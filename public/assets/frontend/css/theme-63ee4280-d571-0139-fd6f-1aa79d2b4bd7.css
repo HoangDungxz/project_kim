@@ -18984,7 +18984,7 @@ button[data-reveal-id='halo-ask-an-expert-form'] span {
 	width: 100% !important;
 }
 .wow {
-	visibility: hidden;
+	visibility: none;
 }
 .panel-body {
 	background: #f5f5f5;
@@ -19077,7 +19077,7 @@ button[data-reveal-id='halo-ask-an-expert-form'] span {
 @media (min-width: 1025px) {
 	#homeNewProducts {
 		position: relative;
-		margin-bottom: -90px;
+		margin-bottom: -28px;
 	}
 	#homeNewProducts:not(:hover) {
 		z-index: 0;

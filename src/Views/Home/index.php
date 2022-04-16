@@ -1,4 +1,4 @@
-  <div class="body">
+ <div class="body">
       <div data-content-region="home_below_menu"></div>
       <section class="heroCarousela">
           <div class="heroCarousela-slide">
@@ -45,34 +45,40 @@
               <section id="homeNewProducts" class="module-wrapper wow fadeIn">
                   <div class="container">
                       <h2 class="module-heading"><span>Sản phẩm mới nhất</span></h2>
-                      <section class="productCarousel owl-carousel" data-owl='{"nav": true,"dots": false,"items": 5,"margin": 30,"slideBy": 5,"responsive": { "0": {    "items": 2,    "slideBy": 2,    "margin": 20 }, "480": {    "items": 2,    "slideBy": 2 }, "641": {    "items": 3,    "slideBy": 3 }, "768": {    "items": 3,    "slideBy": 3 }, "992": {    "items": 4,    "slideBy": 4,    "margin": 30 }, "1200": {    "items": 5,    "slideBy": 5,    "margin": 30 }      },      "responsiveRefreshRate": 0    }'>
+                      <section class="productCarousel">
                           <?php foreach ($newProducts as $p) : ?>
-                              <div class="prod-item wow fadeIn" data-wow-delay="5ms" data-product-id="70">
+                              <div class="prod-item wow fadeIn" data-wow-delay="5ms" data-product-id="<?= $p->getId() ?>">
                                   <article class="card ">
                                       <figure class="card-figure">
                                           <div class="prod-image">
                                               <a href="sample-mango-half-duff-black/index.html">
-                                                  <img class="card-image lazyload" data-sizes="auto" src="../s-tphjucml/images/stencil/224x224/products/70/332/best-beauty-products-0409-2-lg-16781937-compressor__78206.15573365044847.jpg?c=2" data-src-swap="../s-tphjucml/images/stencil/224x224/products/70/330/14-thickbox_default-compressor__76002.15573365054847.jpg?c=2" alt="[Sample] Mango, half duff black " title="[Sample] Mango, half duff black ">
+                                                  <img class="card-image lazyload" data-sizes="auto" src="<?= PUBLIC_URL ?>upload/products/<?= $p->getPhoto() ?>" data-src-swap="<?= PUBLIC_URL ?>upload/products/<?= $p->getPhoto() ?>" alt="[Sample] Mango, half duff black " title="[Sample] Mango, half duff black ">
                                               </a>
                                               <div class="actions">
-                                                  <a href="#" class="btnQV quickview" data-product-id="70" data-event-type="product-click">Quick view</a>
+                                                  <a href="#" class="btnQV quickview" data-product-id="<?= $p->getId() ?>" data-event-type="product-click">Quick view</a>
                                               </div>
                                               <div class="new-badge">NEW</div>
-
+                                              <div class="new-badge" style="top:25px"><?= $p->getDiscount() ?>%</div>
                                           </div>
 
                                           <figcaption class="prod-desc">
 
-                                              <p class="prod-brand" data-test-info-type="brandName">Mango</p>
+                                              <p class="prod-brand" data-test-info-type="brandName"><?= $p->category_name ?></p>
 
                                               <h4 class="prod-name">
-                                                  <a href="sample-mango-half-duff-black/index.html">[Sample]
-                                                      Mango, half duff black </a>
+                                                  <a href="sample-mango-half-duff-black/index.html">
+                                                      <?= $p->getName() ?>
+                                                  </a>
                                               </h4>
 
                                               <div class="prod-price" data-test-info-type="price">
                                                   <div class="price-section price-section--withoutTax ">
-                                                      <span data-product-price-without-tax class="price price--withoutTax">$380.00</span>
+                                                      <span style="text-decoration:line-through;margin-right: 5px;" data-product-price-without-tax class=" price price--withoutTax">
+                                                          <?= number_format($p->getPrice() - ($p->getPrice() * $p->getDiscount()) / 100); ?> ₫
+                                                      </span>
+                                                      <span data-product-price-without-tax class="price price--withoutTax">
+                                                          <?= number_format($p->getPrice()) ?> ₫
+                                                      </span>
                                                   </div>
                                               </div>
 
@@ -108,7 +114,6 @@
                                   </article>
                               </div>
                           <?php endforeach ?>
-
                       </section>
                   </div>
               </section>
@@ -120,8 +125,7 @@
                   <div class="container">
                       <h2 class="module-heading"><span>sản phẩm khuyến mại</span></h2>
 
-                      <section class="productCarousel owl-carousel" data-list-name="" data-owl='{"nav": true,"dots": false,"items": 5,"margin": 30,"slideBy": 5,"responsive": { "0": {"items": 2,"slideBy": 2,"margin": 20 }, "480": {"items": 2,"slideBy": 2 }, "641": {"items": 3,"slideBy": 3 }, "768": {"items": 3,"slideBy": 3 }, "992": {"items": 4,"slideBy": 4,"margin": 30 }, "1200": {"items": 5,"slideBy": 5,"margin": 30 }},"responsiveRefreshRate": 0  }'>
-
+                      <section class="productCarousel">
                           <?php foreach ($discountProducts as $p) : ?>
                               <div class="prod-item wow fadeIn" data-wow-delay="5ms" data-product-id="<?= $p->getId() ?>">
                                   <article class="card ">
@@ -190,7 +194,6 @@
                                   </article>
                               </div>
                           <?php endforeach ?>
-
                       </section>
                   </div>
               </section>
@@ -235,10 +238,6 @@
                   </div>
               </section>
               <!-- END Home Custom CMS Blocks -->
-
-
-
-
           </div>
 
       </div>
@@ -256,10 +255,12 @@
 
   <script>
       $('.heroCarousela').slick({
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          //   autoplay: true,
-          autoplaySpeed: 7000,
-          arrows: false
+        dots: true
+      });
+      
+      $('.productCarousel').slick({
+        dots: false,
+        slidesToShow: 5,
+        slidesToScroll: 1
       });
   </script>
