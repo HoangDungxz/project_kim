@@ -1,0 +1,83 @@
+body{
+	padding: 0;
+	margin: 0;
+}
+*{
+	font-family: "Arial";
+}
+.body{
+	margin: 10px 20px;
+}
+/*.left{
+	width: 320px;
+	position: fixed;
+
+}*/
+.sidebar{
+	margin: 20px 10px;
+}
+.sidebar ul{
+	list-style-type: none;
+	padding: 0;
+}
+.sidebar ul li{
+	margin: 10px 5px;
+	padding: 10px 5px;
+	border: 1px solid white;
+	border-radius: 5px;
+}
+.sidebar ul li a{
+	padding-left: 5px;
+	text-decoration: none;
+	color: black;
+}
+.right{
+	width: 100%;
+	background-color: #f8f9fa;
+	border: 1px solid #f8f9fa;
+	border-radius: 10px;
+}
+.header{
+	background-color: white;
+	border-radius: 10px;
+	margin: 10px 5px;
+	padding: 5px 5px;
+}
+i{
+	padding-top: 10px;
+	font-size: 20px;
+}
+.img{
+	width: 40px;
+	height: 40px;
+	border: 1px solid white;
+	border-radius: 100%;
+}
+.name{
+	margin: 10px 5px;
+	padding: 5px 5px;
+}
+form label{
+	font-weight: bold;
+	font-size: 25px;
+}
+form div{
+	width: 100%;
+	padding: 10px 5px;
+}
+form>div{
+	width: 600px;
+	margin: auto;
+}
+.content>div>input{
+	width: 100%;
+}
+.btn-add-cancel {
+	width: 220px;
+	margin: auto;
+}
+.btn-add-cancel .btn{
+	width: 100px;
+	text-align: center;
+	margin: auto;
+}

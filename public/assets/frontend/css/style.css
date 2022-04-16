@@ -1,0 +1,180 @@
+.menu-product {
+	display: flex;
+}
+.info > p {
+	margin: 0;
+	font-size: 13px;
+}
+.list-unstyled {
+	padding: 0;
+	margin: 0;
+}
+
+/* .search-result-tag {
+	display: none;
+} */
+
+.prod-summary p:nth-child(2) {
+	display: -webkit-box;
+	max-width: 100%;
+	margin: 0 auto;
+	-webkit-line-clamp: 3;
+	/* autoprefixer: off */
+	-webkit-box-orient: vertical;
+	/* autoprefixer: on */
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.heroCarousela {
+	max-width: 1440px;
+	width: 100%;
+	margin: 0 auto;
+}
+.heroCarousela img {
+	width: 100%;
+}
+.heroCarousela-slide {
+	position: relative;
+}
+.heroCarousela-content {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	display: flex;
+	width: 100%;
+}
+
+.content1 {
+	-webkit-text-size-adjust: 100%;
+	color: #2d2d2d;
+	cursor: auto;
+	-webkit-font-smoothing: antialiased;
+	font-family: Arimo, Arial, Helvetica, sans-serif;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 20px;
+	-webkit-tap-highlight-color: transparent;
+	user-select: none;
+	box-sizing: border-box;
+	outline: 0;
+	margin: 0;
+	animation-duration: 1s;
+	animation-fill-mode: both;
+	width: 100%;
+	max-width: 590px;
+	height: 100%;
+	padding: 40px 0 0;
+	display: inline-block;
+	text-align: center;
+	padding-top: 0;
+	visibility: visible;
+	animation-delay: 0.1s;
+	animation-name: fadeInUp;
+}
+
+.heroCarousela-content-inner h1 {
+	-webkit-text-size-adjust: 100%;
+	cursor: auto;
+	-webkit-font-smoothing: antialiased;
+	-webkit-tap-highlight-color: transparent;
+	user-select: none;
+	text-align: center;
+	box-sizing: border-box;
+	outline: 0;
+	font-weight: 700;
+	animation-duration: 1s;
+	animation-fill-mode: both;
+	font-family: Poppins, Arial, Helvetica, sans-serif;
+	font-size: 42px;
+	line-height: 51px;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	margin: 0;
+	padding: 30px 80px;
+	word-spacing: 5px;
+	color: #000;
+	visibility: visible;
+	animation-delay: 0.1s;
+	animation-name: fadeInUp;
+}
+
+.heroCarousela-content-inner p {
+	-webkit-text-size-adjust: 100%;
+	cursor: auto;
+	-webkit-font-smoothing: antialiased;
+	-webkit-tap-highlight-color: transparent;
+	user-select: none;
+	text-align: center;
+	visibility: visible;
+	box-sizing: border-box;
+	outline: 0;
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	font-family: Poppins, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: 500;
+	letter-spacing: 0.05em;
+	margin-bottom: 55px;
+	line-height: 24px;
+	padding-left: 80px;
+	padding-right: 80px;
+	color: #000;
+}
+
+.heroCarousela-content-inner {
+	-webkit-text-size-adjust: 100%;
+	color: #2d2d2d;
+	cursor: auto;
+	-webkit-font-smoothing: antialiased;
+	font-family: Arimo, Arial, Helvetica, sans-serif;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 20px;
+	-webkit-tap-highlight-color: transparent;
+	user-select: none;
+	box-sizing: border-box;
+	outline: 0;
+	margin: 0;
+	animation-duration: 1s;
+	animation-fill-mode: both;
+	width: 100%;
+	max-width: 590px;
+	height: 100%;
+	padding: 40px 0 0;
+	display: inline-block;
+	text-align: center;
+	padding-top: 0;
+	visibility: visible;
+	animation-delay: 0.1s;
+	animation-name: fadeInUp;
+}
+
+.content2 {
+	-webkit-text-size-adjust: 100%;
+	color: #2d2d2d;
+	cursor: auto;
+	-webkit-font-smoothing: antialiased;
+	font-family: Arimo, Arial, Helvetica, sans-serif;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 20px;
+	-webkit-tap-highlight-color: transparent;
+	user-select: none;
+	box-sizing: border-box;
+	outline: 0;
+	margin: 0;
+	animation-duration: 1s;
+	animation-fill-mode: both;
+	width: 100%;
+	max-width: 590px;
+	height: 100%;
+	padding: 40px 0 0;
+	display: inline-block;
+	text-align: center;
+	background-color: #fff;
+	visibility: visible;
+	animation-delay: 0.1s;
+	animation-name: fadeInUp;
+}

@@ -1,0 +1,9 @@
+{
+    "autoload": {
+        "psr-4": {
+            "MVC\\": "",
+            "SRC\\": "src/",
+            "ADMIN\\": "src/admin"
+        }
+    }
+}
