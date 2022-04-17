@@ -14,7 +14,7 @@ use SRC\helper\SESSION;
                         </div>
                         <div class="smart-search">
                             <ul>
-                                <li><img src=""><a href="#">17 - 16 - MACBOOK PRO 16 TOUCH BAR 2.6GHZ CORE I7-16GB-</a></li>
+                                <!-- <li><img src=""><a href="#">17 - 16 - MACBOOK PRO 16 TOUCH BAR 2.6GHZ CORE I7-16GB-</a></li> -->
                             </ul>
                         </div>
                     </div>
@@ -57,9 +57,10 @@ use SRC\helper\SESSION;
                         $(".form-input").keyup(function() {
                             var strkey = $("#key").val();
 
-                            if (strkey.trim() == "")
+                            if (strkey.trim() == "") {
+                                $(".smart-search ul").empty();
                                 $(".smart-search").attr("style", "display:none");
-                            else {
+                            } else {
                                 $(".smart-search").attr("style", "display:block");
                                 //sử dụng ẫ để lấy dữ liệu
 
@@ -220,3 +221,42 @@ use SRC\helper\SESSION;
         </div>
     </div>
 </header>
+
+
+<script>
+    $('.customer-login > .toggle-dropdown-login').on(
+        'click',
+        function(t) {
+            t.preventDefault(),
+                $(this).parent().toggleClass('is-open');
+        });
+
+    $(document).on('click', function(t) {
+        0 === $(t.target).closest('.customer-login').length &&
+            $('.customer-login').removeClass('is-open');
+    });
+
+    $('.top-cart > a').on(
+        'click',
+        function(t) {
+            t.preventDefault(),
+                $(this).parent().toggleClass('is-open');
+        });
+
+    $(document).on('click', function(t) {
+        0 === $(t.target).closest('.top-cart').length &&
+            $('.top-cart').removeClass('is-open');
+    });
+
+    $('#quickSearch input').on(
+        'focus',
+        function(t) {
+            t.preventDefault(),
+                $('.smart-search').css('display', 'block');
+        });
+
+    $(document).on('click', function(t) {
+        0 === $(t.target).closest('#quickSearch').length &&
+            $('.smart-search').css('display', 'none');
+    });
+</script>

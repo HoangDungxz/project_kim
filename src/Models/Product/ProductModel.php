@@ -15,6 +15,7 @@ class ProductModel extends Model
     private $price;
     private $discount;
     private $category_id;
+    private $brand_id;
 
     /**
      * Get the value of id
@@ -192,6 +193,26 @@ class ProductModel extends Model
     public function setCategory_id($category_id)
     {
         $this->category_id = $category_id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of brand_id
+     */
+    public function getBrand_id()
+    {
+        return $this->brand_id;
+    }
+
+    /**
+     * Set the value of brand_id
+     *
+     * @return  self
+     */
+    public function setBrand_id($brand_id)
+    {
+        $this->brand_id = $brand_id;
 
         return $this;
     }

@@ -6,7 +6,7 @@
        <div class="halo-sub-categories">
            <h2 class="subCategories-heading">Sub Categories</h2>
            <div class="sub-cate-col">
-               <?php foreach ($chidCategories as $c) : ?>
+               <?php foreach ($childCategories as $c) : ?>
                    <?php if ($c->getId() != null) : ?>
                        <div class="sub-cate-item">
                            <div class="sub-cate-tab">
@@ -104,23 +104,20 @@
                            <div class="prod-item wow fadeIn" data-wow-delay="0ms" style="visibility: visible; animation-delay: 0ms; animation-name: fadeIn;">
                                <article class="card ">
                                    <figure class="card-figure">
-                                       <div class="prod-image" style="height: 224px;">
-                                           <a href="<?= WEBROOT ?>products/detail/pid/<?= $p->getId() ?>">
-                                               <img class="card-image lazyautosizes lazyloaded" data-sizes="auto" src="<?= PUBLIC_URL ?>upload/products/<?= $p->getPhoto() ?>" data-src="<?= PUBLIC_URL ?>upload/products/<?= $p->getPhoto() ?>" data-src-swap="<?= PUBLIC_URL ?>upload/products/<?= $p->getPhoto() ?>" alt="[Sample] Sodling, black leather duffle bag" title="[Sample] Sodling, black leather duffle bag" sizes="224px">
+                                       <div class="prod-image">
+                                           <a href="<?= WEBROOT ?>/products/detail/pid/<?= $p->getId() ?>">
+                                               <img class="card-image lazyload" data-sizes="auto" src="<?= PUBLIC_URL ?>upload/products/<?= $p->images[0] ?>" data-src-swap="<?= PUBLIC_URL ?>upload/products/<?= $p->images[1]  ?>" alt="<?= $p->getName() ?>" title="<?= $p->getName() ?>">
                                            </a>
                                            <div class="actions">
-                                               <a href="#" class="btnQV quickview" data-product-id="68" data-event-type="product-click">Quick view</a>
+                                               <a href="#" class="btnQV quickview" data-product-id="<?= $p->getId() ?>" data-event-type="product-click">Quick view</a>
                                            </div>
-
                                            <div class="new-badge">NEW</div>
                                            <div class="new-badge" style="top:25px"><?= $p->getDiscount() ?>%</div>
-
-
                                        </div>
 
                                        <figcaption class="prod-desc">
 
-                                           <p class="prod-brand" data-test-info-type="brandName"><?= $p->category_name ?></p>
+                                           <p class="prod-brand" data-test-info-type="brandName"><?= $p->brands_name ?></p>
 
                                            <h4 class="prod-name">
                                                <a href="<?= WEBROOT ?>products/detail/pid/<?= $p->getId() ?>">

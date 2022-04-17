@@ -346,13 +346,4 @@
         </div>
 
     </div>
-    <div id="modal" class="modal" data-reveal="" data-prevent-quick-search-close="">
-        <a href="#" class="modal-close" aria-label="Close" role="button">
-            <span aria-hidden="true"><svg>
-                    <use xlink:href="#icon-close"></use>
-                </svg></span>
-        </a>
-        <div class="modal-content"></div>
-        <div class="loadingOverlay" style="display: none;"></div>
-    </div>
 </div>

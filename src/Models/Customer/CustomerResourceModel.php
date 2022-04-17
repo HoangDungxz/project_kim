@@ -13,20 +13,20 @@ class CustomerResourceModel extends ResourceModel
 
     public function login($customer)
     {
-        $this->runCreateExtraSql = false;
 
-        $this->extralSql = "WHERE email=:email AND password=:password LIMIT 1";
-        $this->select = 'id, email, name';
-
-        $this->selectParams = [
+        $customerLoginCheck = [
             'email' => $customer->getEmail(),
             'password' => md5($customer->getPassword())
         ];
 
-        $customerLogin = $this->getAll($customer);
+        $this->where('email', $customer->getEmail())
+            ->where('password', md5($customer->getPassword()))
+            ->select("name,email,address,phone,id");
 
-        if (count($customerLogin) > 0) {
-            $this->saveSession($customerLogin[0]);
+        $customerLogined = parent::get();
+
+        if (($customerLogined) != null) {
+            $this->saveSession($customerLogined);
             return true;
         }
         return false;

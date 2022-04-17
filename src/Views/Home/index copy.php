@@ -59,7 +59,7 @@
 
                                           <figcaption class="prod-desc">
 
-                                              <p class="prod-brand" data-test-info-type="brandName"><?= $p->category_name ?></p>
+                                              <p class="prod-brand" data-test-info-type="brandName"><?= $p->brands_name ?></p>
 
                                               <h4 class="prod-name">
                                                   <a href="sample-mango-half-duff-black/index.html">
@@ -138,7 +138,7 @@
 
                                           <figcaption class="prod-desc">
 
-                                              <p class="prod-brand" data-test-info-type="brandName"><?= $p->category_name ?></p>
+                                              <p class="prod-brand" data-test-info-type="brandName"><?= $p->brands_name ?></p>
 
                                               <h4 class="prod-name">
                                                   <a href="sample-mango-half-duff-black/index.html">

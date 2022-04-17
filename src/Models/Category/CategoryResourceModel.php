@@ -15,7 +15,7 @@ class CategoryResourceModel extends ResourceModel
 
     public function getWithParents($id)
     {
-        $category = $this->get($id);
+        $category = $this->getById($id);
 
         array_push($this->categories, $category);
 
@@ -27,26 +27,12 @@ class CategoryResourceModel extends ResourceModel
 
         return $this->categories;
     }
-    public function getCategoriesWithParents($params)
+    public function getChildCategories($params)
     {
-
-        foreach ($params as $key => $value) {
-
-            $value = urldecode($value);
-            $key = urldecode($key);
-
-            switch ($key) {
-                case 'parent_id':
-                    $this->where("$this->table.parent_id", $value);
-                    break;
-                case 'get_product_count':
-                    $this->join('products', $this->table . '.id=products.category_id', "count(products.id) as product_count");
-                    unset($params['get_product_count']);
-                    break;
-                default:
-                    break;
-            }
-        }
+        $this->join('products', $this->table . '.id=products.category_id', 'LEFT OUTER JOIN')
+            ->where("$this->table.parent_id", $params['parent_id'])
+            ->select("$this->table.*,count(products.id) as product_count")
+            ->groupBy("$this->table.id");
 
         return parent::getAll();
     }

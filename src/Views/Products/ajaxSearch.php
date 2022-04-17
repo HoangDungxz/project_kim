@@ -2,7 +2,7 @@
 	<?php foreach ($products as $p) : ?>
 		<li>
 			<a style="display: block; height: 100%;width: 100%;" href='index.php?controller=products&action=detail&id={$rows->id}'>
-				<img src='<?= PUBLIC_URL ?>upload/products/<?= $p->getPhoto() ?>'>
+				<img src='<?= PUBLIC_URL ?>upload/products/<?= $p->images[0] ?>'>
 				<?= $p->getName() ?>
 			</a>
 		</li>

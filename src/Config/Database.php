@@ -16,6 +16,7 @@ class Database
     {
         if (is_null(self::$bdd)) {
             self::$bdd = new PDO("mysql:host=localhost;dbname=project_vuanh", 'root', '');
+            self::$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         return self::$bdd;
     }

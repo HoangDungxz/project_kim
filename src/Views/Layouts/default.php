@@ -377,6 +377,73 @@
             <a href="javascript:void(0);" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
         </div>
+        <div id="modal" class="modal" data-reveal data-prevent-quick-search-close>
+            <a href="#" class="modal-close" aria-label="Close" role="button">
+                <span aria-hidden="true"><svg>
+                        <use xlink:href="#icon-close"></use>
+                    </svg></span>
+            </a>
+            <div class="modal-content">
+
+            </div>
+            <div class="loadingOverlay"></div>
+        </div>
+        <div class="modal-background"></div>
+
+
+        <script>
+            $(document).ready(function() {
+
+                $('.modal-close').on('click', function(e) {
+                    e.preventDefault();
+                    $('#modal').removeClass('open');
+                })
+                $('.modal-background').on('click', function(e) {
+                    e.preventDefault();
+                    $('#modal').removeClass('open');
+                })
+
+                $('.btnQV.quickview').on('click', function(e) {
+                    e.preventDefault();
+                    let pid = $(this).attr('data-product-id');
+                    $.ajax({
+                        url: "<?= WEBROOT ?>/home/modal/pid/" + pid,
+                        context: document.body
+                    }).done(function(result) {
+                        $('.modal-content').html('');
+
+                        $('.modal-content').html(result);
+                    });
+
+                    $('#modal').addClass('open');
+                })
+
+
+
+                $('.prod-item').hover(
+                    function() {
+                        $(this).closest('section').css('z-index', '99999');
+
+                        let imgSrc = $(this).find('img').attr('src');
+                        let imgSrcSwap = $(this).find('img').attr('data-src-swap');
+                        $(this).find('img').attr('src', imgSrcSwap);
+                        $(this).find('img').attr('data-src-swap', imgSrc);
+
+                    },
+                    function() {
+                        $(this).closest('section').css('z-index', '0');
+
+                        let imgSrc = $(this).find('img').attr('src');
+                        let imgSrcSwap = $(this).find('img').attr('data-src-swap');
+                        $(this).closest('section').css('z-index', '99999');
+                        $(this).find('img').attr('src', imgSrcSwap);
+                        $(this).find('img').attr('data-src-swap', imgSrc);
+
+                    }
+                );
+
+            });
+        </script>
 </body>
 
 

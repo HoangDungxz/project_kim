@@ -3,12 +3,15 @@
 namespace SRC\Models\Product;
 
 use SRC\Core\ResourceModel;
+use SRC\Models\Image\ImageResourceModel;
+
 
 class ProductResourceModel extends ResourceModel
 {
     public function __construct()
     {
         $this->_init("products", "id", new ProductModel());
+        $this->imageResoureModel = new ImageResourceModel();
     }
     public function getAll($params = [])
     {
@@ -69,8 +72,41 @@ class ProductResourceModel extends ResourceModel
                     break;
             }
         }
-        $this->join('categories', 'products.category_id=categories.id', 'categories.name as category_name');
+        $this->join('categories', "$this->table.category_id=categories.id")
+            ->join('brands', "$this->table.brand_id=brands.id")
+            ->select("$this->table.*,categories.name as category_name,brands.name as brands_name");
 
-        return parent::getAll();
+
+        $products = parent::getAll();
+        foreach ($products as $key => $p) {
+            $products[$key]->images = $this->includeImage($p->getId());
+        }
+        return $products;
+    }
+    public function getById($id)
+    {
+        $product = parent::getById($id);
+        $product->images = $this->includeImage($product->getId());
+        return $product;
+    }
+
+    private function includeImage($pid)
+    {
+        $images = $this->imageResoureModel
+            ->where('product_id', $pid)
+            ->getAll();
+
+        $paths = [];
+        if (count($images) <= 0) {
+            $paths = ["default-product-image.png", "default-product-image.png"];
+        } else if (count($images) <= 1) {
+            $paths = [$images[0]->getPath(), $images[0]->getPath()];;
+        } else {
+            foreach ($images as $i) {
+                array_push($paths, $i->getPath());
+            }
+        }
+
+        return $paths;
     }
 }

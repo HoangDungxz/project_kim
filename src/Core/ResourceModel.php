@@ -19,6 +19,7 @@ class ResourceModel  implements ResourceModelInterface
     private $joinSql;
     private $select = '*';
     private $params = [];
+    private $groupBySql;
 
     function _init($table, $id, $model)
     {
@@ -85,16 +86,20 @@ class ResourceModel  implements ResourceModelInterface
         return $this;
     }
 
-    public function join($tableJoin, $condition, $select)
+    public function join($tableJoin, $condition, $joinType = 'JOIN')
     {
-        $this->select .= ",$select";
-        $this->joinSql .= " JOIN $tableJoin ON $condition ";
+        $this->joinSql .= " $joinType $tableJoin ON $condition ";
+        return $this;
+    }
+    public function groupBy($groupBy)
+    {
+        $this->groupBySql = "GROUP BY $groupBy";
         return $this;
     }
 
     public function select($select)
     {
-        $this->select .= ",$select";
+        $this->select = "$select";
         return $this;
     }
 
@@ -114,25 +119,32 @@ class ResourceModel  implements ResourceModelInterface
 
     public function getAll($params = [])
     {
-        $sql = "SELECT $this->table.$this->select FROM $this->table $this->joinSql $this->conditionSql $this->oderSql $this->paginateSql";
+        $sql = "SELECT $this->select FROM $this->table $this->joinSql $this->conditionSql $this->groupBySql $this->oderSql $this->paginateSql";
 
         $req = Database::getBdd()->prepare($sql);
         $req->execute($this->params);
+
+        // echo '<pre>';
+
+        // // print_r($req->fetchAll(PDO::FETCH_CLASS, get_class($this->model)));
+        // // echo '</pre>';
+
         // echo '<pre>';
         // print_r($this->params);
         // echo '</pre>';
         $this->clearSelectSql();
 
-        return  $req->fetchAll(PDO::FETCH_CLASS, get_class($this->model));
+        return ($req->fetchAll(PDO::FETCH_CLASS, get_class($this->model)));
     }
 
     public function get($params = [])
     {
 
-        $sql = "SELECT $this->table.$this->select FROM $this->table $this->joinSql $this->conditionSql $this->oderSql $this->paginateSql";
+        $sql = "SELECT $this->select FROM $this->table $this->joinSql $this->conditionSql $this->groupBySql $this->oderSql $this->paginateSql";
 
         $req = Database::getBdd()->prepare($sql);
         $req->execute($this->params);
+
         $this->clearSelectSql();
 
         return $req->fetchObject(get_class($this->model));
@@ -143,8 +155,9 @@ class ResourceModel  implements ResourceModelInterface
         $sql = "SELECT * FROM $this->table WHERE $this->id = $id";
         $req = Database::getBdd()->prepare($sql);
         $req->execute($this->params);
-        $this->conditionSql = ' ';
-        $this->params = [];
+
+        $this->clearSelectSql();
+
         return $req->fetchObject(get_class($this->model));
     }
 
@@ -156,6 +169,7 @@ class ResourceModel  implements ResourceModelInterface
         $this->joinSql = ' ';
         $this->select = '*';
         $this->params = [];
+        $this->groupBySql = '';
     }
 
     public function save($model)

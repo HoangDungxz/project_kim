@@ -8610,7 +8610,6 @@ body.has-activeModal {
 		margin: 0 auto;
 		max-width: 80%;
 		right: 0;
-		width: 900px;
 	}
 }
 @media only screen and (min-width: 480px) {
@@ -19099,7 +19098,6 @@ button[data-reveal-id='halo-ask-an-expert-form'] span {
 		content: '';
 		display: block;
 		position: absolute;
-		bottom: 50px;
 		left: 0;
 		right: 0;
 		border-bottom: 1px solid #ebebeb;
