@@ -1,6 +1,6 @@
    <main class="page-content col-sm-9">
        <div class="category-heading">
-           <h1 class="page-heading"><?= end($categoriesWithParents)->getName() ?></h1>
+           <h1 class="page-heading"><?= $categoriesWithParents != null ? end($categoriesWithParents)->getName() : "ALL PRODUCTS" ?></h1>
            <div data-content-region="category_below_header"></div>
        </div>
        <div class="halo-sub-categories">

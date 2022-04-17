@@ -22,13 +22,20 @@ class ProductsController extends Controller
     }
     function index($params)
     {
-        $d['products'] = $this->productResourceModel->where('category_id', $params['cid'])
-            ->getAll($params);
+        if (isset($params['cid'])) {
+            $d['products'] = $this->productResourceModel->where('category_id', $params['cid'])
+                ->getAll($params);
+        } else {
+            $d['products'] = $this->productResourceModel
+                ->getAll($params);
+        }
 
         // tạo breadcrumb  
         $categoryId = $params['cid'] ?? null;
         if ($categoryId != null) {
             $d['categoriesWithParents'] = array_reverse($this->categoryResourceModel->getWithParents($categoryId));
+        } else {
+            $d['categoriesWithParents'] = null;
         }
 
         // tạo sub category
@@ -37,8 +44,8 @@ class ProductsController extends Controller
         ]);
 
         $this->set($d);
-        $this->setView('product_list');
-        $this->render("index");
+
+        $this->render("product_list");
     }
 
     public function detail($params)
@@ -49,8 +56,7 @@ class ProductsController extends Controller
         $d['product'] = $this->productResourceModel->getById($params['pid']);
 
         $this->set($d);
-        $this->setView('product_detail');
-        $this->render("index");
+        $this->render("product_detail");
     }
 
     function ajaxSearch($params)
@@ -58,11 +64,7 @@ class ProductsController extends Controller
         $d['products'] = $this->productResourceModel->getAll(array_merge(['pageNum' => 5], $params));
 
         $this->set($d);
-        $this->setLayout('');
+        $this->setLayout(false);
         echo  $this->render("ajaxSearch");
-    }
-
-    private function breadcrumbs()
-    {
     }
 }

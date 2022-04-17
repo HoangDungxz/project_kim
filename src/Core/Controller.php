@@ -6,9 +6,11 @@ use SRC\Models\Category\CategoryResourceModel;
 
 class Controller
 {
-    private $vars = [];
+    private  $vars = [];
     private  $layout = "default";
     private  $view = '';
+    private  $withNavbar = '';
+    private  $filename;
 
     function set($d)
     {
@@ -18,7 +20,7 @@ class Controller
     {
         $this->layout = $layout;
     }
-    function setView($filename)
+    function render($filename, $withNavbar = true)
     {
         if (strpos(get_class($this), 'ADMIN\Controllers') !== false) {
             $view = ROOT . "/src/admin/Views/" . get_class($this) . '/' . $filename . '.php';
@@ -27,25 +29,45 @@ class Controller
             $view = ROOT . "src/Views/" . get_class($this) . '/' . $filename . '.php';
             $view =  str_replace(['SRC\Controllers\\', 'Controller'], '', $view);
         }
+        $this->filename = $filename;
+        $this->withNavbar = $withNavbar;
         $this->view = $view;
+
+        $this->setView();
     }
 
-    function render($filename)
+    private function setView()
     {
+
         extract($this->vars);
-        ob_start();
-        if (strpos(get_class($this), 'ADMIN\Controllers') !== false) {
-            $view = ROOT . "/src/admin/Views/" . get_class($this) . '/' . $filename . '.php';
-            $view =  str_replace(['ADMIN\Controllers\\', 'Controller'], '', $view);
-        } else {
-            $view = ROOT . "src/Views/" . get_class($this) . '/' . $filename . '.php';
-            $view =  str_replace(['SRC\Controllers\\', 'Controller'], '', $view);
-            $categories = $this->getCategories();
-        }
         $mainView = $this->view;
-        require $view;
+        extract(['mainView' => $mainView]);
+        extract(['categories' => $this->getCategories()]);
+
+
+        if (!$this->layout) {
+            ob_start();
+            require $mainView;
+            $content_for_layout = ob_get_clean();
+            echo $content_for_layout;
+            return;
+        }
+
+        ob_start();
+
+        if ($this->withNavbar) {
+
+            if (strpos(get_class($this), 'ADMIN\Controllers') !== false) {
+                require(ROOT . 'src/admin/Views/Layouts/with_nav_bar.php');
+            } else {
+                require(ROOT . 'src/Views/Layouts/with_nav_bar.php');
+            }
+        } else {
+            require $mainView;
+        }
 
         $content_for_layout = ob_get_clean();
+
 
         if ($this->layout == false) {
             $content_for_layout;
@@ -57,7 +79,7 @@ class Controller
             }
         }
 
-        return $content_for_layout;
+        return;
     }
 
     private function secure_input($data)

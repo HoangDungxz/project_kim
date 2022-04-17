@@ -22,7 +22,7 @@ class ResourceModel  implements ResourceModelInterface
     private $params = [];
     private $groupBySql;
 
-    private  $lastInsetId = 0;
+    private  $lastInsetId;
 
     public function __construct()
     {
@@ -126,6 +126,11 @@ class ResourceModel  implements ResourceModelInterface
         $this->paginateSql = " LIMIT $from, $recordPerPage";
         return $this;
     }
+    public function setFetchClass($class)
+    {
+        $this->class = $class;
+        return $this;
+    }
 
     public function getAll($params = [])
     {
@@ -136,20 +141,20 @@ class ResourceModel  implements ResourceModelInterface
         $req->execute($this->params);
         $this->clearSelectSql();
 
-        return ($req->fetchAll(PDO::FETCH_CLASS, get_class($this->model)));
+        return ($req->fetchAll(PDO::FETCH_CLASS, $this->class));
     }
 
     public function get($params = [])
     {
 
         $table_name = $this->model->getTable_name();
-        $sql = "SELECT $this->select FROM $table_name $this->joinSql $this->conditionSql $this->groupBySql $this->oderSql $this->paginateSql";;
+        $sql = "SELECT $this->select FROM $table_name $this->joinSql $this->conditionSql $this->groupBySql $this->oderSql $this->paginateSql";
 
         $req = Database::getBdd()->prepare($sql);
         $req->execute($this->params);
         $this->clearSelectSql();
 
-        return $req->fetchObject(get_class($this->model));
+        return ($req->fetchObject(get_class($this->model)));
     }
 
     public function getById($id)
@@ -179,17 +184,11 @@ class ResourceModel  implements ResourceModelInterface
     public function save(...$models)
     {
         $req = Database::getBdd();
-        echo '<pre>';
-        print_r($models);
-        echo '</pre>';
         try {
             $req->beginTransaction();
             foreach ($models as $key => $model) {
 
                 $arrayModel = $model->getProperties($model);
-                echo '<pre>';
-                print_r($arrayModel);
-                echo '</pre>';
 
                 $stringModel = '';
 
@@ -207,26 +206,27 @@ class ResourceModel  implements ResourceModelInterface
 
                 $stringModel = rtrim($stringModel, ',');
 
-                if (isset($model->parentRequire)) {
-                    $stringModel .= " ,$model->parentRequire=:$model->parentRequire ";
+                if (isset($model->parentRequire) && $model->getOrder_id() == null) {
                     $arrayModel[$model->parentRequire] = $this->lastInsetId;
                 }
 
                 if ($id == null) {
-                    $sql = "INSERT INTO $this->model->table_name SET $stringModel";
+                    $sql = "INSERT INTO " . $model->getTable_name() . "  SET $stringModel";
                 } else {
-                    $sql = "UPDATE $this->model->table_name SET $stringModel WHERE $this->id = $id";
+                    $sql = "UPDATE " . $model->getTable_name() . " SET $stringModel WHERE " . $model->getTable_id() . " = $id";
                 }
 
                 $tmt =  $req->prepare($sql);
                 $tmt->execute($arrayModel);
-                $req->commit();
+
                 $this->lastInsetId = $req->lastInsertId();
             }
+            $req->commit();
             return true;
         } catch (\PDOException $e) {
             $req->rollback();
             print "Error!: " . $e->getMessage() . "</pre>";
+            return false;
         }
     }
 
@@ -236,6 +236,26 @@ class ResourceModel  implements ResourceModelInterface
         $sql = "DELETE * FROM $this->model->table_name WHERE $this->id = $id";
         $req = Database::getBdd()->prepare($sql);
         return $req->execute();
+    }
+
+    protected function includeImage($pid)
+    {
+        $images = $this->imageResoureModel
+            ->where('product_id', $pid)
+            ->getAll();
+
+        $paths = [];
+        if (count($images) <= 0) {
+            $paths = ["default-product-image.png", "default-product-image.png"];
+        } else if (count($images) <= 1) {
+            $paths = [$images[0]->getPath(), $images[0]->getPath()];;
+        } else {
+            foreach ($images as $i) {
+                array_push($paths, $i->getPath());
+            }
+        }
+
+        return $paths;
     }
 
 

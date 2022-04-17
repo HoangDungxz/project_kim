@@ -12,35 +12,29 @@ class Model
         $this->prepareTable();
     }
 
-
-
     public function getProperties()
     {
-
         $reflection = new \ReflectionClass($this);
-
 
         $vars = $reflection->getProperties(\ReflectionProperty::IS_PRIVATE);
 
         $result = [];
 
-        foreach ($vars as $key => $value) {
-            array_push(
-                $result,
-                $value->getName()
-            );
-        }
-        return $this->get($result, $this);
-    }
+        foreach ($vars as $value) {
 
-    protected function get($properties, $model)
-    {
-        $result = [];
-        foreach ($properties as $p) {
-            $result[$p] = call_user_func(array($model, "get" . ucfirst($p)));
-        };
+            $result[$value->getName()] = $this->get($value->getName());
+        }
 
         return $result;
+    }
+
+    public function get($propertie)
+    {
+        return call_user_func(array($this, "get" . ucfirst($propertie)));
+    }
+    public function set($propertie)
+    {
+        return call_user_func(array($this, "set" . ucfirst($propertie)));
     }
 
     protected function prepareTable()

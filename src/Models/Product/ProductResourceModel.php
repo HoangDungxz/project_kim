@@ -8,6 +8,7 @@ use SRC\Models\Image\ImageResourceModel;
 
 class ProductResourceModel extends ResourceModel
 {
+    protected $imageResoureModel;
     public function __construct()
     {
         parent::__construct();
@@ -88,25 +89,5 @@ class ProductResourceModel extends ResourceModel
         $product = parent::getById($id);
         $product->images = $this->includeImage($product->getId());
         return $product;
-    }
-
-    private function includeImage($pid)
-    {
-        $images = $this->imageResoureModel
-            ->where('product_id', $pid)
-            ->getAll();
-
-        $paths = [];
-        if (count($images) <= 0) {
-            $paths = ["default-product-image.png", "default-product-image.png"];
-        } else if (count($images) <= 1) {
-            $paths = [$images[0]->getPath(), $images[0]->getPath()];;
-        } else {
-            foreach ($images as $i) {
-                array_push($paths, $i->getPath());
-            }
-        }
-
-        return $paths;
     }
 }

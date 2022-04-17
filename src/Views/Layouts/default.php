@@ -410,6 +410,7 @@
                         url: "<?= WEBROOT ?>/home/modal/pid/" + pid,
                         context: document.body
                     }).done(function(result) {
+
                         $('.modal-content').html('');
 
                         $('.modal-content').html(result);

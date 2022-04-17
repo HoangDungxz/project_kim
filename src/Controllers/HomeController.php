@@ -30,7 +30,7 @@ class HomeController extends Controller
         );
 
         $this->set($d);
-        $this->render("index");
+        $this->render("index", false);
     }
 
     function modal($params)
@@ -38,7 +38,7 @@ class HomeController extends Controller
         $d['product'] = $this->productResourceModel->getById($params['pid']);
 
         $this->set($d);
-        $this->setLayout('');
+        $this->setLayout(false);
         echo  $this->render("modal");
     }
 }
