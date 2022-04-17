@@ -6,10 +6,6 @@ use SRC\Core\ResourceModel;
 
 class CustomerResourceModel extends ResourceModel
 {
-    public function __construct()
-    {
-        $this->_init("customers", "id", new CustomerModel());
-    }
 
     public function login($customer)
     {

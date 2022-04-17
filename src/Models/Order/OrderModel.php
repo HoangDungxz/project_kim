@@ -4,6 +4,13 @@ namespace SRC\Models\Order;
 
 use SRC\Core\Model;
 
+/** 
+ * A Order class
+ *
+ * @param  table orders
+ * @param  id id
+ * 
+ */
 class OrderModel extends Model
 {
     private $id;

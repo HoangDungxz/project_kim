@@ -4,18 +4,15 @@ namespace SRC\Controllers;
 
 use SRC\Core\Controller;
 use SRC\Models\Image\ImageResourceModel;
-use SRC\Models\Image\ImagesModel;
 use SRC\Models\Product\ProductResourceModel;
 
 
 class HomeController extends Controller
 {
     private $productResourceModel;
-    private $imageResoureModel;
     function __construct()
     {
         $this->productResourceModel = new ProductResourceModel();
-        $this->imageResoureModel = new ImageResourceModel();
     }
 
     function index()

@@ -11,6 +11,7 @@ class ResourceModel  implements ResourceModelInterface
 
     protected $table;
     protected $id;
+    protected $class;
     protected $model;
 
     private $oderSql;
@@ -21,15 +22,24 @@ class ResourceModel  implements ResourceModelInterface
     private $params = [];
     private $groupBySql;
 
-    function _init($table, $id, $model)
+    private  $lastInsetId = 0;
+
+    public function __construct()
     {
-        $this->table = $table;
-        $this->id = $id;
-        $this->model = $model;
+
+        $this->class = str_replace("Resource", '', get_class($this));
+
+        $this->model = new $this->class;
+
+        $this->table = $this->model->getTable_name();
+        $this->id = $this->model->getTable_id();
+        $this->model->unsetPrepareTable();
     }
+
 
     public function where($column, $value)
     {
+        $column =  str_replace(" ", "", $column);
         $column_parameter = str_replace(".", "_", $column);
         switch ($this->conditionSql) {
             case ' ':
@@ -46,7 +56,7 @@ class ResourceModel  implements ResourceModelInterface
 
     public function like($column = '', $value)
     {
-        $column_parameter = str_replace(".", "_", $column);
+        $column_parameter = str_replace([".", " "], "_", $column);
 
         switch ($this->conditionSql) {
             case ' ':
@@ -119,19 +129,11 @@ class ResourceModel  implements ResourceModelInterface
 
     public function getAll($params = [])
     {
-        $sql = "SELECT $this->select FROM $this->table $this->joinSql $this->conditionSql $this->groupBySql $this->oderSql $this->paginateSql";
+        $table_name = $this->model->getTable_name();
+        $sql = "SELECT $this->select FROM $table_name $this->joinSql $this->conditionSql $this->groupBySql $this->oderSql $this->paginateSql";
 
         $req = Database::getBdd()->prepare($sql);
         $req->execute($this->params);
-
-        // echo '<pre>';
-
-        // // print_r($req->fetchAll(PDO::FETCH_CLASS, get_class($this->model)));
-        // // echo '</pre>';
-
-        // echo '<pre>';
-        // print_r($this->params);
-        // echo '</pre>';
         $this->clearSelectSql();
 
         return ($req->fetchAll(PDO::FETCH_CLASS, get_class($this->model)));
@@ -140,11 +142,11 @@ class ResourceModel  implements ResourceModelInterface
     public function get($params = [])
     {
 
-        $sql = "SELECT $this->select FROM $this->table $this->joinSql $this->conditionSql $this->groupBySql $this->oderSql $this->paginateSql";
+        $table_name = $this->model->getTable_name();
+        $sql = "SELECT $this->select FROM $table_name $this->joinSql $this->conditionSql $this->groupBySql $this->oderSql $this->paginateSql";;
 
         $req = Database::getBdd()->prepare($sql);
         $req->execute($this->params);
-
         $this->clearSelectSql();
 
         return $req->fetchObject(get_class($this->model));
@@ -152,7 +154,9 @@ class ResourceModel  implements ResourceModelInterface
 
     public function getById($id)
     {
-        $sql = "SELECT * FROM $this->table WHERE $this->id = $id";
+        $table_name = $this->model->getTable_name();
+        $sql = "SELECT * FROM $table_name WHERE $this->id = $id";
+
         $req = Database::getBdd()->prepare($sql);
         $req->execute($this->params);
 
@@ -172,25 +176,64 @@ class ResourceModel  implements ResourceModelInterface
         $this->groupBySql = '';
     }
 
-    public function save($model)
+    public function save(...$models)
     {
-        $arrayModel = $model->getProperties($this->model);
-        $stringModel = implode($arrayModel);
+        $req = Database::getBdd();
+        echo '<pre>';
+        print_r($models);
+        echo '</pre>';
+        try {
+            $req->beginTransaction();
+            foreach ($models as $key => $model) {
 
-        $id = $arrayModel['id'];
+                $arrayModel = $model->getProperties($model);
+                echo '<pre>';
+                print_r($arrayModel);
+                echo '</pre>';
 
-        if ($id == null) {
-            $sql = "INSERT INTO $this->table SET $stringModel";
-        } else {
-            $sql = "UPDATE $this->table SET $stringModel WHERE $this->id = $id";
+                $stringModel = '';
+
+                if (isset($model->id_name)) {
+                    $id = $model->id_name;
+                    unset($arrayModel[$model->id_name]);
+                } else {
+                    $id = $arrayModel[$this->id];
+                    unset($arrayModel[$this->id]);
+                }
+
+                foreach ($arrayModel as $key => $value) {
+                    $stringModel .= " $key = :$key ,";
+                }
+
+                $stringModel = rtrim($stringModel, ',');
+
+                if (isset($model->parentRequire)) {
+                    $stringModel .= " ,$model->parentRequire=:$model->parentRequire ";
+                    $arrayModel[$model->parentRequire] = $this->lastInsetId;
+                }
+
+                if ($id == null) {
+                    $sql = "INSERT INTO $this->model->table_name SET $stringModel";
+                } else {
+                    $sql = "UPDATE $this->model->table_name SET $stringModel WHERE $this->id = $id";
+                }
+
+                $tmt =  $req->prepare($sql);
+                $tmt->execute($arrayModel);
+                $req->commit();
+                $this->lastInsetId = $req->lastInsertId();
+            }
+            return true;
+        } catch (\PDOException $e) {
+            $req->rollback();
+            print "Error!: " . $e->getMessage() . "</pre>";
         }
-        $req = Database::getBdd()->prepare($sql);
-        return $req->execute($arrayModel);
     }
+
 
     public function detele($id)
     {
-        $sql = "DELETE * FROM $this->table WHERE $this->id = $id";
+        $sql = "DELETE * FROM $this->model->table_name WHERE $this->id = $id";
         $req = Database::getBdd()->prepare($sql);
         return $req->execute();
     }

@@ -4,6 +4,13 @@ namespace SRC\Models\Category;
 
 use SRC\Core\Model;
 
+/** 
+ * A Category class
+ *
+ * @param  table categories
+ * @param  id id
+ * 
+ */
 class CategoryModel extends Model
 {
     private $id;

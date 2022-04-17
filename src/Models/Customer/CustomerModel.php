@@ -4,6 +4,13 @@ namespace SRC\Models\Customer;
 
 use SRC\Core\Model;
 
+/** 
+ * A Customer class
+ *
+ * @param  table customers
+ * @param  id id
+ * 
+ */
 class CustomerModel extends Model
 {
     private $id;

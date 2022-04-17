@@ -4,6 +4,13 @@ namespace SRC\Models\Product;
 
 use SRC\Core\Model;
 
+/** 
+ * A Product class
+ *
+ * @param  table products
+ * @param  id id
+ * 
+ */
 class ProductModel extends Model
 {
     private $id;

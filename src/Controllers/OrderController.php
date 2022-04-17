@@ -6,14 +6,19 @@ use SRC\Core\Controller;
 use SRC\helper\SESSION;
 use SRC\Models\Order\OrderModel;
 use SRC\Models\Order\OrderResourceModel;
+use SRC\Models\OrderDetail\OrderDetailModel;
+use SRC\Models\OrderDetail\OrderDetailResourceModel;
 
 class OrderController extends Controller
 {
     private $orderResource;
+    private $orderDetailResource;
+
 
     function __construct()
     {
         $this->orderResource = new OrderResourceModel();
+        $this->orderDetailResource = new OrderDetailResourceModel();
     }
 
     function index()
@@ -25,7 +30,7 @@ class OrderController extends Controller
         $this->render("index");
     }
 
-    function create()
+    function create($params)
     {
         if (SESSION::get('customers') == null) {
             header('Location: ' . WEBROOT . 'customers/login');
@@ -37,20 +42,28 @@ class OrderController extends Controller
 
         $orderModel = new OrderModel();
 
-        $orderModel->setCustomer_id($customerId);
-        $orderModel->setPrice($product_price * $product_quantity);
-        $orderModel->setDate(date("Y-m-d H:i:s"));
-        $orderModel->setStatus(0);
+        $orderModel->setCustomer_id($customerId)
+            ->setPrice(($product_price ?? $params['product_price']) * ($product_quantity ?? 1))
+            ->setDate(date("Y-m-d H:i:s"))
+            ->setStatus(0);
+
+        $orderDetail = new OrderDetailModel();
+        $orderDetail
+            ->setProduct_id($product_id ?? $params['product_id'])
+            ->setQuantity($product_quantity ?? 1)
+            ->setPrice($product_price ?? $params['product_price']);
+        $orderDetail->parentRequire = 'order_id';
+
 
         try {
-            $this->orderResource->save($orderModel);
+            $this->orderResource->save($orderModel, $orderDetail);
+            // header('Location: ' . WEBROOT . 'order/index');
         } catch (\Exception $th) {
             //throw $th;
+            die();
         }
 
 
-
-        header('Location: ' . WEBROOT . 'order/index');
 
         // $this->render("index");
     }

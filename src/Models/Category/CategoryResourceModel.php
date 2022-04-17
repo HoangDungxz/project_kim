@@ -9,8 +9,8 @@ class CategoryResourceModel extends ResourceModel
     private $categories;
     public function __construct()
     {
+        parent::__construct();
         $this->categories = [];
-        $this->_init("categories", "id", new CategoryModel());
     }
 
     public function getWithParents($id)

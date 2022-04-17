@@ -4,7 +4,14 @@ namespace SRC\Models\Image;
 
 use SRC\Core\Model;
 
-class ImagesModel extends Model
+/** 
+ * A Image class
+ *
+ * @param  table productimages
+ * @param  id id
+ * 
+ */
+class ImageModel extends Model
 {
     private $id;
     private $path;

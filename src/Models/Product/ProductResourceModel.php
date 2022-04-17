@@ -10,7 +10,7 @@ class ProductResourceModel extends ResourceModel
 {
     public function __construct()
     {
-        $this->_init("products", "id", new ProductModel());
+        parent::__construct();
         $this->imageResoureModel = new ImageResourceModel();
     }
     public function getAll($params = [])
