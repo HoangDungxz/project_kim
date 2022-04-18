@@ -18,7 +18,7 @@
                 </ul>
             </div>
 
-            <div class="page row">
+            <div class="page row" style="display: flex;">
                 <aside class="page-sidebar col-sm-3" id="faceted-search-container">
                     <div id="sidebar-toggle" class="hide"><a class="btn btn-alt" href="javascript:void(0);">SHOW SIDEBAR <i class="fa fa-plus"></i></a></div>
                     <nav>

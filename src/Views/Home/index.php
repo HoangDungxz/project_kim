@@ -103,7 +103,7 @@
                                              </div>
 
                                              <div class="buttons-wrapper">
-                                                 <a href="cart.html?action=add&amp;product_id=70" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-product-id="70" data-event-type="product-click"><span>Add to Cart</span></a>
+                                                 <a href="<?= WEBROOT . "/order/create/product_id/" . $p->getId() . "/product_price/" . $p->getPrice() ?>" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-event-type="product-click"><span>Add to Cart</span></a>
 
                                                  <a href="login9340.html?action=add&amp;product_id=70" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish
                                                          list</span></a>
@@ -183,7 +183,7 @@
                                              </div>
 
                                              <div class="buttons-wrapper">
-                                                 <a href="cart.html?action=add&amp;product_id=70" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-product-id="70" data-event-type="product-click"><span>Add to Cart</span></a>
+                                                 <a href="<?= WEBROOT . "/order/create/product_id/" . $p->getId() . "/product_price/" . $p->getPrice() ?>" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-event-type="product-click"><span>Add to Cart</span></a>
 
                                                  <a href="login9340.html?action=add&amp;product_id=70" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish
                                                          list</span></a>

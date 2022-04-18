@@ -29,7 +29,7 @@ class OrderController extends Controller
 
         $d['order'] = $this->orderResource
             ->where('customer_id', SESSION::get('customers', 'id'))
-            ->get();
+            ->get() ?? [];
 
         if ($d['order']) {
             $d['orderDetails'] = $this->orderDetailResource
@@ -51,13 +51,13 @@ class OrderController extends Controller
             orderdetails.quantity as orderdetail_quantity,
             orderdetails.price as orderdetail_price')
                 ->setFetchClass(\SRC\Models\Order\OrderFrontendViewModel::class)
-                ->getFrontendOrderView();
+                ->getFrontendOrderView() ?? [];
         } else {
             $d['orderDetails'] = false;
         }
 
         $this->set($d);
-        $this->render("carts_list");
+        $this->render("orders_list");
     }
 
     function create($params)
@@ -72,9 +72,7 @@ class OrderController extends Controller
 
         $orderModel = new OrderModel();
 
-
         $orderModel->setCustomer_id($customerId)
-            ->setPrice(($product_price ?? $params['product_price']) * ($product_quantity ?? 1))
             ->setDate(date("Y-m-d H:i:s"))
             ->setStatus(0);
 
@@ -89,6 +87,40 @@ class OrderController extends Controller
             $this->orderResource->save($orderModel, $orderDetail)
         ) {
             header('Location: ' . WEBROOT . 'order/index');
+        }
+    }
+
+    function delete($params)
+    {
+
+        if (!isset($params['odid'])) {
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        }
+
+        $orderDetail = new OrderDetailModel();
+        $orderDetail->setId($params['odid']);
+
+        if ($this->orderDetailResource->delete($orderDetail)) {
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        } else {
+        }
+    }
+
+    public function delete_order($params)
+    {
+        if (!isset($params['oid'])) {
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        }
+
+        $order = new OrderModel();
+        $order->setId($params['oid']);
+
+        $orderDetails = $this->orderDetailResource
+            ->where("order_id", $params['oid'])
+            ->getAll() ?? [];
+
+        if ($this->orderResource->delete($order, ...$orderDetails)) {
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
     }
 }

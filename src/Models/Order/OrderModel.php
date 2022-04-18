@@ -3,6 +3,7 @@
 namespace SRC\Models\Order;
 
 use SRC\Core\Model;
+use SRC\Models\OrderDetail\OrderDetailResourceModel;
 
 /** 
  * A Order class
@@ -16,7 +17,6 @@ class OrderModel extends Model
     private $id;
     private $customer_id;
     private $date;
-    private $price;
     private $status;
 
 
@@ -85,7 +85,10 @@ class OrderModel extends Model
      */
     public function getPrice()
     {
-        return $this->price;
+        $orderDetailResourceModel =  new OrderDetailResourceModel();
+        return $orderDetailResourceModel->where('order_id', $this->id)
+            ->select("sum(orderdetails.price) as sum_price")
+            ->get()->sum_price;
     }
 
     /**

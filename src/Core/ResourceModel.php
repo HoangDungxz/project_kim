@@ -22,7 +22,6 @@ class ResourceModel  implements ResourceModelInterface
     private $params = [];
     private $groupBySql;
 
-    private  $lastInsetId;
 
     public function __construct()
     {
@@ -136,7 +135,6 @@ class ResourceModel  implements ResourceModelInterface
     {
         $table_name = $this->model->getTable_name();
         $sql = "SELECT $this->select FROM $table_name $this->joinSql $this->conditionSql $this->groupBySql $this->oderSql $this->paginateSql";
-
         $req = Database::getBdd()->prepare($sql);
         $req->execute($this->params);
         $this->clearSelectSql();
@@ -186,19 +184,18 @@ class ResourceModel  implements ResourceModelInterface
         $req = Database::getBdd();
         try {
             $req->beginTransaction();
+            $lastInsetId = 0;
             foreach ($models as $key => $model) {
 
                 $arrayModel = $model->getProperties($model);
 
+                $table_name = $model->getTable_name();
+                $table_id = $model->getTable_id();
+                $id = $model->get($table_id);
+
                 $stringModel = '';
 
-                if (isset($model->id_name)) {
-                    $id = $model->id_name;
-                    unset($arrayModel[$model->id_name]);
-                } else {
-                    $id = $arrayModel[$this->id];
-                    unset($arrayModel[$this->id]);
-                }
+                unset($arrayModel[$table_id]);
 
                 foreach ($arrayModel as $key => $value) {
                     $stringModel .= " $key = :$key ,";
@@ -207,21 +204,22 @@ class ResourceModel  implements ResourceModelInterface
                 $stringModel = rtrim($stringModel, ',');
 
                 if (isset($model->parentRequire) && $model->getOrder_id() == null) {
-                    $arrayModel[$model->parentRequire] = $this->lastInsetId;
+                    $arrayModel[$model->parentRequire] = $lastInsetId;
                 }
 
                 if ($id == null) {
-                    $sql = "INSERT INTO " . $model->getTable_name() . "  SET $stringModel";
+                    $sql = "INSERT INTO $table_name  SET $stringModel";
                 } else {
-                    $sql = "UPDATE " . $model->getTable_name() . " SET $stringModel WHERE " . $model->getTable_id() . " = $id";
+                    $sql = "UPDATE $table_name SET $stringModel WHERE  $table_id = $id";
                 }
 
-                $tmt =  $req->prepare($sql);
-                $tmt->execute($arrayModel);
+                $req->prepare($sql)
+                    ->execute($arrayModel);
 
-                $this->lastInsetId = $req->lastInsertId();
+                $lastInsetId = $req->lastInsertId();
             }
             $req->commit();
+
             return true;
         } catch (\PDOException $e) {
             $req->rollback();
@@ -231,12 +229,41 @@ class ResourceModel  implements ResourceModelInterface
     }
 
 
-    public function detele($id)
+    public function delete(...$models)
     {
-        $sql = "DELETE * FROM $this->model->table_name WHERE $this->id = $id";
-        $req = Database::getBdd()->prepare($sql);
-        return $req->execute();
+
+        $req = Database::getBdd();
+        try {
+            $req->beginTransaction();
+            foreach ($models as  $model) {
+
+                $table_name = $model->getTable_name();
+                $table_id = $model->getTable_id();
+                $id = $model->get($table_id);
+
+                $sql = "DELETE FROM $table_name WHERE $table_id = $id";
+
+                $req->prepare($sql)->execute();
+            }
+            $req->commit();
+            die;
+            return true;
+        } catch (\PDOException $e) {
+            $req->rollback();
+            print "Error!: " . $e->getMessage() . "</pre>";
+            return false;
+        } finally {
+            $this->deleteModels = [];
+        }
     }
+
+    // public function createDelete(...$model)
+    // {
+    //     foreach ($model as $key => $value) {
+    //         array_push($this->deleteModels, $value);
+    //     }
+    //     return $this;
+    // }
 
     protected function includeImage($pid)
     {

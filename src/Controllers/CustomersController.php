@@ -32,7 +32,7 @@ class CustomersController extends Controller
             }
         }
         $this->set($d);
-        $this->render("login");
+        $this->render("login", false);
     }
 
     public function logout()

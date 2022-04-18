@@ -39,6 +39,6 @@ class Dispatcher
         } else {
             $controller = 'ADMIN\Controllers\\' . ucfirst($this->request->controller) . 'Controller';
         }
-        return new $controller;
+        return new $controller();
     }
 }
