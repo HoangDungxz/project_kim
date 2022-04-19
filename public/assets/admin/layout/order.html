@@ -1,23 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <!-- Mirrored from truelysell-admin.dreamguystech.com/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Jun 2021 14:21:50 GMT -->
+
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, user-scalable=0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
     <title>Admin</title>
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="../img/favicon.png" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet"
-          href="../plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css" />
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet"
-          href="../plugins/fontawesome/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="../plugins/fontawesome/css/fontawesome.min.css" />
     <link rel="stylesheet" href="../plugins/fontawesome/css/all.min.css" />
 
     <!-- Animate CSS -->
@@ -29,14 +26,13 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="../css/admin.css" />
     <link href="../css/toastr.css" rel="stylesheet" />
-    
-    
+
+
     <!-- Datepicker CSS -->
     <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
 
     <!-- Datatables CSS -->
-    <link rel="stylesheet"
-          href="../plugins/datatables/datatables.min.css" />
+    <link rel="stylesheet" href="../plugins/datatables/datatables.min.css" />
 
 
 
@@ -48,10 +44,7 @@
         <div class="header">
             <div class="header-left">
                 <a href="/admin" class="logo logo-small">
-                    <img src="../img/logo-icon.png"
-                         alt="Logo"
-                         width="30"
-                         height="30" />
+                    <img src="../img/logo-icon.png" alt="Logo" width="30" height="30" />
                 </a>
             </div>
             <a href="javascript:void(0);" id="toggle_btn">
@@ -64,14 +57,9 @@
             <ul class="nav user-menu">
                 <!-- User Menu -->
                 <li class="nav-item dropdown">
-                    <a href="javascript:void(0)"
-                       class="dropdown-toggle user-link nav-link"
-                       data-toggle="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle user-link nav-link" data-toggle="dropdown">
                         <span class="user-img">
-                            <img class="rounded-circle"
-                                 src="../img/user.jpg"
-                                 width="40"
-                                 alt="Admin" />
+                            <img class="rounded-circle" src="../img/user.jpg" width="40" alt="Admin" />
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -86,9 +74,7 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-logo">
                 <a href="/admin">
-                    <img src="../img/logo.png"
-                         class="img-fluid"
-                         alt="" />
+                    <img src="../img/logo.png" class="img-fluid" alt="" />
                 </a>
             </div>
             <div class="sidebar-inner slimscroll">
@@ -129,74 +115,77 @@
         <!-- /Sidebar -->
 
         <div class="page-wrapper">
-            
 
 
 
-<div class="content container-fluid">
-    <!-- Page Header -->
-    <div class="page-header">
-        <div class="row">
-            <div class="col">
-                <h3 class="page-title">Quản lý hoá đơn</h3>
-            </div>
 
-        </div>
-    </div>
-    <!-- /Page Header -->
+            <div class="content container-fluid">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="page-title">Quản lý hoá đơn</h3>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /Page Header -->
 
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover table-center mb-0 datatable">
-                            <thead class="text-center">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Mã đơn hàng</th>
-                                    <th>Người mua</th>
-                                    <th>Số tiền</th>
-                                    <th>Ngày tạo</th>
-                                    <th>Trạng thái</th>
-                                    <th>Hành động</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center">
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>Nguyễn Văn An</td>
-                                        <td>287,000.00</td>
-                                        <td>01-Aug-21 7:04:51 PM</td>
-                                        <td>
-                                            <select id="1-status" class="form-control select select2-hidden-accessible" aria-label="Default select example">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-center mb-0 datatable">
+                                        <thead class="text-center">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Mã đơn hàng</th>
+                                                <th>Người mua</th>
+                                                <th>Số tiền</th>
+                                                <th>Ngày tạo</th>
+                                                <th>Trạng thái</th>
+                                                <th>Hành động</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-center">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>Nguyễn Văn An</td>
+                                                <td>287,000.00</td>
+                                                <td>01-Aug-21 7:04:51 PM</td>
+                                                <td>
+                                                    <select id="1-status"
+                                                        class="form-control select select2-hidden-accessible"
+                                                        aria-label="Default select example">
                                                         <option value="Đ&#227; giao" selected>Đ&#227; giao</option>
                                                         <option value="Đang giao">Đang giao</option>
                                                         <option value="Đ&#227; huỷ">Đ&#227; huỷ</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <a onclick="updateStatus(1)" class="btn btn-sm bg-success-light mr-2">
-                                                Cập nhật
-                                            </a>
-                                            <a class="btn btn-sm bg-success-light mr-2"
-                                               href="/admin/ManageOrder/Details?id=1">
-                                                Chi tiết
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <a onclick="updateStatus(1)"
+                                                        class="btn btn-sm bg-success-light mr-2">
+                                                        Cập nhật
+                                                    </a>
+                                                    <a class="btn btn-sm bg-success-light mr-2"
+                                                        href="/admin/ManageOrder/Details?id=1">
+                                                        Chi tiết
+                                                    </a>
+                                                </td>
+                                            </tr>
 
-                            </tbody>
-                        </table>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
 
 
         </div>
@@ -228,7 +217,7 @@
     <script src="../script/toastr.js"></script>
 
 
-    
+
     <script>
         const updateStatus = async (id) => {
 
@@ -263,5 +252,5 @@
 </body>
 
 <!-- Mirrored from truelysell-admin.dreamguystech.com/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Jun 2021 14:22:07 GMT -->
-</html>
 
+</html>

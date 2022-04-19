@@ -1,23 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <!-- Mirrored from truelysell-admin.dreamguystech.com/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Jun 2021 14:21:50 GMT -->
+
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, user-scalable=0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
     <title>Admin</title>
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="../img/favicon.png" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet"
-          href="../plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css" />
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet"
-          href="../plugins/fontawesome/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="../plugins/fontawesome/css/fontawesome.min.css" />
     <link rel="stylesheet" href="../plugins/fontawesome/css/all.min.css" />
 
     <!-- Animate CSS -->
@@ -29,8 +26,8 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="../css/admin.css" />
     <link href="../css/toastr.css" rel="stylesheet" />
-    
-    
+
+
 
 
 </head>
@@ -41,10 +38,7 @@
         <div class="header">
             <div class="header-left">
                 <a href="/admin" class="logo logo-small">
-                    <img src="../img/logo-icon.png"
-                         alt="Logo"
-                         width="30"
-                         height="30" />
+                    <img src="../img/logo-icon.png" alt="Logo" width="30" height="30" />
                 </a>
             </div>
             <a href="javascript:void(0);" id="toggle_btn">
@@ -57,14 +51,9 @@
             <ul class="nav user-menu">
                 <!-- User Menu -->
                 <li class="nav-item dropdown">
-                    <a href="javascript:void(0)"
-                       class="dropdown-toggle user-link nav-link"
-                       data-toggle="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle user-link nav-link" data-toggle="dropdown">
                         <span class="user-img">
-                            <img class="rounded-circle"
-                                 src="../img/user.jpg"
-                                 width="40"
-                                 alt="Admin" />
+                            <img class="rounded-circle" src="../img/user.jpg" width="40" alt="Admin" />
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -79,9 +68,7 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-logo">
                 <a href="/admin">
-                    <img src="../img/logo.png"
-                         class="img-fluid"
-                         alt="" />
+                    <img src="../img/logo.png" class="img-fluid" alt="" />
                 </a>
             </div>
             <div class="sidebar-inner slimscroll">
@@ -122,46 +109,55 @@
         <!-- /Sidebar -->
 
         <div class="page-wrapper">
-            
 
-<div class="content container-fluid">
-    <div class="row">
-        <div class="col-xl-8 offset-xl-2">
-            <!-- Page Header -->
-            <div class="page-header">
+
+            <div class="content container-fluid">
                 <div class="row">
-                    <div class="col">
-                        <h3 class="page-title">Chỉnh sửa chuyên mục</h3>
+                    <div class="col-xl-8 offset-xl-2">
+                        <!-- Page Header -->
+                        <div class="page-header">
+                            <div class="row">
+                                <div class="col">
+                                    <h3 class="page-title">Chỉnh sửa chuyên mục</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Page Header -->
+
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Form -->
+                                <form method="post" action="edit_category">
+                                    <input name="__RequestVerificationToken" type="hidden"
+                                        value="I8Bnt8mRGTrfqBH57Z_jD9GTfoAOak6slhncfTiOsoEx0XbzxtniqOhfHMLRIhGnqDBijqmc1CaZ2RNOr9pu8eStxYmoWF2-GdA3Qvh0xpA1" />
+                                    <div class="form-group">
+                                        <label>Mã danh mục</label>
+                                        <input class="form-control text-box single-line" data-val="true"
+                                            data-val-number="The field category_id must be a number."
+                                            data-val-required="The category_id field is required." id="category_id"
+                                            name="category_id" readonly="readonly" type="number" value="1" />
+                                        <label>Tên danh mục</label>
+                                        <input class="form-control text-box single-line" data-val="true"
+                                            data-val-length="The field category_name must be a string with a maximum length of 100."
+                                            data-val-length-max="100"
+                                            data-val-required="The category_name field is required." id="category_name"
+                                            name="category_name" type="text" value="Mỹ phẩm" />
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="category_name"
+                                            data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="mt-4">
+                                        <button class="btn btn-primary" type="submit">
+                                            Cập nhật
+                                        </button>
+                                        <a href="category.html" class="btn btn-link">Huỷ</a>
+                                    </div>
+                                </form>
+                                <!-- /Form -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- /Page Header -->
-
-            <div class="card">
-                <div class="card-body">
-                    <!-- Form -->
-                    <form method="post" action="edit_category">
-                        <input name="__RequestVerificationToken" type="hidden" value="I8Bnt8mRGTrfqBH57Z_jD9GTfoAOak6slhncfTiOsoEx0XbzxtniqOhfHMLRIhGnqDBijqmc1CaZ2RNOr9pu8eStxYmoWF2-GdA3Qvh0xpA1" />
-                        <div class="form-group">
-                            <label>Mã danh mục</label>
-                            <input class="form-control text-box single-line" data-val="true" data-val-number="The field category_id must be a number." data-val-required="The category_id field is required." id="category_id" name="category_id" readonly="readonly" type="number" value="1" />
-                            <label>Tên danh mục</label>
-                            <input class="form-control text-box single-line" data-val="true" data-val-length="The field category_name must be a string with a maximum length of 100." data-val-length-max="100" data-val-required="The category_name field is required." id="category_name" name="category_name" type="text" value="Mỹ phẩm" />
-                            <span class="field-validation-valid text-danger" data-valmsg-for="category_name" data-valmsg-replace="true"></span>
-                        </div>
-                        <div class="mt-4">
-                            <button class="btn btn-primary" type="submit">
-                                Cập nhật
-                            </button>
-                            <a href="category.html" class="btn btn-link">Huỷ</a>
-                        </div>
-                    </form>
-                    <!-- /Form -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
@@ -194,7 +190,7 @@
     <script src="../script/toastr.js"></script>
 
 
-    
+
     <script src="/bundles/jqueryval"></script>
 
 
@@ -202,5 +198,5 @@
 </body>
 
 <!-- Mirrored from truelysell-admin.dreamguystech.com/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Jun 2021 14:22:07 GMT -->
-</html>
 
+</html>

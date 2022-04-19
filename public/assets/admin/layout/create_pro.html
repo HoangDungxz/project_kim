@@ -1,23 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <!-- Mirrored from truelysell-admin.dreamguystech.com/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Jun 2021 14:21:50 GMT -->
+
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, user-scalable=0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
     <title>Admin</title>
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="../img/favicon.png" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet"
-          href="../plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css" />
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet"
-          href="../plugins/fontawesome/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="../plugins/fontawesome/css/fontawesome.min.css" />
     <link rel="stylesheet" href="../plugins/fontawesome/css/all.min.css" />
 
     <!-- Animate CSS -->
@@ -29,8 +26,8 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="../css/admin.css" />
     <link href="../css/toastr.css" rel="stylesheet" />
-    
-    
+
+
 
 
 </head>
@@ -41,10 +38,7 @@
         <div class="header">
             <div class="header-left">
                 <a href="/admin" class="logo logo-small">
-                    <img src="../img/logo-icon.png"
-                         alt="Logo"
-                         width="30"
-                         height="30" />
+                    <img src="../img/logo-icon.png" alt="Logo" width="30" height="30" />
                 </a>
             </div>
             <a href="javascript:void(0);" id="toggle_btn">
@@ -57,14 +51,9 @@
             <ul class="nav user-menu">
                 <!-- User Menu -->
                 <li class="nav-item dropdown">
-                    <a href="javascript:void(0)"
-                       class="dropdown-toggle user-link nav-link"
-                       data-toggle="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle user-link nav-link" data-toggle="dropdown">
                         <span class="user-img">
-                            <img class="rounded-circle"
-                                 src="../img/user.jpg"
-                                 width="40"
-                                 alt="Admin" />
+                            <img class="rounded-circle" src="../img/user.jpg" width="40" alt="Admin" />
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -79,9 +68,7 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-logo">
                 <a href="/admin">
-                    <img src="../img/logo.png"
-                         class="img-fluid"
-                         alt="" />
+                    <img src="../img/logo.png" class="img-fluid" alt="" />
                 </a>
             </div>
             <div class="sidebar-inner slimscroll">
@@ -122,95 +109,124 @@
         <!-- /Sidebar -->
 
         <div class="page-wrapper">
-            
 
-<div class="content container-fluid">
-    <div class="row">
-        <div class="col-xl-8 offset-xl-2">
-            <!-- Page Header -->
-            <div class="page-header">
+
+            <div class="content container-fluid">
                 <div class="row">
-                    <div class="col">
-                        <h3 class="page-title">Thêm sản sản phẩm</h3>
+                    <div class="col-xl-8 offset-xl-2">
+                        <!-- Page Header -->
+                        <div class="page-header">
+                            <div class="row">
+                                <div class="col">
+                                    <h3 class="page-title">Thêm sản sản phẩm</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Page Header -->
+
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Form -->
+                                <form method="post" action="create_pro" enctype="multipart/form-data">
+                                    <input name="__RequestVerificationToken" type="hidden"
+                                        value="vnSawEhvRJXmrFhtickEFlZt5jI0nkpYuQPhjKXWjCtGWmHDFIvwxDWMwVNmJ3_Eq2hBrGXdVpH5HRb8nq-moKyPoGrXoEoVy5Y7CZgPxls1" />
+                                    <div class="form-group">
+                                        <label>Tên sản phẩm</label>
+                                        <input class="form-control text-box single-line" data-val="true"
+                                            data-val-length="The field product_name must be a string with a maximum length of 100."
+                                            data-val-length-max="100"
+                                            data-val-required="The product_name field is required." id="product_name"
+                                            name="product_name" type="text" value="" />
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="product_name"
+                                            data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4">Ảnh đại diện</label>
+                                        <img id="output" class="img-rounded" width="200" height="200"
+                                            src="../img/no-image-news.png" alt="Ảnh" />
+                                        <p class="text-center"><label for="ufile" style="cursor:pointer;">Chọn file
+                                                ảnh</label></p>
+                                        <input name="product_image" id="ufile" type="file" style="display:none;"
+                                            onchange="loadFile(event)" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Giá bán</label>
+                                        <input class="form-control text-box single-line" data-val="true"
+                                            data-val-number="The field product_price must be a number."
+                                            data-val-required="The product_price field is required." id="product_price"
+                                            name="product_price" type="text" value="" />
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="product_price"
+                                            data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Nguồn hàng:</label>
+                                        <input class="form-control text-box single-line" data-val="true"
+                                            data-val-length="The field product_source must be a string with a maximum length of 100."
+                                            data-val-length-max="100" id="product_source" name="product_source"
+                                            type="text" value="" />
+                                        <span class="field-validation-valid text-danger"
+                                            data-valmsg-for="product_source" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Trọng lượng</label>
+                                        <input class="form-control text-box single-line" data-val="true"
+                                            data-val-length="The field product_weight must be a string with a maximum length of 100."
+                                            data-val-length-max="100" id="product_weight" name="product_weight"
+                                            type="text" value="" />
+                                        <span class="field-validation-valid text-danger"
+                                            data-valmsg-for="product_weight" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Số lượng</label>
+                                        <input class="form-control text-box single-line" data-val="true"
+                                            data-val-number="The field product_amount must be a number."
+                                            id="product_amount" name="product_amount" type="number" value="" />
+                                        <span class="field-validation-valid text-danger"
+                                            data-valmsg-for="product_amount" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Danh mục</label>
+                                        <select class="form-control" id="category_id" name="category_id">
+                                            <option value="1">Trang điểm </option>
+                                            <option value="2">Mĩ phẩm</option>
+                                            <option value="3">Nước hoa</option>
+                                            <option value="4">Sữa tắm</option>
+                                        </select>
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="category_id"
+                                            data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Mô tả</label>
+
+                                        <input class="form-control text-box single-line" data-val="true"
+                                            data-val-required="The product_description field is required."
+                                            id="product_description" name="product_description" type="text" value="" />
+                                        <span class="field-validation-valid text-danger"
+                                            data-valmsg-for="product_description" data-valmsg-replace="true"></span>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <button class="btn btn-primary" type="submit">
+                                            Thêm
+                                        </button>
+                                        <a href="product.html" class="btn btn-link">Huỷ</a>
+                                    </div>
+                                </form>
+                                <!-- /Form -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- /Page Header -->
-
-            <div class="card">
-                <div class="card-body">
-                    <!-- Form -->
-                    <form method="post" action="create_pro" enctype="multipart/form-data">
-                        <input name="__RequestVerificationToken" type="hidden" value="vnSawEhvRJXmrFhtickEFlZt5jI0nkpYuQPhjKXWjCtGWmHDFIvwxDWMwVNmJ3_Eq2hBrGXdVpH5HRb8nq-moKyPoGrXoEoVy5Y7CZgPxls1" />
-                        <div class="form-group">
-                            <label>Tên sản phẩm</label>
-                            <input class="form-control text-box single-line" data-val="true" data-val-length="The field product_name must be a string with a maximum length of 100." data-val-length-max="100" data-val-required="The product_name field is required." id="product_name" name="product_name" type="text" value="" />
-                            <span class="field-validation-valid text-danger" data-valmsg-for="product_name" data-valmsg-replace="true"></span>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4">Ảnh đại diện</label>
-                            <img id="output" class="img-rounded" width="200" height="200" src="../img/no-image-news.png" alt="Ảnh" />
-                            <p class="text-center"><label for="ufile" style="cursor:pointer;">Chọn file ảnh</label></p>
-                            <input name="product_image" id="ufile" type="file" style="display:none;" onchange="loadFile(event)" />
-                        </div>
-                        <div class="form-group">
-                            <label>Giá bán</label>
-                            <input class="form-control text-box single-line" data-val="true" data-val-number="The field product_price must be a number." data-val-required="The product_price field is required." id="product_price" name="product_price" type="text" value="" />
-                            <span class="field-validation-valid text-danger" data-valmsg-for="product_price" data-valmsg-replace="true"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Nguồn hàng:</label>
-                            <input class="form-control text-box single-line" data-val="true" data-val-length="The field product_source must be a string with a maximum length of 100." data-val-length-max="100" id="product_source" name="product_source" type="text" value="" />
-                            <span class="field-validation-valid text-danger" data-valmsg-for="product_source" data-valmsg-replace="true"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Trọng lượng</label>
-                            <input class="form-control text-box single-line" data-val="true" data-val-length="The field product_weight must be a string with a maximum length of 100." data-val-length-max="100" id="product_weight" name="product_weight" type="text" value="" />
-                            <span class="field-validation-valid text-danger" data-valmsg-for="product_weight" data-valmsg-replace="true"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Số lượng</label>
-                            <input class="form-control text-box single-line" data-val="true" data-val-number="The field product_amount must be a number." id="product_amount" name="product_amount" type="number" value="" />
-                            <span class="field-validation-valid text-danger" data-valmsg-for="product_amount" data-valmsg-replace="true"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Danh mục</label>
-                            <select class="form-control" id="category_id" name="category_id"><option value="1">Trang điểm </option>
-<option value="2">Mĩ phẩm</option>
-<option value="3">Nước hoa</option>
-<option value="4">Sữa tắm</option>
-</select>
-                            <span class="field-validation-valid text-danger" data-valmsg-for="category_id" data-valmsg-replace="true"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Mô tả</label>
-                            
-                            <input class="form-control text-box single-line" data-val="true" data-val-required="The product_description field is required." id="product_description" name="product_description" type="text" value="" />
-                            <span class="field-validation-valid text-danger" data-valmsg-for="product_description" data-valmsg-replace="true"></span>
-                        </div>
-
-                        <div class="mt-4">
-                            <button class="btn btn-primary" type="submit">
-                                Thêm
-                            </button>
-                            <a href="product.html" class="btn btn-link">Huỷ</a>
-                        </div>
-                    </form>
-                    <!-- /Form -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
-<script>
-    var loadFile = function (event) {
-        var image = document.getElementById("output");
-        image.src = URL.createObjectURL(event.target.files[0])
-    }
-</script>
+            <script>
+                var loadFile = function (event) {
+                    var image = document.getElementById("output");
+                    image.src = URL.createObjectURL(event.target.files[0])
+                }
+            </script>
         </div>
     </div>
 
@@ -240,8 +256,8 @@
     <script src="../script/toastr.js"></script>
 
 
-    
-    
+
+
     <script src="/Areas/Asset/js/ckeditor.js"></script>
     <script>
         ClassicEditor.create(document.querySelector(".editor"), {
@@ -288,5 +304,5 @@
 </body>
 
 <!-- Mirrored from truelysell-admin.dreamguystech.com/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Jun 2021 14:22:07 GMT -->
-</html>
 
+</html>

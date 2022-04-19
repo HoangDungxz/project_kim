@@ -2,14 +2,11 @@
 
 namespace SRC\Core;
 
-use SRC\helper\SESSION;
-use SRC\Models\Category\CategoryResourceModel;
 
 class Controller
 {
     private  $vars = [];
     private  $layout = "default";
-    private  $view = '';
     private  $withNavbar = '';
     private  $variables = [];
 
@@ -20,17 +17,17 @@ class Controller
     function render($filename, $withNavbar = true)
     {
         if (strpos(get_class($this), 'ADMIN\Controllers') !== false) {
-            $view = ROOT . "/src/admin/Views/" . get_class($this) . '/' . $filename . '.php';
-            $view =  str_replace(['ADMIN\Controllers\\', 'Controller'], '', $view);
+            $mainView = ROOT . "src/admin/Views/" . get_class($this) . '/' . $filename . '.php';
+            $mainView =  str_replace(['ADMIN\Controllers\\', 'Controller'], '', $mainView);
         } else {
-            $view = ROOT . "src/Views/" . get_class($this) . '/' . $filename . '.php';
-            $view =  str_replace(['SRC\Controllers\\', 'Controller'], '', $view);
+            $mainView = ROOT . "src/Views/" . get_class($this) . '/' . $filename . '.php';
+            $mainView =  str_replace(['SRC\Controllers\\', 'Controller'], '', $mainView);
         }
         $this->withNavbar = $withNavbar;
-        $this->view = $view;
+
 
         extract($this->vars);
-        $mainView = $this->view;
+
         extract($this->variables);
 
         extract(['mainView' => $mainView]);

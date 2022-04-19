@@ -177,7 +177,6 @@
         $('.cart-total-grandTotal').text(total_after_discount + " ₫");
         $('.total_discount').text(total_discount);
 
-        // $('.total_discount').text()
     }
     total_price();
 </script>
