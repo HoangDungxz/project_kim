@@ -27,7 +27,11 @@ class FrontendControllers extends Controller
         $orderDetailResourceClass =  "SRC\Models\OrderDetail\OrderDetailResourceModel";
         $orderResource = new $orderResourceClass;
         $orderDetailResource = new $orderDetailResourceClass;
+
+        $order = null;
+        $orderDetails = null;
         $orders_count = 0;
+
         if (SESSION::get('customers') != null) {
 
             $order = $orderResource

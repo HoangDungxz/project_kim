@@ -125,7 +125,7 @@ use SRC\helper\SESSION;
                         <div class="cart-preview-inner">
                             <div class="previewCart">
 
-                                <?php if ($order != false || $orderDetails != false) : ?>
+                                <?php if (isset($order) && isset($orderDetails) && $order != false && $orderDetails != false) : ?>
                                     <ul class="previewCartList gm-scrollbar-container">
                                         <div class="gm-scrollbar -horizontal">
                                             <div class="thumb" style="width: 0px; transform: translate3d(0px, 0px, 0px);"></div>

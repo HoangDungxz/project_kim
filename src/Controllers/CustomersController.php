@@ -15,6 +15,8 @@ class CustomersController extends FrontendControllers
     }
     function login()
     {
+        $message = null;
+
         $d = [];
         if (isset($_POST['login_email']) && isset($_POST['login_pass'])) {
             $customer =  new CustomerModel();
