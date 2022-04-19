@@ -23,7 +23,6 @@ class ProductsController extends FrontendControllers
     function index($params)
     {
 
-
         if (isset($params['cid'])) {
             $products = $this->productResourceModel->where('category_id', $params['cid'])
                 ->getAll($params);

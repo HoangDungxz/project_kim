@@ -21,7 +21,7 @@ class OrderFrontendViewModel extends Model
 
     public function getPriceAffterDiscount()
     {
-        return number_format($this->get('product_price') - $this->get('product_price') * ($this->get('product_discount')) / 100);
+        return ($this->get('product_price') - $this->get('product_price') * ($this->get('product_discount')) / 100);
     }
 
     /**

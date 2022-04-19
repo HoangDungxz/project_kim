@@ -270,7 +270,7 @@ input[type='number'] {
 	-moz-appearance: textfield;
 	text-align: center !important;
 }
-#pro_qty {
+.pro_qty {
 	text-align: center !important;
 	font-family: Arimo, Arial, Helvetica, sans-serif;
 	font-weight: 700;
@@ -349,4 +349,19 @@ input[type='number'] {
 	li
 	> .navPage-subMenu {
 	margin-left: 0;
+}
+
+img {
+	object-fit: cover !important;
+}
+
+.cart-frontend td {
+	padding: 5px !important;
+	text-align: center;
+}
+.cart-frontend td a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	text-align: center;
 }

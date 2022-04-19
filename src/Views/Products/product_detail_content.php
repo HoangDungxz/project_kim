@@ -212,7 +212,7 @@
                                             <span class="is-srOnly">Decrease Quantity:</span>
                                             <i class="fa fa-minus"></i>
                                         </button>
-                                        <input class="form-input form-input--incrementTotal" id="pro_qty" name="product_quantity" type="tel" value="1" data-quantity-min="0" data-quantity-max="0" min="1" pattern="[0-9]*" aria-live="polite">
+                                        <input class="form-input form-input--incrementTotal pro_qty" name="product_quantity" type="tel" value="1" data-quantity-min="0" data-quantity-max="0" min="1" pattern="[0-9]*" aria-live="polite">
                                         <button type="button" class="button button--icon" onclick="changeQty(this,'asc')">
                                             <span class="is-srOnly">Increase Quantity:</span>
                                             <i class="fa fa-plus"></i>

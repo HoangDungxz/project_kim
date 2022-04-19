@@ -28,6 +28,7 @@ class HomeController extends FrontendControllers
             ]
         );
 
+
         $this->with($newProducts);
 
         $this->with($discountProducts);

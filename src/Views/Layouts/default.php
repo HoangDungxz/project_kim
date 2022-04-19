@@ -446,7 +446,7 @@
             });
 
             function changeQty(e, direct) {
-                let pro_qty = $(e).closest('.form-increment').find('#pro_qty');
+                let pro_qty = $(e).closest('.form-increment').find('.pro_qty');
 
                 switch (direct) {
                     case 'asc':
@@ -456,6 +456,8 @@
                         pro_qty.val(parseInt(parseInt(pro_qty.val()) < 2 ? 1 : parseInt(pro_qty.val()) - 1));
                         break;
                 }
+
+                $('.cart-total-grandTotal');
             }
         </script>
 </body>

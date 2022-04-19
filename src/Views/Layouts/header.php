@@ -74,10 +74,11 @@ use SRC\helper\SESSION;
                 <div class="customer-dropdown-login hidden-xs hidden-sm">
                     <div class="say-hi"><span>Xin chào,<?= SESSION::get('customers', 'name') ?></span></div>
                     <div class="customer-login">
-                        <a href="javascript:void(0);" class="toggle-dropdown-login" style="margin-right: 10px;">Đăng nhập</a> <a href="logind85d.html?action=create_account">Đăng ký</a>
+                        <a href="javascript:void(0);" class="toggle-dropdown-login" style="margin-right: 10px;"><?= SESSION::get('customers') == null ? "Đăng nhập" : "Đăng Xuất" ?></a> <a href="logind85d.html?action=create_account">Đăng ký</a>
                         <div id="dropdown-login" style="width: fit-content;">
-                            <h3>ĐĂNG NHẬP</h3>
+
                             <?php if (SESSION::get('customers') == null) : ?>
+                                <h3>ĐĂNG NHẬP</h3>
                                 <form class="login-popup" id="loginForm" action="<?= WEBROOT ?>customers/login" method="post" name="mainLoginForm">
                                     <fieldset class="form-fieldset">
                                         <div class="form-field">
@@ -93,8 +94,11 @@ use SRC\helper\SESSION;
                                         </div>
                                     </fieldset>
                                 </form>
+                                <div class="separated-form">
+                                    <a class="forgot-password" href="login8311.html?action=reset_password">Forgot your password?</a>
+                                    <a href="logind85d.html?action=create_account" class="btn btn-primary"><span>Create Account</span></a>
+                                </div>
                             <?php else : ?>
-
                                 <div>
                                     <div class="panel-title" style="color: #e7040f;">Email: <span><?= SESSION::get('customers', 'email')  ?></span></div>
                                     <div class="panel-title" style="color: #e7040f; margin-top:15px">Name: <span><?= SESSION::get('customers', 'name') ?></span></div>
@@ -103,10 +107,7 @@ use SRC\helper\SESSION;
 
                                 </div>
                             <?php endif; ?>
-                            <div class="separated-form">
-                                <a class="forgot-password" href="login8311.html?action=reset_password">Forgot your password?</a>
-                                <a href="logind85d.html?action=create_account" class="btn btn-primary"><span>Create Account</span></a>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -199,75 +200,7 @@ use SRC\helper\SESSION;
                             <span>sản phẩm</span>
                             <span class="triangle-with-shadow"></span>
                         </a>
-                        <div class="navPage-subMenu" id="navPages-60" tabindex="-1">
-                            <ul class="navPage-subMenu-list">
-                                <li class="navPage-subMenu-item">
-                                    <a class="navPage-subMenu-action navPages-action has-subMenu" href="body-art/accessorius/index.html">
-                                        <span>Accéssorius</span>
-                                    </a>
-                                    <ul class="navPage-subMenu-item" id="navPages-68">
-                                        <li class="navPage-subMenu-item">
-                                            <a class="navPage-childList-action navPages-action " href="body-art/accessorius/fermentum-loremous/index.html"><span>Fermentum Loremous</span></a>
-                                            <div class="navPage-subMenu" id="navPages-60" tabindex="-1">
-                                                <ul class="navPage-subMenu-list">
-                                                    <li class="navPage-subMenu-item">
-                                                        <a class="navPage-subMenu-action navPages-action has-subMenu" href="body-art/accessorius/index.html">
-                                                            <span>Accéssorius</span>
-                                                        </a>
-                                                        <ul class="navPage-subMenu-item" id="navPages-68">
-                                                            <li class="navPage-subMenu-item">
-                                                                <a class="navPage-childList-action navPages-action " href="body-art/accessorius/fermentum-loremous/index.html"><span>Fermentum Loremous</span></a>
-                                                                <div class="navPage-subMenu" id="navPages-60" tabindex="-1">
-                                                                    <ul class="navPage-subMenu-list">
-                                                                        <li class="navPage-subMenu-item">
-                                                                            <a class="navPage-subMenu-action navPages-action has-subMenu" href="body-art/accessorius/index.html">
-                                                                                <span>Accéssorius</span>
-                                                                            </a>
-                                                                            <ul class="navPage-subMenu-item" id="navPages-68">
-                                                                                <li class="navPage-subMenu-item">
-                                                                                    <a class="navPage-childList-action navPages-action " href="body-art/accessorius/fermentum-loremous/index.html"><span>Fermentum Loremous</span></a>
-                                                                                </li>
-                                                                                <li class="navPage-subMenu-item">
-                                                                                    <a class="navPage-childList-action navPages-action" href="body-art/accessorius/habitasse-molateas/index.html"><span>Habitasse Molateas</span></a>
-                                                                                </li>
-                                                                                <li class="navPage-subMenu-item">
-                                                                                    <a class="navPage-childList-action navPages-action" href="body-art/accessorius/maecenas-commodos/index.html"><span>Maecenas Commodos</span></a>
-                                                                                </li>
-                                                                                <li class="navPage-subMenu-item">
-                                                                                    <a class="navPage-childList-action navPages-action" href="body-art/accessorius/malesuada-sarcus/index.html"><span>Malesuada Sarcus</span></a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </li>
-                                                            <li class="navPage-subMenu-item">
-                                                                <a class="navPage-childList-action navPages-action" href="body-art/accessorius/habitasse-molateas/index.html"><span>Habitasse Molateas</span></a>
-                                                            </li>
-                                                            <li class="navPage-subMenu-item">
-                                                                <a class="navPage-childList-action navPages-action" href="body-art/accessorius/maecenas-commodos/index.html"><span>Maecenas Commodos</span></a>
-                                                            </li>
-                                                            <li class="navPage-subMenu-item">
-                                                                <a class="navPage-childList-action navPages-action" href="body-art/accessorius/malesuada-sarcus/index.html"><span>Malesuada Sarcus</span></a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li class="navPage-subMenu-item">
-                                            <a class="navPage-childList-action navPages-action" href="body-art/accessorius/habitasse-molateas/index.html"><span>Habitasse Molateas</span></a>
-                                        </li>
-                                        <li class="navPage-subMenu-item">
-                                            <a class="navPage-childList-action navPages-action" href="body-art/accessorius/maecenas-commodos/index.html"><span>Maecenas Commodos</span></a>
-                                        </li>
-                                        <li class="navPage-subMenu-item">
-                                            <a class="navPage-childList-action navPages-action" href="body-art/accessorius/malesuada-sarcus/index.html"><span>Malesuada Sarcus</span></a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
+                        <?= $categoriesShow ?>
                     </li>
 
                     <li class="navPages-item">

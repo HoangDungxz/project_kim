@@ -21,18 +21,15 @@
                     <tbody style="font-size: 17px;" class="cart-frontend">
 
                         <?php foreach ($orderDetails as $o) : ?>
-
-
-
                             <tr>
                                 <td><img src=" <?= PUBLIC_URL ?>upload/products/<?= $o->get('product_images')[0] ?>" class="img-responsive" style="width: 100px;height: 100px;" /></td>
                                 <td><a href="<?= WEBROOT ?>products/detail/pid/<?= $o->get('product_id'); ?>"><?= $o->get('product_name'); ?></a></td>
-                                <td style="white-space: nowrap;"> <?= number_format($o->get('product_price')); ?>₫ </td>
+                                <td style="white-space: nowrap;" class="product_price" price="<?= $o->get('product_price') ?>"> <?= number_format($o->get('product_price')); ?>₫ </td>
                                 <td> <?= $o->get('product_discount') ?> %</td>
-                                <td style="white-space: nowrap;"> <?= $o->getPriceAffterDiscount()  ?> ₫</td>
+                                <td style="white-space: nowrap;" class="price_affter_discount" price="<?= $o->getPriceAffterDiscount() ?>"> <?= number_format($o->getPriceAffterDiscount()) ?> ₫</td>
 
                                 <td>
-                                    <div class="form-increment" style="display: flex;">
+                                    <div class=" form-increment" style="display: flex;">
                                         <button type="button" class="button button--icon" onclick="changeQty(this,'dec');changPrice(this,<?= $o->getPriceAffterDiscount()  ?>)">
                                             <span class="is-srOnly">Decrease Quantity:</span>
                                             <i class="fa fa-minus"></i>
@@ -41,7 +38,7 @@
 
                                         <input class="total_order_detail" type="hidden" value="<?= $o->get('orderdetail_price') ?>" name="ord[<?= $o->get('orderdetail_id') ?>][order_detail_price]">
 
-                                        <input class="form-input form-input--incrementTotal" id="pro_qty" name="ord[<?= $o->get('orderdetail_id') ?>][order_detail_quantity]" type="tel" value="<?= $o->get('orderdetail_quantity'); ?>" data-quantity-min="0" data-quantity-max="0" min="1" pattern="[0-9]*" aria-live="polite">
+                                        <input class="form-input form-input--incrementTotal pro_qty" name="ord[<?= $o->get('orderdetail_id') ?>][order_detail_quantity]" type="tel" value="<?= $o->get('orderdetail_quantity'); ?>" data-quantity-min="0" data-quantity-max="0" min="1" pattern="[0-9]*" aria-live="polite">
                                         <button type="button" class="button button--icon" onclick="changeQty(this,'asc');changPrice(this,<?= $o->getPriceAffterDiscount()  ?>)">
                                             <span class="is-srOnly">Increase Quantity:</span>
                                             <i class="fa fa-plus"></i>
@@ -76,7 +73,7 @@
                             <strong>Tổng:</strong>
                         </div>
                         <div class="cart-total-value">
-                            <span style="text-decoration: line-through;">100₫</span>
+                            <span class="total-before-discount" style="text-decoration: line-through;">100₫</span>
                         </div>
                     </li>
                     <li class="cart-total">
@@ -84,15 +81,15 @@
                             <strong>Chiết khấu:</strong>
                         </div>
                         <div class="cart-total-value">
-                            <span class="coupon-code-add"><span>Add Info</span></span>
+                            <span class="coupon-code-add"><span class="total_discount">Add Info</span></span>
                         </div>
                     </li>
                     <li class=" cart-total">
                         <div class="cart-total-label">
                             <strong>Thành tiền:</strong>
                         </div>
-                        <div class="cart-total-value cart-total-grandTotal">
-                            <span><?= number_format($order->getSubtotal()) ?> ₫</span>
+                        <div class="cart-total-value cart-total-grandTotal" price="<?= $order->getSubtotal() ?>">
+                            <span><?= number_format($order->getSubtotal()) ?> </span>₫
                         </div>
                     </li>
                 </ul>
@@ -112,13 +109,75 @@
 
 <script>
     function changPrice(e, price) {
-        let quantity = $(e).closest('.form-increment').find('#pro_qty').val();
+        let quantity = $(e).closest('.form-increment').find('.pro_qty').val();
         total = price * quantity;
-        $(e).closest('tr').find('.total-price').text(total.toFixed(3).replace(".", ','));
+        total = total.toLocaleString(undefined, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+        $(e).closest('tr').find('.total-price').text(total);
 
         $(e).closest('body').find('.previewCartItem-price')
-            .html("<span>" + quantity + " </span>  X " + total.toFixed(3).replace(".", ',') + "₫");
+            .html("<span>" + quantity + " </span>  X " + total + "₫");
 
-        $(e).closest('tr').find('.total_order_detail').val(total.toFixed(3) * 1000);
+        $(e).closest('tr').find('.total_order_detail').val(price * quantity);
+
+
+        let grandTotal = 0;
+        $('.total_order_detail').each(function(e) {
+            // grandTotal += e.val();
+            grandTotal += parseInt(($(this).val()));
+
+        })
+
+        grandTotal = grandTotal.toLocaleString(undefined, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+
+        // $('.cart-total-grandTotal').text(grandTotal + " ₫");
+        total_price();
     }
+
+
+    function total_price() {
+        let total_after_discount = 0;
+        let total_before_discount = 0;
+
+        $('.cart-frontend tr').each(function() {
+            let product_price = ($(this).find('.product_price').attr('price'));
+            let pro_qty = ($(this).find('.pro_qty').val());
+            let price_affter_discount = ($(this).find('.price_affter_discount').attr('price'));
+
+            total_before_discount += (product_price * pro_qty);
+
+            total_after_discount += parseInt(price_affter_discount) * pro_qty;
+
+        });
+
+        let total_discount = total_before_discount - total_after_discount;
+
+        total_discount = total_discount.toLocaleString(undefined, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+
+
+        total_before_discount = total_before_discount.toLocaleString(undefined, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+
+        total_after_discount = total_after_discount.toLocaleString(undefined, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+
+        $('.total-before-discount').text(total_before_discount + " ₫");
+        $('.cart-total-grandTotal').text(total_after_discount + " ₫");
+        $('.total_discount').text(total_discount);
+
+        // $('.total_discount').text()
+    }
+    total_price();
 </script>

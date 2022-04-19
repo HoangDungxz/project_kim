@@ -8,11 +8,53 @@ use SRC\Models\Category\CategoryResourceModel;
 
 class FrontendControllers extends Controller
 {
+    private $categoriesShow = '';
 
     function __construct()
     {
         $this->getCategories();
         $this->getOrder();
+
+        $categoriesResourceModel = new CategoryResourceModel();
+        $categories = $categoriesResourceModel->getAll();
+
+        $this->showCategories($categories);
+        $categoriesShow = $this->categoriesShow;
+        $this->with($categoriesShow);
+
+        // die;
+    }
+
+    // BƯỚC 2: HÀM ĐỆ QUY HIỂN THỊ CATEGORIES
+    function showCategories($categories, $parent_id = 0, $char = '')
+    {
+        // BƯỚC 2.1: LẤY DANH SÁCH CATE CON
+        $cate_child = array();
+        foreach ($categories as $key => $item) {
+            // Nếu là chuyên mục con thì hiển thị
+            if ($item->getParent_id() == $parent_id) {
+                $cate_child[] = $item;
+                unset($categories[$key]);
+            }
+        }
+
+        // BƯỚC 2.2: HIỂN THỊ DANH SÁCH CHUYÊN MỤC CON NẾU CÓ
+        if ($cate_child) {
+            $this->categoriesShow .= '<div class="navPage-subMenu" id="navPages-60" tabindex="-1">
+                                                <ul class="navPage-subMenu-list">';
+            foreach ($cate_child as $key => $item) {
+                // Hiển thị tiêu đề chuyên mục
+                $this->categoriesShow .= ' <li class="navPage-subMenu-item">
+                                    <a class="navPage-subMenu-action navPages-action has-subMenu" href="' . WEBROOT . 'products/index/cid/' . $item->getId() . '">
+                                        <span>' . $item->getName() . '</span>
+                                    </a>';
+
+                // Tiếp tục đệ quy để tìm chuyên mục con của chuyên mục đang lặp
+                $this->showCategories($categories, $item->getId(), $char . '|---');
+                $this->categoriesShow .= '</li>';
+            }
+            $this->categoriesShow .= '</ul></div>';
+        }
     }
 
     private function getCategories()
@@ -66,6 +108,11 @@ class FrontendControllers extends Controller
                     ->select('sum(orderdetails.quantity) as orderdetails_sum_quantity')
                     ->where('order_id', $order->getId())
                     ->get()->orderdetails_sum_quantity;
+
+                $orders_count = $orderDetailResource
+                    ->select('sum(orderdetails.quantity) as orderdetails_sum_price')
+                    ->where('order_id', $order->getId())
+                    ->get()->orderdetails_sum_price;
             } else {
                 $orderDetails = false;
             }

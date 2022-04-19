@@ -11,12 +11,8 @@ class Controller
     private  $layout = "default";
     private  $view = '';
     private  $withNavbar = '';
-    private $variables = [];
+    private  $variables = [];
 
-    // function set($d)
-    // {
-    //     $this->vars = array_merge($this->vars, $d);
-    // }
     function setLayout($layout = "default")
     {
         $this->layout = $layout;
