@@ -10,32 +10,35 @@ class HomeController extends FrontendControllers
     private $productResourceModel;
     function __construct()
     {
+        parent::__construct();
         $this->productResourceModel = new ProductResourceModel();
     }
 
     function index()
     {
-        $d['newProducts'] = $this->productResourceModel->getAll(
+        $newProducts = $this->productResourceModel->getAll(
             [
                 "sort" => 'iddesc'
             ]
         );
 
-        $d['discountProducts'] = $this->productResourceModel->getAll(
+        $discountProducts = $this->productResourceModel->getAll(
             [
                 "sort" => 'discountdesc'
             ]
         );
 
-        $this->set($d);
+        $this->with($newProducts);
+
+        $this->with($discountProducts);
         $this->render("index", false);
     }
 
     function modal($params)
     {
-        $d['product'] = $this->productResourceModel->get($params);
+        $product = $this->productResourceModel->get($params);
 
-        $this->set($d);
+        $this->with($product);
         $this->setLayout(false);
         echo  $this->render("modal");
     }

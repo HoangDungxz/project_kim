@@ -16,6 +16,7 @@ class OrderController extends FrontendControllers
 
     function __construct()
     {
+        parent::__construct();
         $this->orderResource = new OrderResourceModel();
         $this->orderDetailResource = new OrderDetailResourceModel();
     }
@@ -34,8 +35,6 @@ class OrderController extends FrontendControllers
         if (SESSION::get('customers') == null) {
             header('Location: ' . WEBROOT . 'customers/login');
         }
-
-
 
         extract($_POST);
 
@@ -60,7 +59,7 @@ class OrderController extends FrontendControllers
                 $product_quantity * $product_price_affter_discount :
                 $params['product_price_affter_discount']);
 
-        $orderDetail->parentRequire = 'order_id';
+        $orderDetail->parent_id = 'order_id';
 
 
         if (

@@ -205,8 +205,8 @@ class ResourceModel  implements ResourceModelInterface
 
                 $stringModel = rtrim($stringModel, ',');
 
-                if (isset($model->parentRequire) && $model->getOrder_id() == null) {
-                    $arrayModel[$model->parentRequire] = $lastInsertId;
+                if (isset($model->parent_id) && $model->getOrder_id() == null) {
+                    $arrayModel[$model->parent_id] = $lastInsertId;
                 }
 
                 if ($id == null) {

@@ -10,6 +10,7 @@ class CustomersController extends FrontendControllers
     private $customerResourceModel;
     public function __construct()
     {
+        parent::__construct();
         $this->customerResourceModel = new CustomerResourceModel();
     }
     function login()
@@ -26,10 +27,10 @@ class CustomersController extends FrontendControllers
             if ($login == true) {
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
             } else {
-                $d['message']  = 'Địa chỉ email hoặc mật khẩu của bạn không chính xác. Vui lòng thử lại. Nếu bạn quên chi tiết đăng nhập của mình, chỉ cần nhấp vào liên kết `Quên mật khẩu?` đường dẫn phía dưới.';
+                $message  = 'Địa chỉ email hoặc mật khẩu của bạn không chính xác. Vui lòng thử lại. Nếu bạn quên chi tiết đăng nhập của mình, chỉ cần nhấp vào liên kết `Quên mật khẩu?` đường dẫn phía dưới.';
             }
         }
-        $this->set($d);
+        $this->with($message);
         $this->render("login", false);
     }
 

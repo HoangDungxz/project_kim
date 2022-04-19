@@ -1,12 +1,18 @@
 <?php
 
-// $sql = "INSERT INTO `productimages`(`path`, `product_id`) VALUES ('[value-2]','[value-3]'), ";
+// $test = 1;
+// a($test);
 
-// echo rand(5, 15);
 
-// die;
+// function a($x)
+// {
+//     $trace = debug_backtrace();
+//     $file = file($trace[0]['file']);
+//     $line = $file[$trace[0]['line'] - 1];
 
-use SRC\helper\Session;
+//     var_dump($line); // Prints "a($test);" Do the Stringparsing and your done
+
+// }
 
 define('WEBROOT', str_replace("public/index.php", "", $_SERVER["SCRIPT_NAME"]));
 define('ROOT', str_replace("public/index.php", "", $_SERVER["SCRIPT_FILENAME"]));

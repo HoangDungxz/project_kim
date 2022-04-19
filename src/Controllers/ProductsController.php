@@ -15,6 +15,7 @@ class ProductsController extends FrontendControllers
 
     function __construct()
     {
+        parent::__construct();
         $this->productResourceModel = new ProductResourceModel();
         $this->categoryResourceModel = new CategoryResourceModel();
         $this->imageResoureModel = new ImageResourceModel();
@@ -24,31 +25,28 @@ class ProductsController extends FrontendControllers
 
 
         if (isset($params['cid'])) {
-            $d['products'] = $this->productResourceModel->where('category_id', $params['cid'])
+            $products = $this->productResourceModel->where('category_id', $params['cid'])
                 ->getAll($params);
         } else {
-            $d['products'] = $this->productResourceModel
+            $products = $this->productResourceModel
                 ->getAll($params);
         }
 
-        // echo '<pre>';
-        // print_r($d);
-        // echo '</pre>';
-        // die('www');
-        // tạo breadcrumb  
         $categoryId = $params['cid'] ?? null;
         if ($categoryId != null) {
-            $d['categoriesWithParents'] = array_reverse($this->categoryResourceModel->getWithParents($categoryId));
+            $categoriesWithParents = array_reverse($this->categoryResourceModel->getWithParents($categoryId));
         } else {
-            $d['categoriesWithParents'] = null;
+            $categoriesWithParents = null;
         }
 
         // tạo sub category
-        $d['childCategories'] = $this->categoryResourceModel->getChildCategories([
+        $childCategories = $this->categoryResourceModel->getChildCategories([
             'parent_id' => $categoryId
         ]);
 
-        $this->set($d);
+        $this->with($products);
+        $this->with($childCategories);
+        $this->with($categoriesWithParents);
 
         $this->render("product_list");
     }
@@ -58,30 +56,33 @@ class ProductsController extends FrontendControllers
         if (!isset($params['pid'])) {
             header("Location: " . WEBROOT);
         }
-        $d['product'] = $this->productResourceModel->get($params);
+        $product = $this->productResourceModel->get($params);
 
-        if ($d['product'] == false) {
+        if ($product == false) {
             header("Location: " . WEBROOT);
         }
-        $category = $this->categoryResourceModel->getById($d['product']->getCategory_id());
+        $category = $this->categoryResourceModel->getById($product->getCategory_id());
 
         if ($category != false) {
-            $d['categoriesWithParents'] = array_reverse($this->categoryResourceModel->getWithParents($category->getId()));
+            $categoriesWithParents = array_reverse($this->categoryResourceModel->getWithParents($category->getId()));
         } else {
-            $d['categoriesWithParents'] = null;
+            $categoriesWithParents = null;
         }
 
-        $d['childBreadcrumb'] = $d['product']->getName();
+        $childBreadcrumb = $product->getName();
 
-        $this->set($d);
+        $this->with($product);
+        $this->with($categoriesWithParents);
+        $this->with($childBreadcrumb);
+
         $this->render("product_detail");
     }
 
     function ajaxSearch($params)
     {
-        $d['products'] = $this->productResourceModel->getAll(array_merge(['pageNum' => 5], $params));
+        $products = $this->productResourceModel->getAll(array_merge(['pageNum' => 5], $params));
 
-        $this->set($d);
+        $this->with($products);
         $this->setLayout(false);
         echo  $this->render("ajaxSearch");
     }
