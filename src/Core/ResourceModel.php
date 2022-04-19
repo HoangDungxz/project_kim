@@ -30,6 +30,8 @@ class ResourceModel  implements ResourceModelInterface
 
         $this->model = new $this->class;
 
+
+
         $this->table = $this->model->getTable_name();
         $this->id = $this->model->getTable_id();
         $this->model->unsetPrepareTable();
@@ -144,7 +146,6 @@ class ResourceModel  implements ResourceModelInterface
 
     public function get($params = [])
     {
-
         $table_name = $this->model->getTable_name();
         $sql = "SELECT $this->select FROM $table_name $this->joinSql $this->conditionSql $this->groupBySql $this->oderSql $this->paginateSql";
 
@@ -158,6 +159,7 @@ class ResourceModel  implements ResourceModelInterface
     public function getById($id)
     {
         $table_name = $this->model->getTable_name();
+
         $sql = "SELECT * FROM $table_name WHERE $this->id = $id";
 
         $req = Database::getBdd()->prepare($sql);
@@ -184,7 +186,7 @@ class ResourceModel  implements ResourceModelInterface
         $req = Database::getBdd();
         try {
             $req->beginTransaction();
-            $lastInsetId = 0;
+            $lastInsertId = 0;
             foreach ($models as $key => $model) {
 
                 $arrayModel = $model->getProperties($model);
@@ -204,7 +206,7 @@ class ResourceModel  implements ResourceModelInterface
                 $stringModel = rtrim($stringModel, ',');
 
                 if (isset($model->parentRequire) && $model->getOrder_id() == null) {
-                    $arrayModel[$model->parentRequire] = $lastInsetId;
+                    $arrayModel[$model->parentRequire] = $lastInsertId;
                 }
 
                 if ($id == null) {
@@ -216,7 +218,13 @@ class ResourceModel  implements ResourceModelInterface
                 $req->prepare($sql)
                     ->execute($arrayModel);
 
-                $lastInsetId = $req->lastInsertId();
+
+                echo '<pre>';
+                print_r($model);
+                echo '</pre>';
+                if (isset($model->send_id_to_child) && $model->send_id_to_child == true) {
+                    $lastInsertId = $req->lastInsertId();
+                }
             }
             $req->commit();
 
@@ -246,7 +254,6 @@ class ResourceModel  implements ResourceModelInterface
                 $req->prepare($sql)->execute();
             }
             $req->commit();
-            die;
             return true;
         } catch (\PDOException $e) {
             $req->rollback();

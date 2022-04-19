@@ -74,7 +74,7 @@
                                              <div class="prod-price" data-test-info-type="price">
                                                  <div class="price-section price-section--withoutTax ">
                                                      <span style="text-decoration:line-through;margin-right: 5px;" data-product-price-without-tax class=" price price--withoutTax">
-                                                         <?= number_format($p->getPrice() - ($p->getPrice() * $p->getDiscount()) / 100); ?> ₫
+                                                         <?= number_format($p->getPriceAffterDiscount()); ?> ₫
                                                      </span>
                                                      <span data-product-price-without-tax class="price price--withoutTax">
                                                          <?= number_format($p->getPrice()) ?> ₫
@@ -103,8 +103,7 @@
                                              </div>
 
                                              <div class="buttons-wrapper">
-                                                 <a href="<?= WEBROOT . "/order/create/product_id/" . $p->getId() . "/product_price/" . $p->getPrice() ?>" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-event-type="product-click"><span>Add to Cart</span></a>
-
+                                                 <a href="<?= WEBROOT . "/order/create/product_id/" . $p->getId() . "/product_price_affter_discount /" . $p->getPriceAffterDiscount() ?> ?>" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-event-type="product-click"><span>Add to Cart</span></a>
                                                  <a href="login9340.html?action=add&amp;product_id=70" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish
                                                          list</span></a>
 
@@ -138,7 +137,7 @@
                                                  <a href="#" class="btnQV quickview" data-product-id="<?= $p->getId() ?>" data-event-type="product-click">Quick view</a>
                                              </div>
                                              <div class="new-badge">NEW</div>
-                                             <div class="new-badge" style="top:25px"><?= $p->getDiscount() ?>%</div>
+
                                          </div>
 
                                          <figcaption class="prod-desc">
@@ -154,10 +153,11 @@
                                              <div class="prod-price" data-test-info-type="price">
                                                  <div class="price-section price-section--withoutTax ">
                                                      <span style="text-decoration:line-through;margin-right: 5px;" data-product-price-without-tax class=" price price--withoutTax">
-                                                         <?= number_format($p->getPrice() - ($p->getPrice() * $p->getDiscount()) / 100); ?> ₫
+                                                         <?= number_format($p->getPrice()) ?> ₫
                                                      </span>
                                                      <span data-product-price-without-tax class="price price--withoutTax">
-                                                         <?= number_format($p->getPrice()) ?> ₫
+                                                         <?= number_format($p->getPriceAffterDiscount()); ?> ₫
+
                                                      </span>
                                                  </div>
                                              </div>
@@ -183,12 +183,13 @@
                                              </div>
 
                                              <div class="buttons-wrapper">
-                                                 <a href="<?= WEBROOT . "/order/create/product_id/" . $p->getId() . "/product_price/" . $p->getPrice() ?>" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-event-type="product-click"><span>Add to Cart</span></a>
+                                                 <a href="<?= WEBROOT . "/order/create/product_id/" . $p->getId() . "/product_price_affter_discount/" . $p->getPriceAffterDiscount() ?>" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-event-type="product-click"><span>Add to Cart</span></a>
 
                                                  <a href="login9340.html?action=add&amp;product_id=70" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish
                                                          list</span></a>
 
                                              </div>
+
                                          </figcaption>
                                      </figure>
                                  </article>

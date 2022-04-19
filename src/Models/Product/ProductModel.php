@@ -18,12 +18,16 @@ class ProductModel extends Model
     private $description;
     private $content;
     private $hot;
-    private $photo;
     private $price;
     private $discount;
     private $category_id;
     private $brand_id;
 
+
+    public function getPriceAffterDiscount()
+    {
+        return $this->getPrice() - ($this->getPrice() * $this->getDiscount()) / 100;
+    }
     /**
      * Get the value of id
      */
@@ -120,26 +124,6 @@ class ProductModel extends Model
     public function setHot($hot)
     {
         $this->hot = $hot;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of photo
-     */
-    public function getPhoto()
-    {
-        return $this->photo;
-    }
-
-    /**
-     * Set the value of photo
-     *
-     * @return  self
-     */
-    public function setPhoto($photo)
-    {
-        $this->photo = $photo;
 
         return $this;
     }

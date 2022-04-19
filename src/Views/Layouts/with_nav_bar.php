@@ -10,11 +10,15 @@
                     <?php if (isset($categoriesWithParents)) : ?>
                         <?php foreach ($categoriesWithParents as $c) : ?>
                             <li class="breadcrumb">
-                                <a href="<?= WEBROOT ?>/products/index/cid/<?= $c->getId() ?>" class=" breadcrumb-label"><?= $c->getName() ?></a>
+                                <a href="<?= WEBROOT ?>products/index/cid/<?= $c->getId() ?>" class=" breadcrumb-label"><?= $c->getName() ?></a>
                             </li>
                         <?php endforeach; ?>
                     <?php endif; ?>
-
+                    <?php if (isset($childBreadcrumb)) : ?>
+                        <li class="breadcrumb">
+                            <strong><?= $childBreadcrumb ?></strong>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
 

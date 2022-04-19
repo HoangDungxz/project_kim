@@ -13,13 +13,13 @@ class CategoryResourceModel extends ResourceModel
         $this->categories = [];
     }
 
+
     public function getWithParents($id)
     {
         $category = $this->getById($id);
 
         array_push($this->categories, $category);
-
-        if ($category != null) {
+        if ($category != null && $category->getParent_id() != $category->getId()) {
             if ($category->getParent_id() != 0 && $category->getParent_id() != null) {
                 $this->getWithParents($category->getParent_id());
             }

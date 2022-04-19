@@ -201,71 +201,33 @@ use SRC\helper\SESSION;
                         </a>
                         <div class="navPage-subMenu" id="navPages-60" tabindex="-1">
                             <ul class="navPage-subMenu-list">
-                                <li class="navPage-subMenu-item">
-                                    <a class="navPage-subMenu-action navPages-action has-subMenu" href="body-art/accessorius/index.html">
-                                        <span>Accéssorius</span>
-                                    </a>
-                                    <ul class="navPage-subMenu-item" id="navPages-68">
+                                <?php foreach ($categories as $key => $c) : ?>
+                                    <?php if (!isset($c->removed)) : ?>
                                         <li class="navPage-subMenu-item">
-                                            <a class="navPage-childList-action navPages-action " href="body-art/accessorius/fermentum-loremous/index.html"><span>Fermentum Loremous</span></a>
-                                            <div class="navPage-subMenu" id="navPages-60" tabindex="-1">
-                                                <ul class="navPage-subMenu-list">
-                                                    <li class="navPage-subMenu-item">
-                                                        <a class="navPage-subMenu-action navPages-action has-subMenu" href="body-art/accessorius/index.html">
-                                                            <span>Accéssorius</span>
-                                                        </a>
-                                                        <ul class="navPage-subMenu-item" id="navPages-68">
-                                                            <li class="navPage-subMenu-item">
-                                                                <a class="navPage-childList-action navPages-action " href="body-art/accessorius/fermentum-loremous/index.html"><span>Fermentum Loremous</span></a>
-                                                                <div class="navPage-subMenu" id="navPages-60" tabindex="-1">
-                                                                    <ul class="navPage-subMenu-list">
-                                                                        <li class="navPage-subMenu-item">
-                                                                            <a class="navPage-subMenu-action navPages-action has-subMenu" href="body-art/accessorius/index.html">
-                                                                                <span>Accéssorius</span>
-                                                                            </a>
-                                                                            <ul class="navPage-subMenu-item" id="navPages-68">
-                                                                                <li class="navPage-subMenu-item">
-                                                                                    <a class="navPage-childList-action navPages-action " href="body-art/accessorius/fermentum-loremous/index.html"><span>Fermentum Loremous</span></a>
-                                                                                </li>
-                                                                                <li class="navPage-subMenu-item">
-                                                                                    <a class="navPage-childList-action navPages-action" href="body-art/accessorius/habitasse-molateas/index.html"><span>Habitasse Molateas</span></a>
-                                                                                </li>
-                                                                                <li class="navPage-subMenu-item">
-                                                                                    <a class="navPage-childList-action navPages-action" href="body-art/accessorius/maecenas-commodos/index.html"><span>Maecenas Commodos</span></a>
-                                                                                </li>
-                                                                                <li class="navPage-subMenu-item">
-                                                                                    <a class="navPage-childList-action navPages-action" href="body-art/accessorius/malesuada-sarcus/index.html"><span>Malesuada Sarcus</span></a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </li>
-                                                            <li class="navPage-subMenu-item">
-                                                                <a class="navPage-childList-action navPages-action" href="body-art/accessorius/habitasse-molateas/index.html"><span>Habitasse Molateas</span></a>
-                                                            </li>
-                                                            <li class="navPage-subMenu-item">
-                                                                <a class="navPage-childList-action navPages-action" href="body-art/accessorius/maecenas-commodos/index.html"><span>Maecenas Commodos</span></a>
-                                                            </li>
-                                                            <li class="navPage-subMenu-item">
-                                                                <a class="navPage-childList-action navPages-action" href="body-art/accessorius/malesuada-sarcus/index.html"><span>Malesuada Sarcus</span></a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            <a class="navPage-subMenu-action navPages-action has-subMenu" href="<?= WEBROOT ?>products/index/cid/<?= $c->getId() ?>">
+                                                <span><?= $c->getName() ?></span>
+                                            </a>
+                                            <ul class="navPage-childList" id="navPages-68">
+                                                <?php foreach ($categories as $keyChild => $child) : ?>
+                                                    <?php if ($c->getId() == $child->getParent_id()) : ?>
+                                                        <li class="navPage-childList-item">
+                                                            <a class="navPage-childList-action navPages-action" href="<?= WEBROOT ?>products/index/cid/<?= $child->getId() ?>">
+                                                                <span><?= $child->getName() ?></span>
+                                                            </a>
+                                                        </li>
+                                                        <?php
+                                                        $categories[$keyChild]->removed = true;
+                                                        ?>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </ul>
                                         </li>
-                                        <li class="navPage-subMenu-item">
-                                            <a class="navPage-childList-action navPages-action" href="body-art/accessorius/habitasse-molateas/index.html"><span>Habitasse Molateas</span></a>
-                                        </li>
-                                        <li class="navPage-subMenu-item">
-                                            <a class="navPage-childList-action navPages-action" href="body-art/accessorius/maecenas-commodos/index.html"><span>Maecenas Commodos</span></a>
-                                        </li>
-                                        <li class="navPage-subMenu-item">
-                                            <a class="navPage-childList-action navPages-action" href="body-art/accessorius/malesuada-sarcus/index.html"><span>Malesuada Sarcus</span></a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                        <?php
+                                        $categories[$key]->removed = true;
+                                        ?>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+
                             </ul>
                         </div>
                     </li>

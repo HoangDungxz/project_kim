@@ -84,10 +84,19 @@ class ProductResourceModel extends ResourceModel
         }
         return $products;
     }
-    public function getById($id)
+    public function get($params = [])
     {
-        $product = parent::getById($id);
+        $this->join('categories', "$this->table.category_id=categories.id")
+            ->where("$this->table.$this->id", $params['pid'])
+            ->join('brands', "$this->table.brand_id=brands.id")
+            ->select("$this->table.*,categories.name as category_name,brands.name as brands_name");
+
+        $product = parent::get();
+        if ($product == false) {
+            return $product;
+        }
         $product->images = $this->includeImage($product->getId());
+
         return $product;
     }
 }

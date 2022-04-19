@@ -1,7 +1,7 @@
 <?php if (count($products) > 0) : ?>
 	<?php foreach ($products as $p) : ?>
 		<li>
-			<a style="display: block; height: 100%;width: 100%;" href='index.php?controller=products&action=detail&id={$rows->id}'>
+			<a style="display: block; height: 100%;width: 100%;" href='<?= WEBROOT ?>products/detail/pid/<?= $p->getId() ?>'>
 				<img src='<?= PUBLIC_URL ?>upload/products/<?= $p->images[0] ?>'>
 				<?= $p->getName() ?>
 			</a>

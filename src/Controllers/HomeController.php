@@ -2,12 +2,10 @@
 
 namespace SRC\Controllers;
 
-use SRC\Core\Controller;
-use SRC\Models\Image\ImageResourceModel;
 use SRC\Models\Product\ProductResourceModel;
 
 
-class HomeController extends Controller
+class HomeController extends FrontendControllers
 {
     private $productResourceModel;
     function __construct()
@@ -35,7 +33,7 @@ class HomeController extends Controller
 
     function modal($params)
     {
-        $d['product'] = $this->productResourceModel->getById($params['pid']);
+        $d['product'] = $this->productResourceModel->get($params);
 
         $this->set($d);
         $this->setLayout(false);

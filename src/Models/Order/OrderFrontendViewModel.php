@@ -7,23 +7,22 @@ use SRC\Core\Model;
 class OrderFrontendViewModel extends Model
 {
     private $product_id;
-    private $product_product_id;
     private $product_price;
     private $product_name;
-    private $product_description;
-    private $product_content;
     private $product_hot;
     private $product_discount;
-    private $product_category_id;
-    private $product_brand_id;
     private $product_images;
 
     private $orderdetail_id;
     private $orderdetail_order_id;
-    private $orderdetail_product_id;
     private $orderdetail_quantity;
     private $orderdetail_price;
 
+
+    public function getPriceAffterDiscount()
+    {
+        return number_format($this->get('product_price') - $this->get('product_price') * ($this->get('product_discount')) / 100);
+    }
 
     /**
      * Get the value of product_id
@@ -44,28 +43,6 @@ class OrderFrontendViewModel extends Model
 
         return $this;
     }
-
-
-    /**
-     * Get the value of product_product_id
-     */
-    public function getProduct_product_id()
-    {
-        return $this->product_product_id;
-    }
-
-    /**
-     * Set the value of product_product_id
-     *
-     * @return  self
-     */
-    public function setProduct_product_id($product_product_id)
-    {
-        $this->product_product_id = $product_product_id;
-
-        return $this;
-    }
-
 
     /**
      * Get the value of product_price
@@ -103,46 +80,6 @@ class OrderFrontendViewModel extends Model
     public function setProduct_name($product_name)
     {
         $this->product_name = $product_name;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of product_description
-     */
-    public function getProduct_description()
-    {
-        return $this->product_description;
-    }
-
-    /**
-     * Set the value of product_description
-     *
-     * @return  self
-     */
-    public function setProduct_description($product_description)
-    {
-        $this->product_description = $product_description;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of product_content
-     */
-    public function getProduct_content()
-    {
-        return $this->product_content;
-    }
-
-    /**
-     * Set the value of product_content
-     *
-     * @return  self
-     */
-    public function setProduct_content($product_content)
-    {
-        $this->product_content = $product_content;
 
         return $this;
     }
@@ -188,61 +125,21 @@ class OrderFrontendViewModel extends Model
     }
 
     /**
-     * Get the value of product_category_id
+     * Get the value of product_images
      */
-    public function getProduct_category_id()
+    public function getProduct_images()
     {
-        return $this->product_category_id;
+        return $this->product_images;
     }
 
     /**
-     * Set the value of product_category_id
+     * Set the value of product_images
      *
      * @return  self
      */
-    public function setProduct_category_id($product_category_id)
+    public function setProduct_images($product_images)
     {
-        $this->product_category_id = $product_category_id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of product_brand_id
-     */
-    public function getProduct_brand_id()
-    {
-        return $this->product_brand_id;
-    }
-
-    /**
-     * Set the value of product_brand_id
-     *
-     * @return  self
-     */
-    public function setProduct_brand_id($product_brand_id)
-    {
-        $this->product_brand_id = $product_brand_id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of orderdetail_id
-     */
-    public function getOrderdetail_id()
-    {
-        return $this->orderdetail_id;
-    }
-
-    /**
-     * Set the value of orderdetail_id
-     *
-     * @return  self
-     */
-    public function setOrderdetail_id($orderdetail_id)
-    {
-        $this->orderdetail_id = $orderdetail_id;
+        $this->product_images = $product_images;
 
         return $this;
     }
@@ -263,26 +160,6 @@ class OrderFrontendViewModel extends Model
     public function setOrderdetail_order_id($orderdetail_order_id)
     {
         $this->orderdetail_order_id = $orderdetail_order_id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of orderdetail_product_id
-     */
-    public function getOrderdetail_product_id()
-    {
-        return $this->orderdetail_product_id;
-    }
-
-    /**
-     * Set the value of orderdetail_product_id
-     *
-     * @return  self
-     */
-    public function setOrderdetail_product_id($orderdetail_product_id)
-    {
-        $this->orderdetail_product_id = $orderdetail_product_id;
 
         return $this;
     }
@@ -328,21 +205,21 @@ class OrderFrontendViewModel extends Model
     }
 
     /**
-     * Get the value of product_images
+     * Get the value of orderdetail_id
      */
-    public function getProduct_images()
+    public function getOrderdetail_id()
     {
-        return $this->product_images;
+        return $this->orderdetail_id;
     }
 
     /**
-     * Set the value of product_images
+     * Set the value of orderdetail_id
      *
      * @return  self
      */
-    public function setProduct_images($product_images)
+    public function setOrderdetail_id($orderdetail_id)
     {
-        $this->product_images = $product_images;
+        $this->orderdetail_id = $orderdetail_id;
 
         return $this;
     }

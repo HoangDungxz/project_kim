@@ -19,7 +19,7 @@ class OrderDetailResourceModel extends ResourceModel
         $carts = parent::getAll();
 
         foreach ($carts as $key => $c) {
-            $carts[$key]->setProduct_images($this->includeImage($c->getProduct_product_id()));
+            $carts[$key]->setProduct_images($this->includeImage($c->getProduct_id()));
         }
         return  $carts;
     }

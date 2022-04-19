@@ -128,10 +128,10 @@
                                            <div class="prod-price" data-test-info-type="price">
                                                <div class="price-section price-section--withoutTax ">
                                                    <span style="text-decoration:line-through;margin-right: 5px;" data-product-price-without-tax class=" price price--withoutTax">
-                                                       <?= number_format($p->getPrice() - ($p->getPrice() * $p->getDiscount()) / 100); ?> ₫
+                                                       <?= number_format($p->getPrice()) ?> ₫
                                                    </span>
                                                    <span data-product-price-without-tax class="price price--withoutTax">
-                                                       <?= number_format($p->getPrice()) ?> ₫
+                                                       <?= number_format($p->getPriceAffterDiscount()); ?> ₫
                                                    </span>
                                                </div>
                                            </div>
@@ -154,15 +154,13 @@
                                            </div>
 
                                            <div class="buttons-wrapper">
-                                               <a href="<?= WEBROOT . "/order/create/product_id/" . $p->getId() . "/product_price/" . $p->getPrice() ?>" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-event-type="product-click"><span>Add to Cart</span></a>
+                                               <a href="<?= WEBROOT . "/order/create/product_id/" . $p->getId() . "/product_price_affter_discount /" . $p->getPriceAffterDiscount() ?> ?>" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-event-type="product-click"><span>Add to Cart</span></a>
 
                                                <a href="/wishlist.php?action=add&amp;product_id=68" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
 
                                                <div class="btn-compare">
                                                    <input type="checkbox" class="form-checkbox" name="products[]" value="68" id="compare-<?= $p->getId() ?>" data-compare-id="68">
-                                                   <label class="form-label" for="compare-<?= $p->getId() ?>">
-                                                       <span>Compare</span>
-                                                   </label>
+
                                                </div>
                                            </div>
                                        </figcaption>
@@ -182,11 +180,6 @@
 
                    </ul>
                </div>
-
-               <div class="compare-link">
-                   <a class="btn btn-primary" href="/compare" data-compare-nav="">Compare Selected<span class="countPill countPill--positive countPill--alt"></span></a>
-               </div>
-
            </div>
            <div data-content-region="category_below_content"></div>
        </div>

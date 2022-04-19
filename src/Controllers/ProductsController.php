@@ -2,18 +2,17 @@
 
 namespace SRC\Controllers;
 
-use SRC\Core\Controller;
 use SRC\Models\Category\CategoryResourceModel;
 use SRC\Models\Image\ImageResourceModel;
 use SRC\Models\Product\ProductResourceModel;
 
 
 
-class ProductsController extends Controller
+class ProductsController extends FrontendControllers
 {
     private $productResourceModel;
     private $categoryResourceModel;
-    private $imageResoureModel;
+
     function __construct()
     {
         $this->productResourceModel = new ProductResourceModel();
@@ -22,6 +21,8 @@ class ProductsController extends Controller
     }
     function index($params)
     {
+
+
         if (isset($params['cid'])) {
             $d['products'] = $this->productResourceModel->where('category_id', $params['cid'])
                 ->getAll($params);
@@ -30,6 +31,10 @@ class ProductsController extends Controller
                 ->getAll($params);
         }
 
+        // echo '<pre>';
+        // print_r($d);
+        // echo '</pre>';
+        // die('www');
         // tạo breadcrumb  
         $categoryId = $params['cid'] ?? null;
         if ($categoryId != null) {
@@ -53,7 +58,20 @@ class ProductsController extends Controller
         if (!isset($params['pid'])) {
             header("Location: " . WEBROOT);
         }
-        $d['product'] = $this->productResourceModel->getById($params['pid']);
+        $d['product'] = $this->productResourceModel->get($params);
+
+        if ($d['product'] == false) {
+            header("Location: " . WEBROOT);
+        }
+        $category = $this->categoryResourceModel->getById($d['product']->getCategory_id());
+
+        if ($category != false) {
+            $d['categoriesWithParents'] = array_reverse($this->categoryResourceModel->getWithParents($category->getId()));
+        } else {
+            $d['categoriesWithParents'] = null;
+        }
+
+        $d['childBreadcrumb'] = $d['product']->getName();
 
         $this->set($d);
         $this->render("product_detail");

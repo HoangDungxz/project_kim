@@ -2,12 +2,10 @@
 
 namespace SRC\Controllers;
 
-use SRC\Core\Controller;
-use SRC\helper\SESSION;
 use SRC\Models\Customer\CustomerModel;
 use SRC\Models\Customer\CustomerResourceModel;
 
-class CustomersController extends Controller
+class CustomersController extends FrontendControllers
 {
     private $customerResourceModel;
     public function __construct()

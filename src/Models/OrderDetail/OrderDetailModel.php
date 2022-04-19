@@ -16,8 +16,9 @@ class OrderDetailModel extends Model
     private $id;
     private $order_id;
     private $product_id;
-    private $quantity;
     private $price;
+    private $quantity;
+
 
 
     /**
@@ -80,25 +81,6 @@ class OrderDetailModel extends Model
         return $this;
     }
 
-    /**
-     * Get the value of quantity
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
-
-    /**
-     * Set the value of quantity
-     *
-     * @return  self
-     */
-    public function setQuantity($quantity)
-    {
-        $this->quantity = $quantity;
-
-        return $this;
-    }
 
     /**
      * Get the value of price
@@ -116,6 +98,26 @@ class OrderDetailModel extends Model
     public function setPrice($price)
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of quantity
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * Set the value of quantity
+     *
+     * @return  self
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }

@@ -20,7 +20,6 @@ class OrderResourceModel extends ResourceModel
 
         if ($oderExist != false) {
             $orderModel->setId($oderExist->getId())
-                ->setPrice(($oderExist->getPrice() + $oderExist->getPrice()))
                 ->setDate($oderExist->getDate())
                 ->setStatus(0);
 
@@ -33,8 +32,8 @@ class OrderResourceModel extends ResourceModel
             if ($oderDetailExist != false) {
                 $orderDetail->setId($oderDetailExist->getId())
                     ->setOrder_id($oderDetailExist->getOrder_id())
-                    ->setQuantity($oderDetailExist->getQuantity() + $oderDetailExist->getQuantity())
-                    ->setPrice($oderDetailExist->getPrice() + $oderDetailExist->getPrice());
+                    ->setQuantity($oderDetailExist->getQuantity() + $orderDetail->getQuantity())
+                    ->setPrice($oderDetailExist->getPrice() + $orderDetail->getPrice());
             } elseif ($orderModel->getId() != null) {
                 $orderDetail->setOrder_id($orderModel->getId());
             }

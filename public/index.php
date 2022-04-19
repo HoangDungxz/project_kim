@@ -1,5 +1,11 @@
 <?php
 
+// $sql = "INSERT INTO `productimages`(`path`, `product_id`) VALUES ('[value-2]','[value-3]'), ";
+
+// echo rand(5, 15);
+
+// die;
+
 use SRC\helper\Session;
 
 define('WEBROOT', str_replace("public/index.php", "", $_SERVER["SCRIPT_NAME"]));

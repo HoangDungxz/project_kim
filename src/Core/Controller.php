@@ -2,6 +2,7 @@
 
 namespace SRC\Core;
 
+use SRC\helper\SESSION;
 use SRC\Models\Category\CategoryResourceModel;
 
 class Controller
@@ -38,12 +39,12 @@ class Controller
 
     private function setView()
     {
-
         extract($this->vars);
         $mainView = $this->view;
         extract(['mainView' => $mainView]);
         extract(['categories' => $this->getCategories()]);
 
+        extract($this->getOrder());
 
         if (!$this->layout) {
             ob_start();
@@ -52,7 +53,6 @@ class Controller
             echo $content_for_layout;
             return;
         }
-
         ob_start();
 
         if ($this->withNavbar) {
@@ -78,7 +78,6 @@ class Controller
                 require(ROOT . "src/Views/Layouts/" . $this->layout . '.php');
             }
         }
-
         return;
     }
 
@@ -101,5 +100,57 @@ class Controller
     {
         $categoryResourceModel = new CategoryResourceModel();
         return $categoryResourceModel->getAll();
+    }
+
+    private function getOrder()
+    {
+        $orderResourceClass = "SRC\Models\Order\OrderResourceModel";
+        $orderDetailResourceClass =  "SRC\Models\OrderDetail\OrderDetailResourceModel";
+        $orderResource = new $orderResourceClass;
+        $orderDetailResource = new $orderDetailResourceClass;
+
+        if (SESSION::get('customers') != null) {
+
+            $d['order'] = $orderResource
+                ->where('customer_id', SESSION::get('customers', 'id'))
+                ->get() ?? [];
+
+            if ($d['order']) {
+                $d['orderDetails'] = $orderDetailResource
+                    ->where('order_id', $d['order']->getId())
+                    ->join('products', 'products.id=orderdetails.product_id')
+                    ->select(
+                        '
+            products.id as product_id,
+            products.name as product_name,
+            products.description as product_description,
+            products.hot as product_hot,
+            products.price as product_price,
+            products.discount as product_discount,
+            products.category_id as product_category_id,
+            products.brand_id as product_brand_id,
+            
+            orderdetails.id as orderdetail_id,
+            orderdetails.order_id as orderdetail_order_id,
+            orderdetails.product_id as orderdetail_product_id,
+            orderdetails.quantity as orderdetail_quantity,
+            orderdetails.price as orderdetail_price'
+                    )
+                    ->setFetchClass(\SRC\Models\Order\OrderFrontendViewModel::class)
+                    ->getFrontendOrderView() ?? [];
+
+                $d['orders_count'] = $orderDetailResource
+                    ->select('sum(orderdetails.quantity) as orderdetails_sum_quantity')
+                    ->where('order_id', $d['order']->getId())
+                    ->get()->orderdetails_sum_quantity;
+            } else {
+                $d['orderDetails'] = false;
+            }
+
+
+
+            return ($d);
+        }
+        return [];
     }
 }

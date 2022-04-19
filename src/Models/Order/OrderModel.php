@@ -83,7 +83,7 @@ class OrderModel extends Model
     /**
      * Get the value of price
      */
-    public function getPrice()
+    public function getSubtotal()
     {
         $orderDetailResourceModel =  new OrderDetailResourceModel();
         return $orderDetailResourceModel->where('order_id', $this->id)

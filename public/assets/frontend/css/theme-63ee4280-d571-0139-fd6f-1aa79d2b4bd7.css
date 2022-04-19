@@ -11185,11 +11185,11 @@ input#gift-certificate-submit {
 	display: block;
 	animation: fadeIn 0.3s;
 }
-.navPages-container nav ul.navPages-list > li:hover > .navPage-subMenu {
+/* .navPages-container nav ul.navPages-list > li:hover > .navPage-subMenu {
 	display: -ms-flexbox;
 	display: flex;
 	animation: fadeIn 0.3s;
-}
+} */
 .navPages-container
 	nav
 	ul.navPages-list
