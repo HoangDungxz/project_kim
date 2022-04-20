@@ -37,7 +37,6 @@ class FrontendControllers extends Controller
                 unset($categories[$key]);
             }
         }
-
         // BƯỚC 2.2: HIỂN THỊ DANH SÁCH CHUYÊN MỤC CON NẾU CÓ
         if ($cate_child) {
             $this->categoriesShow .= '<div class="navPage-subMenu" id="navPages-60" tabindex="-1">

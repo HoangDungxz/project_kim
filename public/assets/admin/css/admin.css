@@ -4687,12 +4687,17 @@ input[type='checkbox'] {
 	margin-left: 0;
 }
 
+.onoffswitch-inner::after {
+	background-color: #f16b6f;
+}
+
 .pagination,
 .dataTables_info {
 	margin-bottom: 0;
 	margin-top: 1rem;
 	/* margin-left: auto; */
 }
+
 .dataTables_paginate {
 	display: flex;
 }

@@ -7,6 +7,7 @@ namespace ADMIN\Controllers;
  * 
  * @param ControllerName Trang chủ
  * @param SortOrder 1
+ * @param Icon fas fa-columns
  */
 class HomeController extends AdminControllers
 {
@@ -18,5 +19,11 @@ class HomeController extends AdminControllers
     function index()
     {
         $this->render("index");
+    }
+
+    function notFound()
+    {
+
+        $this->render("not_found", false);
     }
 }

@@ -294,10 +294,6 @@ class ResourceModel  implements ResourceModelInterface
 
     public function datatable()
     {
-        echo '<pre>';
-        print_r($_POST);
-        echo '</pre>';
-        die;
     }
 
 

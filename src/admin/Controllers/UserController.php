@@ -9,6 +9,7 @@ use SRC\Models\User\UserResourceModel;
  * 
  * @param ControllerName Quản lý tài khoản
  * @param SortOrder 3
+ * @param Icon fas fa-user
  */
 class UserController extends AdminControllers
 {
@@ -21,7 +22,7 @@ class UserController extends AdminControllers
     /**
      * Index
      * 
-     * @param MethodName Danh sách tài khoản
+     * @param AcctionName Danh sách tài khoản
      */
     function index()
     {
@@ -35,7 +36,7 @@ class UserController extends AdminControllers
     /**
      * Index
      * 
-     * @param MethodName Thêm mới lý tài khoản
+     * @param AcctionName Thêm mới lý tài khoản
      */
     function create()
     {
@@ -45,7 +46,7 @@ class UserController extends AdminControllers
     /**
      * Index
      * 
-     * @param MethodName Sửa tài khoản
+     * @param AcctionName Sửa tài khoản
      */
     function edit()
     {

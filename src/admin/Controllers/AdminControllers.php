@@ -33,6 +33,7 @@ class AdminControllers extends Controller
         $this->with($uri);
     }
 
+
     function authentication()
     {
     }
@@ -63,23 +64,25 @@ class AdminControllers extends Controller
         $result = new \stdClass;
 
         if ($comment_string != false) {
+
             $result->controller_name = $this->getCommentParam($comment_string, 'ControllerName');
             $result->controller_path = strtolower(str_replace("Controller", '', $controller->getShortName()));
             $result->sort_order = str_replace(" ", "", $this->getCommentParam($comment_string, 'SortOrder'));
+            $result->icon = $this->getCommentParam($comment_string, 'Icon');
         }
         $result->methodNames = [];
 
         foreach ($controller->getMethods() as $key => $method) {
 
-            $comment_method_string = $method->getDocComment();
+            $comment_action_string = $method->getDocComment();
 
             if (
-                $comment_method_string != false
+                $comment_action_string != false
             ) {
-                $methodName = $this->getCommentParam($comment_method_string, 'MethodName');
+                $methodName = $this->getCommentParam($comment_action_string, 'AcctionName');
                 array_push($result->methodNames, [
-                    'method_name' => $methodName,
-                    'method_path' => $result->controller_path . '/' . $method->getName()
+                    'action_name' => $methodName,
+                    'action_path' => $result->controller_path . '/' . $method->getName()
                 ]);
             }
         }

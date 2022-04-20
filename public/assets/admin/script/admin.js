@@ -95,6 +95,8 @@
 	if ($('.datatable').length > 0) {
 		$('.datatable').DataTable({
 			bFilter: false,
+			sorting: [],
+			order: [],
 			pageLength: 5,
 			lengthMenu: [5, 10, 15, 20],
 			searching: true,

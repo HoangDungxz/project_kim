@@ -7,7 +7,7 @@
                     <h3 class="page-title">Quản lý danh mục</h3>
                 </div>
                 <div class="col-auto">
-                    <a href="<?= WEBROOT ?>admin/category/prepare_save" class="btn btn-primary ml-3">
+                    <a href="<?= WEBROOT ?>admin/category/create" class="btn btn-primary ml-3">
                         <i class="fas fa-plus"></i> Thêm danh mục
                     </a>
                 </div>
@@ -31,8 +31,19 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-hover table-center mb-0 datatable-category">
+                            <table class="table table-hover table-center mb-0 datatable">
+                                <thead>
+                                    <tr>
+                                        <th>Mã</th>
+                                        <th>Tên danh mục</th>
+                                        <th>Hiện thị</th>
+                                        <th class="text-right">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
+                                    <?= $categoriesShow ?>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -41,27 +52,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    if ($('.datatable-category').length > 0) {
-        $('.datatable-category').DataTable({
-            bFilter: false,
-            pageLength: 5,
-            lengthMenu: [5, 10, 15, 20],
-            search: true,
-            processing: true,
-            serverSide: true,
-            serverMethod: 'POST',
-            ajax: {
-                url: '<?= WEBROOT ?>admin/category/ajaxDatas'
-            },
-            'columns': [{
-                    data: 'emp_name'
-                },
-                {
-                    data: 'emp_id'
-                },
-            ]
-        });
-    }
-</script>

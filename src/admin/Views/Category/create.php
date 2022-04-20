@@ -6,7 +6,7 @@
                    <div class="page-header">
                        <div class="row">
                            <div class="col">
-                               <h3 class="page-title">Thông tin danh mục</h3>
+                               <h3 class="page-title">Thêm danh mục</h3>
                            </div>
                        </div>
                    </div>
@@ -28,10 +28,8 @@
                                    <div class="col-sm-9">
                                        <select class="custom-select" name="category_parent">
                                            <option selected disabled>-- Chọn danh mục cha --</option>
-                                           <?php foreach ($categories as $c) : ?>
-                                               <option value="<?= $c->getParent_id() ?>"><?= $c->getName() ?></option>
-                                           <?php endforeach; ?>
-
+                                           <option value="0"> Danh mục gốc</option>
+                                           <?= $categoriesOptionShow ?>
                                        </select>
                                    </div>
                                </div>
@@ -55,18 +53,13 @@
                                    </button>
                                    <a href="index.php?controller=categories" class="btn btn-link">Huỷ</a>
                                </div>
-
-
+                           </form>
+                           <!-- /Form -->
                        </div>
-
-
-                       </form>
-                       <!-- /Form -->
                    </div>
                </div>
            </div>
        </div>
-   </div>
    </div>
 
 

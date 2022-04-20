@@ -29,16 +29,34 @@ class Dispatcher
         // ghép cách truyền thống và cách key value
         $params = array_merge($params, $this->request->urlParams);
 
-        call_user_func_array([$controller, $this->request->action], [$params]);
+        $response =  call_user_func_array([$controller, $this->request->action], [$params]);
+
+        if ($response) {
+            return new $controller;
+        } else {
+            $this->request->action = 'notFound';
+            $this->request->params = [];
+            return new $controller;
+        }
     }
 
     public function loadController()
     {
         if ($this->request->page != 'admin') {
-            $controller = 'SRC\Controllers\\' . ucfirst($this->request->controller) . 'Controller';
+            $prefix = 'SRC\Controllers\\';
         } else {
-            $controller = 'ADMIN\Controllers\\' . ucfirst($this->request->controller) . 'Controller';
+            $prefix = 'ADMIN\Controllers\\';
         }
-        return new $controller;
+
+        $controller = $prefix . ucfirst($this->request->controller) . 'Controller';
+
+        if (class_exists($controller) && method_exists($controller, $this->request->action)) {
+            return new $controller;
+        } else {
+            $this->request->action = 'notFound';
+            $this->request->params = [];
+            $controller = $prefix . "HomeController";
+            return new $controller;
+        }
     }
 }
