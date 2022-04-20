@@ -2,6 +2,8 @@
 
 namespace MVC;
 
+use SRC\helper\SESSION;
+
 class Router
 {
     static public function parse($url, $request)
@@ -39,5 +41,10 @@ class Router
                 }
                 break;
         }
+
+
+        // lưu lên sesion
+        SESSION::push('request',  $request->controller, 'controller',);
+        SESSION::push('request',  $request->action, 'action',);
     }
 }

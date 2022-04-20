@@ -7,7 +7,7 @@
                     <h3 class="page-title">Quản lý danh mục</h3>
                 </div>
                 <div class="col-auto">
-                    <a href="<?= WEBROOT ?>admin/category/prepare_save" class="btn btn-primary ml-3">
+                    <a href="<?= WEBROOT ?>admin/category/create" class="btn btn-primary ml-3">
                         <i class="fas fa-plus"></i> Thêm danh mục
                     </a>
                 </div>

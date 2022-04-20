@@ -13,9 +13,10 @@
                    <!-- /Page Header -->
 
                    <div class="card">
+                       <?= isset($message) ? $message : '' ?>
                        <div class="card-body">
                            <!-- Form -->
-                           <form method="POST" action="<?= WEBROOT ?>admin/category/save" id="category_form">
+                           <form method="POST" action="#" id="category_form">
                                <div class="form-group row">
                                    <label for="category_name" class="col-sm-3 col-form-label">Tên danh mục</label>
                                    <div class="col-sm-9">

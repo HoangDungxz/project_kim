@@ -292,6 +292,14 @@ class ResourceModel  implements ResourceModelInterface
         return $paths;
     }
 
+    public function datatable()
+    {
+        echo '<pre>';
+        print_r($_POST);
+        echo '</pre>';
+        die;
+    }
+
 
     // SESSION
 

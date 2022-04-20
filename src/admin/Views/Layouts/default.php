@@ -31,6 +31,9 @@
     <!-- jQuery -->
     <script src="<?= PUBLIC_URL ?>admin/script/jquery-3.5.0.min.js"></script>
 
+    <!-- Datatables JS -->
+    <script src="<?= PUBLIC_URL ?>admin/plugins/datatables/datatable.min.js"></script>
+
 
 </head>
 
@@ -79,8 +82,7 @@
     <script src="<?= PUBLIC_URL ?>admin/script/moment.min.js"></script>
     <script src="<?= PUBLIC_URL ?>admin/script/bootstrap-datetimepicker.min.js"></script>
 
-    <!-- Datatables JS -->
-    <script src="<?= PUBLIC_URL ?>admin/plugins/datatables/datatable.min.js"></script>
+
 
     <!-- Slimscroll JS -->
     <script src="<?= PUBLIC_URL ?>admin/plugins/slimscroll/jquery.slimscroll.min.js"></script>

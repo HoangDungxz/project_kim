@@ -51,6 +51,7 @@ class Model
                 if (strpos($value, "@param") !== false) {
                     $value = str_replace(["@param", " "], '', $value);
                     $value = preg_replace('/\s+/u', '', $value);
+
                     if (strpos($value, "table") !== false) {
                         $this->table_name = str_replace('table', '', $value);
                     }
