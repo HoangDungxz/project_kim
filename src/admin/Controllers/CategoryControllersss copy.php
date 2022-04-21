@@ -5,13 +5,7 @@ namespace ADMIN\Controllers;
 use SRC\Models\Category\CategoryModel;
 use SRC\Models\Category\CategoryResourceModel;
 
-/**
- * CategoryController
- * 
- * @param ControllerName Quản lý danh mục
- * @param SortOrder 2
- * @param Icon  fas fa-certificate
- */
+
 class CategoryController extends AdminControllers
 {
     private $categoriesResourceModel;

@@ -42,11 +42,12 @@ class AdminControllers extends Controller
     {
         $controllerDocs = [];
         foreach (array_filter(glob(ROOT . 'src/admin/Controllers/*'), 'is_file') as $file) {
-            $file = str_replace([ROOT . 'src/admin/Controllers/', '.php'], '', $file);
 
-            if ($file == "AdminControllers") {
+            if (!strpos($file, 'Controller.php')) {
                 continue;
             }
+
+            $file = str_replace([ROOT . 'src/admin/Controllers/', '.php'], '', $file);
 
             $controllerClass =  __NAMESPACE__ . '\\' . $file;
 

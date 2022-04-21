@@ -28,6 +28,7 @@ class UserController extends AdminControllers
     {
         $users = $this->customerResoureceModel->getAll();
 
+
         $this->with($users);
 
         $this->render("index");

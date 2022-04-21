@@ -1,16 +1,22 @@
    <div class="page-wrapper">
        <div class="content container-fluid">
+           <!-- Page Header -->
+           <div class="page-header">
+               <div class="row">
+                   <div class="col">
+                       <h3 class="page-title">Quản lý danh mục</h3>
+                       <ul class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="<?= WEBROOT ?>/admin">Trang chủ</a></li>
+                           <li class="breadcrumb-item"><a href="<?= WEBROOT ?>/admin/category">Danh mục</a></li>
+                           <li class="breadcrumb-item active">Thêm danh mục</li>
+                       </ul>
+                   </div>
+               </div>
+           </div>
+           <!-- /Page Header -->
            <div class="row">
                <div class="col-xl-8 offset-xl-2">
-                   <!-- Page Header -->
-                   <div class="page-header">
-                       <div class="row">
-                           <div class="col">
-                               <h3 class="page-title">Thêm danh mục</h3>
-                           </div>
-                       </div>
-                   </div>
-                   <!-- /Page Header -->
+
 
                    <div class="card">
                        <?= isset($message) ? $message : '' ?>
@@ -49,9 +55,9 @@
                                </div>
                                <div class="mt-4 ">
                                    <button class="btn btn-primary" type="submit">
-                                       Thêm
+                                       Thêm danh mục
                                    </button>
-                                   <a href="index.php?controller=categories" class="btn btn-link">Huỷ</a>
+                                   <button type="reset" class="btn">Nhập lại</button>
                                </div>
                            </form>
                            <!-- /Form -->

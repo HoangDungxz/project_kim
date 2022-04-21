@@ -49,12 +49,32 @@
     .card-body.right .card-header {
         padding: 16px 0;
     }
+
+    .table-responsive .col-sm-12 {
+        padding: 0;
+    }
 </style>
 <div class="page-wrapper">
     <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col">
+                    <h3 class="page-title">Quản lý danh mục</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?= WEBROOT ?>/admin">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Danh mục</li>
+                    </ul>
+                </div>
+                <div class="col-auto">
+                    <a href="<?= WEBROOT ?>admin/category/create" class="btn btn-primary ml-3">
+                        <i class="fas fa-plus"></i> Thêm danh mục
+                    </a>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-12">
-                <div class="chat-window">
+                <div class="row">
                     <div class="col-xl-4 col-lg-6 col-md-6 settings-tab">
                         <div class="card">
                             <div class="card-body left">
@@ -111,10 +131,10 @@
                                     </div>
                                     <div class="mt-4 ">
                                         <button class="btn btn-primary" type="submit">
-                                            Sửa
+                                            Sửa danh mục
                                         </button>
 
-                                        <button class="btn btn-link" type="reset">Hủy</button>
+                                        <button class="btn" type="reset">Nhập lại</button>
                                     </div>
                                 </form>
                             </div>
@@ -166,8 +186,8 @@
                     validators: {
                         notEmpty: {},
                         stringLength: {
-                            min: 3,
-                            max: 30,
+                            min: 2,
+                            max: 50,
                         },
                     }
                 },

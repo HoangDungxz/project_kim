@@ -2,6 +2,7 @@
 
 namespace SRC\Models\User;
 
+use DateTime;
 use SRC\Core\Model;
 
 /** 
@@ -15,10 +16,13 @@ class UserModel extends Model
 {
     private $id;
     private $name;
+    private $avatar;
     private $email;
     private $password;
     private $phone;
-    private $address;
+    private $status;
+    private $created_at;
+    private $updated_at;
 
     /**
      * Get the value of id
@@ -136,6 +140,87 @@ class UserModel extends Model
     public function setAddress($address)
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of status
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set the value of status
+     *
+     * @return  self
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of created_at
+     */
+    public function getCreated_at()
+    {
+        $date =  DateTime::createFromFormat('Y-m-d H:i:s', $this->created_at);
+        return $date;
+    }
+
+    /**
+     * Set the value of created_at
+     *
+     * @return  self
+     */
+    public function setCreated_at($created_at)
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of updated_at
+     */
+    public function getUpdated_at()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Set the value of updated_at
+     *
+     * @return  self
+     */
+    public function setUpdated_at($updated_at)
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of avatar
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * Set the value of avatar
+     *
+     * @return  self
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }
