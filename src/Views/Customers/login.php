@@ -28,8 +28,9 @@ use SRC\helper\SESSION;
 
                         <p class="alertBox-column alertBox-message">
                             <span><?= $message ?></span>
+                        </p>
                     </div>
-                    </p>
+
                 <?php endif; ?>
                 <div class="login-row row">
                     <?php if (SESSION::get('customers') != null) : ?>
@@ -78,7 +79,7 @@ use SRC\helper\SESSION;
                                     <li class="new-customer-fact">Theo dõi đơn đặt hàng mới</li>
                                     <li class="new-customer-fact">Lưu các mục vào danh sách wish list</li>
                                 </ul>
-                                <a href="/login.php?action=create_account"><button class="btn btn-checkout">Tạo tài khỏan</button></a>
+                                <a href="<?= WEBROOT ?>customers/register"><button class="btn btn-checkout">Tạo tài khỏan</button></a>
                             </div>
                         </div>
                     </div>

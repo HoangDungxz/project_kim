@@ -4,6 +4,8 @@ namespace ADMIN\Controllers;
 
 use SRC\Core\Controller;
 use SRC\helper\SESSION;
+use SRC\Models\User\UserModel;
+use SRC\Models\User\UserResourceModel;
 
 /**
  * Index
@@ -13,10 +15,49 @@ use SRC\helper\SESSION;
  */
 class AdminControllers extends Controller
 {
-
+    protected $userResoureceModel;
     public function __construct()
     {
+        $this->userResoureModel = new UserResourceModel();
+        // ĐĂNG NHẬP    
+        $uri =  strtolower(SESSION::pull('request', 'controller'));
+        $action = strtolower(SESSION::pull('request', 'action'));
 
+        // các page được phép truy cập khi chưa đăng nhập
+
+        // kiểm tra session có user chưa
+        $allowPages = [
+            "user/login",
+            "user/register"
+        ];
+        if (SESSION::get('users', 'id') == null) {
+            // nếu chưa kiểm tra xem có phải là trang login hoặc đăng ký không nếu không thì chuyển về log in
+
+            if (array_search("$uri/$action", $allowPages) === false) {
+                header('Location: ' . WEBROOT . "admin/user/login");
+            } else {
+                // Nếu ở trang login vào chưa có trong SESsION
+                // giải nén POST và tiến hành đăng nhập lưu vào SESSiON ở UserResourceModel
+                extract($_POST);
+                if (isset($name) && isset($password)) {;
+                    $user = new UserModel();
+                    $user->setEmail($name);
+                    $user->setPhone($name);
+                    $user->setPassword($password);
+
+                    if ($this->userResoureModel->login($user) != false) {
+                        header('Location: ' . WEBROOT . "admin");
+                    } else {
+                        $messager = "Bạn nhập sai tên và mật khẩu hoặc tài khoản bị khóa </br>Vui lòng kiểm tra lại";
+                        $this->with($messager);
+                        $this->render('login', false);
+                        die;
+                    }
+                    // die('đá');
+                }
+            }
+        }
+        // TẠO MENU
         if (SESSION::pull('memu') != null) {
             $menu = SESSION::pull('memu');
         } else {

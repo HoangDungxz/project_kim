@@ -42,4 +42,10 @@ class CustomersController extends FrontendControllers
 
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
+
+    public function register()
+    {
+
+        $this->render('register', false);
+    }
 }

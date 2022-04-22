@@ -77,6 +77,7 @@ class FrontendControllers extends Controller
 
             $order = $orderResource
                 ->where('customer_id', SESSION::get('customers', 'id'))
+                ->where('status', 0)
                 ->get() ?? [];
 
             if ($order) {

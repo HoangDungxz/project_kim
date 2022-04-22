@@ -1,7 +1,12 @@
         <div class="productViewTop">
             <section class="productView-images" data-image-gallery="">
-                <div class="new-badge">NEW</div>
-                <div class="sale-badge">SALE</div>
+                <?php if ($product->getHot()) : ?>
+                    <div class="new-badge">HOT</div>
+                <?php endif; ?>
+
+                <?php if ($product->getDiscount()) : ?>
+                    <div class="sale-badge"> <?= ($product->getDiscount()) ?>%</div>
+                <?php endif; ?>
 
                 <div class="productView-image-wrap">
                     <div class="productView-nav">
@@ -77,7 +82,9 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="writeReview-productDetails">
-                                        <div class="new-badge">NEW</div>
+                                        <?php if ($product->getHot()) : ?>
+                                            <div class="new-badge">HOT</div>
+                                        <?php endif; ?>
                                         <div class="sale-badge">SALE</div>
                                         <img src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/500x500/products/75/268/LOreal-HIP-Metallic-Eyeshadow-Duo-New-Shades-Available-390x390-compressor__36859.1557341769.jpg?c=2">
                                         <h6 class="product-brand">Chanel</h6>

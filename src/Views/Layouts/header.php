@@ -74,7 +74,7 @@ use SRC\helper\SESSION;
                 <div class="customer-dropdown-login hidden-xs hidden-sm">
                     <div class="say-hi"><span>Xin chào,<?= SESSION::get('customers', 'name') ?></span></div>
                     <div class="customer-login">
-                        <a href="javascript:void(0);" class="toggle-dropdown-login" style="margin-right: 10px;"><?= SESSION::get('customers') == null ? "Đăng nhập" : "Đăng Xuất" ?></a> <a href="logind85d.html?action=create_account">Đăng ký</a>
+                        <a href="javascript:void(0);" class="toggle-dropdown-login" style="margin-right: 10px;"><?= SESSION::get('customers') == null ? "Đăng nhập" : "Đăng Xuất" ?></a> <a href="<?= WEBROOT ?>customers/register">Đăng ký</a>
                         <div id="dropdown-login" style="width: fit-content;">
 
                             <?php if (SESSION::get('customers') == null) : ?>
@@ -82,21 +82,21 @@ use SRC\helper\SESSION;
                                 <form class="login-popup" id="loginForm" action="<?= WEBROOT ?>customers/login" method="post" name="mainLoginForm">
                                     <fieldset class="form-fieldset">
                                         <div class="form-field">
-                                            <input class="form-input" name="login_email" id="login_email" type="email" placeholder="Email address">
+                                            <input class="form-input" name="login_email" id="login_email" type="email" placeholder="Email...">
                                         </div>
                                         <div class="form-field">
-                                            <input class="form-input" id="login_pass" type="password" name="login_pass" placeholder="Password">
+                                            <input class="form-input" id="login_pass" type="password" name="login_pass" placeholder="Mật khẩu...">
                                         </div>
                                         <p style="text-align: center;display: none;" id="popup-loading"><img src="<?= PUBLIC_URL ?>frontend/s-tphjucml/stencil/3cd4e730-d571-0139-7941-62e43660c985/e/38323d20-d594-0139-1e5d-3a208d481fb5/img/vendor/jstree/throbber.gif">
                                         </p>
                                         <div class="form-actions">
-                                            <input type="submit" class="btn btn-alt" value="Login">
+                                            <input type="submit" class="btn btn-alt" value="ĐĂNG NHẬP">
                                         </div>
                                     </fieldset>
                                 </form>
                                 <div class="separated-form">
-                                    <a class="forgot-password" href="login8311.html?action=reset_password">Forgot your password?</a>
-                                    <a href="logind85d.html?action=create_account" class="btn btn-primary"><span>Create Account</span></a>
+                                    <a class="forgot-password" href="login8311.html?action=reset_password">Quên mật khẩu?</a>
+                                    <a href="<?= WEBROOT ?>customers/register" class="btn btn-primary"><span>Tạo tài khoản</span></a>
                                 </div>
                             <?php else : ?>
                                 <div>

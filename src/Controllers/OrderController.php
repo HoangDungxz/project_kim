@@ -137,4 +137,20 @@ class OrderController extends FrontendControllers
             };
         }
     }
+
+    function checkout($params)
+    {
+        if (!isset($params['oid'])) {
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        }
+
+        $order = $order = $this->orderResource->getById($params['oid']);
+
+        if ($order) {
+
+            if ($this->orderResource->checkout($order)) {
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+            }
+        }
+    }
 }

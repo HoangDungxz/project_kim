@@ -43,4 +43,10 @@ class HomeController extends FrontendControllers
         $this->setLayout(false);
         echo  $this->render("modal");
     }
+
+    function notFound()
+    {
+        $this->setLayout(false);
+        echo  $this->render("notFound");
+    }
 }

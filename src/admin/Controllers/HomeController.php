@@ -21,6 +21,11 @@ class HomeController extends AdminControllers
         $this->render("index");
     }
 
+    function login()
+    {
+        $this->render("login", false);
+    }
+
     function notFound()
     {
 
