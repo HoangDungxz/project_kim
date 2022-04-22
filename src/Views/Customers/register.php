@@ -38,8 +38,7 @@ use SRC\helper\SESSION;
         width: 150px;
         height: 150px;
         cursor: pointer;
-        background-image: url("<?= PUBLIC_URL ?>/upload/customers/default_customer_image.jpg");
-        /* background-size: 100% 100%; */
+        background-image: url("<?= PUBLIC_URL ?>upload/customers/default_customer_image.jpg");
         background-size: cover;
         background-repeat: no-repeat;
         border-radius: 50%;
@@ -49,6 +48,8 @@ use SRC\helper\SESSION;
         transform: translate(0px, -61px);
         box-sizing: border-box;
         background-position: center;
+        z-index: 999;
+        transform-style: preserve-3d;
     }
 
     .avatar input {
@@ -56,25 +57,39 @@ use SRC\helper\SESSION;
         height: 100%;
         cursor: pointer;
         opacity: 0;
-
-
     }
 
     .avatar::after {
-        content: '';
-        width: 40px;
-        height: 40px;
+        content: '';
         position: absolute;
-        bottom: 5px;
-        right: 8px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) translateZ(-1px) scale(1.05);
+        background-color: #fff;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        z-index: -99999;
+        /* border: 2px solid #333; */
+        box-shadow: 0 2px 4px rgb(0 0 0 / 20%), 0 8px 16px rgb(0 0 0 / 20%);
+    }
+
+    .avatar::before {
+        content: '';
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        bottom: -4px;
+        right: -4px;
         font-size: 23px;
         background-color: #F0F2F5;
         border-radius: 50%;
         text-align: center;
         align-items: center;
-        line-height: 40px;
+        line-height: 50px;
         z-index: -1;
     }
+
 
     .login-row.row {
         margin-top: 60px;
