@@ -76,10 +76,10 @@
                                              <div class="prod-price" data-test-info-type="price">
                                                  <div class="price-section price-section--withoutTax ">
                                                      <span style="text-decoration:line-through;margin-right: 5px;" data-product-price-without-tax class=" price price--withoutTax">
-                                                         <?= number_format($p->getPriceAffterDiscount()); ?> ₫
+                                                         <?= number_format($p->getPrice()) ?> ₫
                                                      </span>
                                                      <span data-product-price-without-tax class="price price--withoutTax">
-                                                         <?= number_format($p->getPrice()) ?> ₫
+                                                         <?= number_format($p->getPriceAffterDiscount()); ?> ₫
                                                      </span>
                                                  </div>
                                              </div>

@@ -50,6 +50,9 @@ use SRC\helper\SESSION;
         background-position: center;
         z-index: 999;
         transform-style: preserve-3d;
+        box-shadow: 0 2px 4px rgb(0 0 0 / 20%), 0 8px 16px rgb(0 0 0 / 20%);
+        border: 5px solid #fff;
+
     }
 
     .avatar input {
@@ -59,34 +62,19 @@ use SRC\helper\SESSION;
         opacity: 0;
     }
 
-    .avatar::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) translateZ(-1px) scale(1.05);
-        background-color: #fff;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        z-index: -99999;
-        /* border: 2px solid #333; */
-        box-shadow: 0 2px 4px rgb(0 0 0 / 20%), 0 8px 16px rgb(0 0 0 / 20%);
-    }
-
     .avatar::before {
         content: '';
-        width: 50px;
-        height: 50px;
+        width: 41px;
+        height: 41px;
         position: absolute;
         bottom: -4px;
-        right: -4px;
+        right: -1px;
         font-size: 23px;
         background-color: #F0F2F5;
         border-radius: 50%;
         text-align: center;
         align-items: center;
-        line-height: 50px;
+        line-height: 41px;
         z-index: -1;
     }
 
@@ -146,7 +134,6 @@ use SRC\helper\SESSION;
                                 </div>
                                 <div class="avatar">
                                     <input id="avatar" type="file">
-
                                 </div>
                             </div>
 
@@ -196,9 +183,7 @@ use SRC\helper\SESSION;
 <script>
     imgInp = document.getElementById('avatar');
     imgInp.onchange = evt => {
-
-        const [file] = imgInp.files
-        console.log(URL.createObjectURL(file));
+        const [file] = imgInp.files;
         if (file) {
             imgInp.parentElement.style.backgroundImage = "url(" + URL.createObjectURL(file) + ")";
 
