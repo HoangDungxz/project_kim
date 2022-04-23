@@ -15,7 +15,7 @@ class Database
     public static function getBdd()
     {
         if (is_null(self::$bdd)) {
-            self::$bdd = new PDO("mysql:host=localhost;dbname=project_vuanh", 'root', '');
+            self::$bdd = new PDO("mysql:host=localhost;dbname=project_vuanh", 'root', '1');
             self::$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         return self::$bdd;

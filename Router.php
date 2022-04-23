@@ -44,7 +44,7 @@ class Router
 
 
         // lưu lên sesion
-        SESSION::push('request',  $request->controller, 'controller',);
-        SESSION::push('request',  $request->action, 'action',);
+        SESSION::push('request',  $request->controller, 'controller');
+        SESSION::push('request',  $request->action, 'action');
     }
 }

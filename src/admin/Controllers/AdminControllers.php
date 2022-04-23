@@ -7,12 +7,7 @@ use SRC\helper\SESSION;
 use SRC\Models\User\UserModel;
 use SRC\Models\User\UserResourceModel;
 
-/**
- * Index
- * 
- * @param ControllerName Trang admin
- * @return void
- */
+
 class AdminControllers extends Controller
 {
     protected $userResoureceModel;
