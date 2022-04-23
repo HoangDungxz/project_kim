@@ -93,9 +93,11 @@ class CategoryController extends AdminControllers
 
                 $displayHomePage = $c->getDisplayhomepage() == 0 ?
                     'danger' : 'success';
+
                 $this->categoriesShow .=
-                    '<a class="nav-link mb-0 ' .  $active . '" href="' . WEBROOT . '/admin/category/index/cid/' . $c->getId() . '">' . $char . $c->getName() . '
-                         <div class="badge badge-' . $displayHomePage . ' badge-pill"> ' . $c->product_count . '</div>
+                    '<a class="nav-link mb-0 ' .  $active . '" href="' . WEBROOT . 'admin/category/index/cid/' . $c->getId() . '">'
+                    . $char . $c->getName()
+                    . ' <div class="badge badge-' . $displayHomePage . ' badge-pill"> ' . $c->product_count . '</div>
                     </a>';
 
                 unset($categories[$key]);
@@ -164,13 +166,26 @@ class CategoryController extends AdminControllers
      * 
      * @param AcctionName Sửa danh mục
      */
-    function edit()
+    function update()
     {
 
-        $categories = $this->categoriesResourceModel->getAll();
+        extract($_POST);
+        if (isset($cid) && isset($category_parent) && isset($category_name)) {
+            $category = $this->categoriesResourceModel->getById($cid);
 
-        $this->with($categories);
+            if ($category) {
 
-        $this->render("prepare_save");
+                $category->setParent_id($category_parent);
+
+                $category->setDisplayhomepage(isset($displayhomepage) ? 1 : 0);
+                $category->setName($category_name);
+
+                if ($this->categoriesResourceModel->save($category)) {
+
+                    header('Location: ' . $_SERVER['HTTP_REFERER']);
+                }
+            }
+        }
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 }

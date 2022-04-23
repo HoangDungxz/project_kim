@@ -55,7 +55,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="6"><a href="<?= WEBROOT ?>order/delete_order/oid/<?= $order->getId() ?>" class="btn btn-checkout btn-lg">Xóa toàn bộ</a> <a href="<?= WEBROOT ?>" class="btn btn-checkout btn-lg pull-right black">Tiếp tục mua hàng</a>
+                            <td colspan="8"><a href="<?= WEBROOT ?>order/delete_order/oid/<?= $order->getId() ?>" class="btn btn-checkout btn-lg">Xóa toàn bộ</a> <a href="<?= WEBROOT ?>" class="btn btn-checkout btn-lg pull-right black">Tiếp tục mua hàng</a>
                                 <input type="submit" class=" btn btn-checkout btn-lg" value="Cập nhật">
                             </td>
                         </tr>
@@ -96,7 +96,7 @@
             </div>
 
             <div class="cart-actions text-center">
-                <a class="btn btn-checkout btn-lg" href="/checkout" title="Click here to proceed to checkout">Thanh toán</a>
+                <a class="btn btn-checkout btn-lg" href="<?= WEBROOT ?>order/checkout/oid/<?= $order->getId() ?>" title="Click here to proceed to checkout">Thanh toán</a>
             </div>
         </div>
 

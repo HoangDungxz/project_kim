@@ -15,6 +15,7 @@ class CustomerModel extends Model
 {
     private $id;
     private $name;
+    private $avatar;
     private $email;
     private $address;
     private $phone;
@@ -136,6 +137,26 @@ class CustomerModel extends Model
     public function setPassword($password)
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of avatar
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * Set the value of avatar
+     *
+     * @return  self
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }

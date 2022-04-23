@@ -10,16 +10,11 @@ class CustomerResourceModel extends ResourceModel
     public function login($customer)
     {
 
-        $customerLoginCheck = [
-            'email' => $customer->getEmail(),
-            'password' => md5($customer->getPassword())
-        ];
-
-        $this->where('email', $customer->getEmail())
+        $customerLogined =  $this->where('email', $customer->getEmail())
             ->where('password', md5($customer->getPassword()))
-            ->select("name,email,address,phone,id");
+            ->select("name,email,address,phone,id")
+            ->get();
 
-        $customerLogined = parent::get();
 
         if (($customerLogined) != null) {
             $this->saveSession($customerLogined);

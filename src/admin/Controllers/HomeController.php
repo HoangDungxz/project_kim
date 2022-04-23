@@ -14,11 +14,16 @@ class HomeController extends AdminControllers
     /**
      * Index
      * 
-     * @param MethodName Xem thống kế
+     * @param AcctionName Xem thống kế
      */
     function index()
     {
         $this->render("index");
+    }
+
+    function login()
+    {
+        $this->render("login", false);
     }
 
     function notFound()

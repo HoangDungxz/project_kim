@@ -4,15 +4,56 @@ namespace ADMIN\Controllers;
 
 use SRC\Core\Controller;
 use SRC\helper\SESSION;
+use SRC\Models\User\UserModel;
+use SRC\Models\User\UserResourceModel;
 
 
 class AdminControllers extends Controller
 {
-
+    protected $userResoureceModel;
     public function __construct()
     {
+        $this->userResoureModel = new UserResourceModel();
+        // ĐĂNG NHẬP    
+        $uri =  strtolower(SESSION::pull('request', 'controller'));
+        $action = strtolower(SESSION::pull('request', 'action'));
 
-        if (SESSION::pull('memu') != null) {
+        // các page được phép truy cập khi chưa đăng nhập
+
+        // kiểm tra session có user chưa
+        $allowPages = [
+            "user/login",
+            "user/register"
+        ];
+        if (SESSION::get('users', 'id') == null) {
+            // nếu chưa kiểm tra xem có phải là trang login hoặc đăng ký không nếu không thì chuyển về log in
+
+            if (array_search("$uri/$action", $allowPages) === false) {
+                header('Location: ' . WEBROOT . "admin/user/login");
+            } else {
+                // Nếu ở trang login vào chưa có trong SESsION
+                // giải nén POST và tiến hành đăng nhập lưu vào SESSiON ở UserResourceModel
+                extract($_POST);
+                if (isset($name) && isset($password)) {;
+                    $user = new UserModel();
+                    $user->setEmail($name);
+                    $user->setPhone($name);
+                    $user->setPassword($password);
+
+                    if ($this->userResoureModel->login($user) != false) {
+                        header('Location: ' . WEBROOT . "admin");
+                    } else {
+                        $messager = "Bạn nhập sai tên và mật khẩu hoặc tài khoản bị khóa </br>Vui lòng kiểm tra lại";
+                        $this->with($messager);
+                        $this->render('login', false);
+                        die;
+                    }
+                    // die('đá');
+                }
+            }
+        }
+        // TẠO MENU cho sidebar danh sách và phân quyền
+        if (SESSION::pull('memu') == null) {
             $menu = SESSION::pull('memu');
         } else {
 
@@ -23,15 +64,12 @@ class AdminControllers extends Controller
             });
             SESSION::push('memu', $menu);
         }
+
         $uri =  strtolower(SESSION::pull('request', 'controller'));
         $this->with($menu);
         $this->with($uri);
     }
 
-
-    function authentication()
-    {
-    }
 
     function createMenu()
     {
@@ -66,20 +104,19 @@ class AdminControllers extends Controller
             $result->sort_order = str_replace(" ", "", $this->getCommentParam($comment_string, 'SortOrder'));
             $result->icon = $this->getCommentParam($comment_string, 'Icon');
         }
-        $result->methodNames = [];
+        $result->action = [];
 
-        foreach ($controller->getMethods() as $key => $method) {
+        foreach ($controller->getMethods() as  $action) {
 
-            $comment_action_string = $method->getDocComment();
-
+            $comment_action_string = $action->getDocComment();
+            $resultAction = new \stdClass;
             if (
                 $comment_action_string != false
             ) {
-                $methodName = $this->getCommentParam($comment_action_string, 'AcctionName');
-                array_push($result->methodNames, [
-                    'action_name' => $methodName,
-                    'action_path' => $result->controller_path . '/' . $method->getName()
-                ]);
+                $actionName = $this->getCommentParam($comment_action_string, 'AcctionName');
+                $resultAction->action_name = $actionName;
+                $resultAction->action_path = $result->controller_path . '/' . $action->getName();
+                array_push($result->action, $resultAction);
             }
         }
         return $result;

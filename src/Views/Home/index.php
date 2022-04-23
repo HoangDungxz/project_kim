@@ -57,8 +57,10 @@
                                              <div class="actions">
                                                  <a href="#" class="btnQV quickview" data-product-id="<?= $p->getId() ?>" data-event-type="product-click">Quick view</a>
                                              </div>
-                                             <div class="new-badge">NEW</div>
-                                             <div class="new-badge" style="top:25px"><?= $p->getDiscount() ?>%</div>
+                                             <?php if ($p->getHot()) : ?>
+                                                 <div class="new-badge">HOT</div>
+                                             <?php endif; ?>
+                                             <div class="sale-badge" style="top:25px"><?= $p->getDiscount() ?>%</div>
                                          </div>
 
                                          <figcaption class="prod-desc">
@@ -74,10 +76,10 @@
                                              <div class="prod-price" data-test-info-type="price">
                                                  <div class="price-section price-section--withoutTax ">
                                                      <span style="text-decoration:line-through;margin-right: 5px;" data-product-price-without-tax class=" price price--withoutTax">
-                                                         <?= number_format($p->getPriceAffterDiscount()); ?> ₫
+                                                         <?= number_format($p->getPrice()) ?> ₫
                                                      </span>
                                                      <span data-product-price-without-tax class="price price--withoutTax">
-                                                         <?= number_format($p->getPrice()) ?> ₫
+                                                         <?= number_format($p->getPriceAffterDiscount()); ?> ₫
                                                      </span>
                                                  </div>
                                              </div>
@@ -136,8 +138,12 @@
                                              <div class="actions">
                                                  <a href="#" class="btnQV quickview" data-product-id="<?= $p->getId() ?>" data-event-type="product-click">Quick view</a>
                                              </div>
-                                             <div class="new-badge">NEW</div>
-
+                                             <?php if ($p->getHot()) : ?>
+                                                 <div class="new-badge">HOT</div>
+                                             <?php endif; ?>
+                                             <?php if ($p->getDiscount()) : ?>
+                                                 <div class="sale-badge"><?= $p->getDiscount() ?>%</div>
+                                             <?php endif; ?>
                                          </div>
 
                                          <figcaption class="prod-desc">

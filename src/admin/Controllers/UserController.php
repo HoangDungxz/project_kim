@@ -2,8 +2,6 @@
 
 namespace ADMIN\Controllers;
 
-use SRC\Models\User\UserResourceModel;
-
 /**
  * UserController
  * 
@@ -13,11 +11,9 @@ use SRC\Models\User\UserResourceModel;
  */
 class UserController extends AdminControllers
 {
-    protected $customerResoureceModel;
     public function __construct()
     {
         parent::__construct();
-        $this->customerResoureceModel = new UserResourceModel();
     }
     /**
      * Index
@@ -26,7 +22,7 @@ class UserController extends AdminControllers
      */
     function index()
     {
-        $users = $this->customerResoureceModel->getAll();
+        $users = $this->userResoureModel->getAll();
 
 
         $this->with($users);
@@ -45,8 +41,6 @@ class UserController extends AdminControllers
 
         if (isset($_POST['category_name']) && isset($_POST['category_parent'])) {
 
-            $user = new UserResourceModel();
-
             if ($this->categoriesResourceModel->save($user)) {
             }
         } else {
@@ -63,5 +57,15 @@ class UserController extends AdminControllers
     function edit()
     {
         $this->render("create");
+    }
+    function login()
+    {
+        $this->render("login", false);
+    }
+    public function logout()
+    {
+        if ($this->userResoureModel->logout()) {
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        };
     }
 }

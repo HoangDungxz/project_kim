@@ -74,7 +74,7 @@ use SRC\helper\SESSION;
                 <div class="customer-dropdown-login hidden-xs hidden-sm">
                     <div class="say-hi"><span>Xin chào,<?= SESSION::get('customers', 'name') ?></span></div>
                     <div class="customer-login">
-                        <a href="javascript:void(0);" class="toggle-dropdown-login" style="margin-right: 10px;">Đăng nhập</a> <a href="logind85d.html?action=create_account">Đăng ký</a>
+                        <a href="javascript:void(0);" class="toggle-dropdown-login" style="margin-right: 10px;">Đăng nhập</a> <a href="<?= WEBROOT ?>customers/login">Đăng ký</a>
                         <div id="dropdown-login" style="width: fit-content;">
                             <h3>ĐĂNG NHẬP</h3>
                             <?php if (SESSION::get('customers') == null) : ?>

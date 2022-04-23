@@ -30,15 +30,13 @@ class ResourceModel  implements ResourceModelInterface
 
         $this->model = new $this->class;
 
-
-
         $this->table = $this->model->getTable_name();
         $this->id = $this->model->getTable_id();
         $this->model->unsetPrepareTable();
     }
 
 
-    public function where($column, $value)
+    public function where($column, $value, $conditionType = "AND")
     {
         $column =  str_replace(" ", "", $column);
         $column_parameter = str_replace(".", "_", $column);
@@ -48,14 +46,14 @@ class ResourceModel  implements ResourceModelInterface
                 $this->params =   array_merge($this->params, [$column_parameter => $value]);
                 break;
             default:
-                $this->conditionSql .= " AND $column = :$column_parameter ";
+                $this->conditionSql .= " $conditionType $column = :$column_parameter ";
                 $this->params =   array_merge($this->params, [$column_parameter => $value]);
                 break;
         }
         return $this;
     }
 
-    public function like($column = '', $value)
+    public function like($column, $value, $conditionType = "AND")
     {
         $column_parameter = str_replace([".", " "], "_", $column);
 
@@ -65,14 +63,14 @@ class ResourceModel  implements ResourceModelInterface
                 $this->params =   array_merge($this->params, [$column_parameter => "%$value%"]);
                 break;
             default:
-                $this->conditionSql .= " AND $column like :$column_parameter ";
+                $this->conditionSql .= "  $conditionType $column like :$column_parameter ";
                 $this->params =   array_merge($this->params, [$column_parameter => "%$value%"]);
                 break;
         }
         return $this;
     }
 
-    public function between($column, $value)
+    public function between($column, $value, $conditionType = "AND")
     {
         $column_parameter = str_replace(".", "_", $column);
 
@@ -87,7 +85,7 @@ class ResourceModel  implements ResourceModelInterface
                 ]);
                 break;
             default:
-                $this->conditionSql .= " AND $column BETWEEN :$column_parameter" . "_between_1 AND :$column_parameter" . "_between_2";;
+                $this->conditionSql .= "  $conditionType $column BETWEEN :$column_parameter" . "_between_1 AND :$column_parameter" . "_between_2";;
                 $this->params =   array_merge($this->params, [
                     $column_parameter . "_between_1" => $valueArr[0],
                     $column_parameter . "_between_2" => $valueArr[1],
@@ -219,9 +217,8 @@ class ResourceModel  implements ResourceModelInterface
                     ->execute($arrayModel);
 
 
-                echo '<pre>';
-                print_r($model);
-                echo '</pre>';
+
+
                 if (isset($model->send_id_to_child) && $model->send_id_to_child == true) {
                     $lastInsertId = $req->lastInsertId();
                 }
@@ -264,13 +261,6 @@ class ResourceModel  implements ResourceModelInterface
         }
     }
 
-    // public function createDelete(...$model)
-    // {
-    //     foreach ($model as $key => $value) {
-    //         array_push($this->deleteModels, $value);
-    //     }
-    //     return $this;
-    // }
 
     protected function includeImage($pid)
     {
@@ -292,7 +282,7 @@ class ResourceModel  implements ResourceModelInterface
         return $paths;
     }
 
-    public function datatable()
+    public function upload($_files, $uploadFolder, $fileName = "")
     {
     }
 

@@ -20,7 +20,7 @@
                        </span>
                    </a>
                    <div class="dropdown-menu dropdown-menu-right">
-                       <a class="dropdown-item" href="login.html">Đăng xuất</a>
+                       <a class="dropdown-item" href="<?= WEBROOT ?>admin/user/logout">Đăng xuất</a>
                    </div>
                </li>
                <!-- /User Menu -->

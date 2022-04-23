@@ -97,7 +97,7 @@
                                 <div class="card-header">
                                     <h4 class="card-title"><?= $category->getName() ?></h4>
                                 </div>
-                                <form method="POST" action="#" id="category_form">
+                                <form method="POST" action="<?= WEBROOT ?>admin/category/update" id="category_form">
                                     <div class="form-group row">
                                         <label for="category_name" class="col-sm-3 col-form-label">Tên danh mục</label>
                                         <div class="col-sm-9">
@@ -115,10 +115,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group row ">
-
                                         <label for="displayhomepage" class="col-sm-3 col-form-label">Hiện thị ở trang chủ</label>
-
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-9 d-flex">
                                             <div type="checkbox" class="onoffswitch">
                                                 <input type="checkbox" class="onoffswitch-checkbox" name="displayhomepage" value="1" <?= $category->getDisplayhomepage() == 0 ? '' : 'checked' ?>>
                                                 <div class=" onoffswitch-label">
@@ -130,10 +128,10 @@
                                         </div>
                                     </div>
                                     <div class="mt-4 ">
+                                        <input type="hidden" name="cid" value="<?= $category->getId() ?>">
                                         <button class="btn btn-primary" type="submit">
                                             Sửa danh mục
                                         </button>
-
                                         <button class="btn" type="reset">Nhập lại</button>
                                     </div>
                                 </form>
@@ -150,6 +148,7 @@
                                             <tr>
                                                 <th>Ảnh</th>
                                                 <th>Tên</th>
+                                                <th>Hãng</th>
                                                 <th>Giá</th>
                                                 <th>Khuyến Mại</th>
                                             </tr>
@@ -159,6 +158,7 @@
                                                 <tr role="row" class="odd">
                                                     <td><img src="<?= PUBLIC_URL ?>upload/products/<?= $p->images[0] ?>" class="rounded service-img" alt=""></td>
                                                     <td><?= $p->getName() ?></td>
+                                                    <td><?= $p->brands_name ?></td>
                                                     <td><?= number_format($p->getPrice()) ?> ₫</td>
                                                     <td><?= $p->getDiscount() ?>%</td>
                                                 </tr>
