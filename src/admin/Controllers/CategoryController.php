@@ -93,9 +93,11 @@ class CategoryController extends AdminControllers
 
                 $displayHomePage = $c->getDisplayhomepage() == 0 ?
                     'danger' : 'success';
+
                 $this->categoriesShow .=
-                    '<a class="nav-link mb-0 ' .  $active . '" href="' . WEBROOT . '/admin/category/index/cid/' . $c->getId() . '">' . $char . $c->getName() . '
-                         <div class="badge badge-' . $displayHomePage . ' badge-pill"> ' . $c->product_count . '</div>
+                    '<a class="nav-link mb-0 ' .  $active . '" href="' . WEBROOT . 'admin/category/index/cid/' . $c->getId() . '">'
+                    . $char . $c->getName()
+                    . ' <div class="badge badge-' . $displayHomePage . ' badge-pill"> ' . $c->product_count . '</div>
                     </a>';
 
                 unset($categories[$key]);

@@ -14,7 +14,7 @@ class HomeController extends AdminControllers
     /**
      * Index
      * 
-     * @param MethodName Xem thống kế
+     * @param AcctionName Xem thống kế
      */
     function index()
     {

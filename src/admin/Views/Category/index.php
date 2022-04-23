@@ -115,10 +115,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group row ">
-
                                         <label for="displayhomepage" class="col-sm-3 col-form-label">Hiện thị ở trang chủ</label>
-
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-9 d-flex">
                                             <div type="checkbox" class="onoffswitch">
                                                 <input type="checkbox" class="onoffswitch-checkbox" name="displayhomepage" value="1" <?= $category->getDisplayhomepage() == 0 ? '' : 'checked' ?>>
                                                 <div class=" onoffswitch-label">
@@ -134,7 +132,6 @@
                                         <button class="btn btn-primary" type="submit">
                                             Sửa danh mục
                                         </button>
-
                                         <button class="btn" type="reset">Nhập lại</button>
                                     </div>
                                 </form>

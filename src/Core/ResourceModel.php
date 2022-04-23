@@ -282,7 +282,7 @@ class ResourceModel  implements ResourceModelInterface
         return $paths;
     }
 
-    public function datatable()
+    public function upload($_files, $uploadFolder, $fileName = "")
     {
     }
 

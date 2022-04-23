@@ -46,6 +46,25 @@ class CustomersController extends FrontendControllers
     public function register()
     {
 
+
+        extract($_POST);
+
+        if (isset($register_name) && isset($register_phone) && isset($register_email) && isset($register_pass)) {
+            $customer = new CustomerModel();
+            $customer->setName($register_name);
+            $customer->setPhone($register_phone);
+            $customer->setEmail($register_email);
+            $customer->setPassword($register_pass);
+
+            //tạo file name
+
+            $name = "abc";
+            $customer->setAvatar($name);
+
+            if ($this->customerResourceModel->save($customer)) {
+                $this->customerResourceModel->upload($_FILES, 'custommer', $name);
+            }
+        }
         $this->render('register', false);
     }
 }

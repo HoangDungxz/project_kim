@@ -57,8 +57,8 @@ class AdminControllers extends Controller
                 }
             }
         }
-        // TẠO MENU
-        if (SESSION::pull('memu') != null) {
+        // TẠO MENU cho sidebar danh sách và phân quyền
+        if (SESSION::pull('memu') == null) {
             $menu = SESSION::pull('memu');
         } else {
 
@@ -69,15 +69,12 @@ class AdminControllers extends Controller
             });
             SESSION::push('memu', $menu);
         }
+
         $uri =  strtolower(SESSION::pull('request', 'controller'));
         $this->with($menu);
         $this->with($uri);
     }
 
-
-    function authentication()
-    {
-    }
 
     function createMenu()
     {
@@ -112,20 +109,19 @@ class AdminControllers extends Controller
             $result->sort_order = str_replace(" ", "", $this->getCommentParam($comment_string, 'SortOrder'));
             $result->icon = $this->getCommentParam($comment_string, 'Icon');
         }
-        $result->methodNames = [];
+        $result->action = [];
 
-        foreach ($controller->getMethods() as $key => $method) {
+        foreach ($controller->getMethods() as  $action) {
 
-            $comment_action_string = $method->getDocComment();
-
+            $comment_action_string = $action->getDocComment();
+            $resultAction = new \stdClass;
             if (
                 $comment_action_string != false
             ) {
-                $methodName = $this->getCommentParam($comment_action_string, 'AcctionName');
-                array_push($result->methodNames, [
-                    'action_name' => $methodName,
-                    'action_path' => $result->controller_path . '/' . $method->getName()
-                ]);
+                $actionName = $this->getCommentParam($comment_action_string, 'AcctionName');
+                $resultAction->action_name = $actionName;
+                $resultAction->action_path = $result->controller_path . '/' . $action->getName();
+                array_push($result->action, $resultAction);
             }
         }
         return $result;

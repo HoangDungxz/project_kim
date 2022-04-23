@@ -43,7 +43,7 @@
 
                                    <label for="displayhomepage" class="col-sm-3 col-form-label">Hiện thị ở trang chủ</label>
 
-                                   <div class="col-sm-9">
+                                   <div class="col-sm-9 d-flex">
                                        <div type="checkbox" class="onoffswitch">
                                            <input type="checkbox" class="onoffswitch-checkbox" name="displayhomepage" value="1" checked="checked">
                                            <div class="onoffswitch-label">

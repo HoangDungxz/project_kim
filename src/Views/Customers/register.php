@@ -84,15 +84,12 @@ use SRC\helper\SESSION;
     }
 
     .panel-body {
-        margin-top: -72px;
+        margin-top: -43px;
     }
 
     .login-form {
-        padding-top: 26px;
-    }
-
-    #register_name {
-        /* max-width: 350px; */
+        padding-top: 0;
+        margin: 0;
     }
 </style>
 <div class="body" style="margin-top: 0px; margin-bottom: 50px;">
@@ -125,20 +122,21 @@ use SRC\helper\SESSION;
 
                 <?php endif; ?>
                 <div class="login-row row">
-                    <div class="new-customer">
-                        <div class="panel">
-                            <div class="panel-header">
-                                <div style="height: fit-content;margin-top: 17px;">
-                                    <h2 class="panel-title">Tạo tài khoản</h2>
-                                    <div class="panel-title-text">Thật nhanh chóng và dễ dàng.</div>
+                    <form class="login-form form " action="#" method="post" enctype="multipart/form-data">
+                        <div class="new-customer">
+                            <div class="panel">
+                                <div class="panel-header">
+                                    <div style="height: fit-content;margin-top: 17px;">
+                                        <h2 class="panel-title">Tạo tài khoản</h2>
+                                        <div class="panel-title-text">Thật nhanh chóng và dễ dàng.</div>
+                                    </div>
+                                    <div class="avatar">
+                                        <input id="avatar" name="register_avartar" type="file">
+                                    </div>
                                 </div>
-                                <div class="avatar">
-                                    <input id="avatar" type="file">
-                                </div>
-                            </div>
 
-                            <div class="panel-body">
-                                <form class="login-form form " action="#" method="post">
+                                <div class="panel-body">
+
                                     <div class="form-field form-field--input form-field--inputEmail">
                                         <input class="form-input" name="register_name" id="register_name" type="text" placeholder="Họ và tên...">
                                         <span style="display: none;"></span>
@@ -160,24 +158,24 @@ use SRC\helper\SESSION;
                                         <input type="submit" class="btn btn-primary" value="Đăng ký">
                                         <a class="forgot-password" href="<?= WEBROOT ?>customer/login">Tôi đã có tài khoản?</a>
                                     </div>
-                                </form>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 
-    </div>
-    <div id="modal" class="modal" data-reveal="" data-prevent-quick-search-close="">
-        <a href="#" class="modal-close" aria-label="Close" role="button">
-            <span aria-hidden="true"><svg>
-                    <use xlink:href="#icon-close"></use>
-                </svg></span>
-        </a>
-        <div class="modal-content"></div>
-        <div class="loadingOverlay" style="display: none;"></div>
-    </div>
+</div>
+<div id="modal" class="modal" data-reveal="" data-prevent-quick-search-close="">
+    <a href="#" class="modal-close" aria-label="Close" role="button">
+        <span aria-hidden="true"><svg>
+                <use xlink:href="#icon-close"></use>
+            </svg></span>
+    </a>
+    <div class="modal-content"></div>
+    <div class="loadingOverlay" style="display: none;"></div>
+</div>
 </div>
 
 <script>
