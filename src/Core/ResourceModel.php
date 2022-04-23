@@ -282,8 +282,44 @@ class ResourceModel  implements ResourceModelInterface
         return $paths;
     }
 
-    public function upload($_files, $uploadFolder, $fileName = "")
+    public function upload($uploadFolder, $file_name)
     {
+        $new_name = $uploadFolder . time() . "-" . $file_name;
+        $uploadOk = true;
+        $imageFileType = strtolower(pathinfo($new_name, PATHINFO_EXTENSION));
+        $check = getimagesize($_FILES["avatar"]["tmp_name"]);
+
+        if ($check !== false) {
+            $message = "File là 1 ảnh - " . $check["mime"] . ".";
+        } else {
+            $message = "File không phải là 1 ảnh.";
+        }
+
+        if (file_exists($file_name)) {
+            $message = "File ko tồn tại!";
+        }
+
+        if ($_FILES["avatar"]["size"] > 500000) {
+            $message = "Dung lượng file phải nhỏ hơn 500000!";
+        }
+
+        if (
+            $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif"
+        ) {
+            $message = "File phải là đuôi JPG, JPEG, PNG & GIF!";
+        }
+
+        if ($uploadOk == 0) {
+            $message = "Không thể  uploads file!";
+        } else {
+
+            if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $new_name)) {
+                $message = "File: " . htmlspecialchars($new_name) . " đã được uploads.";
+            } else {
+                $message = "không thể  uploads file!";
+            }
+        }
     }
 
 

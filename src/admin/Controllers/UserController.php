@@ -2,6 +2,9 @@
 
 namespace ADMIN\Controllers;
 
+use SRC\Models\User\UserModel;
+use SRC\Models\User\UserResourceModel;
+
 /**
  * UserController
  * 
@@ -14,6 +17,7 @@ class UserController extends AdminControllers
     public function __construct()
     {
         parent::__construct();
+        $this->userResourceModel = new UserResourceModel();
     }
     /**
      * Index
@@ -23,7 +27,6 @@ class UserController extends AdminControllers
     function index()
     {
         $users = $this->userResoureModel->getAll();
-
 
         $this->with($users);
 
@@ -37,11 +40,22 @@ class UserController extends AdminControllers
      */
     function create()
     {
-        $user = $this->customerResoureceModel->getAll();
+        if (isset($_POST["email"]) && isset($_POST["password"])) {
+            $uploadFolder = "assets/upload/users/";
+            $avatar = basename($_FILES["avatar"]["name"]);
 
-        if (isset($_POST['category_name']) && isset($_POST['category_parent'])) {
+            $user = new UserModel();
+            $user->setName($_POST['name']);
+            $user->setEmail($_POST['email']);
+            $user->setPassword($_POST['password']);
+            $user->setPhone($_POST['phone']);
+            $user->setAddress($_POST['address']);
+            $user->setStatus($_POST['status']);
+            $user->setAvatar($avatar);
 
-            if ($this->categoriesResourceModel->save($user)) {
+            if ($this->userResoureModel->save($user)) {
+                $this->userResourceModel->upload($uploadFolder, $avatar);
+                header('Location: ' . WEBROOT . "admin/user");
             }
         } else {
             $message = "Tạo mới tài khoản không thành công";
@@ -56,12 +70,39 @@ class UserController extends AdminControllers
      */
     function edit()
     {
-        $this->render("create");
+        if (isset($_POST["id"]) && isset($_POST["email"]) && isset($_POST["password"])) {
+            $uploadFolder = "assets/upload/users/";
+            $avatar = basename($_FILES["avatar"]["name"]);
+            $user = $this->userResourceModel->getById($_POST["id"]);
+
+            if ($user) {
+
+                $user->setName($_POST['name']);
+                $user->setEmail($_POST['email']);
+                $user->setPassword($_POST['password']);
+                $user->setPhone($_POST['phone']);
+                $user->setAddress($_POST['address']);
+                $user->setStatus($_POST['status']);
+                $user->setAvatar($avatar);
+
+                if ($this->categoriesResourceModel->save($user)) {
+
+                    $this->userResourceModel->upload($uploadFolder, $avatar);
+                    header('Location: ' . $_SERVER['HTTP_REFERER']);
+                }
+            }
+        } else {
+            $message = "Cập nhật tài khoản không thành công";
+        }
+
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
+
     function login()
     {
         $this->render("login", false);
     }
+
     public function logout()
     {
         if ($this->userResoureModel->logout()) {
