@@ -60,7 +60,7 @@ class UserController extends AdminControllers
         } else {
             $message = "Tạo mới tài khoản không thành công";
         }
-        $this->render("create");
+        // $this->render("create");
     }
 
     /**

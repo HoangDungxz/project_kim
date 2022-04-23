@@ -147,11 +147,6 @@ function readURL(input) {
 $(document).ready(function() {
     $('#user_form').bootstrapValidator({
         fields: {
-            avatar: {
-                validators: {
-                    notEmpty: {}
-                }
-            },
             name: {
                 validators: {
                     notEmpty: {
@@ -173,11 +168,11 @@ $(document).ready(function() {
                         min: 11,
                         max: 11,
                         message: 'số điện thoại chỉ có 10 ký tự'
-                    },
-                    regexp: {
-                        regexp: /^(05)\d{9}$/,
-                        message: 'Số điện thoại không đúng định dạng vd: 023541566943'
                     }
+                    // regexp: {
+                    //     regexp: /^(05)\d{9}$/,
+                    //     message: 'Số điện thoại không đúng định dạng vd: 023541566943'
+                    // }
                 }
             },
             address: {
@@ -192,11 +187,11 @@ $(document).ready(function() {
                     notEmpty: {
                         message: 'Tên tài khoản không được để chống'
                     }
-                },
-                regexp: {
-                    regexp: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    message: 'Tên tài khoản không đúng định dạng vd: abc1234@gmail.com'
                 }
+                // regexp: {
+                //     regexp: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                //     message: 'Tên tài khoản không đúng định dạng vd: abc1234@gmail.com'
+                // }
             },
             password: {
                 validators: {
