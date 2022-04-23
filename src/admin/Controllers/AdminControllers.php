@@ -5,12 +5,7 @@ namespace ADMIN\Controllers;
 use SRC\Core\Controller;
 use SRC\helper\SESSION;
 
-/**
- * Index
- * 
- * @param ControllerName Trang admin
- * @return void
- */
+
 class AdminControllers extends Controller
 {
 

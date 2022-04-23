@@ -41,12 +41,23 @@ class UserController extends AdminControllers
      */
     function create()
     {
+        $user = $this->customerResoureceModel->getAll();
+
+        if (isset($_POST['category_name']) && isset($_POST['category_parent'])) {
+
+            $user = new UserResourceModel();
+
+            if ($this->categoriesResourceModel->save($user)) {
+            }
+        } else {
+            $message = "Tạo mới tài khoản không thành công";
+        }
         $this->render("create");
     }
 
     /**
      * Index
-     * 
+     *
      * @param AcctionName Sửa tài khoản
      */
     function edit()
