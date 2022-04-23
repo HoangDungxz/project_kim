@@ -307,16 +307,20 @@ class ResourceModel  implements ResourceModelInterface
             $message = "File phải là đuôi JPG, JPEG, PNG & GIF!";
         }
 
-        if ($uploadOk == 0) {
-            $message = "Không thể  uploads file!";
-        } else {
 
-            if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $new_name)) {
-                $message = "File: " . htmlspecialchars($new_name) . " đã được uploads.";
-            } else {
-                $message = "không thể  uploads file!";
-            }
+        echo '<pre>';
+        print_r($_FILES["avatar"]["tmp_name"]);
+        echo '</pre>';
+
+        if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $new_name)) {
+            $message = "File: " . htmlspecialchars($new_name) . " đã được uploads.";
+        } else {
+            $message = "không thể  uploads file!";
         }
+
+
+        echo $message;
+        die;
     }
 
 

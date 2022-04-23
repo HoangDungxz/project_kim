@@ -41,7 +41,7 @@ class UserController extends AdminControllers
     function create()
     {
         if (isset($_POST["email"]) && isset($_POST["password"])) {
-            $uploadFolder = "assets/upload/users/";
+            $uploadFolder = PUBLIC_URL . 'upload/users/';
             $avatar = basename($_FILES["avatar"]["name"]);
 
             $user = new UserModel();
