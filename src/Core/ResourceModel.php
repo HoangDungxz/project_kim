@@ -216,9 +216,6 @@ class ResourceModel  implements ResourceModelInterface
                 $req->prepare($sql)
                     ->execute($arrayModel);
 
-
-
-
                 if (isset($model->send_id_to_child) && $model->send_id_to_child == true) {
                     $lastInsertId = $req->lastInsertId();
                 }

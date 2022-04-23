@@ -61,7 +61,7 @@ class PermissionModel extends Model
     /**
      * Get the value of paths
      */
-    public function getPaths()
+    public function getPathsJson()
     {
         return json_decode($this->paths, JSON_UNESCAPED_UNICODE);
     }
@@ -71,9 +71,29 @@ class PermissionModel extends Model
      *
      * @return  self
      */
+    public function setPathsJson($paths)
+    {
+        $this->paths = json_encode($paths, JSON_UNESCAPED_UNICODE);
+        return $this;
+    }
+
+    /**
+     * Get the value of paths
+     */
+    public function getPaths()
+    {
+        return $this->paths;
+    }
+
+    /**
+     * Set the value of paths
+     *
+     * @return  self
+     */
     public function setPaths($paths)
     {
-        $this->paths = json_decode($paths, JSON_UNESCAPED_UNICODE);
+        $this->paths = $paths;
+
         return $this;
     }
 }

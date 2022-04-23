@@ -42,6 +42,7 @@ class CategoryController extends AdminControllers
     function index($params)
     {
 
+        // lấy id category hoặc id nhỏ nhất bảng category
         if (isset($params['cid'])) {
             $cid = $params['cid'];
         } else {

@@ -3,7 +3,6 @@
 namespace SRC\Models\Order;
 
 use SRC\Core\ResourceModel;
-use SRC\helper\SESSION;
 use SRC\Models\OrderDetail\OrderDetailResourceModel;
 
 class OrderResourceModel extends ResourceModel

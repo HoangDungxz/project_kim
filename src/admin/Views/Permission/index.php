@@ -34,6 +34,38 @@
     .card-body.right .card-header {
         padding: 16px 0;
     }
+
+    .permission-select-row {
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    .permission-select-row label {
+        cursor: pointer;
+    }
+
+    .permission-select-row:hover {
+        background: #e8e8e8;
+        color: #333;
+    }
+
+    .permissions-lable {
+        position: relative;
+    }
+
+    .permissions-lable .badge {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        height: 25px;
+        border: 2px solid #fff;
+        cursor: pointer;
+    }
+
+    .permissions-lable .badge:hover {
+        background-color: #55ce63 !important;
+    }
 </style>
 <div class="page-wrapper">
     <div class="content container-fluid">
@@ -62,10 +94,14 @@
                                         </a>
                                     </div>
                                     <?php foreach ($permissions as $p) : ?>
-                                        <a class="nav-link mb-0 ' .  $active . '" href="<?= WEBROOT  ?>admin/permission/index/pid/<?= $p->getId()  ?>">
-                                            <?= $p->getName() ?>
-                                            <div class="badge badge-' . $displayHomePage . ' badge-pill"> </div>
-                                        </a>
+                                        <div class="permissions-lable">
+
+                                            <a class="nav-link mb-0 <?= $p->getId() == $permission->getId() ? "active" : ''   ?>" href="<?= WEBROOT  ?>admin/permission/index/pid/<?= $p->getId()  ?>">
+                                                <?= $p->getName() ?>
+                                            </a>
+
+                                            <button data-toggle="modal" data-target="#model-1" onclick="handleDelete('<?= $p->getId() ?>','<?= $p->getName() ?>')" class="badge badge-danger badge-pill"> x </button>
+                                        </div>
                                     <?php endforeach; ?>
                                 </div>
                             </div>
@@ -73,24 +109,30 @@
                     </div>
                     <div class="col-xl-8 col-lg-6 col-md-6">
                         <div class="card">
-                            <div class="card-body right">
-                                <div class="card-header">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Phân quyền</h4>
-                                    </div>
-                                </div>
+                            <div class="card-body right mt-3">
+                                <?php if (isset($messager)) : ?>
+
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>Lỗi!</strong> A <a href="#" class="alert-link"></a><?= $messager ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div> <?php endif; ?>
+
                                 <form method="POST" action="<?= WEBROOT ?>admin/permission/update" id="category_form">
                                     <?php foreach ($menu as $m) : ?>
+
                                         <div class="permission-group">
                                             <div class="form-group row">
                                                 <label for="category_name" class=" col-sm-6 col-form-label"><strong><?= $m->controller_name ?></strong></label>
                                             </div>
                                             <?php foreach ($m->action as $a) : ?>
-                                                <div class="form-group row ">
-                                                    <label for="permission_select_<?= str_replace('/', '_', $a->action_path) ?>" class="offset-md-1 col-md-4 col-form-label"><?= $a->action_name ?></label>
+
+                                                <div class="form-group row permission-select-row">
+                                                    <label for="permission_select_<?= str_replace('/', '_', $a->action_path) ?>" class="offset-md-1 col-md-9 col-form-label"><?= $a->action_name ?></label>
                                                     <div class="col-sm-2 d-flex" style="justify-content: flex-end;">
                                                         <div type="checkbox" class="onoffswitch">
-                                                            <input type="checkbox" class="onoffswitch-checkbox permission-select" name="permission_select<?= str_replace('/', '_', $a->action_path) ?>" id="permission_select_<?= str_replace('/', '_', $a->action_path) ?>" value="1">
+                                                            <input <?= in_array($a->action_path, $permission->getPathsJson()) ? 'checked' : '' ?> type="checkbox" class="onoffswitch-checkbox permission-select" name="permission_select[]" id="permission_select_<?= str_replace('/', '_', $a->action_path) ?>" value="<?= $a->action_path ?>">
                                                             <div class=" onoffswitch-label">
                                                                 <div class="onoffswitch-inner "></div>
                                                                 <div class="onoffswitch-switch "></div>
@@ -98,11 +140,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             <?php endforeach; ?>
                                         </div>
                                     <?php endforeach; ?>
-                                    <div class="mt-4 ">
-                                        <input type="hidden" name="cid" value="">
+
+                                    <div style="margin-top: 30px;">
+                                        <input type="hidden" name="pid" value="<?= $permission->getId() ?>">
+                                        <input type="hidden" name="pname" value="<?= $permission->getName() ?>">
                                         <button class="btn btn-primary" type="submit">
                                             Phân quyền
                                         </button>
@@ -110,9 +155,31 @@
                                         <button class="btn" type="reset">Nhập lại</button>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="model-1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Xác nhận?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">Bạn có muốn xoá quyền <span class="p-name text-danger"></span> ?</div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        Không
+                                    </button>
+                                    <button onclick="runDelete()" type="button" class="btn btn-primary">Đồng ý</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -128,7 +195,7 @@
             // tim index bằng class đầu tiên tìm thấy ở class cha
             let indexPage = $(this).closest('.permission-group').find('.permission-select').first();
 
-            // Nếu check  vào phần bất kì index cũng check theo
+            // Nếu check  vào phần bất kì index cũng check theo 
             if ($(this).attr('id') != indexPage.attr('id') && $(this).is(':checked')) {
                 indexPage.prop('checked', true);
             }
@@ -139,4 +206,33 @@
             }
         });
     });
+
+    var GLOBE_id = undefined;
+    var GLOBE_name = undefined;
+
+    function handleDelete(id, name) {
+
+        // đảu dữ liêu từ click ra globe
+        GLOBE_id = id;
+        GLOBE_name = name;
+
+        $('.modal').find('.p-name').text(name);
+
+    }
+
+    const runDelete = async () => {
+
+        const response = await fetch(`<?= WEBROOT ?>/admin/permission/delete?pid=${GLOBE_id}`, {
+            method: 'POST',
+        });
+
+        const data = await response;
+
+        if (data) {
+            window.location.reload();
+        } else {
+            $('.model').modal("hide");
+            toastr.error('Lỗi khi xoá tài khoản', 'Lỗi')
+        }
+    }
 </script>
