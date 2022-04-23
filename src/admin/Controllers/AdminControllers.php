@@ -53,7 +53,7 @@ class AdminControllers extends Controller
             }
         }
         // TẠO MENU cho sidebar danh sách và phân quyền
-        if (SESSION::pull('memu') == null) {
+        if (SESSION::pull('memu') != null) {
             $menu = SESSION::pull('memu');
         } else {
 

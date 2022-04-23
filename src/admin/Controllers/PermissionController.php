@@ -79,6 +79,12 @@ class PermissionController extends AdminControllers
     function delete($params)
     {
         if ($params['pid']) {
+
+            if ($params['pid'] == $this->permissionResourceModel->select('min(id) as min_id')->get()->min_id) {
+                echo 'admin';
+                die;
+            }
+
             // lấy bảng chính
             $permission = $this->permissionResourceModel->getById($params['pid']);
             // lấy các bảng phụ
@@ -89,10 +95,14 @@ class PermissionController extends AdminControllers
             array_push($user_permissions, $permission);
 
             if ($this->permissionResourceModel->delete(...$user_permissions)) {
-                return true;
+                echo 'true';
+                die;
             } else {
-                return false;
+                echo 'false';
+                die;
             }
         }
+        echo 'false';
+        die;
     }
 }

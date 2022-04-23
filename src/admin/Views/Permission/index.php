@@ -226,13 +226,18 @@
             method: 'POST',
         });
 
-        const data = await response;
+        const data = await response.text();
 
-        if (data) {
+        console.log(data);
+
+        if (data == 'true') {
             window.location.reload();
+        } else if (data == 'admin') {
+            $('.modal').modal("hide");
+            toastr.error('Bạn không được phép xóa quyền quản trị viên', ' Lỗi ');
         } else {
-            $('.model').modal("hide");
-            toastr.error('Lỗi khi xoá tài khoản', 'Lỗi')
+            $('.modal').modal("hide");
+            toastr.error('Lỗi khi xóa quyền', ' Lỗi ');
         }
     }
 </script>
