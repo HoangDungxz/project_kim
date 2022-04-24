@@ -3,6 +3,7 @@
 namespace ADMIN\Controllers;
 
 use SRC\Core\Controller;
+use SRC\helper\MSG;
 use SRC\helper\SESSION;
 use SRC\Models\User\UserModel;
 use SRC\Models\User\UserResourceModel;
@@ -41,8 +42,10 @@ class AdminControllers extends Controller
                     $user->setPassword($password);
 
                     if ($this->userResoureModel->login($user) != false) {
+                        MSG::send('Đăng nhập thành công', 'success');
                         header('Location: ' . WEBROOT . "admin");
                     } else {
+                        MSG::send('Đăng nhập thất bại');
                         $messager = "Bạn nhập sai tên và mật khẩu hoặc tài khoản bị khóa </br>Vui lòng kiểm tra lại";
                         $this->with($messager);
                         $this->render('login', false);

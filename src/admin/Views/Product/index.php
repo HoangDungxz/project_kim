@@ -74,7 +74,7 @@
                                             <td><?= $p->getDiscount() ?>%</td>
                                             <td><?= $p->getHot() ? '<span class="fa fa-check"></span>' : '' ?></td>
                                             <td class="text-right">
-                                                <a href="index.php?controller=products&amp;action=update&amp;id=6" class="btn btn-sm bg-success-light mr-2">
+                                                <a href="<?= WEBROOT ?>admin/product/edit/pid/<?= $p->getId() ?>" class="btn btn-sm bg-success-light mr-2">
                                                     <i class="far fa-edit mr-1"></i> Sửa
                                                 </a>
                                                 <a pid="<?= $p->getId() ?>" pname="<?= $p->getName() ?>" class="btn btn-sm

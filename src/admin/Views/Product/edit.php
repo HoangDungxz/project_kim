@@ -78,6 +78,17 @@
         align-items: center;
         cursor: pointer;
     }
+
+    .image-preview {
+        position: relative;
+    }
+
+    .remove-image {
+        position: absolute;
+        top: -12px;
+        right: 1px;
+        z-index: 99999;
+    }
 </style>
 <div class="page-wrapper">
     <div class="content container-fluid">
@@ -111,7 +122,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-lg-12 col-form-label">Tên sản phẩm</label>
                                                     <div class="col-lg-12">
-                                                        <input type="text" name="name" class="form-control">
+                                                        <input value="<?= isset($product) ? $product->getName() : '' ?>" type="text" name="name" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -120,7 +131,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-lg-12 col-form-label">Giá</label>
                                                     <div class="col-lg-12">
-                                                        <input type="text" name="price" class="form-control">
+                                                        <input value="<?= isset($product) ? $product->getPrice() : '' ?>" type="text" name="price" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,7 +139,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-lg-12 col-form-label">Khuyến mại %</label>
                                                     <div class="col-lg-12">
-                                                        <input type="text" name="discount" class="form-control">
+                                                        <input value="<?= isset($product) ? $product->getDiscount() : '' ?>" type="text" name="discount" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -139,7 +150,7 @@
                                                         <select name="category_id" class=" select select2-hidden-accessible" tabindex="-1" aria-hidden="true">
                                                             <option selected disabled>---Chọn danh mục--</option>
                                                             <?php foreach ($categories as $c) : ?>
-                                                                <option value="<?= $c->getId() ?>"><?= $c->getName() ?></option>
+                                                                <option <?= isset($product) && $product->getCategory_id() == $c->getId() ? 'selected' : '' ?> value="<?= $c->getId() ?>"><?= $c->getName() ?></option>
                                                             <?php endforeach; ?>
                                                         </select>
                                                     </div>
@@ -152,7 +163,7 @@
                                                         <select name="brand_id" class=" select select2-hidden-accessible" tabindex="-1" aria-hidden="true">
                                                             <option selected disabled>---Chọn nhãn hiệu--</option>
                                                             <?php foreach ($brands as $b) : ?>
-                                                                <option value="<?= $b->getId() ?>"><?= $b->getName() ?></option>
+                                                                <option <?= isset($product) && $product->getBrand_id() == $b->getId() ? 'selected' : '' ?> value="<?= $b->getId() ?>"><?= $b->getName() ?></option>
                                                             <?php endforeach; ?>
                                                         </select>
                                                     </div>
@@ -163,7 +174,7 @@
                                                     <label class="col-lg-12 col-form-label">HOT</label>
                                                     <div class="col-lg-12">
                                                         <div type="checkbox" class="onoffswitch">
-                                                            <input checked="" type="checkbox" class="onoffswitch-checkbox permission-select" name="hot" value="1">
+                                                            <input <?= isset($product) && $product->getHot() == 1 ? 'checked' : '' ?> type="checkbox" class="onoffswitch-checkbox permission-select" name="hot" value="1">
                                                             <div class=" onoffswitch-label">
                                                                 <div class="onoffswitch-inner "></div>
                                                                 <div class="onoffswitch-switch "></div>
@@ -176,7 +187,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-lg-12 col-form-label">Nội dung</label>
                                                     <div class="col-lg-12">
-                                                        <textarea id="content" name="content"></textarea>
+                                                        <textarea id="content" name="content"><?= isset($product) ? $product->getContent() : '' ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -184,20 +195,35 @@
                                                 <div class="form-group row">
                                                     <label class="col-lg-12 col-form-label">Miêu tả</label>
                                                     <div class="col-lg-12">
-                                                        <textarea id="description" name="description"></textarea>
+                                                        <textarea id="description" name="description"><?= isset($product) ? $product->getDescription() : '' ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-xl-12">
                                                 <div class="form-group row choise-img">
                                                     <label class="col-lg-12 col-form-label">Chọn ảnh sảnh phẩm</label>
+
+
                                                     <div class="col-lg-12 images">
-                                                        <div class="image-preview">
+                                                        <?php if ($images) : ?>
+                                                            <?php foreach ($images as $i) : ?>
+                                                                <div class="image-preview">
+                                                                    <a href="<?= WEBROOT ?>admin/product/delete_image/iid/<?= $i->getId() ?>" class="remove-image badge badge-danger badge-pill"> x </a>
+                                                                    <div class="image-preview-content">
+                                                                        <img src="<?= PUBLIC_URL ?>upload/products/<?= $i->getPath() ?>" alt="">
+                                                                    </div>
+                                                                </div>
+                                                            <?php endforeach; ?>
+                                                        <?php endif; ?>
+
+                                                        <!-- <div class="image-preview">
                                                             <div class="image-preview-content">
                                                                 <img src="<?= PUBLIC_URL ?>upload/products/default-product-image.png" alt="">
                                                             </div>
-                                                        </div>
+                                                        </div> -->
+
                                                     </div>
+
                                                     <input multiple value="" type="file" name="images[]" class="upload-image form-control">
                                                 </div>
                                             </div>
@@ -226,12 +252,15 @@
         CKEDITOR.replace('content');
         CKEDITOR.replace('description');
 
+        const old_preview = $('.images').html();
+
+
 
         $('.upload-image').on('change', function() {
             console.log($(this.files));
 
             let filesAmount = $(this.files).length;
-            let preview = '';
+            let preview = old_preview;
             for (let i = 0; i < filesAmount; i++) {
                 const file = $(this.files)[i];
                 url = URL.createObjectURL(file);

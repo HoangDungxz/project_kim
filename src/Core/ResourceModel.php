@@ -212,10 +212,6 @@ class ResourceModel  implements ResourceModelInterface
 
                 $stringModel = rtrim($stringModel, ',');
 
-                // if (isset($model->parent_id) && $model->getOrder_id() == null) {
-                //     $arrayModel[$model->parent_id] = $lastInsertId;
-                // }
-
                 if (isset($model->parent_id) && call_user_func(array($model, "get" . ucfirst($model->parent_id))) == null) {
                     $arrayModel[$model->parent_id] = $lastInsertId;
                 }
@@ -225,6 +221,7 @@ class ResourceModel  implements ResourceModelInterface
                 } else {
                     $sql = "UPDATE $table_name SET $stringModel WHERE  $table_id = $id";
                 }
+
 
                 $req->prepare($sql)
                     ->execute($arrayModel);
@@ -241,6 +238,9 @@ class ResourceModel  implements ResourceModelInterface
 
             return true;
         } catch (\PDOException $e) {
+
+            echo $e->getMessage();
+            die;
             $req->rollback();
             print "Error!: " . $e->getMessage() . "</pre>";
             return false;

@@ -55,6 +55,7 @@ class Controller
         }
         // die('asdad');
         echo SESSION::pull('msgs');
+
         SESSION::remove('msgs');
 
 

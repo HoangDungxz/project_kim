@@ -17,13 +17,12 @@ use SRC\Models\UserPermission\UserPermissionResourceModel;
 class PermissionController extends AdminControllers
 {
 
-    private $permissionResourceModel;
+
 
     public function __construct()
     {
         parent::__construct();
         $this->permissionResourceModel = new PermissionResourceModel();
-        $this->userPermissionResourceModel = new UserPermissionResourceModel();
     }
 
     /**
@@ -90,10 +89,10 @@ class PermissionController extends AdminControllers
 
             MSG::send('Cập nhật quyền thành công', 'success');
 
-            $this->index(['pid' => $pid]);
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
         } else {
             MSG::send('Cập nhật quyên lỗi vui lòng kiểm tra lại');
-            $this->index(['pid' => $pid]);
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
     }
 
@@ -107,7 +106,7 @@ class PermissionController extends AdminControllers
         if ($params['pid']) {
 
             if ($params['pid'] == $this->permissionResourceModel->select('min(id) as min_id')->get()->min_id) {
-                echo 'admin';
+                MSG::send("Xóa quyền thành công", 'success');
                 die;
             }
             // lấy bảng chính
@@ -115,8 +114,10 @@ class PermissionController extends AdminControllers
 
             if ($this->permissionResourceModel->delete($permission)) {
                 echo 'true';
+                MSG::send("Xóa quyền thành công", 'success');
                 die;
             } else {
+                MSG::send("Xóa quyền thất bại");
                 echo 'false';
                 die;
             }

@@ -26,8 +26,8 @@
 
                     <form action="<?= WEBROOT ?>admin/user/login" id="login_form" method="POST">
                         <div class="form-group">
-                            <label class="control-label">Email hoặc số điện thoại</label>
-                            <input class="form-control" name="name" type="text" placeholder="Nhập email hoặc số điện thoại">
+                            <label class="control-label">Email</label>
+                            <input class="form-control" name="name" type="text" placeholder="Nhập email....">
                         </div>
                         <div class="form-group mb-4">
                             <label class="control-label">Mật khẩu</label>

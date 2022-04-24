@@ -2,6 +2,8 @@
 
 namespace ADMIN\Controllers;
 
+use SRC\helper\MSG;
+
 /**
  * HomeController
  * 
@@ -23,6 +25,7 @@ class HomeController extends AdminControllers
 
     function login()
     {
+
         $this->render("login", false);
     }
 

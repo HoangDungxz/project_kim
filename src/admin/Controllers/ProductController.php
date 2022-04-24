@@ -51,11 +51,9 @@ class ProductController extends AdminControllers
      */
     function create()
     {
-
-        $products = $this->productsResourceModel->getAll();
         $categories = $this->categoryResourceModel->getALL();
         $brands = $this->brandResourceModel->getAll();
-        $this->with($products);
+
         $this->with($categories);
         $this->with($brands);
 
@@ -63,13 +61,13 @@ class ProductController extends AdminControllers
         $this->with($breadcrumb);
 
         extract($_POST);
-        if (isset($name, $description, $content, $hot, $price, $discount, $category_id, $brand_id)) {
+        if (isset($name, $description, $content,  $price, $discount, $category_id, $brand_id)) {
 
             $product = new ProductModel();
             $product->setName($name);
             $product->setDescription($description);
             $product->setContent($content);
-            $product->setHot($hot);
+            $product->setHot($hot ?? 0);
             $product->setPrice($price);
             $product->setDiscount($discount);
             $product->setCategory_id($category_id);
@@ -78,10 +76,9 @@ class ProductController extends AdminControllers
 
             $arraysave = [];
 
-            array_push($arraysave, $product);
-
             extract($_FILES);
-            if ($images) {
+
+            if (isset($images['name']) && $images['name'][0] != null) {
                 $images = $this->reArrayFiles($images);
                 foreach ($images as $i) {
                     $image = new ImageModel();
@@ -94,12 +91,84 @@ class ProductController extends AdminControllers
                 }
             }
 
-            if ($this->productsResourceModel->save(...$arraysave)) {
+            if ($this->productsResourceModel->save($product, ...$arraysave)) {
+                header('Location: ' . WEBROOT . 'admin/product');
             }
         }
 
         $this->render("create");
     }
+
+
+    /**
+     * Index
+     * 
+     * @param AcctionName Sửa sản phẩm
+     */
+    function edit($params)
+    {
+        if (!$params['pid']) {
+            header('Location: ' . WEBROOT . "product/create");
+        }
+
+        $categories = $this->categoryResourceModel->getALL();
+        $brands = $this->brandResourceModel->getAll();
+        $product = $this->productsResourceModel->getById($params['pid']);
+
+        $images = $this->imagesResourceModel->where('product_id', $params['pid'])->getAll();
+
+        $this->with($categories);
+        $this->with($brands);
+        $this->with($product);
+        $this->with($images);
+
+        $breadcrumb = "Sửa sản phẩm";
+        $this->with($breadcrumb);
+
+        extract($_POST);
+
+        if (isset($name, $description, $content, $price, $discount, $category_id, $brand_id)) {
+
+            $product->setName($name);
+            $product->setDescription($description);
+            $product->setContent($content);
+            $product->setHot($hot ?? 0);
+            $product->setPrice($price);
+            $product->setDiscount($discount);
+            $product->setCategory_id($category_id);
+            $product->setBrand_id($brand_id);
+            $product->send_id_to_child = false;
+
+            $arraysave = [];
+
+            extract($_FILES);
+            if (isset($images['name']) && $images['name'][0] != null) {
+                $images = $this->reArrayFiles($images);
+
+                foreach ($images as $i) {
+                    $image = new ImageModel();
+                    $image->setPath($this->productsResourceModel->upload($i));
+                    $image->setProduct_id($product->getId());
+                    $image->parent_id = 'product_id';
+
+                    if ($image->getPath() != null) {
+                        array_push($arraysave, $image);
+                    }
+                }
+            }
+
+            if ($this->productsResourceModel->save($product, ...$arraysave)) {
+                MSG::send("Sửa sản phẩm thành công", 'success');
+                header("Refresh:0");
+                die;
+            }
+        }
+        $this->render("edit");
+    }
+
+
+
+
     private function reArrayFiles(&$file_post)
     {
         $file_ary = array();
@@ -142,6 +211,36 @@ class ProductController extends AdminControllers
                 }
                 echo 'true';
             }
+        }
+    }
+
+    /**
+     * Index
+     * 
+     * @param AcctionName Xóa ảnh sản phẩm
+     */
+    function delete_image($params)
+    {
+        if (!$params['iid']) {
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        }
+
+        $image = $this->imagesResourceModel->getById($params['iid']);
+
+        if ($image) {
+            $this->imagesResourceModel->deleteImage($image->getPath());
+
+            if ($this->imagesResourceModel->delete($image)) {
+
+                if ($image->getPath() != null && $image->getPath() != 'default-product-image.png') {
+                    $this->imagesResourceModel->deleteImage($image->getPath());
+                }
+
+                MSG::send("Xóa ảnh sản phẩm thành công", 'success');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                die;
+            }
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
     }
 }

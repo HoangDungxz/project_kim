@@ -168,6 +168,7 @@ class CategoryController extends AdminControllers
             $category->setDisplayhomepage($_POST['displayhomepage'] == 0 ? 0 : 1);
 
             if ($this->categoriesResourceModel->save($category)) {
+                MSG::send('Thêm danh mục thành công', 'success');
                 header('Location: ' . WEBROOT . "admin/category");
             }
         }
@@ -227,7 +228,7 @@ class CategoryController extends AdminControllers
 
                 if ($this->categoriesResourceModel->save($category)) {
                     MSG::send('Sửa danh mục ' .  $category->getName() . ' thành công', 'success');
-                    $this->index(['cid' => $cid]);
+                    header('Location: ' . $_SERVER['HTTP_REFERER']);
                 }
             }
         }
@@ -278,8 +279,10 @@ class CategoryController extends AdminControllers
 
             if ($this->categoriesResourceModel->delete(...$will_deletes)) {
                 echo 'true';
+                MSG::send('Xóa danh mục thành công', 'success');
                 die;
             } else {
+                MSG::send('Xóa danh mục thất bại');
                 echo 'false';
                 die;
             }
