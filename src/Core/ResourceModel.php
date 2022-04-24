@@ -82,7 +82,7 @@ class ResourceModel  implements ResourceModelInterface
     {
         $column_parameter = str_replace(".", "_", $column);
 
-        $valueArr = explode(",", $value);
+        $valueArr = explode("-", $value);
         switch ($this->conditionSql) {
             case ' ':
                 $this->conditionSql .= " WHERE $column BETWEEN :$column_parameter" . "_between_1 AND :$column_parameter" . "_between_2";;

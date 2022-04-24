@@ -41,6 +41,9 @@ class ProductResourceModel extends ResourceModel
                 case 'cid':
                     $this->where("$this->table.category_id", $value);
                     break;
+                case 'brand':
+                    $this->where("$this->table.brand_id", $value);
+                    break;
                 case 'sort':
                     switch ($value) {
                         case 'priceasc':
