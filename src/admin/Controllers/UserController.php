@@ -2,6 +2,13 @@
 
 namespace ADMIN\Controllers;
 
+use DateTime;
+use DateTimeZone;
+use SplFileInfo;
+use SRC\helper\ERROR;
+use SRC\helper\MSG;
+use SRC\helper\SESSION;
+use SRC\Models\Permission\PermissionResourceModel;
 use SRC\Models\User\UserModel;
 use SRC\Models\User\UserResourceModel;
 
@@ -14,10 +21,13 @@ use SRC\Models\User\UserResourceModel;
  */
 class UserController extends AdminControllers
 {
+    private $userResourceModel;
+    private $permissionResourceModel;
     public function __construct()
     {
         parent::__construct();
         $this->userResourceModel = new UserResourceModel();
+        $this->permissionResourceModel = new PermissionResourceModel;
     }
     /**
      * Index
@@ -27,8 +37,8 @@ class UserController extends AdminControllers
     function index()
     {
         $users = $this->userResoureModel->getAll();
-
         $this->with($users);
+
 
         $this->render("index");
     }
@@ -40,26 +50,57 @@ class UserController extends AdminControllers
      */
     function create()
     {
-        if (isset($_POST["email"]) && isset($_POST["password"])) {
-            $uploadFolder = PUBLIC_URL . 'upload/users/';
+
+        $permissions =  $this->permissionResourceModel->getAll();
+        $this->with($permissions);
+
+        extract($_POST);
+
+        if (isset($name) && isset($phone) && isset($address) && isset($email) && isset($permission)) {
+
             $avatar = basename($_FILES["avatar"]["name"]);
 
             $user = new UserModel();
-            $user->setName($_POST['name']);
-            $user->setEmail($_POST['email']);
-            $user->setPassword($_POST['password']);
-            $user->setPhone($_POST['phone']);
-            $user->setAddress($_POST['address']);
-            $user->setStatus($_POST['status']);
+
+            $user->setName($name);
+            $user->setEmail($email);
+            $user->setPassword($password);
+            $user->setPhone($phone);
+            $user->setAddress($address);
+            $user->setStatus($status);
+            $user->setPermission_id($permission);
+
+            extract($_FILES);
+
+            if ($avatar['name'] != null) {
+                $avatar =  $this->userResourceModel->upload($avatar);
+            } else {
+                $avatar = 'user-default-avatar.png';
+            }
+
             $user->setAvatar($avatar);
 
-            if ($this->userResoureModel->save($user)) {
-                $this->userResourceModel->upload($uploadFolder, $avatar);
-                header('Location: ' . WEBROOT . "admin/user");
+            // kiểm tra chống trùng email
+            $checkEmailUnique = $this->userResourceModel->select('id')->where('email', $email)->get();
+
+
+            if ($checkEmailUnique) {
+                MSG::send('Email đã được đăng ký trước đó');
+                $this->with($user);
+                goto end;
             }
-        } else {
-            $message = "Tạo mới tài khoản không thành công";
+
+            if ($this->userResourceModel->save($user)) {
+
+                header('Location: ' . WEBROOT . "admin/user");
+            } else {
+                MSG::send("Tạo mới tài khoản không thành công");
+            }
         }
+
+        end:
+        $breadcrumb = "Tạo mới tài khoản";
+        $this->with($breadcrumb);
         $this->render("create");
     }
 
@@ -68,34 +109,66 @@ class UserController extends AdminControllers
      *
      * @param AcctionName Sửa tài khoản
      */
-    function edit()
+    function edit($params)
     {
-        if (isset($_POST["id"]) && isset($_POST["email"]) && isset($_POST["password"])) {
-            $uploadFolder = "assets/upload/users/";
-            $avatar = basename($_FILES["avatar"]["name"]);
-            $user = $this->userResourceModel->getById($_POST["id"]);
-
-            if ($user) {
-
-                $user->setName($_POST['name']);
-                $user->setEmail($_POST['email']);
-                $user->setPassword($_POST['password']);
-                $user->setPhone($_POST['phone']);
-                $user->setAddress($_POST['address']);
-                $user->setStatus($_POST['status']);
-                $user->setAvatar($avatar);
-
-                if ($this->categoriesResourceModel->save($user)) {
-
-                    $this->userResourceModel->upload($uploadFolder, $avatar);
-                    header('Location: ' . $_SERVER['HTTP_REFERER']);
-                }
-            }
-        } else {
-            $message = "Cập nhật tài khoản không thành công";
+        if (!isset($params['uid'])) {
+            header('Location: ' . WEBROOT . "admin/user");
         }
 
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        $permissions =  $this->permissionResourceModel->getAll();
+        $this->with($permissions);
+
+        echo '<pre>';
+        print_r($params['uid']);
+        echo '</pre>';
+
+        $user =  $this->userResourceModel->getById($params['uid']);
+
+
+        extract($_POST);
+
+        if (isset($name) && isset($phone) && isset($address) && isset($email) && isset($password) && isset($permission)) {
+
+            $avatar = basename($_FILES["avatar"]["name"]);
+
+
+            $user->setName($name);
+            $user->setEmail($email);
+
+            $user->setPhone($phone);
+            $user->setAddress($address);
+            $user->setStatus($status);
+            $user->setPermission_id($permission);
+
+            if ($password != '********') {
+                $user->setPassword($password);
+            }
+            extract($_FILES);
+
+            if ($avatar['name'] != null) {
+
+                // xóa ảnh cũ
+                if ($user->getAvatar() != null && $user->getAvatar() != 'user-default-avatar.png') {
+                    $this->userResourceModel->deleteImage($user->getAvatar());
+                }
+
+                // upload ảnh mới
+                $avatar =  $this->userResourceModel->upload($avatar);
+                $user->setAvatar($avatar);
+            }
+
+            if ($this->userResourceModel->save($user)) {
+
+                // header('Location: ' . WEBROOT . "admin/user");
+                MSG::send("Sửa tài khoản thành công", 'success');
+            } else {
+                MSG::send("Sửa tài khoản không thành công");
+            }
+        }
+        $breadcrumb = "Sửa tài khoản";
+        $this->with($breadcrumb);
+        $this->with($user);
+        $this->render("create");
     }
 
     function login()
@@ -108,5 +181,34 @@ class UserController extends AdminControllers
         if ($this->userResoureModel->logout()) {
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         };
+    }
+
+    public function delete($params)
+    {
+
+        if (!$params['uid']) {
+            echo 'false';
+            die;
+        }
+
+        $user = $this->userResourceModel->getById($params['uid']);
+
+        if (!$user) {
+            echo 'false';
+            die;
+        }
+
+        if ($this->userResourceModel->delete($user)) {
+
+            if ($user->getAvatar() != null && $user->getAvatar() != 'user-default-avatar.png') {
+                $this->userResourceModel->deleteImage($user->getAvatar());
+            }
+
+            if ($params['uid'] == SESSION::get('users', 'id')) {
+                $this->userResoureModel->logout();
+            }
+            echo 'true';
+            die;
+        }
     }
 }

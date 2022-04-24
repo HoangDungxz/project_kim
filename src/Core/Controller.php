@@ -2,6 +2,8 @@
 
 namespace SRC\Core;
 
+use SRC\helper\ERROR;
+use SRC\helper\SESSION;
 
 class Controller
 {
@@ -51,6 +53,10 @@ class Controller
         } else {
             require $mainView;
         }
+        // die('asdad');
+        echo SESSION::pull('msgs');
+        SESSION::remove('msgs');
+
 
         $content_for_layout = ob_get_clean();
 

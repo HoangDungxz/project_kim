@@ -11,7 +11,7 @@
                 <div class="col">
                     <h3 class="page-title">Quản lý tài khoản</h3>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?= WEBROOT ?>/admin">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="<?= WEBROOT ?>admin">Trang chủ</a></li>
                         <li class="breadcrumb-item active">Tài khỏan</li>
                     </ul>
                 </div>
@@ -69,11 +69,11 @@
                                             <td><a href="mailto:nhom2user@gmail.com"><?= $u->getEmail() ?></a></td>
                                             <td><label><?= $u->getStatus() == 0 ? "Chưa kích hoạt" : "Đã kích hoạt" ?></label>
                                             </td>
-                                            <td><label>Người dùng</label>
+                                            <td><label><?= $u->permissions_name ?></label>
                                             </td>
-                                            <td><?= date_format($u->getCreated_at(), "d/m/Y H:i A") ?></td>
+                                            <td><?= date_format(DateTime::createFromFormat('Y-m-d H:i:s', $u->getCreated_at()), "d/m/Y H:i A") ?></td>
                                             <td class="text-right">
-                                                <a href="/admin/ManageAccount/Update?id=1" class="btn btn-sm bg-success-light mr-2">
+                                                <a href="<?= WEBROOT ?>admin/user/edit/uid/<?= $u->getId() ?>" class="btn btn-sm bg-success-light mr-2">
                                                     <i class="far fa-edit mr-1"></i> Sửa
                                                 </a>
                                                 <a data-id="40" href="javascript:void(0);" class="
@@ -81,7 +81,7 @@
                                                     bg-danger-light
                                                     mr-2
                                                     delete_review_comment
-                                                  " data-toggle="modal" data-target="#model-1">
+                                                  " data-toggle="modal" data-target="#model-1" onclick="handleDelete('<?= $u->getId() ?>','<?= $u->getName() ?>')">
                                                     <i class="far fa-trash-alt mr-1"></i> Xoá
                                                 </a>
                                             </td>
@@ -90,6 +90,7 @@
                                 </tbody>
                             </table>
                         </div>
+
 
                         <!-- Modal -->
                         <div class="modal fade" id="model-1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -101,12 +102,12 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">Bạn có muốn xoá bản ghi này?</div>
+                                    <div class="modal-body">Bạn có muốn xoá tài khoản <span class="p-name text-danger"></span> ?</div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                             Không
                                         </button>
-                                        <button onclick="handleDelete(1, `nhom2user@gmail.com`)" type="button" class="btn btn-primary">Đồng ý</button>
+                                        <button onclick="runDelete()" type="button" class="btn btn-primary">Đồng ý</button>
                                     </div>
                                 </div>
                             </div>
@@ -114,19 +115,32 @@
 
 
                         <script>
-                            const handleDelete = async (id, name) => {
+                            var GLOBE_id = undefined;
+                            var GLOBE_name = undefined;
 
-                                const response = await fetch(`/admin/ManageAccount/Delete?id=${id}`, {
+                            function handleDelete(id, name) {
+
+                                // đảu dữ liêu từ click ra globe
+                                GLOBE_id = id;
+                                GLOBE_name = name;
+
+                                $('.modal').find('.p-name').text(name);
+
+                            }
+
+                            const runDelete = async () => {
+
+                                const response = await fetch(`<?= WEBROOT ?>admin/user/delete/uid/${GLOBE_id}`, {
                                     method: 'POST',
                                 });
 
-                                const data = await response.json();
+                                const data = await response.text();
 
-                                if (data) {
+                                if (data == 'true') {
                                     window.location.reload();
                                 } else {
-                                    $(`#model-${id}`).modal("hide");
-                                    toastr.error('Lỗi khi xoá tài khoản', 'Lỗi')
+                                    $('.modal').modal("hide");
+                                    toastr.error('Lỗi khi xóa tài khoản', ' Lỗi ');
                                 }
                             }
                         </script>

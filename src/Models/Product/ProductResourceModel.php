@@ -99,4 +99,13 @@ class ProductResourceModel extends ResourceModel
 
         return $product;
     }
+
+    public function getAllInclule(...$columns)
+    {
+        $include = implode(",$this->table.", $columns);
+        $include = rtrim($include, ',');
+
+        $this->select($include);
+        return parent::getAll();
+    }
 }

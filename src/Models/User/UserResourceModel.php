@@ -36,4 +36,11 @@ class UserResourceModel extends ResourceModel
         }
         return false;
     }
+
+    public function getAll($params = [])
+    {
+        $this->join('permissions', 'permissions.id=users.permission_id')
+            ->select('users.*,permissions.name as permissions_name,permissions.paths as permissions_paths');
+        return parent::getAll();
+    }
 }

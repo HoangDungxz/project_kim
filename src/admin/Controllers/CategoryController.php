@@ -2,8 +2,11 @@
 
 namespace ADMIN\Controllers;
 
+use SRC\helper\MSG;
 use SRC\Models\Category\CategoryModel;
 use SRC\Models\Category\CategoryResourceModel;
+use SRC\Models\Image\ImageModel;
+use SRC\Models\Image\ImageResourceModel;
 use SRC\Models\Product\ProductResourceModel;
 
 /**
@@ -17,8 +20,7 @@ class CategoryController extends AdminControllers
 {
     private $categoriesResourceModel;
     private $productsResourceModel;
-
-
+    private $imagesResourceModel;
 
     private $categoriesShow = '';
     private $categoriesOptionShow = '';
@@ -26,11 +28,15 @@ class CategoryController extends AdminControllers
     private $categoryId;
     private $categoryParentId;
 
+    private $will_deletes = [];
+
     function __construct()
     {
         parent::__construct();
         $this->categoriesResourceModel = new CategoryResourceModel();
         $this->productsResourceModel = new ProductResourceModel();
+
+        $this->imagesResourceModel = new ImageResourceModel();
     }
 
 
@@ -43,6 +49,7 @@ class CategoryController extends AdminControllers
     {
 
         // lấy id category hoặc id nhỏ nhất bảng category
+
         if (isset($params['cid'])) {
             $cid = $params['cid'];
         } else {
@@ -50,9 +57,14 @@ class CategoryController extends AdminControllers
                 ->get()->categories_min_id;
         }
 
-        $this->categoriesResourceModel = new CategoryResourceModel();
         $category = $this->categoriesResourceModel
             ->where('categories.id', $cid)->get();
+
+        if (!$category) {
+
+            $this->render("empty_category");
+            die;
+        }
 
         $this->categoryId = $category->getId();
         $this->categoryParentId = $category->getparent_id();
@@ -72,9 +84,9 @@ class CategoryController extends AdminControllers
 
         $categoriesShow = $this->categoriesShow;
 
-        $this->showOptionCategories($categories);
-        $categoriesOptionShow = $this->categoriesOptionShow;
+        $this->showOptionCategories($categories, 0, '', $category->getId());
 
+        $categoriesOptionShow = $this->categoriesOptionShow;
 
         $this->with($categoriesOptionShow);
 
@@ -96,10 +108,14 @@ class CategoryController extends AdminControllers
                     'danger' : 'success';
 
                 $this->categoriesShow .=
-                    '<a class="nav-link mb-0 ' .  $active . '" href="' . WEBROOT . 'admin/category/index/cid/' . $c->getId() . '">'
-                    . $char . $c->getName()
-                    . ' <div class="badge badge-' . $displayHomePage . ' badge-pill"> ' . $c->product_count . '</div>
-                    </a>';
+                    '<div class="category-item">
+                    <a class="nav-link mb-0 ' .  $active . '" href="' . WEBROOT . 'admin/category/index/cid/' . $c->getId() . '">
+                    <div class="badge badge-' . $displayHomePage . ' badge-pill"> ' . $c->product_count . '</div>'
+                    . '<span>' . $char . $c->getName() .
+                    '</span>
+                    </a>
+                        <i class="far fa-trash-alt delete-category" cid="' . $c->getId() . '" cname="' . $c->getName() . '" ></i>
+                    </div>';
 
                 unset($categories[$key]);
 
@@ -109,20 +125,22 @@ class CategoryController extends AdminControllers
     }
 
     // BƯỚC 2: HÀM ĐỆ QUY HIỂN THỊ CATEGORIES
-    private function showOptionCategories($categories, $parent_id = 0, $char = '')
+    private function showOptionCategories($categories, $parent_id = 0, $char = '', $current_id = '')
     {
         // BƯỚC 2.1: LẤY DANH SÁCH CATE CON
         foreach ($categories as $key => $c) {
             // Nếu là chuyên mục con thì hiển thị
+            $disabled = $c->getId() == $current_id ?
+                'disabled' : '';
 
             $selected = $this->categoryParentId == $c->getId() ? 'selected' : '';
 
             if ($c->getParent_id() == $parent_id) {
-                $this->categoriesOptionShow .= '<option ' . $selected . ' value="' . $c->getId() . '">' . $char . $c->getName() . '</option>';
+                $this->categoriesOptionShow .= '<option ' . $selected . ' ' . $disabled . '  value="' . $c->getId() . '">' . $char . $c->getName() . '</option>';
 
                 unset($categories[$key]);
 
-                $this->showOptionCategories($categories, $c->getId(), $char . '|---');
+                $this->showOptionCategories($categories, $c->getId(), $char . '|---', $current_id);
             }
         }
     }
@@ -151,11 +169,7 @@ class CategoryController extends AdminControllers
 
             if ($this->categoriesResourceModel->save($category)) {
                 header('Location: ' . WEBROOT . "admin/category");
-                // $message = "Bạn chưa nhập tên hoặc chọn danh mục cha";
-                // $this->render("index");
             }
-        } else {
-            $message = "Bạn chưa nhập tên hoặc chọn danh mục cha";
         }
 
         $this->render("create");
@@ -169,24 +183,154 @@ class CategoryController extends AdminControllers
      */
     function update()
     {
-
         extract($_POST);
-        if (isset($cid) && isset($category_parent) && isset($category_name)) {
+
+        if (isset($cid) && isset($category_parent) && isset($category_name) && $cid !== $category_parent) {
+
             $category = $this->categoriesResourceModel->getById($cid);
 
             if ($category) {
 
-                $category->setParent_id($category_parent);
-
                 $category->setDisplayhomepage(isset($displayhomepage) ? 1 : 0);
                 $category->setName($category_name);
 
-                if ($this->categoriesResourceModel->save($category)) {
+                // lấy danh sách tất cả các categry con cháu ...
+                $categoriesChilds = $this->categoriesResourceModel->categoriesAllChild($cid);
 
-                    header('Location: ' . $_SERVER['HTTP_REFERER']);
+                // lấy danh sách tất cả các categry chỉ con ...
+                $categoriesChildsNears = $this->categoriesResourceModel->where('parent_id', $cid)->getAll();
+
+                $childs_id = [];
+
+                //đổi list object thành mảng
+                if ($categoriesChilds) {
+                    foreach ($categoriesChilds as  $c) {
+                        array_push($childs_id, $c->getId());
+                    }
+                }
+
+                // nếu đối parent_id cho con cháu ...
+                // con trực tiếp sẽ đặt lại parent_id thành parent id hiện tại => lên 1 nấc
+                if (in_array($category_parent, $childs_id)) {
+                    foreach ($categoriesChildsNears as  $c) {
+                        $c->setParent_id($category->getParent_id());
+                    }
+
+                    $category->setParent_id($category_parent);
+
+                    if ($this->categoriesResourceModel->save($category, ...$categoriesChildsNears)) {
+                        header('Location: ' . $_SERVER['HTTP_REFERER']);
+                    }
+                }
+
+                $category->setParent_id($category_parent);
+
+                if ($this->categoriesResourceModel->save($category)) {
+                    MSG::send('Sửa danh mục ' .  $category->getName() . ' thành công', 'success');
+                    $this->index(['cid' => $cid]);
                 }
             }
         }
         header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
+
+    /**
+     * Index
+     * 
+     * @param AcctionName Xóa danh mục
+     */
+    function delete($params)
+    {
+        if ($params['cid']) {
+
+            $will_deletes = [];
+
+            // lấy bảng chính
+            $category = $this->categoriesResourceModel->getById($params['cid']);
+
+            if ($category) {
+                $categoriesChilds  =   $this->categoriesResourceModel->categoriesAllChild($category->getId());
+
+                if ($categoriesChilds) {
+
+                    foreach ($categoriesChilds as $c) {
+                        // lấy các bảng phụ
+                        $products = $this->productsResourceModel->where('category_id', $c->getId())->getAllInclule('id,name');
+
+                        if ($products) {
+                            foreach ($products as $p) {
+                                $images =  $this->imagesResourceModel->select('id')->where('product_id', $p->getId())->getAll();
+
+                                if ($images) {
+                                    foreach ($images as $i) {
+                                        array_push($will_deletes, $i);
+                                    }
+                                }
+                            }
+                            array_push($will_deletes, $p);
+                        }
+                        array_push($will_deletes, $c);
+                    }
+                }
+                array_push($will_deletes, $category);
+            }
+
+
+            if ($this->categoriesResourceModel->delete(...$will_deletes)) {
+                echo 'true';
+                die;
+            } else {
+                echo 'false';
+                die;
+            }
+        }
+        echo 'false';
+        die;
+    }
+
+    public function alertDelete($params)
+    {
+        if ($params['cid']) {
+
+            // lấy bảng chính
+            $category = $this->categoriesResourceModel->getById($params['cid']);
+
+            if ($category) {
+                $categoriesChilds  =   $this->categoriesResourceModel->categoriesAllChild($category->getId());
+                array_unshift($categoriesChilds, $category);
+
+                if ($categoriesChilds) {
+
+                    $listShow = [];
+
+                    foreach ($categoriesChilds as $c) {
+                        // lấy các bảng phụ
+
+                        $showCategory = new \stdClass;
+                        $showCategory->category_id = $c->getId();
+                        $showCategory->category_name = $c->getName();
+
+                        $products = $this->productsResourceModel->where('category_id', $c->getId())->getAllInclule('id,name');
+
+                        if ($products) {
+                            $showproducts = [];
+                            foreach ($products as $p) {
+
+                                $showproduct = new \stdClass;
+                                $showproduct->product_id = $p->getId();
+                                $showproduct->product_name = $p->getName();
+
+
+                                array_push($showproducts, $showproduct);
+                            }
+
+                            $showCategory->products = $showproducts;
+                        }
+                        array_push($listShow, $showCategory);
+                    }
+                }
+            }
+            echo json_encode($listShow, JSON_UNESCAPED_UNICODE);
+        }
     }
 }

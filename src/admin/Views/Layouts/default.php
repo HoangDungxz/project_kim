@@ -34,6 +34,14 @@
     <!-- Datatables JS -->
     <script src="<?= PUBLIC_URL ?>admin/plugins/datatables/datatable.min.js"></script>
 
+    <script src="<?= PUBLIC_URL ?>admin/script/toastr.js"></script>
+
+    <!-- Bootstrap Core JS -->
+    <script src="<?= PUBLIC_URL ?>admin/script/popper.min.js"></script>
+    <script src="<?= PUBLIC_URL ?>admin/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+
 
 </head>
 
@@ -47,15 +55,11 @@
 
         <?= $content_for_layout ?>
     </div>
-    <!-- Bootstrap Core JS -->
-    <script src="<?= PUBLIC_URL ?>admin/script/popper.min.js"></script>
-    <script src="<?= PUBLIC_URL ?>admin/plugins/bootstrap/js/bootstrap.min.js"></script>
+
 
     <!-- Datepicker Core JS -->
     <script src="<?= PUBLIC_URL ?>admin/script/moment.min.js"></script>
     <script src="<?= PUBLIC_URL ?>admin/script/bootstrap-datetimepicker.min.js"></script>
-
-
 
     <!-- Slimscroll JS -->
     <script src="<?= PUBLIC_URL ?>admin/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -67,8 +71,9 @@
 
     <!-- Custom JS -->
     <script src="<?= PUBLIC_URL ?>admin/script/admin.js"></script>
-    <script src="<?= PUBLIC_URL ?>admin/script/toastr.js"></script>
 
+    <!-- add ckeditor-->
+    <script type="text/javascript" src="<?= PUBLIC_URL ?>/admin/ckeditor/ckeditor.js"></script>
 
 </body>
 

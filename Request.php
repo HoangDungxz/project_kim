@@ -27,6 +27,6 @@ class Request
         }
         $this->urlParams = $params;
 
-        $this->url = $_GET["p"];
+        $this->url = rtrim($_GET["p"], '#');
     }
 }

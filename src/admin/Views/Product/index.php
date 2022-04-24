@@ -9,15 +9,15 @@
         <div class="page-header">
             <div class="row">
                 <div class="col">
-                    <h3 class="page-title">Quản lý tài khoản</h3>
+                    <h3 class="page-title">Quản lý sản phẩm</h3>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?= WEBROOT ?>/admin">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Tài khỏan</li>
+                        <li class="breadcrumb-item"><a href="<?= WEBROOT ?>admin">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Sản phẩm</li>
                     </ul>
                 </div>
                 <div class="col-auto">
-                    <a href="<?= WEBROOT ?>admin/user/create" class="btn btn-primary ml-3">
-                        <i class="fas fa-plus"></i> Thêm tài khoản
+                    <a href="<?= WEBROOT ?>admin/product/create" class="btn btn-primary ml-3">
+                        <i class="fas fa-plus"></i> Thêm sản phẩm
                     </a>
                 </div>
             </div>
@@ -77,12 +77,10 @@
                                                 <a href="index.php?controller=products&amp;action=update&amp;id=6" class="btn btn-sm bg-success-light mr-2">
                                                     <i class="far fa-edit mr-1"></i> Sửa
                                                 </a>
-                                                <a data-id="40" href="index.php?controller=products&amp;action=delete&amp;id=6" onclick="return window.confirm('Are you sure?');" class="
-                                                btn btn-sm
+                                                <a pid="<?= $p->getId() ?>" pname="<?= $p->getName() ?>" class="btn btn-sm
                                                 bg-danger-light
                                                 mr-2
-                                                delete_review_comment
-                                                " data-toggle="modal" data-target="#model-2">
+                                                delete-product">
                                                     <i class="far fa-trash-alt mr-1"></i> Xoá
                                                 </a>
                                             </td>
@@ -97,3 +95,57 @@
         </div>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="model-1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xác nhận?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">Bạn có muốn xoá sản phẩm <span class="p-name text-danger"></span> ?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Không
+                </button>
+                <button onclick="runDelete()" type="button" class="btn btn-primary">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var GLOBE_pid;
+    var GLOBE_pname;
+
+    $(document).on('click', '.delete-product', function() {
+        GLOBE_pid = $(this).attr('pid');
+        GLOBE_pname = $(this).attr('pname');
+        $('.modal').modal('show');
+
+        $('.p-name').html(GLOBE_pname);
+
+    })
+
+    const runDelete = async () => {
+
+        const response = await fetch(`<?= WEBROOT ?>admin/product/delete/pid/${GLOBE_pid}`, {
+            method: 'POST',
+        });
+
+        const data = await response.text();
+
+        console.log(data);
+
+        if (data == 'true') {
+            window.location.reload();
+        } else {
+            $('.modal').modal("hide");
+            toastr.error('Lỗi khi xóa sản phẩm', ' Lỗi ');
+        }
+    }
+</script>

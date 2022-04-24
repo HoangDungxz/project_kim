@@ -74,7 +74,7 @@
                 <div class="col">
                     <h3 class="page-title">Quản lý phân quyền</h3>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?= WEBROOT ?>/admin">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="<?= WEBROOT ?>admin">Trang chủ</a></li>
                         <li class="breadcrumb-item active">Phân quyền</li>
                     </ul>
                 </div>
@@ -89,7 +89,7 @@
                                 <div class="nav flex-column">
                                     <div class="card-header left">
                                         <h4 class="card-title">Quyền</h4>
-                                        <a href="<?= WEBROOT ?>admin/category/create" class="chat-compose">
+                                        <a href="<?= WEBROOT ?>admin/permission/create" class="chat-compose">
                                             <i class="material-icons">control_point</i>
                                         </a>
                                     </div>
@@ -149,7 +149,7 @@
                                         <input type="hidden" name="pid" value="<?= $permission->getId() ?>">
                                         <input type="hidden" name="pname" value="<?= $permission->getName() ?>">
                                         <button class="btn btn-primary" type="submit">
-                                            Phân quyền
+                                            Sửa quyền
                                         </button>
 
                                         <button class="btn" type="reset">Nhập lại</button>
@@ -222,16 +222,16 @@
 
     const runDelete = async () => {
 
-        const response = await fetch(`<?= WEBROOT ?>/admin/permission/delete?pid=${GLOBE_id}`, {
+        const response = await fetch(`<?= WEBROOT ?>admin/permission/delete/pid/${GLOBE_id}`, {
             method: 'POST',
         });
 
         const data = await response.text();
 
-        console.log(data);
-
         if (data == 'true') {
-            window.location.reload();
+
+            window.location.href = "<?= WEBROOT ?>admin/permission";
+
         } else if (data == 'admin') {
             $('.modal').modal("hide");
             toastr.error('Bạn không được phép xóa quyền quản trị viên', ' Lỗi ');

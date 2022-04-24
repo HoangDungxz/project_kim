@@ -5,6 +5,7 @@ namespace SRC\Core;
 use SRC\Core\ResourceModelInterface;
 use SRC\Config\Database;
 use PDO;
+use SRC\helper\MSG;
 
 class ResourceModel  implements ResourceModelInterface
 {
@@ -21,6 +22,13 @@ class ResourceModel  implements ResourceModelInterface
     private $select = '*';
     private $params = [];
     private $groupBySql;
+
+    private $file_name;
+    private $tmp_name;
+    private $target_file;
+
+    private $upload_value = [];
+
 
 
     public function __construct()
@@ -136,6 +144,7 @@ class ResourceModel  implements ResourceModelInterface
         $table_name = $this->model->getTable_name();
         $sql = "SELECT $this->select FROM $table_name $this->joinSql $this->conditionSql $this->groupBySql $this->oderSql $this->paginateSql";
         $req = Database::getBdd()->prepare($sql);
+
         $req->execute($this->params);
         $this->clearSelectSql();
 
@@ -203,7 +212,11 @@ class ResourceModel  implements ResourceModelInterface
 
                 $stringModel = rtrim($stringModel, ',');
 
-                if (isset($model->parent_id) && $model->getOrder_id() == null) {
+                // if (isset($model->parent_id) && $model->getOrder_id() == null) {
+                //     $arrayModel[$model->parent_id] = $lastInsertId;
+                // }
+
+                if (isset($model->parent_id) && call_user_func(array($model, "get" . ucfirst($model->parent_id))) == null) {
                     $arrayModel[$model->parent_id] = $lastInsertId;
                 }
 
@@ -222,6 +235,10 @@ class ResourceModel  implements ResourceModelInterface
             }
             $req->commit();
 
+            if (count($this->upload_value) > 0) {
+                $this->runUpload();
+            }
+
             return true;
         } catch (\PDOException $e) {
             $req->rollback();
@@ -233,7 +250,6 @@ class ResourceModel  implements ResourceModelInterface
 
     public function delete(...$models)
     {
-
         $req = Database::getBdd();
         try {
             $req->beginTransaction();
@@ -250,6 +266,7 @@ class ResourceModel  implements ResourceModelInterface
             $req->commit();
             return true;
         } catch (\PDOException $e) {
+            echo $e->getMessage();
             $req->rollback();
             print "Error!: " . $e->getMessage() . "</pre>";
             return false;
@@ -279,48 +296,91 @@ class ResourceModel  implements ResourceModelInterface
         return $paths;
     }
 
-    public function upload($uploadFolder, $file_name)
+    public function upload($file, $target_dir = false)
     {
-        $new_name = $uploadFolder . time() . "-" . $file_name;
+        if ($target_dir === false) {
+            $target_dir = $this->table;
+        }
+
+        $now = new \DateTime('now', new \DateTimeZone('Asia/Ho_Chi_Minh'));
+        $file_name = $now->format('Y_m_d_H_i_s') . '_' . random_int(1000, 9999);
+
         $uploadOk = true;
-        $imageFileType = strtolower(pathinfo($new_name, PATHINFO_EXTENSION));
-        $check = getimagesize($_FILES["avatar"]["tmp_name"]);
+
+        $imageFileType = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $file_name .= '.' . $imageFileType;
+
+        $target_file = 'assets/upload/' . $target_dir . './' . $file_name;
+
+        $check = getimagesize($file["tmp_name"]);
 
         if ($check !== false) {
-            $message = "File là 1 ảnh - " . $check["mime"] . ".";
+            // MSG::send("File là 1 ảnh - " . $check["mime"] . ".", 'success');
+            $uploadOk = 1;
         } else {
-            $message = "File không phải là 1 ảnh.";
+            MSG::send("File không phải là 1 ảnh.");
+            $uploadOk = 0;
         }
 
-        if (file_exists($file_name)) {
-            $message = "File ko tồn tại!";
+        if (file_exists($target_file)) {
+            MSG::send("File đã tồn tại!");
+            $uploadOk = 0;
         }
 
-        if ($_FILES["avatar"]["size"] > 500000) {
-            $message = "Dung lượng file phải nhỏ hơn 500000!";
+
+        if ($file["size"] > 1500000) {
+            MSG::send("Dung lượng file phải nhỏ hơn 1500000!");
+            $uploadOk = 0;
         }
 
         if (
             $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
             && $imageFileType != "gif"
         ) {
-            $message = "File phải là đuôi JPG, JPEG, PNG & GIF!";
+            MSG::send("File phải là đuôi JPG, JPEG, PNG & GIF!");
+            $uploadOk = 0;
         }
 
-
-        echo '<pre>';
-        print_r($_FILES["avatar"]["tmp_name"]);
-        echo '</pre>';
-
-        if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $new_name)) {
-            $message = "File: " . htmlspecialchars($new_name) . " đã được uploads.";
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            MSG::send("Sorry, ảnh tải lên không thành công");
+            // if everything is ok, try to upload file
         } else {
-            $message = "không thể  uploads file!";
+
+            array_push($this->upload_value, [
+                'file_name' => $file_name,
+                'tmp_name' => $file["tmp_name"],
+                'target_file' => $target_file
+            ]);
+
+            return $file_name;
         }
+    }
 
+    private function runUpload()
+    {
+        foreach ($this->upload_value as  $u) {
+            if (move_uploaded_file($u['tmp_name'], $u['target_file'])) {
+                MSG::send("Ảnh " . htmlspecialchars(basename($u['file_name'])) . " đã được tải lên.", 'success');
+            } else {
+                MSG::send("Sorry, ảnh tải lên không thành công.");
+            }
+        }
+    }
 
-        echo $message;
-        die;
+    public function deleteImage($images, $target_dir = false)
+    {
+        if ($target_dir === false) {
+            $target_dir = $this->table;
+        }
+        $target_file = 'assets/upload/' . $target_dir . './' . $images;
+
+        if (file_exists($target_file)) {
+            if (unlink($target_file)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

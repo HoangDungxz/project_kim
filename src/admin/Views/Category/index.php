@@ -16,7 +16,11 @@
 
     .card-body .nav-link.mb-0 {
         display: flex;
-        justify-content: space-between;
+
+    }
+
+    .nav-link.mb-0 span {
+        margin-left: 10px;
     }
 
     .badge {
@@ -25,10 +29,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
     }
 
     .card-header.left {
-        padding: 16px 24px;
+        padding: 16px 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -39,7 +44,7 @@
     }
 
     .card-body.left .nav-link {
-        padding: 10px 24px;
+        padding: 10px 10px;
     }
 
     .card-body.right {
@@ -53,6 +58,49 @@
     .table-responsive .col-sm-12 {
         padding: 0;
     }
+
+    .nav-link.mb-0 span {
+        width: 100%;
+        justify-content: space-between;
+        display: flex;
+        align-self: center;
+    }
+
+    .nav-link.mb-0 span i {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        z-index: 9999;
+
+    }
+
+    .category-item {
+        position: relative;
+    }
+
+    .category-item i {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        height: 100%;
+        width: 44px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 10px;
+        color: #f16b6f;
+    }
+
+    .category-item i:hover {
+        background-color: #55ce63;
+        color: #fff;
+    }
+
+    .nav-link.mb-0.active~i {
+        color: #fff;
+    }
 </style>
 <div class="page-wrapper">
     <div class="content container-fluid">
@@ -61,7 +109,7 @@
                 <div class="col">
                     <h3 class="page-title">Quản lý danh mục</h3>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="<?= WEBROOT ?>/admin">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="<?= WEBROOT ?>admin">Trang chủ</a></li>
                         <li class="breadcrumb-item active">Danh mục</li>
                     </ul>
                 </div>
@@ -175,6 +223,26 @@
 
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="model-1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Bạn có muốn xoá ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Không
+                </button>
+                <button onclick="runDelete()" type="button" class="btn btn-primary">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -199,4 +267,57 @@
             }
         });
     });
+
+
+
+    var GLOBE_cid;
+    var GLOBE_cname;
+
+    $(document).on('click', '.delete-category', async function() {
+        GLOBE_cid = $(this).attr('cid');
+        GLOBE_cname = $(this).attr('cname');
+        $('.modal').modal('show');
+
+        const response = await fetch(`<?= WEBROOT ?>admin/category/alertDelete/cid/${GLOBE_cid}`, {
+            method: 'POST',
+        });
+
+        const data = await response.json();
+
+        let modalBody = '';
+
+        data?.map(c => {
+            modalBody += `<div class="mt-2"> <strong> Danh mục: 
+            <span class="text-danger">${c.category_name}</span></strong>`;
+
+            c.products?.map(p => {
+                modalBody += `<div class="offset-md-1"> Sản phẩm: 
+            <span class="text-danger">${p.product_name}</span>`;
+
+                modalBody += `</div>`;
+            });
+
+        });
+
+        $('.modal-body').html(modalBody);
+
+    })
+
+    const runDelete = async () => {
+
+        const response = await fetch(`<?= WEBROOT ?>admin/category/delete/cid/${GLOBE_cid}`, {
+            method: 'POST',
+        });
+
+        const data = await response.text();
+
+        console.log(data);
+
+        if (data == 'true') {
+            window.location.reload();
+        } else {
+            $('.modal').modal("hide");
+            toastr.error('Lỗi khi xóa danh mục', ' Lỗi ');
+        }
+    }
 </script>

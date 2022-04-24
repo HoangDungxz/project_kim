@@ -21,6 +21,8 @@ class UserModel extends Model
     private $password;
     private $phone;
     private $status;
+    private $address;
+    private $permission_id;
     private $created_at;
     private $updated_at;
 
@@ -99,7 +101,7 @@ class UserModel extends Model
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        $this->password = md5($password);
 
         return $this;
     }
@@ -169,8 +171,8 @@ class UserModel extends Model
      */
     public function getCreated_at()
     {
-        $date =  DateTime::createFromFormat('Y-m-d H:i:s', $this->created_at);
-        return $date;
+        // $date =  DateTime::createFromFormat('Y-m-d H:i:s', $this->created_at);
+        return  $this->created_at;
     }
 
     /**
@@ -190,7 +192,8 @@ class UserModel extends Model
      */
     public function getUpdated_at()
     {
-        return $this->updated_at;
+        // $date =  DateTime::createFromFormat('Y-m-d H:i:s', $this->created_at);
+        return $this->created_at;
     }
 
     /**
@@ -221,6 +224,26 @@ class UserModel extends Model
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of permission_id
+     */
+    public function getPermission_id()
+    {
+        return $this->permission_id;
+    }
+
+    /**
+     * Set the value of permission_id
+     *
+     * @return  self
+     */
+    public function setPermission_id($permission_id)
+    {
+        $this->permission_id = $permission_id;
 
         return $this;
     }

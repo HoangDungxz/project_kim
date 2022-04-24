@@ -40,4 +40,13 @@ class SESSION
             return isset($_SESSION[$table])  ?  $_SESSION[$table]->{$column} : null;
         }
     }
+
+    public static function remove($table)
+    {
+        if (isset($_SESSION[$table])) {
+            $_SESSION[$table] = null;
+            return true;
+        }
+        return false;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace ADMIN\Controllers;
 
+use SRC\helper\MSG;
 use SRC\Models\Permission\PermissionModel;
 use SRC\Models\Permission\PermissionResourceModel;
 use SRC\Models\UserPermission\UserPermissionResourceModel;
@@ -17,7 +18,7 @@ class PermissionController extends AdminControllers
 {
 
     private $permissionResourceModel;
-    private $userPermissionResourceModel;
+
     public function __construct()
     {
         parent::__construct();
@@ -44,9 +45,31 @@ class PermissionController extends AdminControllers
         $this->with($permission);
 
         $permissions = $this->permissionResourceModel->getAll();
+
         $this->with($permissions);
 
         $this->render("index");
+    }
+    /**
+     * Index
+     * 
+     * @param AcctionName Thêm quyền
+     */
+    function create()
+    {
+        extract($_POST);
+
+        if (isset($permission_name)) {
+            $permission = new PermissionModel();
+            $permission->setName($permission_name);
+            $permission->setPaths('[]');
+            if ($this->permissionResourceModel->save($permission)) {
+
+                MSG::send('Thêm mới quyền thành công', 'success');
+                $this->index([]);
+            }
+        }
+        $this->render("create");
     }
 
     /**
@@ -64,13 +87,16 @@ class PermissionController extends AdminControllers
         $this->permissionResourceModel->save($permission);
 
         if ($this->permissionResourceModel->save($permission)) {
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
+
+            MSG::send('Cập nhật quyền thành công', 'success');
+
+            $this->index(['pid' => $pid]);
         } else {
-            $messager = "Phân quyên lỗi vui lòng kiểm tra lại";
-            $this->with($messager);
+            MSG::send('Cập nhật quyên lỗi vui lòng kiểm tra lại');
             $this->index(['pid' => $pid]);
         }
     }
+
     /**
      * Index
      * 
@@ -84,17 +110,10 @@ class PermissionController extends AdminControllers
                 echo 'admin';
                 die;
             }
-
             // lấy bảng chính
             $permission = $this->permissionResourceModel->getById($params['pid']);
-            // lấy các bảng phụ
-            $user_permissions = $this->userPermissionResourceModel->where('permission_id', $params['pid'])->getAll();
 
-            //chuyển bảng chính ra sau cùng các bảng phụ
-            // để xóa sau cùng
-            array_push($user_permissions, $permission);
-
-            if ($this->permissionResourceModel->delete(...$user_permissions)) {
+            if ($this->permissionResourceModel->delete($permission)) {
                 echo 'true';
                 die;
             } else {
