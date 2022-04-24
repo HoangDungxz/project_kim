@@ -156,7 +156,7 @@
                                            </div>
 
                                            <div class="buttons-wrapper">
-                                               <a href="<?= WEBROOT . "/order/create/product_id/" . $p->getId() . "/product_price_affter_discount /" . $p->getPriceAffterDiscount() ?> ?>" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-event-type="product-click"><span>Add to Cart</span></a>
+                                               <a href="<?= WEBROOT . "/order/create/product_id/" . $p->getId() . "/product_price_affter_discount /" . str_replace('.', '_', $p->getPriceAffterDiscount()) ?> ?>" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-event-type="product-click"><span>Add to Cart</span></a>
 
                                                <a href="/wishlist.php?action=add&amp;product_id=68" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
 

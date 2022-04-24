@@ -38,6 +38,8 @@ class OrderController extends FrontendControllers
 
         extract($_POST);
 
+        $params['product_price_affter_discount'] = str_replace('_', '.', $params['product_price_affter_discount']);
+
         $customerId = SESSION::get('customers', 'id');
 
         $orderModel = new OrderModel();
