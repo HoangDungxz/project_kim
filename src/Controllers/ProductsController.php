@@ -5,6 +5,7 @@ namespace SRC\Controllers;
 use SRC\Models\Category\CategoryResourceModel;
 use SRC\Models\Image\ImageResourceModel;
 use SRC\Models\Product\ProductResourceModel;
+use SRC\Models\Brand\BrandResourceModel;
 
 
 
@@ -12,6 +13,7 @@ class ProductsController extends FrontendControllers
 {
     private $productResourceModel;
     private $categoryResourceModel;
+    private $brandResourceModel;
 
     function __construct()
     {
@@ -19,6 +21,7 @@ class ProductsController extends FrontendControllers
         $this->productResourceModel = new ProductResourceModel();
         $this->categoryResourceModel = new CategoryResourceModel();
         $this->imageResoureModel = new ImageResourceModel();
+        $this->brandResourceModel = new BrandResourceModel();
     }
     function index($params)
     {
@@ -38,6 +41,8 @@ class ProductsController extends FrontendControllers
             $categoriesWithParents = null;
         }
 
+        $brands = array_reverse($this->brandResourceModel->getAll());
+
         // tạo sub category
         $childCategories = $this->categoryResourceModel->getChildCategories([
             'parent_id' => $categoryId
@@ -46,6 +51,7 @@ class ProductsController extends FrontendControllers
         $this->with($products);
         $this->with($childCategories);
         $this->with($categoriesWithParents);
+        $this->with($brands);
 
         $this->render("product_list");
     }
