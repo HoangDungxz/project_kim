@@ -65,14 +65,14 @@ class CustomerController  extends AdminControllers
 
             if ($avatar['name'] != null) {
 
-                // xóa ảnh cũ
-                if ($customer->getAvatar() != null && $customer->getAvatar() != 'default_customer_image.jpg') {
-                    $this->customerResourceModel->deleteImage($customer->getAvatar());
-                }
-
-                // upload ảnh mới
                 $avatar =  $this->customerResourceModel->upload($avatar);
-                $customer->setAvatar($avatar);
+                if ($avatar) {
+                    // xóa ảnh cũ
+                    if ($customer->getAvatar() != null && $customer->getAvatar() != 'default_customer_image.jpg') {
+                        $this->customerResourceModel->deleteImage($customer->getAvatar());
+                    }
+                    $customer->setAvatar($avatar);
+                }
             }
 
             if ($this->customerResourceModel->save($customer)) {

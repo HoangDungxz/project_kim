@@ -4,10 +4,10 @@
         <div class="page-header">
             <div class="row">
                 <div class="col">
-                    <h3 class="page-title">Quản lý sản phẩm</h3>
+                    <h3 class="page-title">Quản tin tức</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= WEBROOT ?>admin">Trang chủ</a></li>
-                        <li class="breadcrumb-item"><a href="<?= WEBROOT ?>admin/product">Sản phẩm</a></li>
+                        <li class="breadcrumb-item"><a href="<?= WEBROOT ?>admin/news">Tin tức</a></li>
                         <li class="breadcrumb-item active"><?= $breadcrumb ?></li>
                     </ul>
                 </div>
@@ -15,7 +15,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <form action="#" id="product_form" method="post" enctype="multipart/form-data">
+                <form action="#" id="news_form" method="post" enctype="multipart/form-data">
                     <div class="profile-header">
                         <div class="row">
 
@@ -26,63 +26,21 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-xl-6">
+                                            <div class="col-xl-10">
                                                 <div class="form-group row">
-                                                    <label class="col-lg-12 col-form-label">Tên sản phẩm</label>
+                                                    <label class="col-lg-12 col-form-label">Tên tin tức</label>
                                                     <div class="col-lg-12">
-                                                        <input type="text" name="name" class="form-control">
+                                                        <input value="<?= isset($news) ? $news->getName() : '' ?>" type="text" name="name" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="col-xl-4">
-                                                <div class="form-group row">
-                                                    <label class="col-lg-12 col-form-label">Giá</label>
-                                                    <div class="col-lg-12">
-                                                        <input type="text" name="price" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="col-xl-2">
                                                 <div class="form-group row">
-                                                    <label class="col-lg-12 col-form-label">Khuyến mại %</label>
-                                                    <div class="col-lg-12">
-                                                        <input type="text" name="discount" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6">
-                                                <div class="form-group row">
-                                                    <label class="col-lg-12 col-form-label">Danh mục</label>
-                                                    <div class="col-lg-12">
-                                                        <select name="category_id" class=" select select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                                            <option selected disabled>---Chọn danh mục--</option>
-                                                            <?php foreach ($categories as $c) : ?>
-                                                                <option value="<?= $c->getId() ?>"><?= $c->getName() ?></option>
-                                                            <?php endforeach; ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-4">
-                                                <div class="form-group row">
-                                                    <label class="col-lg-12 col-form-label">Nhãn hiệu</label>
-                                                    <div class="col-lg-12">
-                                                        <select name="brand_id" class=" select select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                                            <option selected disabled>---Chọn nhãn hiệu--</option>
-                                                            <?php foreach ($brands as $b) : ?>
-                                                                <option value="<?= $b->getId() ?>"><?= $b->getName() ?></option>
-                                                            <?php endforeach; ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-2">
-                                                <div class="form-group row">
-                                                    <label class="col-lg-12 col-form-label">HOT</label>
+                                                    <label class="col-lg-12 col-form-label">Tin nổi bật</label>
                                                     <div class="col-lg-12">
                                                         <div type="checkbox" class="onoffswitch">
-                                                            <input checked="" type="checkbox" class="onoffswitch-checkbox permission-select" name="hot" value="1">
+                                                            <input <?= isset($news) && $news->getHot() == 1 ? 'checked' : '' ?> type="checkbox" class="onoffswitch-checkbox permission-select" name="hot" value="1">
                                                             <div class=" onoffswitch-label">
                                                                 <div class="onoffswitch-inner "></div>
                                                                 <div class="onoffswitch-switch "></div>
@@ -93,31 +51,35 @@
                                             </div>
                                             <div class="col-xl-12">
                                                 <div class="form-group row">
-                                                    <label class="col-lg-12 col-form-label">Nội dung</label>
+                                                    <label class="col-lg-12 col-form-label">Giới thiệu</label>
                                                     <div class="col-lg-12">
-                                                        <textarea id="content" name="content"></textarea>
+                                                        <textarea id="content" name="content"><?= isset($news) ? $news->getContent() : '' ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-xl-12">
                                                 <div class="form-group row">
-                                                    <label class="col-lg-12 col-form-label">Miêu tả</label>
+                                                    <label class="col-lg-12 col-form-label">Chi tiết</label>
                                                     <div class="col-lg-12">
-                                                        <textarea id="description" name="description"></textarea>
+                                                        <textarea id="description" name="description"><?= isset($news) ? $news->getDescription() : '' ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-xl-12">
                                                 <div class="form-group row choise-img">
-                                                    <label class="col-lg-12 col-form-label">Chọn ảnh sảnh phẩm</label>
+                                                    <label class="col-lg-12 col-form-label">Chọn ảnh tin tức</label>
                                                     <div class="col-lg-12 images">
                                                         <div class="image-preview">
                                                             <div class="image-preview-content">
-                                                                <img src="<?= PUBLIC_URL ?>upload/products/default-product-image.png" alt="">
+                                                                <?php if ($news) : ?>
+                                                                    <img src="<?= PUBLIC_URL ?>upload/news/<?= $news->getPhoto() ?>" alt="">
+                                                                <?php else : ?>
+                                                                    <img src="<?= PUBLIC_URL ?>upload/news/news_default_image.png" alt="">
+                                                                <?php endif; ?>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <input multiple value="" type="file" name="images[]" class="upload-image form-control">
+                                                    <input value="" type="file" name="photo" class="upload-image form-control">
                                                 </div>
                                             </div>
                                             <div class="col-xl-12">
