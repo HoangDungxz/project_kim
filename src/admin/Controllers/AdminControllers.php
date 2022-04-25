@@ -11,25 +11,27 @@ use SRC\Models\User\UserResourceModel;
 
 class AdminControllers extends Controller
 {
-    protected $userResoureceModel;
+    protected $userResoureModel;
     public function __construct()
     {
         $this->userResoureModel = new UserResourceModel();
         // ĐĂNG NHẬP    
-        $uri =  strtolower(SESSION::pull('request', 'controller'));
+        $controller =  strtolower(SESSION::pull('request', 'controller'));
         $action = strtolower(SESSION::pull('request', 'action'));
 
         // các page được phép truy cập khi chưa đăng nhập
 
         // kiểm tra session có user chưa
-        $allowPages = [
+        $allowPages = [ // các pages k cần login
             "user/login",
+            "user/logout",
             "user/register"
         ];
+
         if (SESSION::get('users', 'id') == null) {
             // nếu chưa kiểm tra xem có phải là trang login hoặc đăng ký không nếu không thì chuyển về log in
 
-            if (array_search("$uri/$action", $allowPages) === false) {
+            if (array_search("$controller/$action", $allowPages) === false) {
                 header('Location: ' . WEBROOT . "admin/user/login");
             } else {
                 // Nếu ở trang login vào chưa có trong SESsION
@@ -55,22 +57,41 @@ class AdminControllers extends Controller
                 }
             }
         }
-        // TẠO MENU cho sidebar danh sách và phân quyền
-        if (SESSION::pull('memu') != null) {
-            $menu = SESSION::pull('memu');
-        } else {
 
-            $menu =  $this->createMenu();
 
-            usort($menu, function ($a, $b) {
-                return (int)$a->sort_order - (int)$b->sort_order;
-            });
-            SESSION::push('memu', $menu);
-        }
+        // tạo memu
+
+        $menu =  $this->createMenu();
+
+        // sắp xếp theo sort order
+        usort($menu, function ($a, $b) {
+            return (int)$a->sort_order - (int)$b->sort_order;
+        });
+
 
         $uri =  strtolower(SESSION::pull('request', 'controller'));
+
         $this->with($menu);
         $this->with($uri);
+
+
+        // PHÂN QUYỀN
+        // lấy danh sách các quyền của người dùng
+        $permissions = $this->userResoureModel
+            ->select('users.id,permissions.paths')
+            ->join('permissions', 'users.permission_id=permissions.id')
+            ->get();
+        // chuyển đổi danh sách sang array
+        $alowPermissions = json_decode($permissions->paths);
+
+        if (array_search("$controller/$action", $allowPages) === false) {
+
+            if (array_search("$controller/$action", $alowPermissions) === false) {
+                var_dump(array_search("$controller/$action", $alowPermissions));
+                $this->render('permission_denied', true, 'Permission');
+                die;
+            }
+        }
     }
 
 

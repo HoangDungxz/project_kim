@@ -14,7 +14,7 @@ use SRC\Models\Product\ProductResourceModel;
  * 
  * @param ControllerName Quản lý danh mục
  * @param SortOrder 2
- * @param Icon  fas fa-certificate
+ * @param Icon fas fa-book
  */
 class CategoryController extends AdminControllers
 {
@@ -242,58 +242,7 @@ class CategoryController extends AdminControllers
      */
     function delete($params)
     {
-        if ($params['cid']) {
-
-            $will_deletes = [];
-
-            // lấy bảng chính
-            $category = $this->categoriesResourceModel->getById($params['cid']);
-
-            if ($category) {
-                $categoriesChilds  =   $this->categoriesResourceModel->categoriesAllChild($category->getId());
-
-                if ($categoriesChilds) {
-
-                    foreach ($categoriesChilds as $c) {
-                        // lấy các bảng phụ
-                        $products = $this->productsResourceModel->where('category_id', $c->getId())->getAllInclule('id,name');
-
-                        if ($products) {
-                            foreach ($products as $p) {
-                                $images =  $this->imagesResourceModel->select('id')->where('product_id', $p->getId())->getAll();
-
-                                if ($images) {
-                                    foreach ($images as $i) {
-                                        array_push($will_deletes, $i);
-                                    }
-                                }
-                            }
-                            array_push($will_deletes, $p);
-                        }
-                        array_push($will_deletes, $c);
-                    }
-                }
-                array_push($will_deletes, $category);
-            }
-
-
-            if ($this->categoriesResourceModel->delete(...$will_deletes)) {
-                echo 'true';
-                MSG::send('Xóa danh mục thành công', 'success');
-                die;
-            } else {
-                MSG::send('Xóa danh mục thất bại');
-                echo 'false';
-                die;
-            }
-        }
-        echo 'false';
-        die;
-    }
-
-    public function alertDelete($params)
-    {
-        if ($params['cid']) {
+        if (isset($params['cid'])) {
 
             // lấy bảng chính
             $category = $this->categoriesResourceModel->getById($params['cid']);
@@ -335,5 +284,53 @@ class CategoryController extends AdminControllers
             }
             echo json_encode($listShow, JSON_UNESCAPED_UNICODE);
         }
+        /////////////////////////////////////
+
+        if (isset($_POST['cid'])) {
+
+            $will_deletes = [];
+
+            // lấy bảng chính
+            $category = $this->categoriesResourceModel->getById($_POST['cid']);
+
+            if ($category) {
+                $categoriesChilds  =   $this->categoriesResourceModel->categoriesAllChild($category->getId());
+
+                if ($categoriesChilds) {
+
+                    foreach ($categoriesChilds as $c) {
+                        // lấy các bảng phụ
+                        $products = $this->productsResourceModel->where('category_id', $c->getId())->getAllInclule('id,name');
+
+                        if ($products) {
+                            foreach ($products as $p) {
+                                $images =  $this->imagesResourceModel->select('id')->where('product_id', $p->getId())->getAll();
+
+                                if ($images) {
+                                    foreach ($images as $i) {
+                                        array_push($will_deletes, $i);
+                                    }
+                                }
+                            }
+                            array_push($will_deletes, $p);
+                        }
+                        array_push($will_deletes, $c);
+                    }
+                }
+                array_push($will_deletes, $category);
+            }
+
+
+            if ($this->categoriesResourceModel->delete(...$will_deletes)) {
+                echo 'true';
+                MSG::send('Xóa danh mục thành công', 'success');
+                die;
+            } else {
+                MSG::send('Xóa danh mục thất bại');
+                echo 'false';
+                die;
+            }
+        }
+        die;
     }
 }

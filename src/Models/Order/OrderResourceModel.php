@@ -10,12 +10,12 @@ class OrderResourceModel extends ResourceModel
     public function save(...$models)
     {
         $orderModel = $models[0];
-        $orderDetail = $models[1];
+
 
         // kiêm tra lại status xem được mua chưa
         $oderExist = $this
             ->where("$this->table.customer_id", $orderModel->getCustomer_id())
-            ->where("$this->table.status", 0)
+            ->where("$this->table.status", $orderModel->getStatus() ?? 0)
             ->get();
 
         if ($oderExist != false) {
@@ -24,8 +24,9 @@ class OrderResourceModel extends ResourceModel
                 ->setStatus(0);
 
 
-            if ($orderDetail) {
-                # code...
+            if (isset($models[1])) {
+
+                $orderDetail = $models[1];
 
                 $oderDetailResourceModel = new OrderDetailResourceModel();
                 $oderDetailExist = $oderDetailResourceModel->where('order_id', $orderModel->getId())
@@ -45,6 +46,11 @@ class OrderResourceModel extends ResourceModel
         }
 
         return parent::save($orderModel, $orderDetail);
+    }
+
+    public function change_status($orderModel)
+    {
+        return parent::save($orderModel);
     }
 
     public function checkout($order)

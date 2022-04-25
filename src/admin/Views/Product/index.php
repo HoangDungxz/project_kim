@@ -139,12 +139,11 @@
 
         const data = await response.text();
 
-        console.log(data);
-
         if (data == 'true') {
             window.location.reload();
         } else {
             $('.modal').modal("hide");
+            document.write(data);
             toastr.error('Lỗi khi xóa sản phẩm', ' Lỗi ');
         }
     }

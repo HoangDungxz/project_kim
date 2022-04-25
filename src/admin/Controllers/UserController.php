@@ -118,29 +118,24 @@ class UserController extends AdminControllers
         $permissions =  $this->permissionResourceModel->getAll();
         $this->with($permissions);
 
-        echo '<pre>';
-        print_r($params['uid']);
-        echo '</pre>';
-
         $user =  $this->userResourceModel->getById($params['uid']);
 
 
         extract($_POST);
 
-        if (isset($name) && isset($phone) && isset($address) && isset($email) && isset($password) && isset($permission)) {
+        if (isset($name) && isset($phone) && isset($address) && isset($email) && isset($permission)) {
 
             $avatar = basename($_FILES["avatar"]["name"]);
-
 
             $user->setName($name);
             $user->setEmail($email);
 
             $user->setPhone($phone);
             $user->setAddress($address);
-            $user->setStatus($status);
+            $user->setStatus($status ?? 0);
             $user->setPermission_id($permission);
 
-            if ($password != '********') {
+            if (strpos($password, '*') !== false) {
                 $user->setPassword($password);
             }
             extract($_FILES);
@@ -164,6 +159,8 @@ class UserController extends AdminControllers
             } else {
                 MSG::send("Sửa tài khoản không thành công");
             }
+            Header('Location: ' . $_SERVER['PHP_SELF']);
+            exit(); //optional
         }
         $breadcrumb = "Sửa tài khoản";
         $this->with($breadcrumb);
@@ -179,14 +176,23 @@ class UserController extends AdminControllers
     public function logout()
     {
         if ($this->userResoureModel->logout()) {
+            MSG::send("Đăng xuất thành công", 'success');
             header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit(); //optional
         };
     }
 
+
+    /**
+     * Index
+     *
+     * @param AcctionName Xóa tài khoản
+     */
     public function delete($params)
     {
 
         if (!$params['uid']) {
+            MSG::send("không có tài khoản này");
             echo 'false';
             die;
         }
@@ -194,6 +200,7 @@ class UserController extends AdminControllers
         $user = $this->userResourceModel->getById($params['uid']);
 
         if (!$user) {
+            MSG::send("không có tài khoản này");
             echo 'false';
             die;
         }
@@ -207,6 +214,7 @@ class UserController extends AdminControllers
             if ($params['uid'] == SESSION::get('users', 'id')) {
                 $this->userResoureModel->logout();
             }
+            MSG::send("xóa tài khoản " . $user->getName() . " thành công", 'success');
             echo 'true';
             die;
         }

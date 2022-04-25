@@ -278,46 +278,53 @@
         GLOBE_cname = $(this).attr('cname');
         $('.modal').modal('show');
 
-        const response = await fetch(`<?= WEBROOT ?>admin/category/alertDelete/cid/${GLOBE_cid}`, {
-            method: 'POST',
+        const response = await fetch(`<?= WEBROOT ?>admin/category/delete/cid/${GLOBE_cid}`, {
+            method: 'GET',
         });
-
-        const data = await response.json();
 
         let modalBody = '';
 
-        data?.map(c => {
-            modalBody += `<div class="mt-2"> <strong> Danh mục: 
+        try {
+            // data = JSON.parse(data);
+            const data = await response.json();
+            data?.map(c => {
+                modalBody += `<div class="mt-2"> <strong> Danh mục: 
             <span class="text-danger">${c.category_name}</span></strong>`;
 
-            c.products?.map(p => {
-                modalBody += `<div class="offset-md-1"> Sản phẩm: 
+                c.products?.map(p => {
+                    modalBody += `<div class="offset-md-1"> Sản phẩm: 
             <span class="text-danger">${p.product_name}</span>`;
 
-                modalBody += `</div>`;
+                    modalBody += `</div>`;
+                });
+
             });
 
-        });
+            $('.modal-body').html(modalBody);
 
-        $('.modal-body').html(modalBody);
+        } catch ($e) {
+
+        }
+        // data = JSON.parse(data);
 
     })
 
-    const runDelete = async () => {
+    const runDelete = () => {
 
-        const response = await fetch(`<?= WEBROOT ?>admin/category/delete/cid/${GLOBE_cid}`, {
-            method: 'POST',
+        $.ajax({
+            url: `<?= WEBROOT ?>admin/category/delete`,
+            method: "POST",
+            data: {
+                cid: GLOBE_cid
+            },
+            success: function(result) {
+                if (result == 'true') {
+                    window.location.reload();
+                } else {
+                    $('.modal').modal("hide");
+                    document.write(result);
+                }
+            }
         });
-
-        const data = await response.text();
-
-        console.log(data);
-
-        if (data == 'true') {
-            window.location.reload();
-        } else {
-            $('.modal').modal("hide");
-            toastr.error('Lỗi khi xóa danh mục', ' Lỗi ');
-        }
     }
 </script>

@@ -120,7 +120,7 @@ class ResourceModel  implements ResourceModelInterface
         return $this;
     }
 
-    public function order($column, $direction)
+    public function order($column, $direction = "ASC")
     {
         $this->oderSql = " ORDER BY $column $direction ";
         return $this;
@@ -350,7 +350,8 @@ class ResourceModel  implements ResourceModelInterface
             array_push($this->upload_value, [
                 'file_name' => $file_name,
                 'tmp_name' => $file["tmp_name"],
-                'target_file' => $target_file
+                'target_file' => $target_file,
+                'old_name' => $file['name']
             ]);
 
             return $file_name;
@@ -361,7 +362,7 @@ class ResourceModel  implements ResourceModelInterface
     {
         foreach ($this->upload_value as  $u) {
             if (move_uploaded_file($u['tmp_name'], $u['target_file'])) {
-                MSG::send("Ảnh " . htmlspecialchars(basename($u['file_name'])) . " đã được tải lên.", 'success');
+                MSG::send("Ảnh " . htmlspecialchars(basename($u['old_name'])) . " đã được tải lên.", 'success');
             } else {
                 MSG::send("Sorry, ảnh tải lên không thành công.");
             }

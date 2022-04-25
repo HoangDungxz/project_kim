@@ -228,16 +228,13 @@
 
         const data = await response.text();
 
+        // xóa thành công thì cho về trang index
         if (data == 'true') {
-
             window.location.href = "<?= WEBROOT ?>admin/permission";
-
-        } else if (data == 'admin') {
-            $('.modal').modal("hide");
-            toastr.error('Bạn không được phép xóa quyền quản trị viên', ' Lỗi ');
+            //xóa thất bại thì reload page để hiện thông báo
         } else {
-            $('.modal').modal("hide");
-            toastr.error('Lỗi khi xóa quyền', ' Lỗi ');
+            document.write(data);
+            location.reload();
         }
     }
 </script>

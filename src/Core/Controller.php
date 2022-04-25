@@ -16,17 +16,33 @@ class Controller
     {
         $this->layout = $layout;
     }
-    function render($filename, $withNavbar = true)
+    function render($filename, $withNavbar = true, $pageView = false)
     {
-        if (strpos(get_class($this), 'ADMIN\Controllers') !== false) {
-            $mainView = ROOT . "src/admin/Views/" . get_class($this) . '/' . $filename . '.php';
-            $mainView =  str_replace(['ADMIN\Controllers\\', 'Controller'], '', $mainView);
-        } else {
-            $mainView = ROOT . "src/Views/" . get_class($this) . '/' . $filename . '.php';
-            $mainView =  str_replace(['SRC\Controllers\\', 'Controller'], '', $mainView);
-        }
-        $this->withNavbar = $withNavbar;
 
+
+        if (strpos(get_class($this), 'ADMIN\Controllers') !== false) {
+
+
+            if (!$pageView) {
+                $pageView = str_replace(['ADMIN\Controllers\\', 'Controller'], '', get_class($this));
+            } else {
+                $pageView = ucfirst($pageView);
+            }
+
+            $mainView = ROOT . "src/admin/Views/" . $pageView . '/' . $filename . '.php';
+        } else {
+
+            if (!$pageView) {
+                $pageView =
+                    str_replace(['SRC\Controllers\\', 'Controller'], '', get_class($this));
+            } else {
+                $pageView = ucfirst($pageView);
+            }
+
+            $mainView = ROOT . "src/Views/" . $pageView . '/' . $filename . '.php';
+        }
+
+        $this->withNavbar = $withNavbar;
 
         extract($this->vars);
 

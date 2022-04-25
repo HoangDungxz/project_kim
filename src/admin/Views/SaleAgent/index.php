@@ -9,15 +9,15 @@
         <div class="page-header">
             <div class="row">
                 <div class="col">
-                    <h3 class="page-title">Quản lý tài khoản</h3>
+                    <h3 class="page-title">Quản lý đại lý</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= WEBROOT ?>admin">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Tài khỏan</li>
+                        <li class="breadcrumb-item active">Quản lý đại lý</li>
                     </ul>
                 </div>
                 <div class="col-auto">
                     <a href="<?= WEBROOT ?>admin/user/create" class="btn btn-primary ml-3">
-                        <i class="fas fa-plus"></i> Thêm tài khoản
+                        <i class="fas fa-plus"></i> Thêm đại lý
                     </a>
                 </div>
             </div>
@@ -45,12 +45,12 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Tên</th>
-                                        <th>Số điện thoại</th>
+                                        <th>SĐT</th>
                                         <th>Email</th>
                                         <th>Trạng thái</th>
                                         <th>Quyền</th>
                                         <th>Ngày tạo</th>
-                                        <th class="text-right"></th>
+                                        <th class="text-right">Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,7 +66,7 @@
                                                 </h2>
                                             </td>
                                             <td>0<?= number_format($u->getPhone(), 0, '', '.') ?></td>
-                                            <td><a href="mailto:<?= $u->getEmail()  ?>"><?= $u->getEmail() ?></a></td>
+                                            <td><a href="mailto:nhom2user@gmail.com"><?= $u->getEmail() ?></a></td>
                                             <td><label><?= $u->getStatus() == 0 ? "Chưa kích hoạt" : "Đã kích hoạt" ?></label>
                                             </td>
                                             <td><label><?= $u->permissions_name ?></label>

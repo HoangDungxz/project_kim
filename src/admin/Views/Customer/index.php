@@ -4,21 +4,19 @@
     }
 </style>
 <div class="page-wrapper">
-    <div class="content container-fluid">
+    <div class="content container-flcid">
         <!-- Page Header -->
         <div class="page-header">
             <div class="row">
                 <div class="col">
-                    <h3 class="page-title">Quản lý tài khoản</h3>
+                    <h3 class="page-title">Quản lý khách hàng</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= WEBROOT ?>admin">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Tài khỏan</li>
+                        <li class="breadcrumb-item active">Khách hàng</li>
                     </ul>
                 </div>
                 <div class="col-auto">
-                    <a href="<?= WEBROOT ?>admin/user/create" class="btn btn-primary ml-3">
-                        <i class="fas fa-plus"></i> Thêm tài khoản
-                    </a>
+
                 </div>
             </div>
         </div>
@@ -47,33 +45,29 @@
                                         <th>Tên</th>
                                         <th>Số điện thoại</th>
                                         <th>Email</th>
-                                        <th>Trạng thái</th>
-                                        <th>Quyền</th>
-                                        <th>Ngày tạo</th>
+                                        <th>Địa chỉ</th>
                                         <th class="text-right"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($users as $u) : ?>
+                                    <?php foreach ($customers as $c) : ?>
                                         <tr>
-                                            <td><?= $u->getId() ?></td>
+                                            <td><?= $c->getId() ?></td>
                                             <td>
                                                 <h2 class="table-avatar">
                                                     <a href="#" class="avatar avatar-sm mr-2">
-                                                        <img class="avatar-img rounded-circle" alt="" src="<?= PUBLIC_URL ?>upload/users/<?= $u->getAvatar() ?>">
+                                                        <img class="avatar-img rounded-circle" alt="" src="<?= PUBLIC_URL ?>upload/customers/<?= $c->getAvatar() ?>">
                                                     </a>
-                                                    <a href="#"><?= $u->getName() ?></a>
+                                                    <a href="#"><?= $c->getName() ?></a>
                                                 </h2>
                                             </td>
-                                            <td>0<?= number_format($u->getPhone(), 0, '', '.') ?></td>
-                                            <td><a href="mailto:<?= $u->getEmail()  ?>"><?= $u->getEmail() ?></a></td>
-                                            <td><label><?= $u->getStatus() == 0 ? "Chưa kích hoạt" : "Đã kích hoạt" ?></label>
-                                            </td>
-                                            <td><label><?= $u->permissions_name ?></label>
-                                            </td>
-                                            <td><?= date_format(DateTime::createFromFormat('Y-m-d H:i:s', $u->getCreated_at()), "d/m/Y H:i A") ?></td>
+                                            <td>0<?= number_format($c->getPhone(), 0, '', '.') ?></td>
+                                            <td><a href="mailto:<?= $c->getEmail() ?>"><?= $c->getEmail() ?></a></td>
+
+                                            <td><label><?= $c->getAddress() ?></label></td>
+
                                             <td class="text-right">
-                                                <a href="<?= WEBROOT ?>admin/user/edit/uid/<?= $u->getId() ?>" class="btn btn-sm bg-success-light mr-2">
+                                                <a href="<?= WEBROOT ?>admin/customer/edit/cid/<?= $c->getId() ?>" class="btn btn-sm bg-success-light mr-2">
                                                     <i class="far fa-edit mr-1"></i> Sửa
                                                 </a>
                                                 <a data-id="40" href="javascript:void(0);" class="
@@ -81,7 +75,7 @@
                                                     bg-danger-light
                                                     mr-2
                                                     delete_review_comment
-                                                  " data-toggle="modal" data-target="#model-1" onclick="handleDelete('<?= $u->getId() ?>','<?= $u->getName() ?>')">
+                                                  " data-toggle="modal" data-target="#model-1" onclick="handleDelete('<?= $c->getId() ?>','<?= $c->getName() ?>')">
                                                     <i class="far fa-trash-alt mr-1"></i> Xoá
                                                 </a>
                                             </td>
@@ -130,7 +124,7 @@
 
                             const runDelete = async () => {
 
-                                const response = await fetch(`<?= WEBROOT ?>admin/user/delete/uid/${GLOBE_id}`, {
+                                const response = await fetch(`<?= WEBROOT ?>admin/customer/delete/cid/${GLOBE_id}`, {
                                     method: 'POST',
                                 });
 

@@ -168,7 +168,7 @@ class ProductController extends AdminControllers
 
 
 
-
+    // sắp xếp lại cấu trúc $_FILES nhận về
     private function reArrayFiles(&$file_post)
     {
         $file_ary = array();
@@ -209,6 +209,7 @@ class ProductController extends AdminControllers
                 foreach ($images as $i) {
                     $this->imagesResourceModel->deleteImage($i->getPath(), 'products');
                 }
+                MSG::send("Bạn xóa sản phẩm " . $product->getName() . " thành công", 'success');
                 echo 'true';
             }
         }
