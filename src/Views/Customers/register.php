@@ -139,20 +139,19 @@ use SRC\helper\SESSION;
 
                                     <div class="form-field form-field--input form-field--inputEmail">
                                         <input class="form-input" name="register_name" id="register_name" type="text" placeholder="Họ và tên...">
-                                        <span style="display: none;"></span>
                                     </div>
                                     <div class="form-field form-field--input form-field--inputEmail">
                                         <input class="form-input" name="register_phone" id="register_phone" type="phone" placeholder="Số điện thoại...">
-                                        <span style="display: none;"></span>
                                     </div>
                                     <div class="form-field form-field--input form-field--inputEmail">
 
                                         <input class="form-input" name="register_email" id="register_email" type="email" placeholder="Email...">
-                                        <span style="display: none;"></span>
                                     </div>
                                     <div class="form-field form-field--input form-field--inputPassword">
                                         <input class="form-input" id="register_pass" type="password" name="register_pass" placeholder="Mật khẩu...">
-                                        <span style="display: none;"></span>
+                                    </div>
+                                    <div class="form-field form-field--input form-field--inputAddress">
+                                        <textarea class="form-input" id="register_address" type="password" placeholder="Địa chỉ..." name=" register_address"></textarea>
                                     </div>
                                     <div class="form-actions">
                                         <input type="submit" class="btn btn-primary" value="Đăng ký">

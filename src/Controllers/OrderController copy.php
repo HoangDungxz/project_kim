@@ -40,9 +40,9 @@ class OrderController extends FrontendControllers
             die;
         }
 
-        extract($params);
+        extract($_POST);
 
-        $product_price_affter_discount = str_replace('_', '.', $product_price_affter_discount);
+        $params['product_price_affter_discount'] = str_replace('_', '.', $params['product_price_affter_discount']);
 
         $customerId = SESSION::get('customers', 'id');
 
@@ -55,15 +55,15 @@ class OrderController extends FrontendControllers
         $orderModel->send_id_to_child = true;
 
         $orderDetail = new OrderDetailModel();
-
-        if (isset($product_id)) {
-            $orderDetail->setProduct_id($product_id);
-        }
         $orderDetail
+            ->setProduct_id(
+                isset($product_id) ? $product_id : $params['product_id']
+                // $product_id
+            )
             ->setQuantity($product_quantity ?? 1)
-            ->setPrice(
-                ($product_quantity ?? 1) * $product_price_affter_discount
-            );
+            ->setPrice(isset($product_price_affter_discount) ?
+                $product_quantity * $product_price_affter_discount :
+                $params['product_price_affter_discount']);
 
         $orderDetail->parent_id = 'order_id';
 

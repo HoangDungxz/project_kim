@@ -109,43 +109,40 @@
                                             </div>
                                             <div class="col-xl-12">
                                                 <div class="form-group row choise-img">
-                                                    <label class="col-lg-12 col-form-label">Chọn ảnh sảnh phẩm</label>
-
-
-                                                    <div class="col-lg-12 images">
-                                                        <?php if ($images) : ?>
-                                                            <?php foreach ($images as $i) : ?>
-                                                                <div class="image-preview">
-                                                                    <a href="<?= WEBROOT ?>admin/product/delete_image/iid/<?= $i->getId() ?>" class="remove-image badge badge-danger badge-pill"> x </a>
-                                                                    <div class="image-preview-content">
-                                                                        <img src="<?= PUBLIC_URL ?>upload/products/<?= $i->getPath() ?>" alt="">
-                                                                    </div>
+                                                    <label class="col-lg-12 col-form-label">Chọn ảnh sảnh phẩm</label <div class="col-lg-12 images">
+                                                    <?php if ($images) : ?>
+                                                        <?php foreach ($images as $i) : ?>
+                                                            <div class="image-preview">
+                                                                <a href="<?= WEBROOT ?>admin/product/delete_image/iid/<?= $i->getId() ?>" class="remove-image badge badge-danger badge-pill"> x </a>
+                                                                <div class="image-preview-content">
+                                                                    <img src="<?= PUBLIC_URL ?>upload/products/<?= $i->getPath() ?>" alt="">
                                                                 </div>
-                                                            <?php endforeach; ?>
-                                                        <?php endif; ?>
+                                                            </div>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
 
-                                                    </div>
-
-                                                    <input multiple value="" type="file" name="images[]" class="upload-image form-control">
                                                 </div>
+
+                                                <input multiple value="" type="file" name="images[]" class="upload-image form-control">
                                             </div>
-                                            <div class="col-xl-12">
-                                                <button class="btn btn-primary" type="submit">
-                                                    <?= $breadcrumb ?>
-                                                </button>
-                                                <button type="reset" class="btn">Nhập lại</button>
-                                            </div>
+                                        </div>
+                                        <div class="col-xl-12">
+                                            <button class="btn btn-primary" type="submit">
+                                                <?= $breadcrumb ?>
+                                            </button>
+                                            <button type="reset" class="btn">Nhập lại</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                </form>
             </div>
+
+            </form>
         </div>
     </div>
+</div>
 </div>
 
 

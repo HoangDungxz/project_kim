@@ -16,7 +16,7 @@ use SRC\helper\SESSION;
                         </li>
                     </ul>
                 </div>
-                <h1 class="page-heading">Đăng ký</h1>
+                <h1 class="page-heading">Đăng Nhập</h1>
                 <?php
                 if (isset($message)) : ?>
                     <div class="alert alert-danger">
@@ -40,7 +40,7 @@ use SRC\helper\SESSION;
                                 <h2 class="panel-title"><?= SESSION::get('customers', 'email') ?></h2>
                             </div>
                             <div style="margin-top: 15px;">
-                                <label class="form-label" for="login_email">Name:</label>
+                                <label class="form-label" for="login_name">Name:</label>
                                 <h2 class="panel-title"><?= SESSION::get('customers', 'name') ?></h2>
                             </div>
                             <div style="margin-top: 15px;">
@@ -48,15 +48,16 @@ use SRC\helper\SESSION;
                             </div>
                         </div>
                     <?php else : ?>
-                        <form class="login-form form col-sm-6" action="#" method="post">
+
+                        <form class="login-form form col-sm-6" action="<?= WEBROOT ?>customers/login" method="post">
                             <div class="form-field form-field--input form-field--inputEmail">
-                                <label class="form-label" for="login_email">Email:</label>
-                                <input class="form-input" name="login_email" id="login_email" type="email">
+                                <label class="form-label" for="login_email2">Email:</label>
+                                <input class="form-input" name="login_email" id="login_email2" type="email">
                                 <span style="display: none;"></span>
                             </div>
                             <div class="form-field form-field--input form-field--inputPassword">
-                                <label class="form-label" for="login_pass">Mật khẩu:</label>
-                                <input class="form-input" id="login_pass" type="password" name="login_pass">
+                                <label class="form-label" for="login_pass2">Mật khẩu:</label>
+                                <input class="form-input" id="login_pass2" type="password" name="login_pass">
                                 <span style="display: none;"></span>
                             </div>
                             <div class="form-actions">

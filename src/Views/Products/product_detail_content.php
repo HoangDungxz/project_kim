@@ -184,7 +184,7 @@
 
                 <div class="productView-options">
 
-                    <form class="form" method="post" action="<?= WEBROOT ?>order/create  " enctype="multipart/form-data" data-cart-item-add="">
+                    <form class="form" method="get" action="<?= WEBROOT ?>order/create  " enctype="multipart/form-data" data-cart-item-add="">
                         <input type="hidden" name="product_id" value="<?= $product->getId() ?>">
                         <input type="hidden" name="product_price_affter_discount" value="<?= $product->getPriceAffterDiscount() ?>">
 
