@@ -76,14 +76,16 @@
                                     {
                                         switch ($status) {
                                             case 0:
-                                                return 'Chờ giải quyết';
+                                                return 'Đang trong giỏ hàng';
                                             case 1:
-                                                return 'Đang giải quyết';
+                                                return 'Chờ giải quyết';
                                             case 2:
-                                                return 'Giao hàng';
+                                                return 'Đang giải quyết';
                                             case 3:
-                                                return 'Hoàn thành';
+                                                return 'Giao hàng';
                                             case 4:
+                                                return 'Hoàn thành';
+                                            case 5:
                                                 return 'Huỷ';
 
                                             default:
@@ -94,14 +96,16 @@
                                     {
                                         switch ($status) {
                                             case 0:
-                                                return 'pending';
+                                                return 'ordering';
                                             case 1:
-                                                return 'processing';
+                                                return 'pending';
                                             case 2:
-                                                return 'shiping';
+                                                return 'processing';
                                             case 3:
-                                                return 'completed';
+                                                return 'shiping';
                                             case 4:
+                                                return 'completed';
+                                            case 5:
                                                 return 'canceled';
 
                                             default:
@@ -150,11 +154,11 @@
             const change_status_href = '<?= WEBROOT ?>admin/order/change_status/';
             let order_id = $(this).attr('oid');
 
-            $('.pending').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 0);
-            $('.processing').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 1);
-            $('.shiping').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 2);
-            $('.completed').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 3);
-            $('.canceled').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 4);
+            $('.pending').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 1);
+            $('.processing').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 2);
+            $('.shiping').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 3);
+            $('.completed').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 4);
+            $('.canceled').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 5);
         })
 
         $(document).on('click', function(t) {

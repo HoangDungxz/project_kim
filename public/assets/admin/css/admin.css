@@ -5113,6 +5113,10 @@ input[type='checkbox'] {
 	padding: 7px 15px;
 	display: block;
 }
+.order-status.ordering {
+	background-color: #d1e7dd;
+	color: #0f5132;
+}
 
 .pending {
 	background-color: #cfe2ff;
@@ -5130,7 +5134,7 @@ input[type='checkbox'] {
 }
 
 .completed {
-	background-color: #d1e7dd;
+	background-color: #1db9aa;
 	color: #0f5132;
 }
 
