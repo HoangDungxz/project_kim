@@ -507,7 +507,6 @@
 
             $('.cart-total-grandTotal');
         }
-
         $('#sort').on('change', function() {
             var value = $(this).val();
             //di chuyển đến url tìm kiếm
@@ -515,6 +514,45 @@
             url.searchParams.set('sort', value);
             window.location.href = url;
         });
+
+        $(".price").click(function(event) {
+            event.preventDefault();
+            var href = $(this).attr('href');
+
+            //di chuyển đến url tìm kiếm
+            const url = new URL(window.location.href);
+            url.searchParams.set('price', href);
+            window.location.href = url;
+        });
+
+        $(".brands").click(function(event) {
+            event.preventDefault();
+            var href = $(this).attr('href');
+
+            //di chuyển đến url tìm kiếm
+            const url = new URL(window.location.href);
+            url.searchParams.set('brand', href);
+            window.location.href = url;
+        });
+
+        $('.btn-tag').click(function() {
+            const url = new URL(window.location.href);
+            var price = []
+            price = getUrlVars();
+            console.log(price);
+        });
+
+        function getUrlVars() {
+            var vars = [],
+                hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars.push(i);
+                vars[i] = hash;
+            }
+            return vars;
+        }
         </script>
 </body>
 

@@ -32,27 +32,27 @@
                             <h5 class="side-module-heading"><span>Shop By Price</span></h5>
                             <ul>
                                 <li>
-                                    <a class="" href="<?= WEBROOT ?>products/?price=0-218000" alt="0.000 ₫ - 218,000 ₫"
+                                    <a class="price" href="0-218000" alt="0.000 ₫ - 218,000 ₫"
                                         title="0.000 ₫ - 218,000 ₫">0.000 ₫ - 218,000 ₫</a>
                                 </li>
                                 <li>
-                                    <a class="" href="<?= WEBROOT ?>products/?price=210000-280000"
-                                        alt="210.000 ₫ - 280.000 ₫" title="210.000 ₫ - 280.000 ₫">210.000 ₫ - 280.000
+                                    <a class="price" href="210000-280000" alt="210.000 ₫ - 280.000 ₫"
+                                        title="210.000 ₫ - 280.000 ₫">210.000 ₫ - 280.000
                                         ₫</a>
                                 </li>
                                 <li>
-                                    <a class="" href="<?= WEBROOT ?>products/?price=280000-350000"
-                                        alt="280.000 ₫ - 350.000 ₫" title="280.000 ₫ - 350.000 ₫">280.000 ₫ - 350.000
+                                    <a class="price" href="280000-350000" alt="280.000 ₫ - 350.000 ₫"
+                                        title="280.000 ₫ - 350.000 ₫">280.000 ₫ - 350.000
                                         ₫</a>
                                 </li>
                                 <li>
-                                    <a class="" href="<?= WEBROOT ?>products/?price=350000-420000"
-                                        alt="350.000 ₫ - 420.000 ₫" title="350.000 ₫ - 420.000 ₫">350.000 ₫ - 420.000
+                                    <a class="price" href="350000-420000" alt="350.000 ₫ - 420.000 ₫"
+                                        title="350.000 ₫ - 420.000 ₫">350.000 ₫ - 420.000
                                         ₫</a>
                                 </li>
                                 <li>
-                                    <a class="" href="<?= WEBROOT ?>products/?price=420000-490000"
-                                        alt="420.000 ₫ - 490.000 ₫" title="420.000 ₫ - 490.000 ₫">420.000 ₫ - 490.000
+                                    <a class="price" href="420000-490000" alt="420.000 ₫ - 490.000 ₫"
+                                        title="420.000 ₫ - 490.000 ₫">420.000 ₫ - 490.000
                                         ₫</a>
                                 </li>
 
@@ -64,7 +64,7 @@
                             <ul class="navList">
                                 <?php foreach ($brands as $c) : ?>
                                 <li>
-                                    <a href="<?= WEBROOT ?>products/?brand=<?= $c->getId() ?>"><?= $c->getName() ?></a>
+                                    <a class="brands" href="<?= $c->getId() ?>"><?= $c->getName() ?></a>
                                 </li>
                                 <?php endforeach; ?>
                             </ul>
