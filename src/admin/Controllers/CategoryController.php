@@ -5,7 +5,6 @@ namespace ADMIN\Controllers;
 use SRC\helper\MSG;
 use SRC\Models\Category\CategoryModel;
 use SRC\Models\Category\CategoryResourceModel;
-use SRC\Models\Image\ImageModel;
 use SRC\Models\Image\ImageResourceModel;
 use SRC\Models\Product\ProductResourceModel;
 

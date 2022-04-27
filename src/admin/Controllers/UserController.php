@@ -140,16 +140,17 @@ class UserController extends AdminControllers
             }
             extract($_FILES);
 
+
             if ($avatar['name'] != null) {
 
-                // xóa ảnh cũ
-                if ($user->getAvatar() != null && $user->getAvatar() != 'user-default-avatar.png') {
-                    $this->userResourceModel->deleteImage($user->getAvatar());
-                }
-
-                // upload ảnh mới
                 $avatar =  $this->userResourceModel->upload($avatar);
-                $user->setAvatar($avatar);
+                if ($avatar) {
+                    // xóa ảnh cũ
+                    if ($user->getAvatar() != null && $user->getAvatar() != 'user-default-avatar.png') {
+                        $this->userResourceModel->deleteImage($user->getAvatar());
+                    }
+                    $user->setAvatar($avatar);
+                }
             }
 
             if ($this->userResourceModel->save($user)) {
@@ -159,7 +160,7 @@ class UserController extends AdminControllers
             } else {
                 MSG::send("Sửa tài khoản không thành công");
             }
-            Header('Location: ' . $_SERVER['PHP_SELF']);
+            header("Refresh:0");
             exit(); //optional
         }
         $breadcrumb = "Sửa tài khoản";

@@ -1,72 +1,3 @@
-<style>
-    .card-body .nav-link.mb-0 {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .badge {
-        min-width: 20px;
-        height: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .card-header.left {
-        padding: 16px 24px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .card-body.left {
-        padding: 0;
-    }
-
-    .card-body.left .nav-link {
-        padding: 10px 24px;
-    }
-
-    .card-body.right {
-        padding-top: 0;
-    }
-
-    .card-body.right .card-header {
-        padding: 16px 0;
-    }
-
-    .permission-select-row {
-        cursor: pointer;
-        border-radius: 10px;
-    }
-
-    .permission-select-row label {
-        cursor: pointer;
-    }
-
-    .permission-select-row:hover {
-        background: #e8e8e8;
-        color: #333;
-    }
-
-    .permissions-lable {
-        position: relative;
-    }
-
-    .permissions-lable .badge {
-        position: absolute;
-        top: 50%;
-        right: 20px;
-        transform: translateY(-50%);
-        height: 25px;
-        border: 2px solid #fff;
-        cursor: pointer;
-    }
-
-    .permissions-lable .badge:hover {
-        background-color: #55ce63 !important;
-    }
-</style>
 <div class="page-wrapper">
     <div class="content container-fluid">
         <div class="page-header">
@@ -87,7 +18,7 @@
                         <div class="card">
                             <div class="card-body left">
                                 <div class="nav flex-column">
-                                    <div class="card-header left">
+                                    <div class="card-header left left-permission">
                                         <h4 class="card-title">Quyền</h4>
                                         <a href="<?= WEBROOT ?>admin/permission/create" class="chat-compose">
                                             <i class="material-icons">control_point</i>

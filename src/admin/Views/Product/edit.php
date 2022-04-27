@@ -1,102 +1,10 @@
-<style>
-    .choise-img {
-        position: relative;
-    }
-
-    .images {
-        /* height: 100px; */
-        display: flex;
-        flex-wrap: wrap;
-        width: 100%;
-        position: relative;
-    }
-
-    .image-preview {
-        /* width: 100%; */
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        width: 20%;
-        padding: 0 15px;
-        box-sizing: border-box;
-
-    }
-
-    .image-preview-content {
-        width: 100%;
-        padding-top: 100%;
-        position: relative;
-    }
-
-    .image-preview-content img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 100%;
-        width: 100%;
-        display: block;
-        object-fit: contain;
-        max-width: 999px;
-    }
-
-    .images input {
-        z-index: 9999;
-        opacity: 0;
-        cursor: pointer;
-        position: absolute;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 100%;
-        width: 100%;
-    }
-
-    .upload-image {
-        margin-top: 30px;
-        width: 300px;
-        position: relative;
-        margin-left: 15px;
-    }
-
-    .upload-image::after {
-        content: "Thêm ảnh";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 1;
-        background-color: #f16b6f;
-        font-size: 20px;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-    }
-
-    .image-preview {
-        position: relative;
-    }
-
-    .remove-image {
-        position: absolute;
-        top: -12px;
-        right: 1px;
-        z-index: 99999;
-    }
-</style>
 <div class="page-wrapper">
     <div class="content container-fluid">
 
         <div class="page-header">
             <div class="row">
                 <div class="col">
-                    <h3 class="page-title">Quản sản phẩm</h3>
+                    <h3 class="page-title">Quản lý sản phẩm</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= WEBROOT ?>admin">Trang chủ</a></li>
                         <li class="breadcrumb-item"><a href="<?= WEBROOT ?>admin/product">Sản phẩm</a></li>
@@ -201,49 +109,40 @@
                                             </div>
                                             <div class="col-xl-12">
                                                 <div class="form-group row choise-img">
-                                                    <label class="col-lg-12 col-form-label">Chọn ảnh sảnh phẩm</label>
-
-
-                                                    <div class="col-lg-12 images">
-                                                        <?php if ($images) : ?>
-                                                            <?php foreach ($images as $i) : ?>
-                                                                <div class="image-preview">
-                                                                    <a href="<?= WEBROOT ?>admin/product/delete_image/iid/<?= $i->getId() ?>" class="remove-image badge badge-danger badge-pill"> x </a>
-                                                                    <div class="image-preview-content">
-                                                                        <img src="<?= PUBLIC_URL ?>upload/products/<?= $i->getPath() ?>" alt="">
-                                                                    </div>
+                                                    <label class="col-lg-12 col-form-label">Chọn ảnh sảnh phẩm</label <div class="col-lg-12 images">
+                                                    <?php if ($images) : ?>
+                                                        <?php foreach ($images as $i) : ?>
+                                                            <div class="image-preview">
+                                                                <a href="<?= WEBROOT ?>admin/product/delete_image/iid/<?= $i->getId() ?>" class="remove-image badge badge-danger badge-pill"> x </a>
+                                                                <div class="image-preview-content">
+                                                                    <img src="<?= PUBLIC_URL ?>upload/products/<?= $i->getPath() ?>" alt="">
                                                                 </div>
-                                                            <?php endforeach; ?>
-                                                        <?php endif; ?>
-
-                                                        <!-- <div class="image-preview">
-                                                            <div class="image-preview-content">
-                                                                <img src="<?= PUBLIC_URL ?>upload/products/default-product-image.png" alt="">
                                                             </div>
-                                                        </div> -->
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
 
-                                                    </div>
-
-                                                    <input multiple value="" type="file" name="images[]" class="upload-image form-control">
                                                 </div>
+
+                                                <input multiple value="" type="file" name="images[]" class="upload-image form-control">
                                             </div>
-                                            <div class="col-xl-12">
-                                                <button class="btn btn-primary" type="submit">
-                                                    <?= $breadcrumb ?>
-                                                </button>
-                                                <button type="reset" class="btn">Nhập lại</button>
-                                            </div>
+                                        </div>
+                                        <div class="col-xl-12">
+                                            <button class="btn btn-primary" type="submit">
+                                                <?= $breadcrumb ?>
+                                            </button>
+                                            <button type="reset" class="btn">Nhập lại</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                </form>
             </div>
+
+            </form>
         </div>
     </div>
+</div>
 </div>
 
 
@@ -253,8 +152,6 @@
         CKEDITOR.replace('description');
 
         const old_preview = $('.images').html();
-
-
 
         $('.upload-image').on('change', function() {
             console.log($(this.files));

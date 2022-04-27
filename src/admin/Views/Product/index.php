@@ -1,8 +1,3 @@
-<style>
-    .card-body {
-        padding: 1.5rem 0;
-    }
-</style>
 <div class="page-wrapper">
     <div class="content container-fluid">
         <!-- Page Header -->

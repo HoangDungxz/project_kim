@@ -553,6 +553,15 @@
             }
             return vars;
         }
+        $('.cart-total-grandTotal');
+
+        $('#sort').on('change', function() {
+            var value = $(this).val();
+            //di chuyển đến url tìm kiếm
+            const url = new URL(window.location.href);
+            url.searchParams.set('sort', value);
+            window.location.href = url;
+        });
         </script>
 </body>
 

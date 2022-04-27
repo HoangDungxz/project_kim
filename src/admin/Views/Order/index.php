@@ -1,91 +1,3 @@
-<style>
-    .card-body {
-        padding: 1.5rem 0;
-    }
-
-    .status-context-menu {
-        position: fixed;
-        z-index: 1;
-        width: 200px;
-        overflow: hidden;
-        max-height: 0;
-    }
-
-    .status-context-menu button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 20px;
-        width: 100%;
-        height: 50px;
-        cursor: pointer;
-        margin: 0;
-    }
-
-    .status-context-menu.visible {
-        max-height: 1000px;
-        transition: max-height 0.5s ease-in;
-        z-index: 999999;
-    }
-
-    .status-context-menu.hidden {
-        max-height: 0;
-        z-index: -1;
-        transition: all 0.5s ease-out;
-        transition-property: max-height, z-index;
-    }
-
-    .order-status {
-        cursor: pointer;
-    }
-
-    .status-context-menu li {
-        list-style: none;
-    }
-
-    .status-context-menu li a {
-        padding: 7px 15px;
-        display: block;
-    }
-
-    .pending {
-        background-color: #cfe2ff;
-        color: #055160;
-    }
-
-    .processing {
-        background-color: #fff3cd;
-        color: #664d03;
-    }
-
-    .shiping {
-        background-color: #cff4fc;
-        color: #055160;
-    }
-
-    .completed {
-        background-color: #d1e7dd;
-        color: #0f5132;
-    }
-
-    .canceled {
-        background-color: #f16b6f;
-        color: #842029;
-    }
-
-
-    @keyframes statuscontextcoverhidden {
-        from {
-            opacity: 1;
-            z-index: 99999;
-        }
-
-        to {
-            z-index: 0;
-            opacity: 0;
-        }
-    }
-</style>
 <div class="page-wrapper">
     <div class="content container-fluid">
         <!-- Page Header -->
@@ -164,14 +76,16 @@
                                     {
                                         switch ($status) {
                                             case 0:
-                                                return 'Chờ giải quyết';
+                                                return 'Đang trong giỏ hàng';
                                             case 1:
-                                                return 'Đang giải quyết';
+                                                return 'Chờ giải quyết';
                                             case 2:
-                                                return 'Giao hàng';
+                                                return 'Đang giải quyết';
                                             case 3:
-                                                return 'Hoàn thành';
+                                                return 'Giao hàng';
                                             case 4:
+                                                return 'Hoàn thành';
+                                            case 5:
                                                 return 'Huỷ';
 
                                             default:
@@ -182,14 +96,16 @@
                                     {
                                         switch ($status) {
                                             case 0:
-                                                return 'pending';
+                                                return 'ordering';
                                             case 1:
-                                                return 'processing';
+                                                return 'pending';
                                             case 2:
-                                                return 'shiping';
+                                                return 'processing';
                                             case 3:
-                                                return 'completed';
+                                                return 'shiping';
                                             case 4:
+                                                return 'completed';
+                                            case 5:
                                                 return 'canceled';
 
                                             default:
@@ -238,11 +154,11 @@
             const change_status_href = '<?= WEBROOT ?>admin/order/change_status/';
             let order_id = $(this).attr('oid');
 
-            $('.pending').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 0);
-            $('.processing').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 1);
-            $('.shiping').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 2);
-            $('.completed').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 3);
-            $('.canceled').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 4);
+            $('.pending').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 1);
+            $('.processing').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 2);
+            $('.shiping').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 3);
+            $('.completed').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 4);
+            $('.canceled').attr('href', change_status_href + 'oid/' + order_id + '/status/' + 5);
         })
 
         $(document).on('click', function(t) {

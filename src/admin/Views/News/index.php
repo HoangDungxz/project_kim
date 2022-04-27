@@ -1,18 +1,18 @@
 <div class="page-wrapper">
-    <div class="content container-fluid">
+    <div class="content container-flcid">
         <!-- Page Header -->
         <div class="page-header">
             <div class="row">
                 <div class="col">
-                    <h3 class="page-title">Quản lý đại lý</h3>
+                    <h3 class="page-title">Quản lý tin tức</h3>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= WEBROOT ?>admin">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Quản lý đại lý</li>
+                        <li class="breadcrumb-item active">Tin tức</li>
                     </ul>
                 </div>
                 <div class="col-auto">
-                    <a href="<?= WEBROOT ?>admin/user/create" class="btn btn-primary ml-3">
-                        <i class="fas fa-plus"></i> Thêm đại lý
+                    <a href="<?= WEBROOT ?>admin/news/create" class="btn btn-primary ml-3">
+                        <i class="fas fa-plus"></i> Thêm tin tức
                     </a>
                 </div>
             </div>
@@ -38,37 +38,29 @@
                             <table class="table table-hover table-center mb-0 datatable">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Tên</th>
-                                        <th>SĐT</th>
-                                        <th>Email</th>
-                                        <th>Trạng thái</th>
-                                        <th>Quyền</th>
-                                        <th>Ngày tạo</th>
-                                        <th class="text-right">Hành động</th>
+                                        <th style="width:100px;">Photo</th>
+                                        <th>Name</th>
+                                        <th style="width:50px;">Hot</th>
+                                        <th style="width:100px;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($users as $u) : ?>
+                                    <?php foreach ($news as $n) : ?>
                                         <tr>
-                                            <td><?= $u->getId() ?></td>
                                             <td>
-                                                <h2 class="table-avatar">
-                                                    <a href="#" class="avatar avatar-sm mr-2">
-                                                        <img class="avatar-img rounded-circle" alt="" src="<?= PUBLIC_URL ?>upload/users/<?= $u->getAvatar() ?>">
-                                                    </a>
-                                                    <a href="#"><?= $u->getName() ?></a>
-                                                </h2>
+
+                                                <?php if (file_exists(ROOT . "public/assets/upload/news/" . $n->getPhoto())) : ?>
+                                                    <img src="<?= PUBLIC_URL . "upload/news/" . $n->getPhoto() ?>" style="width:100px;">
+                                                <?php endif; ?>
                                             </td>
-                                            <td>0<?= number_format($u->getPhone(), 0, '', '.') ?></td>
-                                            <td><a href="mailto:nhom2user@gmail.com"><?= $u->getEmail() ?></a></td>
-                                            <td><label><?= $u->getStatus() == 0 ? "Chưa kích hoạt" : "Đã kích hoạt" ?></label>
+                                            <td><?php echo $n->getName(); ?></td>
+                                            <td>
+                                                <?php if ($n->getHot() != null && $n->getHot() == 1) : ?>
+                                                    <span class="fa fa-check"></span>
+                                                <?php endif; ?>
                                             </td>
-                                            <td><label><?= $u->permissions_name ?></label>
-                                            </td>
-                                            <td><?= date_format(DateTime::createFromFormat('Y-m-d H:i:s', $u->getCreated_at()), "d/m/Y H:i A") ?></td>
                                             <td class="text-right">
-                                                <a href="<?= WEBROOT ?>admin/user/edit/uid/<?= $u->getId() ?>" class="btn btn-sm bg-success-light mr-2">
+                                                <a href="<?= WEBROOT ?>admin/news/edit/nid/<?= $n->getId() ?>" class="btn btn-sm bg-success-light mr-2">
                                                     <i class="far fa-edit mr-1"></i> Sửa
                                                 </a>
                                                 <a data-id="40" href="javascript:void(0);" class="
@@ -76,7 +68,7 @@
                                                     bg-danger-light
                                                     mr-2
                                                     delete_review_comment
-                                                  " data-toggle="modal" data-target="#model-1" onclick="handleDelete('<?= $u->getId() ?>','<?= $u->getName() ?>')">
+                                                  " data-toggle="modal" data-target="#model-1" onclick="handleDelete('<?= $n->getId() ?>','<?= $n->getName() ?>')">
                                                     <i class="far fa-trash-alt mr-1"></i> Xoá
                                                 </a>
                                             </td>
@@ -97,7 +89,8 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">Bạn có muốn xoá tài khoản <span class="p-name text-danger"></span> ?</div>
+                                    <div class="modal-body">Bạn có muốn xoá tin tức<div class="n-name text-danger"></div>
+                                    </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                             Không
@@ -119,13 +112,13 @@
                                 GLOBE_id = id;
                                 GLOBE_name = name;
 
-                                $('.modal').find('.p-name').text(name);
+                                $('.modal').find('.n-name').text(name);
 
                             }
 
                             const runDelete = async () => {
 
-                                const response = await fetch(`<?= WEBROOT ?>admin/user/delete/uid/${GLOBE_id}`, {
+                                const response = await fetch(`<?= WEBROOT ?>admin/news/delete/nid/${GLOBE_id}`, {
                                     method: 'POST',
                                 });
 
@@ -136,7 +129,6 @@
                                 } else {
                                     $('.modal').modal("hide");
                                     document.write(data);
-                                    toastr.error('Lỗi khi xóa tài khoản', ' Lỗi ');
                                 }
                             }
                         </script>
