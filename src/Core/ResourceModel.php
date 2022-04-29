@@ -23,10 +23,6 @@ class ResourceModel  implements ResourceModelInterface
     private $params = [];
     private $groupBySql;
 
-    private $file_name;
-    private $tmp_name;
-    private $target_file;
-
     private $upload_value = [];
 
 
@@ -44,17 +40,33 @@ class ResourceModel  implements ResourceModelInterface
     }
 
 
-    public function where($column, $value, $conditionType = "AND")
+    public function where($column, $value, $conditionType = "AND", $type = '=')
     {
         $column =  str_replace(" ", "", $column);
         $column_parameter = str_replace(".", "_", $column);
         switch ($this->conditionSql) {
             case ' ':
-                $this->conditionSql .= " WHERE $column = :$column_parameter ";
+                $this->conditionSql .= " WHERE $column $type :$column_parameter ";
                 $this->params =   array_merge($this->params, [$column_parameter => $value]);
                 break;
             default:
-                $this->conditionSql .= " $conditionType $column = :$column_parameter ";
+                $this->conditionSql .= " $conditionType $column $type :$column_parameter ";
+                $this->params =   array_merge($this->params, [$column_parameter => $value]);
+                break;
+        }
+        return $this;
+    }
+    public function whereNot($column, $value, $conditionType = "AND", $type = '=')
+    {
+        $column =  str_replace(" ", "", $column);
+        $column_parameter = str_replace(".", "_", $column);
+        switch ($this->conditionSql) {
+            case ' ':
+                $this->conditionSql .= " WHERE NOT ($column $type :$column_parameter) ";
+                $this->params =   array_merge($this->params, [$column_parameter => $value]);
+                break;
+            default:
+                $this->conditionSql .= " $conditionType WHERE NOT ($column $type :$column_parameter) ";
                 $this->params =   array_merge($this->params, [$column_parameter => $value]);
                 break;
         }
