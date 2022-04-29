@@ -147,7 +147,7 @@
             $('.status-context-menu').css({
                 top: e.clientY,
                 left: e.clientX,
-                transform: $.clientX <= 150 ? 'translateY(-100%)' : ''
+                transform: window.innerHeight - e.clientY <= 180 ? 'translateY(-100%)' : ''
             });
 
 

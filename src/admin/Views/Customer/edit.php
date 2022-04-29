@@ -22,7 +22,7 @@
                                 <div class="card mb-0">
                                     <div class="card-body">
 
-                                        <div class="avatar-form" style='background-image: url("<?= PUBLIC_URL ?>upload/customers/<?= isset($customer) ? $customer->getAvatar() : 'customer-default-avatar.png' ?>");'>
+                                        <div class="avatar-form" style='background-image: url("<?= PUBLIC_URL ?>upload/customers/<?= isset($customer) ? $customer->getDisplayAvatar() : 'customer-default-avatar.png' ?>");'>
                                             <input id="avatar" name="avatar" type="file">
                                         </div>
 
@@ -73,7 +73,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-lg-4 col-form-label">Mật Khẩu</label>
                                                     <div class="col-lg-12">
-                                                        <input placeholder="*******" value="<?= isset($customer) ? '********' : '' ?>" type="password" name="password" class="form-control">
+                                                        <input placeholder="&bull;&bull;&bull;&bull;&bull;" value="<?= isset($customer) ? '********' : '' ?>" type="password" name="password" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>

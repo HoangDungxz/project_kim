@@ -56,7 +56,7 @@
                                             <td>
                                                 <h2 class="table-avatar">
                                                     <a href="#" class="avatar avatar-sm mr-2">
-                                                        <img class="avatar-img rounded-circle" alt="" src="<?= PUBLIC_URL ?>upload/customers/<?= $c->getAvatar() ?>">
+                                                        <img class="avatar-img rounded-circle" alt="" src="<?= PUBLIC_URL ?>upload/customers/<?= $c->getDisplayAvatar() ?>">
                                                     </a>
                                                     <a href="#"><?= $c->getName() ?></a>
                                                 </h2>

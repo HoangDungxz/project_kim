@@ -146,7 +146,15 @@ class CustomerModel extends Model
      */
     public function getAvatar()
     {
-        return $this->avatar;
+        return  $this->avatar;
+    }
+
+    /**
+     * Get the value of avatar
+     */
+    public function getDisplayAvatar()
+    {
+        return (file_exists(ROOT . 'public/assets/upload/customers/' . $this->avatar)) ? $this->avatar : 'default_customer_image.jpg';
     }
 
     /**

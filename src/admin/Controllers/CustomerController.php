@@ -58,12 +58,14 @@ class CustomerController  extends AdminControllers
             $customer->setPhone($phone);
             $customer->setAddress($address);
 
-            if (strpos($password, '*') !== false) {
-                $customer->setPassword($password);
+            if (strpos($password, '*') === false) {
+                $customer->setPassword(md5($password));
             }
             extract($_FILES);
 
-            if ($avatar['name'] != null) {
+
+            if ($avatar['name'] != '') {
+
 
                 $avatar =  $this->customerResourceModel->upload($avatar);
                 if ($avatar) {

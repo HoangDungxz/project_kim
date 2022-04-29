@@ -11,6 +11,9 @@ class UserResourceModel extends ResourceModel
 
     public function login($user)
     {
+        // logout user cũ
+        SESSION::get($this->table) == null;
+
         $userLogIned =  $this->select('users.id,users.email,users.name,users.avatar,users.status')
             ->where('email', $user->getEmail())
             ->where('password', $user->getPassword())

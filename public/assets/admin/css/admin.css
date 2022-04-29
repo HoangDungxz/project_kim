@@ -5451,3 +5451,7 @@ input[type='checkbox'] {
 .col-lg-12 > .onoffswitch {
 	margin-top: 9px;
 }
+
+.status-context-menu ul {
+	padding: 0;
+}

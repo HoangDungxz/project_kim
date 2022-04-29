@@ -29,6 +29,8 @@ class AdminControllers extends Controller
         ];
 
         if (SESSION::get('users', 'id') == null) {
+
+
             // nếu chưa kiểm tra xem có phải là trang login hoặc đăng ký không nếu không thì chuyển về log in
 
             if (array_search("$controller/$action", $allowPages) === false) {
@@ -74,20 +76,22 @@ class AdminControllers extends Controller
         $this->with($menu);
         $this->with($uri);
 
-
         // PHÂN QUYỀN
         // lấy danh sách các quyền của người dùng
         $permissions = $this->userResoureModel
             ->select('users.id,permissions.paths')
             ->join('permissions', 'users.permission_id=permissions.id')
             ->get();
+
         // chuyển đổi danh sách sang array
         $alowPermissions = json_decode($permissions->paths);
 
+        // xem link có thuộc allowPages không
         if (array_search("$controller/$action", $allowPages) === false) {
 
+            // xem link có thuộc alowPermissions không
             if (array_search("$controller/$action", $alowPermissions) === false) {
-                var_dump(array_search("$controller/$action", $alowPermissions));
+
                 $this->render('permission_denied', true, 'Permission');
                 die;
             }

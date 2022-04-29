@@ -13,7 +13,7 @@ class MSG
         SESSION::push('msgs', $msgSend);
     }
 
-    private function toastr($msg, $type)
+    private static function toastr($msg, $type)
     {
         return '<script type="text/javascript"> toastr.' . $type . '("' . htmlspecialchars($msg) . '","' . strtoupper($type) . '"); </script>';
     }
