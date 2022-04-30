@@ -93,7 +93,7 @@
                                 <tbody>
                                     <?php foreach ($child_agents as $sa) : ?>
                                         <tr>
-                                            <td><?= $sa->getName(); ?></td>
+                                            <td><?= $sa->char . $sa->getName(); ?></td>
                                             <td><?= $sa->getEmail(); ?></td>
                                             <td><?= number_format($sa->sum_price); ?> ₫</td>
                                         </tr>

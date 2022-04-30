@@ -171,7 +171,7 @@ class SaleAgentController  extends AdminControllers
         $this->render("detail");
     }
 
-    private function countCommissionFromChild($sale_agents, $superior_agent_id = 0, $lv = 1)
+    private function countCommissionFromChild($sale_agents, $superior_agent_id = 0, $lv = 1, $char = '')
     {
         $lv = $lv * 2;
         foreach ($sale_agents as $key => $s) {
@@ -186,13 +186,15 @@ class SaleAgentController  extends AdminControllers
                     ->groupBy('customers.id')
                     ->get();
 
+                $sale_agent->char = $char;
+
                 $this->commission_from_child += $sale_agent->sum_price;
 
                 array_push($this->child_agents,  $sale_agent);
 
                 unset($sale_agents[$key]);
 
-                $this->countCommissionFromChild($sale_agents, $s->getId(), $lv);
+                $this->countCommissionFromChild($sale_agents, $s->getId(), $lv, $char . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
             }
         }
     }
