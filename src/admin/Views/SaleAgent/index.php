@@ -25,7 +25,7 @@
                 <div style="display: none" id="deletee" class="alert alert-danger text-center" role="alert"></div>
             </div>
             <div class="col-4">
-                <a href="<?= PUBLIC_URL ?>upload/customers/default_customer_image.jpg" download>abccc</a>
+
             </div>
 
         </div>
@@ -41,44 +41,13 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Tên</th>
-                                        <th>Số điện thoại</th>
                                         <th>Email</th>
-                                        <th>Đại lý cấp trên</th>
 
                                         <th class="text-right"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($customers as $c) : ?>
-                                        <tr>
-                                            <td><?= $c->getId() ?></td>
-                                            <td>
-                                                <h2 class="table-avatar">
-                                                    <a href="#" class="avatar avatar-sm mr-2">
-                                                        <img class="avatar-img rounded-circle" alt="" src="<?= PUBLIC_URL ?>upload/customers/<?= $c->getDisplayAvatar() ?>">
-                                                    </a>
-                                                    <?= $c->getName() ?>
-                                                </h2>
-                                            </td>
-                                            <td>0<?= number_format($c->getPhone(), 0, '', '.') ?></td>
-                                            <td><a href="mailto:<?= $c->getEmail() ?>"><?= $c->getEmail() ?></a></td>
-                                            <td> <?= $c->superior_agent_name ?? 'Cấp 1' ?></td>
-
-                                            <td class="text-right">
-                                                <a href="<?= WEBROOT ?>admin/customer/edit/cid/<?= $c->getId() ?>" class="btn btn-sm bg-success-light mr-2">
-                                                    <i class="far fa-edit mr-1"></i> Sửa
-                                                </a>
-                                                <a data-id="40" href="javascript:void(0);" class="
-                                                    btn btn-sm
-                                                    bg-danger-light
-                                                    mr-2
-                                                    delete_review_comment
-                                                  " data-toggle="modal" data-target="#model-1" onclick="handleDelete('<?= $c->getId() ?>','<?= $c->getName() ?>')">
-                                                    <i class="far fa-trash-alt mr-1"></i> Xoá
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
+                                    <?= $saleAgentsShow ?>
                                 </tbody>
                             </table>
                         </div>
@@ -105,38 +74,6 @@
                             </div>
                         </div>
 
-
-                        <script>
-                            var GLOBE_id = undefined;
-                            var GLOBE_name = undefined;
-
-                            function handleDelete(id, name) {
-
-                                // đảu dữ liêu từ click ra globe
-                                GLOBE_id = id;
-                                GLOBE_name = name;
-
-                                $('.modal').find('.p-name').text(name);
-
-                            }
-
-                            const runDelete = async () => {
-
-                                const response = await fetch(`<?= WEBROOT ?>admin/customer/delete/cid/${GLOBE_id}`, {
-                                    method: 'POST',
-                                });
-
-                                const data = await response.text();
-
-                                if (data == 'true') {
-                                    window.location.reload();
-                                } else {
-                                    $('.modal').modal("hide");
-                                    document.write(data);
-                                    toastr.error('Lỗi khi xóa tài khoản', ' Lỗi ');
-                                }
-                            }
-                        </script>
                     </div>
                 </div>
             </div>

@@ -17,12 +17,12 @@ class ProductResourceModel extends ResourceModel
     public function getAll($params = [])
     {
 
-        $paginateSqlDefault = [
-            'p' => 1,
-            'pageNum' => 20
-        ];
+        // $paginateSqlDefault = [
+        //     'p' => 1,
+        //     'pageNum' => 20
+        // ];
 
-        $params =  array_merge($paginateSqlDefault, $params);
+        // $params =  array_merge($paginateSqlDefault, $params);
 
         foreach ($params as $key => $value) {
             $value = urldecode($value);
@@ -76,8 +76,8 @@ class ProductResourceModel extends ResourceModel
                     break;
             }
         }
-        $this->join('categories', "$this->table.category_id=categories.id")
-            ->join('brands', "$this->table.brand_id=brands.id")
+        $this->join('categories', "$this->table.category_id=categories.id", 'LEFT OUTER JOIN')
+            ->join('brands', "$this->table.brand_id=brands.id", 'LEFT OUTER JOIN')
             ->select("$this->table.*,categories.name as category_name,brands.name as brands_name");
 
 

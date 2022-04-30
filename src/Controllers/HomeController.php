@@ -18,13 +18,17 @@ class HomeController extends FrontendControllers
     {
         $newProducts = $this->productResourceModel->getAll(
             [
-                "sort" => 'iddesc'
+                "sort" => 'iddesc',
+                'p' => 1,
+                'pageNum' => 20
             ]
         );
 
         $discountProducts = $this->productResourceModel->getAll(
             [
-                "sort" => 'discountdesc'
+                "sort" => 'discountdesc',
+                'p' => 1,
+                'pageNum' => 20
             ]
         );
 

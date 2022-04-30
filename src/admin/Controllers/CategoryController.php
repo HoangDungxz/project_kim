@@ -94,7 +94,7 @@ class CategoryController extends AdminControllers
         $this->render("index");
     }
 
-    // BƯỚC 2: HÀM ĐỆ QUY HIỂN THỊ CATEGORIES
+    // HÀM ĐỆ QUY HIỂN THỊ CATEGORIES
     private function showCategories($categories, $parent_id = 0, $char = '')
     {
         foreach ($categories as $key => $c) {
@@ -123,7 +123,7 @@ class CategoryController extends AdminControllers
         }
     }
 
-    // BƯỚC 2: HÀM ĐỆ QUY HIỂN THỊ CATEGORIES
+    // BƯỚC 2: HÀM ĐỆ QUY HIỂN THỊ OPTION CATEGORIES
     private function showOptionCategories($categories, $parent_id = 0, $char = '', $current_id = '')
     {
         // BƯỚC 2.1: LẤY DANH SÁCH CATE CON

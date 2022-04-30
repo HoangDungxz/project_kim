@@ -18,6 +18,7 @@ class OrderDetailModel extends Model
     private $product_id;
     private $price;
     private $quantity;
+    private $agent_id;
 
 
 
@@ -118,6 +119,26 @@ class OrderDetailModel extends Model
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of agent_id
+     */
+    public function getAgent_id()
+    {
+        return $this->agent_id;
+    }
+
+    /**
+     * Set the value of agent_id
+     *
+     * @return  self
+     */
+    public function setAgent_id($agent_id)
+    {
+        $this->agent_id = $agent_id;
 
         return $this;
     }

@@ -76,6 +76,7 @@ class AdminControllers extends Controller
         $this->with($menu);
         $this->with($uri);
 
+
         // PHÂN QUYỀN
         // lấy danh sách các quyền của người dùng
         $permissions = $this->userResoureModel

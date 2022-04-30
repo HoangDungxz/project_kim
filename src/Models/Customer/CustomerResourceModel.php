@@ -12,7 +12,7 @@ class CustomerResourceModel extends ResourceModel
 
         $customerLogined =  $this->where('email', $customer->getEmail())
             ->where('password', md5($customer->getPassword()))
-            ->select("name,email,address,phone,id")
+            ->select("name,email,address,phone,id,superior_agent_id")
             ->get();
 
         if (($customerLogined) != null) {

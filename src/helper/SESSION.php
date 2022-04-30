@@ -26,16 +26,14 @@ class SESSION
 
     public static function push($table,  $value = null, $column = null)
     {
-
-
-        if (!$_SESSION[$table]) {
+        if (!isset($_SESSION[$table])) {
             $_SESSION[$table] = new \stdClass;
         }
 
         if ($column != null) {
-            @$_SESSION[$table]->{$column} = $value;
+            $_SESSION[$table]->{$column} = $value;
         } else {
-            @$_SESSION[$table] = $value;
+            $_SESSION[$table] = $value;
         }
     }
     public static function pull($table, $column = null)

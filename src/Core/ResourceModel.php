@@ -56,6 +56,7 @@ class ResourceModel  implements ResourceModelInterface
         }
         return $this;
     }
+
     public function whereNot($column, $value, $conditionType = "AND", $type = '=')
     {
         $column =  str_replace(" ", "", $column);
@@ -63,7 +64,9 @@ class ResourceModel  implements ResourceModelInterface
         switch ($this->conditionSql) {
             case ' ':
                 $this->conditionSql .= " WHERE NOT ($column $type :$column_parameter) ";
+
                 $this->params =   array_merge($this->params, [$column_parameter => $value]);
+
                 break;
             default:
                 $this->conditionSql .= " $conditionType WHERE NOT ($column $type :$column_parameter) ";

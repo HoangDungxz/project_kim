@@ -80,6 +80,7 @@ class ProductsController extends FrontendControllers
         $this->with($categoriesWithParents);
         $this->with($childBreadcrumb);
 
+
         $this->render("product_detail");
     }
 

@@ -20,6 +20,7 @@ class CustomerModel extends Model
     private $address;
     private $phone;
     private $password;
+    private $superior_agent_id;
 
     /**
      * Get the value of id
@@ -165,6 +166,26 @@ class CustomerModel extends Model
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of superior_agent_id
+     */
+    public function getSuperior_agent_id()
+    {
+        return $this->superior_agent_id;
+    }
+
+    /**
+     * Set the value of superior_agent_id
+     *
+     * @return  self
+     */
+    public function setSuperior_agent_id($superior_agent_id)
+    {
+        $this->superior_agent_id = $superior_agent_id;
 
         return $this;
     }

@@ -3,6 +3,7 @@
 namespace SRC\Controllers;
 
 use SRC\helper\SESSION;
+use SRC\Models\Customer\CustomerResourceModel;
 use SRC\Models\Order\OrderModel;
 use SRC\Models\Order\OrderResourceModel;
 use SRC\Models\OrderDetail\OrderDetailModel;
@@ -12,6 +13,7 @@ class OrderController extends FrontendControllers
 {
     private $orderResource;
     private $orderDetailResource;
+    private $customerResourceModel;
 
 
     function __construct()
@@ -19,6 +21,7 @@ class OrderController extends FrontendControllers
         parent::__construct();
         $this->orderResource = new OrderResourceModel();
         $this->orderDetailResource = new OrderDetailResourceModel();
+        $this->customerResourceModel = new CustomerResourceModel();
     }
 
     function index()
@@ -59,6 +62,24 @@ class OrderController extends FrontendControllers
         if (isset($product_id)) {
             $orderDetail->setProduct_id($product_id);
         }
+
+
+        if (isset($saleagent)) {
+
+            $customerId = $this->customerResourceModel
+                ->select('customers.id as customers_id')
+                ->where('email', $saleagent)->get();
+
+
+
+            if ($customerId) {
+                $customerId = $customerId->customers_id;
+
+                $orderDetail->setAgent_id($customerId);
+            }
+        }
+
+
         $orderDetail
             ->setQuantity($product_quantity ?? 1)
             ->setPrice(

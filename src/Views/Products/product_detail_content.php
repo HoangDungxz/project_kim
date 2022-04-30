@@ -184,8 +184,10 @@
 
                 <div class="productView-options">
 
-                    <form class="form" method="get" action="<?= WEBROOT ?>order/create  " enctype="multipart/form-data" data-cart-item-add="">
+                    <form class="form" method="get" action="<?= WEBROOT ?>order/create" enctype="multipart/form-data" data-cart-item-add="">
                         <input type="hidden" name="product_id" value="<?= $product->getId() ?>">
+                        <input id='saleagent' type="hidden" name="saleagent" value="">
+
                         <input type="hidden" name="product_price_affter_discount" value="<?= $product->getPriceAffterDiscount() ?>">
 
                         <div data-product-option-change="">
@@ -274,6 +276,10 @@
                     $('.productView-for').slick('slickGoTo', parseInt(index), false);
                     $('.productView-nav').slick('slickGoTo', parseInt(index), false);
                 })
+
+                const url = new URL(window.location.href);
+                let saleagent = url.searchParams.get('saleagent');
+                $('#saleagent').val(saleagent);
 
             })
         </script>
