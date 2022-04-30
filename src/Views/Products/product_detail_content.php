@@ -229,7 +229,7 @@
                                     </div>
                                 </div>
                                 <!-- <div class="form-action"> -->
-                                <input id="form-action-addToCart" data-wait-message="Adding to cart…" class="btn btn-primary" type="submit" value="Add to Cart">
+                                <input id="form-action-addToCart" data-wait-message="Adding to cart…" class="btn btn-primary" type="submit" value="Thêm vào giỏ hàng">
                                 <!-- </div> -->
                                 <!-- snippet location product_addtocart -->
                             </div>
@@ -244,7 +244,7 @@
                     <form class="form" method="post" action="/wishlist.php?action=add&amp;product_id=75" data-wishlist-add="">
                         <input type="hidden" name="variation_id" value="">
                         <button type="submit" class="btn btn-alt">
-                            <i class="fa fa-heart"></i><span>Add to Wish list</span>
+                            <i class="fa fa-heart"></i><span>Thêm vào yêu thích</span>
                         </button>
                     </form>
                 </div>

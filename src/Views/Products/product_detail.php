@@ -231,7 +231,7 @@
                                                 <img class="card-image lazyautosizes lazyloaded" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/38/430/url-5-compressor__89277.1505290810.png?c=2" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/38/430/url-5-compressor__89277.1505290810.png?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/38/431/url11-compressor__94501.1505290812.png?c=2" alt="[Sample] Maccas, colorful cardigans" title="[Sample] Maccas, colorful cardigans" sizes="50px">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="38" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="38" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
 
@@ -273,7 +273,7 @@
                                             <div class="buttons-wrapper">
                                                 <a href="#/sample-maccas-colorful-cardigans/" class="btn btn-primary btnATC" data-product-id="38" title="Choose Options" data-event-type="product-click"><span>Choose Options</span></a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=38" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=38" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>
@@ -290,7 +290,7 @@
                                                 <img class="card-image lazyautosizes lazyloaded" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/58/293/url-4-compressor__09553.1505287815.jpg?c=2" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/58/293/url-4-compressor__09553.1505287815.jpg?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/58/297/url-7-compressor__76277.1505287857.png?c=2" alt="[Sample] Jimmy Choo, extra high dynamite cheetahs" title="[Sample] Jimmy Choo, extra high dynamite cheetahs" sizes="50px">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="58" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="58" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
                                             <div class="new-badge">NEW</div>
@@ -331,7 +331,7 @@
                                             <div class="buttons-wrapper">
                                                 <a href="#/sample-jimmy-choo-extra-high-dynamite-cheetahs/" class="btn btn-primary btnATC" data-product-id="58" title="Choose Options" data-event-type="product-click"><span>Choose Options</span></a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=58" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=58" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>
@@ -348,7 +348,7 @@
                                                 <img class="card-image lazyautosizes lazyloaded" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/62/360/loreal-youth-code-foaming-gel-cleanser-compressor__54814.1505288891.jpg?c=2" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/62/360/loreal-youth-code-foaming-gel-cleanser-compressor__54814.1505288891.jpg?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/62/361/url1-compressor__36280.1505288891.gif?c=2" alt="[Sample] Coco Lee, Jam2" title="[Sample] Coco Lee, Jam2" sizes="50px">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="62" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="62" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
                                             <div class="new-badge">NEW</div>
@@ -389,9 +389,9 @@
                                             </div>
 
                                             <div class="buttons-wrapper">
-                                                <a href="#/cart.php?action=add&amp;product_id=62" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-product-id="62" data-event-type="product-click"><span>Add to Cart</span></a>
+                                                <a href="#/cart.php?action=add&amp;product_id=62" class="btn btn-primary btnATC themevale_btnATC" title="Thêm vào giỏ hàng" data-product-id="62" data-event-type="product-click"><span>Thêm vào giỏ hàng</span></a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=62" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=62" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>
@@ -408,7 +408,7 @@
                                                 <img class="card-image lazyautosizes lazyloaded" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/64/354/10-compressor__26494.1505288776.jpg?c=2" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/64/354/10-compressor__26494.1505288776.jpg?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/64/355/09-compressor__18612.1505288777.jpg?c=2" alt="[Sample] GANT, red duffle" title="[Sample] GANT, red duffle" sizes="50px">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="64" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="64" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
                                             <div class="new-badge">NEW</div>
@@ -449,9 +449,9 @@
                                             </div>
 
                                             <div class="buttons-wrapper">
-                                                <a href="#/cart.php?action=add&amp;product_id=64" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-product-id="64" data-event-type="product-click"><span>Add to Cart</span></a>
+                                                <a href="#/cart.php?action=add&amp;product_id=64" class="btn btn-primary btnATC themevale_btnATC" title="Thêm vào giỏ hàng" data-product-id="64" data-event-type="product-click"><span>Thêm vào giỏ hàng</span></a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=64" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=64" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>
@@ -468,7 +468,7 @@
                                                 <img class="card-image lazyautosizes lazyloaded" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/69/289/Dior-Lipsticks-compressor__57213.1557507983.jpg?c=2" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/69/289/Dior-Lipsticks-compressor__57213.1557507983.jpg?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/69/290/url-compressor__69997.1557507983.png?c=2" alt="[Sample] Collette, alligator clutch" title="[Sample] Collette, alligator clutch" sizes="50px">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="69" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="69" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
                                             <div class="new-badge">NEW</div>
@@ -512,7 +512,7 @@
                                             <div class="buttons-wrapper">
                                                 <a href="#/sample-collette-alligator-clutch/" class="btn btn-primary btnATC is-out-of-stock" data-product-id="69" data-event-type="product-click">Out of stock</a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=69" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=69" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>
@@ -589,7 +589,7 @@
                                                 <img class="card-image lazyautosizes lazyloaded" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/72/280/url-compressor__71817.1557506085.jpg?c=2" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/72/280/url-compressor__71817.1557506085.jpg?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/72/281/yves_saint_laurent_mascara_singulier_nuit_blanche_1-compressor__80588.1557506086.png?c=2" alt="[Sample] Coco Lee, gladiator bag" title="[Sample] Coco Lee, gladiator bag" sizes="50px">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="72" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="72" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
                                             <div class="new-badge">NEW</div>
@@ -632,7 +632,7 @@
                                             <div class="buttons-wrapper">
                                                 <a href="#/sample-coco-lee-gladiator-bag/" class="btn btn-primary btnATC" data-product-id="72" title="Choose Options" data-event-type="product-click"><span>Choose Options</span></a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=72" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=72" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>
@@ -649,7 +649,7 @@
                                                 <img class="card-image lazyautosizes lazyloaded" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/69/289/Dior-Lipsticks-compressor__57213.1557507983.jpg?c=2" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/69/289/Dior-Lipsticks-compressor__57213.1557507983.jpg?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/69/290/url-compressor__69997.1557507983.png?c=2" alt="[Sample] Collette, alligator clutch" title="[Sample] Collette, alligator clutch" sizes="50px">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="69" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="69" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
                                             <div class="new-badge">NEW</div>
@@ -693,7 +693,7 @@
                                             <div class="buttons-wrapper">
                                                 <a href="#/sample-collette-alligator-clutch/" class="btn btn-primary btnATC is-out-of-stock" data-product-id="69" data-event-type="product-click">Out of stock</a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=69" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=69" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>
@@ -710,7 +710,7 @@
                                                 <img class="card-image lazyautosizes lazyloaded" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/70/332/best-beauty-products-0409-2-lg-16781937-compressor__78206.1557336504.jpg?c=2" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/70/332/best-beauty-products-0409-2-lg-16781937-compressor__78206.1557336504.jpg?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/70/330/14-thickbox_default-compressor__76002.1557336505.jpg?c=2" alt="[Sample] Mango, half duff black " title="[Sample] Mango, half duff black " sizes="50px">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="70" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="70" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
                                             <div class="new-badge">NEW</div>
@@ -751,9 +751,9 @@
                                             </div>
 
                                             <div class="buttons-wrapper">
-                                                <a href="#/cart.php?action=add&amp;product_id=70" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-product-id="70" data-event-type="product-click"><span>Add to Cart</span></a>
+                                                <a href="#/cart.php?action=add&amp;product_id=70" class="btn btn-primary btnATC themevale_btnATC" title="Thêm vào giỏ hàng" data-product-id="70" data-event-type="product-click"><span>Thêm vào giỏ hàng</span></a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=70" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=70" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>
@@ -770,7 +770,7 @@
                                                 <img class="card-image lazyautosizes lazyloaded" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/74/272/url23-compressor__78106.1557342150.jpg?c=2" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/74/272/url23-compressor__78106.1557342150.jpg?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/74/273/loreal-youth-code-rejuvenating-eye-essence-compressor__81828.1557342150.jpg?c=2" alt="[Sample] French Connection, straw bag" title="[Sample] French Connection, straw bag" sizes="50px">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="74" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="74" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
                                             <div class="new-badge">NEW</div>
@@ -813,7 +813,7 @@
                                             <div class="buttons-wrapper">
                                                 <a href="#/sample-french-connection-straw-bag/" class="btn btn-primary btnATC" data-product-id="74" title="Choose Options" data-event-type="product-click"><span>Choose Options</span></a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=74" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=74" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>
@@ -830,7 +830,7 @@
                                                 <img class="card-image lazyautosizes lazyloaded" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/52/310/10641200-1349275186-847258-compressor__39808.1505287995.jpg?c=2" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/52/310/10641200-1349275186-847258-compressor__39808.1505287995.jpg?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/52/307/90708339f543807e_loreal-compressor__57801.1505287991.jpg?c=2" alt="[Sample] Marc, retro style summer mid dress" title="[Sample] Marc, retro style summer mid dress" sizes="50px">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="52" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="52" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
 
@@ -872,9 +872,9 @@
                                             </div>
 
                                             <div class="buttons-wrapper">
-                                                <a href="#/cart.php?action=add&amp;product_id=52" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-product-id="52" data-event-type="product-click"><span>Add to Cart</span></a>
+                                                <a href="#/cart.php?action=add&amp;product_id=52" class="btn btn-primary btnATC themevale_btnATC" title="Thêm vào giỏ hàng" data-product-id="52" data-event-type="product-click"><span>Thêm vào giỏ hàng</span></a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=52" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=52" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>
@@ -891,7 +891,7 @@
                                                 <img class="card-image lazyautosizes lazyloaded" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/41/419/LOral-Paris-Youth-Code-Anti-Falten-Pflege-Tag-compressor__03440.1505290667.jpg?c=2" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/41/419/LOral-Paris-Youth-Code-Anti-Falten-Pflege-Tag-compressor__03440.1505290667.jpg?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/41/420/loreals-compressor__90315.1505290669.jpg?c=2" alt="[Sample] Gideon, canvas espadrilles (multiple colours)" title="[Sample] Gideon, canvas espadrilles (multiple colours)" sizes="50px">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="41" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="41" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
 
@@ -934,7 +934,7 @@
                                             <div class="buttons-wrapper">
                                                 <a href="#/sample-gideon-canvas-espadrilles-multiple-colours/" class="btn btn-primary btnATC is-out-of-stock" data-product-id="41" data-event-type="product-click">Out of stock</a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=41" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=41" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>
@@ -951,7 +951,7 @@
                                                 <img class="card-image lazyautosizes lazyloaded" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/54/306/300.LOrealSkinExpertiseYouthCodeMoisturizer-compressor__35739.1505287943.jpg?c=2" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/54/306/300.LOrealSkinExpertiseYouthCodeMoisturizer-compressor__35739.1505287943.jpg?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/54/303/LOral-Paris-Youth-Code-Anti-Falten-Pflege-Tag-compressor__47876.1505287934.jpg?c=2" alt="[Sample] Collette, florentine jungle dress" title="[Sample] Collette, florentine jungle dress" sizes="50px">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="54" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="54" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
 
@@ -991,9 +991,9 @@
                                             </div>
 
                                             <div class="buttons-wrapper">
-                                                <a href="#/cart.php?action=add&amp;product_id=54" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-product-id="54" data-event-type="product-click"><span>Add to Cart</span></a>
+                                                <a href="#/cart.php?action=add&amp;product_id=54" class="btn btn-primary btnATC themevale_btnATC" title="Thêm vào giỏ hàng" data-product-id="54" data-event-type="product-click"><span>Thêm vào giỏ hàng</span></a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=54" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=54" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>
@@ -1010,7 +1010,7 @@
                                                 <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/stencil/ce2a7aa0-8316-013a-1043-62484650b759/e/38323d20-d594-0139-1e5d-3a208d481fb5/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/68/338/kohl_pencil-compressor__02604.1505288402.png?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/68/336/YouthCode_3StepKit-compressor__40032.1505288395.jpg?c=2" alt="[Sample] Sodling, black leather duffle bag" title="[Sample] Sodling, black leather duffle bag">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="68" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="68" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
                                             <div class="new-badge">NEW</div>
@@ -1051,9 +1051,9 @@
                                             </div>
 
                                             <div class="buttons-wrapper">
-                                                <a href="#/cart.php?action=add&amp;product_id=68" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-product-id="68" data-event-type="product-click"><span>Add to Cart</span></a>
+                                                <a href="#/cart.php?action=add&amp;product_id=68" class="btn btn-primary btnATC themevale_btnATC" title="Thêm vào giỏ hàng" data-product-id="68" data-event-type="product-click"><span>Thêm vào giỏ hàng</span></a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=68" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=68" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>
@@ -1070,7 +1070,7 @@
                                                 <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/stencil/ce2a7aa0-8316-013a-1043-62484650b759/e/38323d20-d594-0139-1e5d-3a208d481fb5/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/71/284/Maybelline-BB-White-_-Stick1-compressor__76880.1557344364.png?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/71/285/Loreal-Sublime-Bronze-Self-Tanning-Gel-Tinted--Shimmering-Medium-Skin-12460-compressor__93931.1557344365.jpg?c=2" alt="[Sample] Coco Lee, coins are Kumis brown leather bag" title="[Sample] Coco Lee, coins are Kumis brown leather bag">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="71" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="71" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
                                             <div class="new-badge">NEW</div>
@@ -1113,7 +1113,7 @@
                                             <div class="buttons-wrapper">
                                                 <a href="#/sample-coco-lee-coins-are-kumis-brown-leather-bag/" class="btn btn-primary btnATC" data-product-id="71" title="Choose Options" data-event-type="product-click"><span>Choose Options</span></a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=71" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=71" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>
@@ -1130,7 +1130,7 @@
                                                 <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/stencil/ce2a7aa0-8316-013a-1043-62484650b759/e/38323d20-d594-0139-1e5d-3a208d481fb5/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/73/277/big_4475-compressor__13848.1505287496.jpg?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/73/278/01-loreal-shampoo-compressor__60197.1505287496.jpg?c=2" alt="[Sample] French Connection, Sunday bliss bag" title="[Sample] French Connection, Sunday bliss bag">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="73" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="73" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
                                             <div class="new-badge">NEW</div>
@@ -1173,7 +1173,7 @@
                                             <div class="buttons-wrapper">
                                                 <a href="#/sample-french-connection-sunday-bliss-bag/" class="btn btn-primary btnATC" data-product-id="73" title="Choose Options" data-event-type="product-click"><span>Choose Options</span></a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=73" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=73" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>
@@ -1190,7 +1190,7 @@
                                                 <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/stencil/ce2a7aa0-8316-013a-1043-62484650b759/e/38323d20-d594-0139-1e5d-3a208d481fb5/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/33/323/10641200-1349275186-847258-compressor__73956.1505291196.jpg?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/33/322/90708339f543807e_loreal-compressor__12704.1505288176.jpg?c=2" alt="[Sample] Anna, multi-colored bangles" title="[Sample] Anna, multi-colored bangles">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="33" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="33" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
 
@@ -1232,7 +1232,7 @@
                                             <div class="buttons-wrapper">
                                                 <a href="#/sample-anna-multi-colored-bangles/" class="btn btn-primary btnATC" data-product-id="33" title="Choose Options" data-event-type="product-click"><span>Choose Options</span></a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=33" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=33" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>
@@ -1249,7 +1249,7 @@
                                                 <img class="card-image lazyload" data-sizes="auto" src="https://cdn11.bigcommerce.com/s-tphjucml/stencil/ce2a7aa0-8316-013a-1043-62484650b759/e/38323d20-d594-0139-1e5d-3a208d481fb5/img/loading.svg" data-src="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/35/444/14-thickbox_default-compressor__75159.1505291311.jpg?c=2" data-src-swap="https://cdn11.bigcommerce.com/s-tphjucml/images/stencil/224x224/products/35/445/300.LOrealSkinExpertiseYouthCodeMoisturizer-compressor__84362.1505291310.jpg?c=2" alt="[Sample] Anna, bright single bangles" title="[Sample] Anna, bright single bangles">
                                             </a>
                                             <div class="actions">
-                                                <a href="#" class="btnQV quickview" data-product-id="35" data-event-type="product-click">Quick view</a>
+                                                <a href="#" class="btnQV quickview" data-product-id="35" data-event-type="product-click">Xem nhanh</a>
                                             </div>
 
 
@@ -1289,9 +1289,9 @@
                                             </div>
 
                                             <div class="buttons-wrapper">
-                                                <a href="#/cart.php?action=add&amp;product_id=35" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-product-id="35" data-event-type="product-click"><span>Add to Cart</span></a>
+                                                <a href="#/cart.php?action=add&amp;product_id=35" class="btn btn-primary btnATC themevale_btnATC" title="Thêm vào giỏ hàng" data-product-id="35" data-event-type="product-click"><span>Thêm vào giỏ hàng</span></a>
 
-                                                <a href="/wishlist.php?action=add&amp;product_id=35" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish list</span></a>
+                                                <a href="/wishlist.php?action=add&amp;product_id=35" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                             </div>
                                         </figcaption>

@@ -274,61 +274,57 @@
                                 <h3>Shop</h3>
                                 <ul>
                                     <li>
-                                        <a href="trend-now/index.html">#Trend Now</a>
+                                        <a href="#">Trang chủ</a>
                                     </li>
                                     <li>
-                                        <a href="makeup/index.html">Makeup</a>
+                                        <a href="#">Sản phẩm</a>
                                     </li>
                                     <li>
-                                        <a href="nail/index.html">Nail</a>
+                                        <a href="#">Giới thiệu</a>
                                     </li>
                                     <li>
-                                        <a href="beauty-accessories/index.html">Beauty Accessories</a>
+                                        <a href="#">Tin tức</a>
                                     </li>
                                     <li>
-                                        <a href="body-art/index.html">Body Art</a>
+                                        <a href="#">Khuyến mãi</a>
                                     </li>
                                     <li>
-                                        <a href="makeup-tools/index.html">Makeup Tools</a>
+                                        <a href="#">Bản đồ</a>
                                     </li>
                                     <li>
-                                        <a href="fragrance/index.html">Fragrance</a>
+                                        <a href="#">Liên hệ</a>
                                     </li>
                                 </ul>
                             </div>
 
                             <div class="column-item first wow fadeIn" data-wow-delay="100ms">
-                                <h3>Information</h3>
+                                <h3>Thông tin và hướng dẫn</h3>
                                 <ul>
-                                    <li><a href="about-us/index.html">About Us</a></li>
-                                    <li><a href="demo_url/index.html">Theme FAQs</a></li>
-                                    <li><a href="demo_url/index.html">New Collections</a></li>
-                                    <li><a href="demo_url/index.html">Best Sellers</a></li>
-                                    <li><a href="demo_url/index.html">Manufactures</a></li>
-                                    <li><a href="privacy-policy/index.html">Privacy Policy</a></li>
-                                    <li><a href="terms-conditions/index.html">Terms &amp; Conditions</a></li>
-                                    <li><a href="blog/index.html">Blog</a></li>
+                                    <li><a href="#">Thông tin cửa hàng</a></li>
+                                    <li><a href="#">Hình thức thanh toán</a></li>
+                                    <li><a href="#">Chính sách bảo mật</a></li>
+                                    <li><a href="#">Điều khoản sử dụng</a></li>
+                                    <li><a href="#">Chính sách đổi trả</a></li>
+                                    <li><a href="#">Cách thức chuyển hàng</a></li>
+                                    <li><a href="#">Hỏi đáp</a></li>
                                 </ul>
                             </div>
 
                             <div class="column-item wow fadeIn" data-wow-delay="400ms">
-                                <h3>Customer Service</h3>
+                                <h3>Dịch vụ khách hàng</h3>
                                 <ul>
-                                    <li><a href="demo_url/index.html">Search Terms</a></li>
-                                    <li><a href="search9120.html?search_query">Advanced Search</a></li>
-                                    <li><a href="demo_url/index.html">Order and Return Search</a></li>
-                                    <li><a href="contact-us/index.html">Contact Us</a></li>
-                                    <li><a href="rss-syndication/index.html">RSS</a></li>
-                                    <li><a href="demo_url/index.html">Help &amp; FAQs</a></li>
-                                    <li><a href="demo_url/index.html">Consultant</a></li>
-                                    <li><a href="contact-us/index.html">Store Locations</a></li>
+                                    <li><a href="#">Tìm kiếm mở rộng</a></li>
+                                    <li><a href="#">Hướng dẫn đặt hàng</a></li>
+                                    <li><a href="#">Liên hệ hỗ trợ</a></li>
+                            
+                                    <li><a href="#">Địa chỉ cửa hàng</a></li>
                                 </ul>
                             </div>
 
                             <div class="column-item last wow fadeIn" data-wow-delay="500ms">
                                 <div id="footerSubcribeForm" class="wow fadeIn">
-                                    <h3>Sign Up for our Newsletter</h3>
-                                    <p>Receive our latest updates about our products and promotions.</p>
+                                    <h3>Đăng ký nhận thông tin qua email</h3>
+                                    <p>Nhận thông tin cập nhật mới nhất về sản phẩm và các chương trình khuyến mãi của chúng tôi.</p>
                                     <form class="form" action="" method="post" id="footerSubcribeFormSubmit">
                                         <fieldset class="form-fieldset">
                                             <input type="hidden" name="action" value="subscribe">
@@ -336,9 +332,9 @@
                                             <div class="form-field">
                                                 <div class="form-wrap">
                                                     <input class="form-input" id="nl_email" name="nl_email" type="email"
-                                                        value="" placeholder="enter your email address">
+                                                        value="" placeholder="Nhập email của bạn">
                                                     <input class="btn btn-primary btn-subcribe" type="submit"
-                                                        value="Subscribe">
+                                                        value="Đăng ký">
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -346,7 +342,7 @@
                                 </div>
 
 
-                                <h3 class="social-heading">Stay Connected</h3>
+                                <h3 class="social-heading">Kết nối với chúng tôi</h3>
                                 <ul class="social-icons">
                                     <li class="socialLinks-item">
                                         <a class="icon icon--facebook" href="https://www.themevale.com/"
@@ -390,17 +386,11 @@
                         <div class="row1">
                             <div class="col-left">
                                 <div class="footer-copyright">
-                                    <p>&copy; 2021 Beautica All Rights Reserved.</p>
+                                    <p>&copy; 2022 Beautica All Rights Reserved.</p>
+                                    <a href="#">vukimanh2300@gmail.com</a>
                                 </div>
 
-                                <div class="powered-by">
-                                    <p>Ecommerce Software by <a href="https://www.bigcommerce.com/">BigCommerce</a>.</p>
-                                </div>
-
-                                <div class="template-by">
-                                    <p>BigCommerce Themes &amp; Templates by <a href="https://www.themevale.com/"
-                                            target="_blank" rel="nofollow">ThemeVale.com</a></p>
-                                </div>
+            
                             </div>
                             <div class="col-right">
                                 <div class="footer-payment-icons">

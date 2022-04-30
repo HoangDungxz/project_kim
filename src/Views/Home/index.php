@@ -7,11 +7,11 @@
              </div>
              <div class="heroCarousela-content" style="display: flex; justify-content: center;">
                  <div class="heroCarousela-content-inner animated content2">
-                     <h1 class="heroCarousela-title animated">Beautifully Bare Collection</h1>
+                     <h1 class="heroCarousela-title animated">mới & vượt trội</h1>
                      <div class="heroCarousela-description animated">
-                         <p>It’s the Lightweight, Natural-Looking Collection You Love</p>
+                         <p>Phép màu thực sự cho làn da tái sinh</p>
                      </div>
-                     <a style="margin-bottom: -22px;" class="heroCarousela-action btn btn-primary btn-lg animated" href="http://www.themevale.com/bigcommerce-templates">Shop Now</a>
+                     <a style="margin-bottom: -22px;" class="heroCarousela-action btn btn-primary btn-lg animated" href="http://www.themevale.com/bigcommerce-templates">Mua Ngay</a>
                  </div>
              </div>
          </div>
@@ -31,7 +31,7 @@
                          <p>Pellentesque posuere orci lobortis scelerisque blandit. Donec id tellus lacinia
                              andos tincidunt risus delous an consequat lorem quisquemos sodales.</p>
                      </div>
-                     <a class="heroCarousela-action btn btn-primary btn-lg animated" href="http://www.themevale.com/bigcommerce-templates">Shop Now</a>
+                     <a class="heroCarousela-action btn btn-primary btn-lg animated" href="http://www.themevale.com/bigcommerce-templates">Mua Ngay</a>
                  </div>
              </div>
          </div>
@@ -55,7 +55,7 @@
                                                  <img class="card-image lazyload" data-sizes="auto" src="<?= PUBLIC_URL ?>upload/products/<?= $p->images[0] ?>" data-src-swap="<?= PUBLIC_URL ?>upload/products/<?= $p->images[1]  ?>" alt="<?= $p->getName() ?>" title="<?= $p->getName() ?>">
                                              </a>
                                              <div class="actions">
-                                                 <a href="#" class="btnQV quickview" data-product-id="<?= $p->getId() ?>" data-event-type="product-click">Quick view</a>
+                                                 <a href="#" class="btnQV quickview" data-product-id="<?= $p->getId() ?>" data-event-type="product-click">Xem nhanh</a>
                                              </div>
                                              <?php if ($p->getHot()) : ?>
                                                  <div class="new-badge">HOT</div>
@@ -105,8 +105,8 @@
                                              </div>
 
                                              <div class="buttons-wrapper">
-                                                 <a href="<?= WEBROOT . "order/create/product_id/" . $p->getId() . "/product_price_affter_discount/" . str_replace('.', '_', $p->getPriceAffterDiscount()) ?>" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-event-type="product-click"><span>Add to Cart</span></a>
-                                                 <a href="login9340.html?action=add&amp;product_id=70" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish
+                                                 <a href="<?= WEBROOT . "order/create/product_id/" . $p->getId() . "/product_price_affter_discount/" . str_replace('.', '_', $p->getPriceAffterDiscount()) ?>" class="btn btn-primary btnATC themevale_btnATC" title="Thêm vào giỏ hàng" data-event-type="product-click"><span>Thêm vào giỏ hàng</span></a>
+                                                 <a href="login9340.html?action=add&amp;product_id=70" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Add to Wish
                                                          list</span></a>
 
                                              </div>
@@ -136,7 +136,7 @@
                                                  <img class="card-image lazyload" data-sizes="auto" src="<?= PUBLIC_URL ?>upload/products/<?= $p->images[0] ?>" data-src-swap="<?= PUBLIC_URL ?>upload/products/<?= $p->images[1]  ?>" alt="<?= $p->getName() ?>" title="<?= $p->getName() ?>">
                                              </a>
                                              <div class="actions">
-                                                 <a href="#" class="btnQV quickview" data-product-id="<?= $p->getId() ?>" data-event-type="product-click">Quick view</a>
+                                                 <a href="#" class="btnQV quickview" data-product-id="<?= $p->getId() ?>" data-event-type="product-click">Xem nhanh</a>
                                              </div>
                                              <?php if ($p->getHot()) : ?>
                                                  <div class="new-badge">HOT</div>
@@ -189,9 +189,9 @@
                                              </div>
 
                                              <div class="buttons-wrapper">
-                                                 <a href="<?= WEBROOT . "/order/create/product_id/" . $p->getId() . "/product_price_affter_discount/" . str_replace('.', '_', $p->getPriceAffterDiscount()) ?>" class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart" data-event-type="product-click"><span>Add to Cart</span></a>
+                                                 <a href="<?= WEBROOT . "/order/create/product_id/" . $p->getId() . "/product_price_affter_discount/" . str_replace('.', '_', $p->getPriceAffterDiscount()) ?>" class="btn btn-primary btnATC themevale_btnATC" title="Thêm vào giỏ hàng" data-event-type="product-click"><span>Thêm vào giỏ hàng</span></a>
 
-                                                 <a href="login9340.html?action=add&amp;product_id=70" class="btnWL" title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish
+                                                 <a href="login9340.html?action=add&amp;product_id=70" class="btnWL" title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Add to Wish
                                                          list</span></a>
 
                                              </div>

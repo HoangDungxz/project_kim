@@ -150,7 +150,7 @@
                                        </a>
                                        <div class="actions">
                                            <a href="#" class="btnQV quickview" data-product-id="<?= $p->getId() ?>"
-                                               data-event-type="product-click">Quick view</a>
+                                               data-event-type="product-click">Xem nhanh</a>
                                        </div>
                                        <?php if ($p->getHot()) : ?>
                                        <div class="new-badge">HOT</div>
@@ -199,12 +199,11 @@
 
                                        <div class="buttons-wrapper">
                                            <a href="<?= WEBROOT . "/order/create/product_id/" . $p->getId() . "/product_price_affter_discount /" . str_replace('.', '_', $p->getPriceAffterDiscount()) ?> ?>"
-                                               class="btn btn-primary btnATC themevale_btnATC" title="Add to Cart"
-                                               data-event-type="product-click"><span>Add to Cart</span></a>
+                                               class="btn btn-primary btnATC themevale_btnATC" title="Thêm vào giỏ hàng"
+                                               data-event-type="product-click"><span>Thêm vào giỏ hàng</span></a>
 
                                            <a href="/wishlist.php?action=add&amp;product_id=68" class="btnWL"
-                                               title="Add to Wish list"><i class="fa fa-heart"></i><span>Add to Wish
-                                                   list</span></a>
+                                               title="Thêm vào yêu thích"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a>
 
                                            <div class="btn-compare">
                                                <input type="checkbox" class="form-checkbox" name="products[]" value="68"

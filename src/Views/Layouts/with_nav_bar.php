@@ -29,7 +29,7 @@
                             <i class="fa fa-plus"></i></a></div>
                     <nav>
                         <div class="sidebarBlock" id="sideShopByPrice">
-                            <h5 class="side-module-heading"><span>Shop By Price</span></h5>
+                            <h5 class="side-module-heading"><span>Giá</span></h5>
                             <ul>
                                 <li>
                                     <a class="price" href="0-218000" alt="0.000 ₫ - 218,000 ₫"
@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="sidebarBlock" id="sideShopByBrands">
-                            <h5 class="side-module-heading"><span>Brands</span></h5>
+                            <h5 class="side-module-heading"><span>Thương hiệu</span></h5>
                             <ul class="navList">
                                 <?php foreach ($brands as $c) : ?>
                                 <li>
@@ -298,8 +298,8 @@
                                                             <div class="buttons-wrapper">
                                                                 <a href="#/cart.php?action=add&amp;product_id=54"
                                                                     class="btn btn-primary btnATC themevale_btnATC"
-                                                                    title="Add to Cart" data-event-type="product-click"
-                                                                    data-product-id="54"><span>Add to Cart</span></a>
+                                                                    title="Thêm vào giỏ hàng" data-event-type="product-click"
+                                                                    data-product-id="54"><span>Thêm vào giỏ hàng</span></a>
                                                             </div>
                                                         </figcaption>
                                                     </figure>

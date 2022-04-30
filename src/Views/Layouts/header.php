@@ -74,7 +74,7 @@ use SRC\helper\SESSION;
                 <div class="customer-dropdown-login hidden-xs hidden-sm">
                     <div class="say-hi"><span>Xin chào,<?= SESSION::get('customers', 'name') ?></span></div>
                     <div class="customer-login">
-                        <a href="javascript:void(0);" class="toggle-dropdown-login" style="margin-right: 10px;"><?= SESSION::get('customers') == null ? "Đăng nhập" : "Đăng Xuất" ?></a> <a href="<?= WEBROOT ?>customers/register">Đăng ký</a>
+                        <a href="javascript:void(0);" class="toggle-dropdown-login" style="margin-right: 10px;"><?= SESSION::get('customers') == null ? "Đăng nhập" : "Thông tin tài khoản" ?></a> <a href="<?= WEBROOT ?>customers/register">Đăng ký</a>
                         <div id="dropdown-login" style="width: fit-content;">
 
                             <?php if (SESSION::get('customers') == null) : ?>
@@ -100,10 +100,13 @@ use SRC\helper\SESSION;
                                 </div>
                             <?php else : ?>
                                 <div>
-                                    <div class="panel-title" style="color: #e7040f;">Email: <span><?= SESSION::get('customers', 'email')  ?></span></div>
-                                    <div class="panel-title" style="color: #e7040f; margin-top:15px">Name: <span><?= SESSION::get('customers', 'name') ?></span></div>
+                                    <a href="" class="" style="margin-top: 30px"><span>Tài khoản của tôi</span></a><br>
+                                    <a href="" class="" style="margin-top: 30px"><span>Đơn mua</span></a><br>
 
-                                    <a href="<?= WEBROOT ?>customers/logout" class="btn btn-primary" style="margin-top: 30px"><span>Đăng xuất</span></a>
+                                    <!-- <div class="panel-title" style="color: #e7040f;">Email: <span><?= SESSION::get('customers', 'email')  ?></span></div>
+                                    <div class="panel-title" style="color: #e7040f; margin-top:15px">Name: <span><?= SESSION::get('customers', 'name') ?></span></div> -->
+
+                                    <a href="<?= WEBROOT ?>customers/logout" class="" style="margin-top: 30px"><span>Đăng xuất</span></a>
 
                                 </div>
                             <?php endif; ?>
