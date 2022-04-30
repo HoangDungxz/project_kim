@@ -134,7 +134,7 @@
 
 <script>
     $(document).ready(function() {
-        $('.order-status').on('click', function(e) {
+        $(document).on('click', '.order-status', function(e) {
 
 
             $('.status-context-menu').removeClass('visible');

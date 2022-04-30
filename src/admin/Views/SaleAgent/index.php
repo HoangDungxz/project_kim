@@ -42,6 +42,7 @@
                                         <th>#</th>
                                         <th>Tên</th>
                                         <th>Email</th>
+                                        <th>Hoa hồng</th>
 
                                         <th class="text-right"></th>
                                     </tr>

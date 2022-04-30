@@ -34,9 +34,14 @@ class SaleAgentController  extends AdminControllers
         //     ->getAll();
         // $this->with($customers);
 
-        $sale_agents = $this->customerResourceModel->getAll();
+        $sale_agents = $this->customerResourceModel
+            ->select('customers.*,SUM(orderdetails.price) as sum_price')
+            ->join('orderdetails', 'orderdetails.agent_id = customers.id', 'LEFT OUTER JOIN')
+            ->groupBy('customers.id')
+            ->getAll();
 
         $this->showSaleAgent($sale_agents);
+
         $saleAgentsShow = $this->sale_agent_show;
 
         $this->with($saleAgentsShow);
@@ -64,7 +69,8 @@ class SaleAgentController  extends AdminControllers
                             </h2>
                         </td>
                         <td><a href="mailto:' . $s->getEmail() . '">' . $s->getEmail() . '</a></td>
-   
+
+                       <td>' . number_format($s->sum_price * 20 / 100) . ' ₫</td>
 
                         <td class="text-right">
                             <a href="' . WEBROOT . 'admin/saleagent/detaild/sid/' . $s->getId() . '" class="btn btn-sm bg-success-light mr-2">
