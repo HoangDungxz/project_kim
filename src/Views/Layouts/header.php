@@ -64,7 +64,7 @@ use SRC\helper\SESSION;
                             <?php else : ?>
                                 <div>
                                     <a href="<?= WEBROOT ?>customers/detail" class=""><span>Tài khoản của tôi</span></a>
-                                    <a href="<?= WEBROOT ?>order/index" class=""><span>Đơn mua</span></a>
+                                    <a href="<?= WEBROOT ?>customers/detail?page=order" class=""><span>Đơn mua</span></a>
 
                                     <!-- <div class="panel-title" style="color: #e7040f;">Email: <span><?= SESSION::get('customers', 'email')  ?></span></div>
                                     <div class="panel-title" style="color: #e7040f; margin-top:15px">Name: <span><?= SESSION::get('customers', 'name') ?></span></div> -->
