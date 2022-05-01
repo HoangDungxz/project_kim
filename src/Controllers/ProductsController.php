@@ -93,7 +93,9 @@ class ProductsController extends FrontendControllers
 
     function ajaxSearch($params)
     {
-        $products = $this->productResourceModel->getAll(array_merge(['pageNum' => 5], $params));
+        $products = $this->productResourceModel
+            ->paginate(1, 5)
+            ->getAll($params);
 
         $this->with($products);
         $this->setLayout(false);

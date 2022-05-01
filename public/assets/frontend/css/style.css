@@ -222,6 +222,8 @@
 }
 
 .productView-options form {
+	flex: 1;
+	margin-right: 15px;
 }
 
 [data-wishlist-add] > button {
@@ -511,4 +513,8 @@ img {
 }
 .sticky-wrapper:not(.is-sticky) {
 	height: fit-content !important;
+}
+.smart-search {
+	padding: 5px;
+	box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
 }
