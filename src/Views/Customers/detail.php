@@ -32,6 +32,9 @@
                                 <li>
                                     <a class="" href="<?= WEBROOT ?>customers/detail?page=agents_commission">Tiền lãi đại lý cấp dưới</a>
                                 </li>
+                                <li>
+                                    <a class="" href="<?= WEBROOT ?>customers/detail?page=agents_invite">Mời đại lý cấp dưới</a>
+                                </li>
 
                             </ul>
                         </div>

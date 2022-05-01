@@ -4,6 +4,7 @@
         <?php
 
         use SRC\helper\SESSION;
+        use SRC\helper\URL;
 
         require_once ROOT . 'src/Views/Products/product_detail_content.php'
         ?>
@@ -143,7 +144,7 @@
                         <script>
                             $(document).ready(function() {
                                 const url = new URL(window.location.href);
-                                url.searchParams.set('saleagent', '<?= (SESSION::get('customers', 'email')) ?>');
+                                url.searchParams.set('saleagent', '<?= URL::base64_encode_url(SESSION::get('customers', 'email')) ?>');
                                 $('.sale-url').text(url);
                             });
                         </script>

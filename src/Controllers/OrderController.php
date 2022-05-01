@@ -3,6 +3,7 @@
 namespace SRC\Controllers;
 
 use SRC\helper\SESSION;
+use SRC\helper\URL;
 use SRC\Models\Customer\CustomerResourceModel;
 use SRC\Models\Order\OrderModel;
 use SRC\Models\Order\OrderResourceModel;
@@ -66,11 +67,10 @@ class OrderController extends FrontendControllers
 
         if (isset($saleagent)) {
 
+            // Lây mã đại lý rồi giải mã
             $customerId = $this->customerResourceModel
                 ->select('customers.id as customers_id')
-                ->where('email', $saleagent)->get();
-
-
+                ->where('email', URL::base64_decode_url($saleagent))->get();
 
             if ($customerId) {
                 $customerId = $customerId->customers_id;
