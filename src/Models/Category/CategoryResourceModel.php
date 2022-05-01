@@ -33,6 +33,7 @@ class CategoryResourceModel extends ResourceModel
     {
         $this->join('products', $this->table . '.id=products.category_id', 'LEFT OUTER JOIN')
             ->where("$this->table.parent_id", $params['parent_id'])
+            ->where('displayhomepage', 1)
             ->select("$this->table.*,count(products.id) as product_count")
             ->groupBy("$this->table.id");
 

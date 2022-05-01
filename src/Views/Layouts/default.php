@@ -14,6 +14,8 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="<?= PUBLIC_URL ?>frontend/scripts/jquery.sticky.js"></script>
+
     <script src="<?= PUBLIC_URL ?>admin/script/toastr.js"></script>
 
 </head>
@@ -387,7 +389,13 @@
 
         <script>
             $(document).ready(function() {
+                //sticky header
+                $("#header").sticky({
+                    topSpacing: 0
+                });
 
+
+                //  MODEP QUICK VIEW
                 $('.modal-close').on('click', function(e) {
                     e.preventDefault();
                     $('#modal').removeClass('open');
@@ -483,7 +491,7 @@
                 //di chuyển đến url tìm kiếm
                 let url = new URL(window.location.href);
 
-                if (url.pathname.indexOf('/index') < 0) {
+                if (url.pathname.indexOf('products/index') < 0) {
                     url = new URL(url.origin + '<?= WEBROOT ?>products/index');
                 }
 

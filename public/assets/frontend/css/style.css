@@ -431,3 +431,84 @@ img {
 	padding: 15px 0;
 	font-size: 16px;
 }
+
+#header {
+	background-color: #fff;
+	z-index: 999999 !important;
+}
+
+.sticky-wrapper.is-sticky .container {
+	width: 100% !important;
+	justify-content: start;
+	padding: 0 15px;
+	box-sizing: border-box;
+}
+
+.sticky-wrapper.is-sticky .header-middle .center {
+	display: none;
+}
+
+.sticky-wrapper.is-sticky .header-middle .left {
+	width: fit-content;
+	padding: 0 16px;
+}
+.sticky-wrapper.is-sticky .header-middle .right {
+	margin-left: auto;
+	width: fit-content;
+	padding: 16px 0;
+}
+.sticky-wrapper.is-sticky .header-middle .form-field {
+	margin: 0 !important;
+}
+
+.sticky-wrapper.is-sticky .navPages {
+	width: fit-content;
+}
+
+.sticky-wrapper.is-sticky .navPages-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: fit-content;
+}
+.previewCartList.gm-scrollbar-container {
+	height: 400px;
+	overflow-y: scroll;
+}
+.slick-dots {
+	bottom: 15px;
+}
+.slick-dots button::before {
+	background-color: #fff;
+}
+.slick-dots li.slick-active button::before {
+	background: none;
+}
+
+.slick-dots li button {
+	border: 2px solid #fff;
+}
+.slick-dots li button:hover::before {
+	background: none;
+}
+
+#dropdown-login {
+	padding: 0 !important;
+}
+
+#dropdown-login a {
+	padding: 10px 20px !important;
+	display: block;
+}
+.header-middle
+	> .container
+	> .right
+	.customer-dropdown-login
+	.customer-login
+	#dropdown-login {
+	margin-left: 0;
+}
+.sticky-wrapper:not(.is-sticky) {
+	height: fit-content !important;
+}

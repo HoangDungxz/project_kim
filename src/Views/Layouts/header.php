@@ -3,7 +3,7 @@
 use SRC\helper\SESSION;
 ?>
 
-<header class="header" role="banner">
+<header class="header" role="banner" id="header">
     <div class="header-middle">
         <div class="container">
             <div class="left">
@@ -27,8 +27,18 @@ use SRC\helper\SESSION;
                         //bắt sựn kiện click của id=btndSearch
                         $("#btnSearch").click(function() {
                             var key = $("#key").val();
+
                             //di chuyển đến url tìm kiếm
-                            location.href = "index.php?controller=search&action=name&key=" + key;
+                            let url = new URL(window.location.href);
+
+                            if (url.pathname.indexOf('products/index') < 0) {
+                                url = new URL(url.origin + '<?= WEBROOT ?>products/index');
+                            }
+
+                            url.searchParams.set('key', key);
+
+                            window.location.href = url;
+
 
                         });
                         // smart search
@@ -100,13 +110,13 @@ use SRC\helper\SESSION;
                                 </div>
                             <?php else : ?>
                                 <div>
-                                    <a href="" class="" style="margin-top: 30px"><span>Tài khoản của tôi</span></a><br>
-                                    <a href="" class="" style="margin-top: 30px"><span>Đơn mua</span></a><br>
+                                    <a href="" class=""><span>Tài khoản của tôi</span></a>
+                                    <a href="" class=""><span>Đơn mua</span></a>
 
                                     <!-- <div class="panel-title" style="color: #e7040f;">Email: <span><?= SESSION::get('customers', 'email')  ?></span></div>
                                     <div class="panel-title" style="color: #e7040f; margin-top:15px">Name: <span><?= SESSION::get('customers', 'name') ?></span></div> -->
 
-                                    <a href="<?= WEBROOT ?>customers/logout" class="" style="margin-top: 30px"><span>Đăng xuất</span></a>
+                                    <a href="<?= WEBROOT ?>customers/logout" class=""><span>Đăng xuất</span></a>
 
                                 </div>
                             <?php endif; ?>
@@ -164,15 +174,9 @@ use SRC\helper\SESSION;
                                 <?php endif; ?>
                                 <div class="previewCartAction">
 
-                                    <div class="previewCartAction-checkout">
-                                        <a href="/checkout" class="btn btn-checkout">
-                                            Check out now
-                                        </a>
-                                    </div>
-
                                     <div class="previewCartAction-viewCart">
-                                        <a href="<?= WEBROOT ?>order/index" class="btn btn-alt">
-                                            View Cart
+                                        <a href="<?= WEBROOT ?>order/index" class="btn btn-checkout">
+                                            Xem giỏ hàng
                                         </a>
                                     </div>
                                     <div class="clear"></div>
