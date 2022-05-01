@@ -127,8 +127,8 @@ class SaleAgentController  extends AdminControllers
             die;
         }
         $sale_agents = $this->customerResourceModel
-
             ->getAll();
+
 
 
         $sale_agent = $this->customerResourceModel
@@ -137,7 +137,8 @@ class SaleAgentController  extends AdminControllers
             ->where('customers.id', $params['sid'])
             ->groupBy('customers.id')
             ->get();
-
+        $this->with($sale_agent);
+        // thông tin tiền hàng bán được
         $sale_success = $this->customerResourceModel
             ->join('orderdetails', 'orderdetails.agent_id = customers.id')
 
@@ -154,15 +155,12 @@ class SaleAgentController  extends AdminControllers
             products.name as products_name')
             ->getAll();
 
+        $this->with($sale_success);
+
+
         $this->countCommissionFromChild($sale_agents, $sale_agent->getId(), 1);
 
         $commission_from_child = $this->commission_from_child;
-
-
-        $this->with($sale_success);
-
-        $this->with($sale_agent);
-
         $this->with($commission_from_child);
 
         $child_agents = $this->child_agents;

@@ -46,13 +46,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($orders as $o) : ?>
+                                    <?php
+
+                                    use SRC\helper\DATE;
+
+                                    foreach ($orders as $o) : ?>
                                         <tr>
                                             <td><?= $o->getId() ?></td>
                                             <td><?= $o->customers_name ?></td>
                                             <td><?= $o->customers_phone ?></td>
                                             <td><?= $o->customers_address ?></td>
-                                            <td><?= date_format(DateTime::createFromFormat('Y-m-d', $o->getDate()), "d/m/Y") ?></td>
+                                            <td><?= DATE::format($o->getDate()) ?></td>
                                             <td><?= $o->sum_quantity ?></td>
                                             <td class="text-right"><?= number_format($o->sum_price) ?> ₫</td>
 

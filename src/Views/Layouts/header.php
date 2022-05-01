@@ -21,54 +21,7 @@ use SRC\helper\SESSION;
                     </div>
                 </div>
 
-                <script type="text/javascript">
-                    //tính năng này phải dùng kết hợp với jquery ->phải load thư viện jquerry( nếu bài chưa load jquerry, kiểm tra jquerry có hoạt động không bằng  cách thêm alert("ok") vào bên trong tag này)
-                    $(document).ready(function() {
-                        //bắt sựn kiện click của id=btndSearch
-                        $("#btnSearch").click(function() {
-                            var key = $("#key").val();
 
-                            //di chuyển đến url tìm kiếm
-                            let url = new URL(window.location.href);
-
-                            if (url.pathname.indexOf('products/index') < 0) {
-                                url = new URL(url.origin + '<?= WEBROOT ?>products/index');
-                            }
-
-                            url.searchParams.set('key', key);
-
-                            window.location.href = url;
-
-
-                        });
-                        // smart search
-                        $(".form-input").keyup(function() {
-                            var strkey = $("#key").val();
-
-                            if (strkey.trim() == "") {
-                                $(".smart-search ul").empty();
-                                $(".smart-search").attr("style", "display:none");
-                            } else {
-                                $(".smart-search").attr("style", "display:block");
-                                //sử dụng ẫ để lấy dữ liệu
-
-                                $.ajax({
-                                    url: '<?= WEBROOT ?>products/ajaxSearch?key=' + strkey,
-                                    type: 'GET',
-                                }).done(function(data) {
-
-                                    //clear các thẻ li bên trong thẻ ul
-                                    $(".smart-search ul").empty();
-                                    //thêm dữ liệu vừa lấy được bằng ẫ vào thẻ ul
-                                    $(".smart-search ul").append(data);
-                                }).always(function() {
-
-                                });
-
-                            }
-                        })
-                    });
-                </script>
             </div>
 
             <div class="center">
@@ -110,8 +63,8 @@ use SRC\helper\SESSION;
                                 </div>
                             <?php else : ?>
                                 <div>
-                                    <a href="" class=""><span>Tài khoản của tôi</span></a>
-                                    <a href="" class=""><span>Đơn mua</span></a>
+                                    <a href="<?= WEBROOT ?>customers/detail" class=""><span>Tài khoản của tôi</span></a>
+                                    <a href="<?= WEBROOT ?>order/index" class=""><span>Đơn mua</span></a>
 
                                     <!-- <div class="panel-title" style="color: #e7040f;">Email: <span><?= SESSION::get('customers', 'email')  ?></span></div>
                                     <div class="panel-title" style="color: #e7040f; margin-top:15px">Name: <span><?= SESSION::get('customers', 'name') ?></span></div> -->

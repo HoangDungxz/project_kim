@@ -423,7 +423,6 @@
                 })
 
 
-
                 $('.prod-item').hover(
                     function() {
                         $(this).closest('section').css('z-index', '99999');
@@ -503,7 +502,9 @@
 
             $('.btn-tag-price').click(function() {
                 const url = new URL(window.location.href);
+
                 var value = $(".btn-tag-price").val();
+
                 url.searchParams.delete(value);
                 window.location.href = url;
             });
@@ -511,6 +512,12 @@
             $('.btn-tag-brand').click(function() {
                 const url = new URL(window.location.href);
                 var value = $(".btn-tag-brand").val();
+                url.searchParams.delete(value);
+                window.location.href = url;
+            });
+            $('.btn-tag-search').click(function() {
+                const url = new URL(window.location.href);
+                var value = $(".btn-tag-search").val();
                 url.searchParams.delete(value);
                 window.location.href = url;
             });
@@ -533,7 +540,7 @@
 
             function showTags() {
                 var vars = getUrlVars();
-                console.log(vars);
+
                 for (var i = 0; i < vars.length; i++) {
                     for (var j = 0; j < vars[i].length; j++) {
                         switch (vars[i][j]) {
@@ -561,6 +568,16 @@
                                 $(".tag-brand").append(vars[i][j] + ': ' + name);
 
                                 $(".btn-tag-brand").val(vars[i][j]);
+                                break;
+
+                            case 'key':
+
+                                let key = vars[i][j + 1];
+
+
+                                $(".tag-search").append('name: ' + decodeURIComponent(key));
+
+                                $(".btn-tag-search").val(vars[i][j]);
                                 break;
                             default:
                                 break;
@@ -617,6 +634,54 @@
                     scrollTop: 400
                 }, "slow");
 
+            });
+        </script>
+
+
+        <script type="text/javascript">
+            //tính năng này phải dùng kết hợp với jquery ->phải load thư viện jquerry( nếu bài chưa load jquerry, kiểm tra jquerry có hoạt động không bằng  cách thêm alert("ok") vào bên trong tag này)
+            $(document).ready(function() {
+                //bắt sựn kiện click của id=btndSearch
+                $("#btnSearch").click(function() {
+
+                    var key = $("#key").val();
+                    //di chuyển đến url tìm kiếm
+                    let url = new URL(window.location.href);
+
+                    if (url.pathname.indexOf('products/index') < 0) {
+                        url = new URL(url.origin + '<?= WEBROOT ?>products/index');
+                    }
+
+                    url.searchParams.set('key', key);
+                    window.location.href = url;
+
+                });
+                // smart search
+                $(".form-input").keyup(function() {
+                    var strkey = $("#key").val();
+
+                    if (strkey.trim() == "") {
+                        $(".smart-search ul").empty();
+                        $(".smart-search").attr("style", "display:none");
+                    } else {
+                        $(".smart-search").attr("style", "display:block");
+                        //sử dụng ẫ để lấy dữ liệu
+
+                        $.ajax({
+                            url: '<?= WEBROOT ?>products/ajaxSearch?key=' + strkey,
+                            type: 'GET',
+                        }).done(function(data) {
+
+                            //clear các thẻ li bên trong thẻ ul
+                            $(".smart-search ul").empty();
+                            //thêm dữ liệu vừa lấy được bằng ẫ vào thẻ ul
+                            $(".smart-search ul").append(data);
+                        }).always(function() {
+
+                        });
+
+                    }
+                })
             });
         </script>
 </body>

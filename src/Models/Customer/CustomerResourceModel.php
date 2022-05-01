@@ -3,7 +3,6 @@
 namespace SRC\Models\Customer;
 
 use SRC\Core\ResourceModel;
-use SRC\helper\MSG;
 
 class CustomerResourceModel extends ResourceModel
 {
@@ -13,7 +12,7 @@ class CustomerResourceModel extends ResourceModel
 
         $customerLogined =  $this->where('email', $customer->getEmail())
             ->where('password', md5($customer->getPassword()))
-            ->select("name,email,address,phone,id,superior_agent_id")
+            ->select("name,email,address,phone,id,superior_agent_id,avatar")
             ->get();
 
         if (($customerLogined) != null) {
@@ -27,7 +26,7 @@ class CustomerResourceModel extends ResourceModel
 
         $customerLogined =  $this->where('email', $customer->getEmail())
             ->where('password', ($customer->getPassword()))
-            ->select("name,email,address,phone,id")
+            ->select("name,email,address,phone,id,superior_agent_id,avatar")
             ->get();
 
         if (($customerLogined) != null) {

@@ -51,11 +51,11 @@
                             <table class="table table-hover table-center mb-0 datatable">
 
                                 <tr>
-                                    <th style="width:120px;">Photo</th>
-                                    <th>Name</th>
-                                    <th style="width:120px;">Price</th>
-                                    <th style="width:120px;">Discount</th>
-                                    <th style="width:120px;">Quanlity</th>
+                                    <th style="width:120px;">Ảnh</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th style="width:120px;">Giá</th>
+                                    <th style="width:120px;">chiết khất</th>
+                                    <th style="width:120px;">Số lượng</th>
                                 </tr>
 
                                 <tbody>
@@ -71,7 +71,7 @@
                                             </td>
                                             <td><?php echo $od->products_name; ?></td>
 
-                                            <td><?php echo number_format($od->products_price); ?></td>
+                                            <td><?php echo number_format($od->products_price); ?> ₫</td>
                                             <td><?php echo $od->products_discount; ?></td>
 
                                             <td><?php echo $od->getQuantity(); ?></td>

@@ -267,7 +267,7 @@
 }
 
 .cart-frontend td {
-	text-align: left !important;
+	text-align: left;
 	vertical-align: middle !important;
 }
 
@@ -496,7 +496,7 @@ img {
 }
 
 #dropdown-login {
-	padding: 0 !important;
+	/* padding: 0 !important; */
 }
 
 #dropdown-login a {
@@ -539,4 +539,8 @@ img {
 	padding: 0;
 	border: none;
 	background: none;
+}
+
+.sidebarBlock .side-module-heading {
+	border: 0;
 }
