@@ -17,19 +17,13 @@ class ProductResourceModel extends ResourceModel
     public function getAll($params = [])
     {
 
-        // $paginateSqlDefault = [
-        //     'p' => 1,
-        //     'pageNum' => 20
-        // ];
-
-        // $params =  array_merge($paginateSqlDefault, $params);
-
         foreach ($params as $key => $value) {
             $value = urldecode($value);
             $key = urldecode($key);
 
             switch ($key) {
                 case 'p':
+                    $params['pageNum'] = $params['pageNum'] ?? 8;
                     $this->paginate($params['p'], $params['pageNum']);
                     break;
                 case 'price':
@@ -76,6 +70,7 @@ class ProductResourceModel extends ResourceModel
                     break;
             }
         }
+
         $this->join('categories', "$this->table.category_id=categories.id", 'LEFT OUTER JOIN')
             ->join('brands', "$this->table.brand_id=brands.id", 'LEFT OUTER JOIN')
             ->select("$this->table.*,categories.name as category_name,brands.name as brands_name");
@@ -101,6 +96,16 @@ class ProductResourceModel extends ResourceModel
         $product->images = $this->includeImage($product->getId());
 
         return $product;
+    }
+
+    public function countProducts()
+    {
+
+        $this->select('COUNT(id) as count_product');
+
+        $countProducts = parent::get();
+
+        return $countProducts != null ? $countProducts->count_product : 0;
     }
 
     public function getAllInclule(...$columns)

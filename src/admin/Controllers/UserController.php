@@ -131,7 +131,7 @@ class UserController extends AdminControllers
             $user->setStatus($status ?? 0);
             $user->setPermission_id($permission);
 
-            if (strpos($password, '*') !== false) {
+            if (strpos($password, '*') === false) {
                 $user->setPassword($password);
             }
             extract($_FILES);

@@ -22,6 +22,8 @@
 
     <!-- Select CSS -->
     <link rel="stylesheet" href="<?= PUBLIC_URL ?>admin/css/select2.min.css" />
+    <link rel="stylesheet" href="<?= PUBLIC_URL ?>admin\plugins\datatables\datatables.min.css" />
+
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="<?= PUBLIC_URL ?>admin/css/admin.css" />
@@ -33,6 +35,7 @@
 
     <!-- Datatables JS -->
     <script src="<?= PUBLIC_URL ?>admin/plugins/datatables/datatable.min.js"></script>
+    <!-- <script src="<?= PUBLIC_URL ?>admin\plugins\datatables\jquery.dataTables.min.js"></script> -->
 
     <script src="<?= PUBLIC_URL ?>admin/script/toastr.js"></script>
 

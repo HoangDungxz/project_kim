@@ -28,11 +28,13 @@ class CustomersController extends FrontendControllers
             $login = $this->customerResourceModel->login($customer);
 
             if ($login == true) {
+                MSG::send('Đăng nhập thành công', 'success');
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
+                die;
             } else {
-                header('Location: ' . $_SERVER['HTTP_REFERER']);
-                $message  = '';
+
                 MSG::send('Địa chỉ email hoặc mật khẩu của bạn không chính xác. Vui lòng thử lại. Nếu bạn quên chi tiết đăng nhập của mình, chỉ cần nhấp vào liên kết `Quên mật khẩu?` đường dẫn phía dưới.');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
                 die;
             }
         }
@@ -44,16 +46,23 @@ class CustomersController extends FrontendControllers
     public function logout()
     {
         $this->customerResourceModel->remove();
-
+        MSG::send('Đăng xuất thành công', 'success');
         header('Location: ' . $_SERVER['HTTP_REFERER']);
+        die;
     }
 
     public function register()
     {
-
         extract($_POST);
 
-        if (isset($register_name, $register_phone, $register_email, $register_pass, $register_address)) {
+
+        if (
+            isset($register_name, $register_phone, $register_email, $register_pass, $register_address)
+            && $register_name != null
+            && $register_name != null && $register_phone != null && $register_email != null && $register_pass !=
+            null && $register_address != null
+        ) {
+
             $customer = new CustomerModel();
             $customer->setName($register_name);
             $customer->setPhone($register_phone);
@@ -69,15 +78,59 @@ class CustomersController extends FrontendControllers
                 $avatar =  $this->customerResourceModel->upload($register_avartar);
             }
 
-
             $customer->setAvatar($avatar ?? 'default_customer_image.jpg');
 
             if ($this->customerResourceModel->save($customer)) {
+                MSG::send('Đăng ký thành công', 'success');
 
                 $this->customerResourceModel->loginAfterRegister($customer);
+
+                MSG::send('Đăng nhập thành công', 'success');
+
                 header('Location: ' . WEBROOT);
+                die;
+            } else {
+                MSG::send('Đăng ký lỗi');
+
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                die;
+            }
+        } else {
+
+            $msg = '';
+
+            foreach (array_reverse($_POST) as $key => $post) {
+                if ($post == null) {
+
+                    switch ($key) {
+                        case 'register_name':
+                            $msg = 'Tên đăng nhập ';
+                            MSG::send($msg . ' Không được để trống');
+                            break;
+                        case 'register_phone':
+                            $msg = 'Số điện thoại ';
+                            MSG::send($msg . ' Không được để trống');
+                            break;
+                        case 'register_email':
+                            $msg = 'Email ';
+                            MSG::send($msg . ' Không được để trống');
+                            break;
+                        case 'register_pass':
+                            $msg = 'Mật khẩu ';
+                            MSG::send($msg . ' Không được để trống');
+                            break;
+                        case 'register_address':
+                            $msg = 'Địa chỉ ';
+                            MSG::send($msg . ' Không được để trống');
+                            break;
+                        default:
+                            # code...
+                            break;
+                    }
+                }
             }
         }
+
         $this->render('register', false);
     }
 }

@@ -4,23 +4,33 @@ namespace SRC\Controllers;
 
 use SRC\Core\Controller;
 use SRC\helper\SESSION;
+use SRC\Models\Brand\BrandResourceModel;
 use SRC\Models\Category\CategoryResourceModel;
 
 class FrontendControllers extends Controller
 {
     private $categoriesShow = '';
-
+    private $brandResourceModel;
     function __construct()
     {
+
+        $this->brandResourceModel = new BrandResourceModel();
+
         $this->getCategories();
         $this->getOrder();
 
         $categoriesResourceModel = new CategoryResourceModel();
-        $categories = $categoriesResourceModel->getAll();
+        $categories = $categoriesResourceModel
+            ->where('displayhomepage', 1)
+            ->getAll();
 
         $this->showCategories($categories);
         $categoriesShow = $this->categoriesShow;
         $this->with($categoriesShow);
+
+
+        $brands = $this->brandResourceModel->getAll();
+        $this->with($brands);
 
         // die;
     }

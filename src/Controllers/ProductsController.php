@@ -5,15 +5,13 @@ namespace SRC\Controllers;
 use SRC\Models\Category\CategoryResourceModel;
 use SRC\Models\Image\ImageResourceModel;
 use SRC\Models\Product\ProductResourceModel;
-use SRC\Models\Brand\BrandResourceModel;
-
 
 
 class ProductsController extends FrontendControllers
 {
     private $productResourceModel;
     private $categoryResourceModel;
-    private $brandResourceModel;
+
 
     function __construct()
     {
@@ -21,37 +19,46 @@ class ProductsController extends FrontendControllers
         $this->productResourceModel = new ProductResourceModel();
         $this->categoryResourceModel = new CategoryResourceModel();
         $this->imageResoureModel = new ImageResourceModel();
-        $this->brandResourceModel = new BrandResourceModel();
     }
     function index($params)
     {
+        $params['p'] = $params['p'] ?? 1;
 
-        if (isset($params['cid'])) {
-            $products = $this->productResourceModel->where('category_id', $params['cid'])
+        if (count($params) > 0) {
+            $products = $this->productResourceModel
                 ->getAll($params);
+            unset($params['p']);
+            $countProducts = count($this->productResourceModel->getAll($params));
         } else {
             $products = $this->productResourceModel
                 ->getAll($params);
+
+            $countProducts = $this->productResourceModel->countProducts();
         }
 
         $categoryId = $params['cid'] ?? null;
+
         if ($categoryId != null) {
             $categoriesWithParents = array_reverse($this->categoryResourceModel->getWithParents($categoryId));
         } else {
             $categoriesWithParents = null;
         }
 
-        $brands = array_reverse($this->brandResourceModel->getAll());
+
 
         // tạo sub category
         $childCategories = $this->categoryResourceModel->getChildCategories([
             'parent_id' => $categoryId
         ]);
 
+
         $this->with($products);
         $this->with($childCategories);
         $this->with($categoriesWithParents);
-        $this->with($brands);
+
+
+
+        $this->with($countProducts);
 
         $this->render("product_list");
     }

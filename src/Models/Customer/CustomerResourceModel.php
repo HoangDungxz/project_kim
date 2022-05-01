@@ -3,6 +3,7 @@
 namespace SRC\Models\Customer;
 
 use SRC\Core\ResourceModel;
+use SRC\helper\MSG;
 
 class CustomerResourceModel extends ResourceModel
 {
