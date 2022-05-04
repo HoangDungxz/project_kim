@@ -6,7 +6,12 @@ class DATE
 {
     public static function format($originalDate)
     {
-        $originalDate = "2010-03-21";
+
         return date("d-m-Y", strtotime($originalDate));
+    }
+    public static function format_vn_datetime($originalDate)
+    {
+
+        return date("d-m-Y H:i", strtotime($originalDate));
     }
 }

@@ -1,8 +1,142 @@
+<style>
+    #review_modal_form {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 99999999;
+        background-color: #ffff;
+        padding: 20px;
+        box-sizing: border-box;
+        min-width: 500px;
+        box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+        display: none;
+    }
+
+    .review_modal_form_active {
+        display: block !important;
+    }
+
+    textarea {
+        width: 100%;
+        border: 1px solid;
+        padding: 5px 7px;
+    }
+
+    .rating {
+        margin-top: 20px;
+    }
+
+    .card-review {
+        margin-top: 30px;
+    }
+
+    #review_modal_cover {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 99999999;
+        width: 100vw;
+        height: 100vh;
+        /* background-color: #333;
+        opacity: .5; */
+    }
+
+    .rating {
+        --dir: right;
+        --fill: gold;
+        --fillbg: rgba(100, 100, 100, 0.15);
+        --heart: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.328l-1.453-1.313q-2.484-2.25-3.609-3.328t-2.508-2.672-1.898-2.883-0.516-2.648q0-2.297 1.57-3.891t3.914-1.594q2.719 0 4.5 2.109 1.781-2.109 4.5-2.109 2.344 0 3.914 1.594t1.57 3.891q0 1.828-1.219 3.797t-2.648 3.422-4.664 4.359z"/></svg>');
+        --star: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.25l-6.188 3.75 1.641-7.031-5.438-4.734 7.172-0.609 2.813-6.609 2.813 6.609 7.172 0.609-5.438 4.734 1.641 7.031z"/></svg>');
+        --stars: 5;
+        --starsize: 3rem;
+        --symbol: var(--star);
+        --value: 1;
+        --w: calc(var(--stars) * var(--starsize));
+        --x: calc(100% * (var(--value) / var(--stars)));
+        block-size: var(--starsize);
+        inline-size: var(--w);
+        position: relative;
+        touch-action: manipulation;
+        -webkit-appearance: none;
+    }
+
+    [dir="rtl"] .rating {
+        --dir: left;
+
+    }
+
+    .rating::-moz-range-track {
+        background: linear-gradient(to var(--dir), var(--fill) 0 var(--x), var(--fillbg) 0 var(--x));
+        block-size: 100%;
+        mask: repeat left center/var(--starsize) var(--symbol);
+    }
+
+    .rating::-webkit-slider-runnable-track {
+        background: linear-gradient(to var(--dir), var(--fill) 0 var(--x), var(--fillbg) 0 var(--x));
+        block-size: 100%;
+        mask: repeat left center/var(--starsize) var(--symbol);
+        -webkit-mask: repeat left center/var(--starsize) var(--symbol);
+    }
+
+    .rating::-moz-range-thumb {
+        height: var(--starsize);
+        opacity: 0;
+        width: var(--starsize);
+    }
+
+    .rating::-webkit-slider-thumb {
+        height: var(--starsize);
+        opacity: 0;
+        width: var(--starsize);
+        -webkit-appearance: none;
+    }
+
+    .rating,
+    .rating-label {
+        display: block;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+    }
+
+    .rating-label {
+        margin-block-end: 1rem;
+    }
+
+    /* NO JS */
+    .rating--nojs::-moz-range-track {
+        background: var(--fillbg);
+    }
+
+    .rating--nojs::-moz-range-progress {
+        background: var(--fill);
+        block-size: 100%;
+        mask: repeat left center/var(--starsize) var(--star);
+    }
+
+    .rating--nojs::-webkit-slider-runnable-track {
+        background: var(--fillbg);
+    }
+
+    .rating--nojs::-webkit-slider-thumb {
+        background-color: var(--fill);
+        box-shadow: calc(0rem - var(--w)) 0 0 var(--w) var(--fill);
+        opacity: 1;
+        width: 1px;
+    }
+
+    [dir="rtl"] .rating--nojs::-webkit-slider-thumb {
+        box-shadow: var(--w) 0 0 var(--w) var(--fill);
+    }
+</style>
+
 <main itemscope="" itemtype="http://schema.org/Product" class="page-content col-sm-9">
     <div class="productView productView-1">
 
         <?php
 
+        use SRC\helper\DATE;
+        use SRC\helper\RATING;
         use SRC\helper\SESSION;
         use SRC\helper\URL;
 
@@ -17,7 +151,7 @@
 
             <div class="tabs flex-tabs">
                 <label for="tab-description" id="tab-description-label" class="tab">Miêu tả</label>
-                <label for="tab-reviews" id="tab-reviews-label" class="tab">ĐÁNH GIÁ (5) </label>
+                <label for="tab-reviews" id="tab-reviews-label" class="tab">ĐÁNH GIÁ (<?= count($ratings) ?>) </label>
 
                 <!-- BEGIN Custom Product Tab title -->
                 <label for="tab-custom" id="tab-custom-label" class="tab">Đường dẫn chia sẻ sản phẩm</label>
@@ -27,112 +161,35 @@
                     <?= $product->getContent() ?>
                     <div id="eJOY__extension_root" class="eJOY__extension_root_class" style="all: unset;">&nbsp;</div>
                     <!-- snippet location product_description -->
-
                 </div>
 
                 <div id="tab-reviews-panel" class="panel">
                     <section data-product-reviews="">
 
-                        <a class="btn btn-alt" href="#" data-reveal-id="modal-review-form">Write a Review</a>
+                        <a class="btn btn-alt review_button_form" href=" #" data-reveal-id="modal-review-form">VIết đánh giá</a>
 
                         <ul class="productReviews-list" id="productReviews-list">
-                            <li class="productReview">
-                                <article itemprop="review" itemscope="" itemtype="http://schema.org/Review">
-                                    <header>
-                                        <h5 itemprop="name" class="productReview-title">Gilro</h5>
-                                        <span class="productReview-rating rating--small" itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating">
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <!-- snippet location product_rating -->
-                                            <span class="productReview-ratingNumber" itemprop="ratingValue">5</span>
-                                        </span>
-                                        <meta itemprop="author" content="Kun Nam">
-                                        <p class="productReview-author">
-                                            Posted by <strong>Kun Nam</strong> on 5th Nov 2018
-                                        </p>
-                                    </header>
-                                    <p itemprop="reviewBody" class="productReview-body">Killer</p>
-                                </article>
-                            </li>
-                            <li class="productReview">
-                                <article itemprop="review" itemscope="" itemtype="http://schema.org/Review">
-                                    <header>
-                                        <h5 itemprop="name" class="productReview-title">Vip Hunter</h5>
-                                        <span class="productReview-rating rating--small" itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating">
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <!-- snippet location product_rating -->
-                                            <span class="productReview-ratingNumber" itemprop="ratingValue">5</span>
-                                        </span>
-                                        <meta itemprop="author" content="Kim jule">
-                                        <p class="productReview-author">
-                                            Posted by <strong>Kim jule</strong> on 5th Nov 2018
-                                        </p>
-                                    </header>
-                                    <p itemprop="reviewBody" class="productReview-body">Kaa</p>
-                                </article>
-                            </li>
-                            <li class="productReview">
-                                <article itemprop="review" itemscope="" itemtype="http://schema.org/Review">
-                                    <header>
-                                        <h5 itemprop="name" class="productReview-title">We promise to</h5>
-                                        <span class="productReview-rating rating--small" itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating">
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star"></i>
-                                            <!-- snippet location product_rating -->
-                                            <span class="productReview-ratingNumber" itemprop="ratingValue">4</span>
-                                        </span>
-                                        <meta itemprop="author" content="Nam An">
-                                        <p class="productReview-author">
-                                            Posted by <strong>Nam An</strong> on 5th Nov 2018
-                                        </p>
-                                    </header>
-                                    <p itemprop="reviewBody" class="productReview-body">hi</p>
-                                </article>
-                            </li>
-                            <li class="productReview">
-                                <article itemprop="review" itemscope="" itemtype="http://schema.org/Review">
-                                    <header>
-                                        <h5 itemprop="name" class="productReview-title">Naminos delementum</h5>
-                                        <span class="productReview-rating rating--small" itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating">
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <i class="fa fa-star color"></i>
-                                            <!-- snippet location product_rating -->
-                                            <span class="productReview-ratingNumber" itemprop="ratingValue">5</span>
-                                        </span>
-                                        <meta itemprop="author" content="ThemeVale">
-                                        <p class="productReview-author">
-                                            Posted by <strong>ThemeVale</strong> on 7th Sep 2017
-                                        </p>
-                                    </header>
-                                    <p itemprop="reviewBody" class="productReview-body">Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.Donec pretium egestas sapien et mollis.</p>
-                                </article>
-                            </li>
-                        </ul>
 
-                        <div class="pagination">
-                            <ul class="pagination-list">
+                            <?php foreach ($ratings as $key => $r) : ?>
 
-                                <li class="pagination-item pagination-item--next">
-                                    <a class="pagination-link" href="#/sample-chanel-the-cheetah/?revpage=2" data-faceted-search-facet="">
-                                        <span>Next</span> <i class="fa fa-angle-right"></i>
-                                    </a>
+                                <li class="productReview">
+                                    <article itemprop="review" itemscope="" itemtype="http://schema.org/Review">
+                                        <header>
+                                            <h5 itemprop="name" class="productReview-title"><?= $r->customers_name ?></h5>
+                                            <span class="productReview-rating rating--small" itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating">
+                                                <?= RATING::toStar($r->getStar()) ?>
+                                                <!-- snippet location product_rating -->
+                                                <span class="productReview-ratingNumber" itemprop="ratingValue">5</span>
+                                            </span>
+                                        </header>
+                                        <p itemprop="reviewBody" class="productReview-body"><?= $r->getComment() ?></p>
+                                        <p class="productReview-author">
+                                            Đã đăng bởi <strong><?= $r->customers_name ?></strong> vào <?= DATE::format_vn_datetime($r->getCreated_at()) ?>
+                                        </p>
+                                    </article>
                                 </li>
-                            </ul>
-                        </div>
-
+                            <?php endforeach; ?>
+                        </ul>
                     </section>
                     <!-- snippet location reviews -->
                 </div>
@@ -567,15 +624,6 @@
       },
       &quot;responsiveRefreshRate&quot;: 0
     }">
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1310,4 +1358,48 @@
             </section>
         </div>
     </div>
+
+    <div id="review_modal_cover">
+
+    </div>
+
+    <form action="<?= WEBROOT ?>rating/create" method="POST" id="review_modal_form">
+        <div class="card">
+            <div class='card-body'>
+                <h4>Đánh giá</h4>
+                </strong>
+                <input name='star' class="rating" min="1" max="5" oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)" step="1" style="--value:5" type="range" value="5">
+                <div class="card-review">
+                    <textarea name="comment" cols="30" rows="10" placeholder="Đánh giá của bạn về sản phẩm...."></textarea>
+                </div>
+            </div>
+        </div>
+        <input hidden name="product_id" value="<?= $product->getId() ?>" />
+        <input id="form-action-addToCart" class="btn btn-primary" type="submit" value="Gửi đánh giá">
+        </div>
+
 </main>
+
+
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '.review_button_form', function(e) {
+            e.preventDefault();
+
+            // Khiểm tra đăng nhập chưa
+            let customer_id = "<?= SESSION::get('customers', 'id') ?>"
+
+            if (customer_id == '') {
+                toastr.error('Bận cần đăng nhập để đánh giá sản phẩm.', 'Gặp lỗi!')
+            } else {
+                $('#review_modal_form').addClass('review_modal_form_active');
+                $('#review_modal_cover').addClass('review_modal_form_active');
+            }
+        })
+
+        $(document).on('click', '#review_modal_cover', function(e) {
+            $('#review_modal_form').removeClass('review_modal_form_active');
+            $('#review_modal_cover').removeClass('review_modal_form_active');
+        })
+    })
+</script>

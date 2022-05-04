@@ -39,9 +39,14 @@
 
     <script src="<?= PUBLIC_URL ?>admin/script/toastr.js"></script>
 
-    <!-- Bootstrap Core JS -->
+    <!-- Char JS -->
     <script src="<?= PUBLIC_URL ?>admin/script/popper.min.js"></script>
     <script src="<?= PUBLIC_URL ?>admin/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <script src="<?= PUBLIC_URL ?>admin/script/chart.js"></script>
+
+
 
 
 

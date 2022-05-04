@@ -49,7 +49,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($users as $u) : ?>
+                                    <?php
+
+                                    use SRC\helper\NUMBER;
+
+                                    foreach ($users as $u) : ?>
                                         <tr>
                                             <td><?= $u->getId() ?></td>
                                             <td>
@@ -60,7 +64,7 @@
                                                     <a href="#"><?= $u->getName() ?></a>
                                                 </h2>
                                             </td>
-                                            <td>0<?= number_format($u->getPhone(), 0, '', '.') ?></td>
+                                            <td><?= NUMBER::phone($u->getPhone()) ?></td>
                                             <td><a href="mailto:<?= $u->getEmail()  ?>"><?= $u->getEmail() ?></a></td>
                                             <td><label><?= $u->getStatus() == 0 ? "Chưa kích hoạt" : "Đã kích hoạt" ?></label>
                                             </td>

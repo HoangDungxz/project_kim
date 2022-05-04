@@ -417,7 +417,7 @@ img {
 }
 
 .navList {
-	max-height: 500px;
+	max-height: 900px;
 	overflow: hidden;
 	transition: max-height 1s ease-in-out;
 }
@@ -496,7 +496,7 @@ img {
 }
 
 #dropdown-login {
-	padding: 0 !important;
+	/* padding: 0 !important; */
 }
 
 #dropdown-login a {
@@ -543,4 +543,10 @@ img {
 
 .sidebarBlock .side-module-heading {
 	border: 0;
+}
+.productView-rating i {
+	margin-right: 3px;
+}
+.productReview i {
+	margin-right: 3px;
 }

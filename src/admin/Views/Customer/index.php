@@ -45,7 +45,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($customers as $c) : ?>
+                                    <?php
+
+                                    use SRC\helper\NUMBER;
+
+                                    foreach ($customers as $c) : ?>
                                         <tr>
                                             <td><?= $c->getId() ?></td>
                                             <td>
@@ -56,7 +60,7 @@
                                                     <a href="#"><?= $c->getName() ?></a>
                                                 </h2>
                                             </td>
-                                            <td>0<?= number_format($c->getPhone(), 0, '', '.') ?></td>
+                                            <td><?= NUMBER::phone($c->getPhone()) ?></td>
                                             <td><a href="mailto:<?= $c->getEmail() ?>"><?= $c->getEmail() ?></a></td>
 
                                             <td><label><?= $c->getAddress() ?></label></td>

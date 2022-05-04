@@ -39,14 +39,11 @@ class HomeController extends FrontendControllers
         $this->render("index", false);
     }
 
-    function modal($params)
+    function map()
     {
-        $product = $this->productResourceModel->get($params);
-
-        $this->with($product);
-        $this->setLayout(false);
-        echo  $this->render("modal");
+        $this->render("map");
     }
+
 
     function notFound()
     {

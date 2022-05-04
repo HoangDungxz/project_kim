@@ -5,13 +5,14 @@ namespace SRC\Controllers;
 use SRC\Models\Category\CategoryResourceModel;
 use SRC\Models\Image\ImageResourceModel;
 use SRC\Models\Product\ProductResourceModel;
-
+use SRC\Models\Rating\RatingResourceModel;
 
 class ProductsController extends FrontendControllers
 {
     private $productResourceModel;
     private $categoryResourceModel;
 
+    private $ratingResourceModel;
 
     function __construct()
     {
@@ -19,6 +20,7 @@ class ProductsController extends FrontendControllers
         $this->productResourceModel = new ProductResourceModel();
         $this->categoryResourceModel = new CategoryResourceModel();
         $this->imageResoureModel = new ImageResourceModel();
+        $this->ratingResourceModel = new RatingResourceModel();
     }
     function index($params)
     {
@@ -44,8 +46,6 @@ class ProductsController extends FrontendControllers
             $categoriesWithParents = null;
         }
 
-
-
         // tạo sub category
         $childCategories = $this->categoryResourceModel->getChildCategories([
             'parent_id' => $categoryId
@@ -55,8 +55,6 @@ class ProductsController extends FrontendControllers
         $this->with($products);
         $this->with($childCategories);
         $this->with($categoriesWithParents);
-
-
 
         $this->with($countProducts);
 
@@ -87,6 +85,24 @@ class ProductsController extends FrontendControllers
         $this->with($categoriesWithParents);
         $this->with($childBreadcrumb);
 
+        // lấy comment và sao
+        $ratings = $this->ratingResourceModel->where('product_id', $params['pid'])
+            ->join('customers', 'customers.id=rating.customer_id')
+            ->select('rating.*,customers.name as customers_name')
+            ->order('rating.id', 'DESC')
+            ->getAll();
+        $this->with($ratings);
+
+        // lấy tổng sao
+        $average_rating = $this->ratingResourceModel
+            ->select('AVG(star) as avg_star')
+            ->groupBy('product_id')
+            ->where('product_id', $params['pid'])
+            ->get();
+        $avg_star = $average_rating != null ? $average_rating->avg_star : 5;
+        $this->with($avg_star);
+
+
 
         $this->render("product_detail");
     }
@@ -100,5 +116,26 @@ class ProductsController extends FrontendControllers
         $this->with($products);
         $this->setLayout(false);
         echo  $this->render("ajaxSearch");
+    }
+
+
+    function modal($params)
+    {
+        $product = $this->productResourceModel->get($params);
+
+
+        // lấy tổng sao
+        $average_rating = $this->ratingResourceModel
+            ->select('AVG(star) as avg_star')
+            ->groupBy('product_id')
+            ->where('product_id', $params['pid'])
+            ->get();
+        $avg_star = $average_rating != null ? $average_rating->avg_star : 5;
+
+        $this->with($avg_star);
+        $this->with($product);
+        $this->setLayout(false);
+
+        echo  $this->render("modal");
     }
 }

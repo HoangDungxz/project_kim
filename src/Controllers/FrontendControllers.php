@@ -32,6 +32,8 @@ class FrontendControllers extends Controller
         $brands = $this->brandResourceModel->getAll();
         $this->with($brands);
 
+
+
         // die;
     }
 

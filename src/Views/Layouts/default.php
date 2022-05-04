@@ -236,25 +236,25 @@
                                 <h3>Shop</h3>
                                 <ul>
                                     <li>
-                                        <a href="#">Trang chủ</a>
+                                        <a href="<?= WEBROOT ?>home">Trang chủ</a>
                                     </li>
                                     <li>
-                                        <a href="#">Sản phẩm</a>
+                                        <a href="<?= WEBROOT ?>products">Sản phẩm</a>
                                     </li>
                                     <li>
-                                        <a href="#">Giới thiệu</a>
+                                        <a href="<?= WEBROOT ?>home/map">Giới thiệu</a>
                                     </li>
                                     <li>
-                                        <a href="#">Tin tức</a>
+                                        <a href="<?= WEBROOT ?>home/map">Tin tức</a>
                                     </li>
                                     <li>
-                                        <a href="#">Khuyến mãi</a>
+                                        <a href="<?= WEBROOT ?>home/map">Khuyến mãi</a>
                                     </li>
                                     <li>
-                                        <a href="#">Bản đồ</a>
+                                        <a href="<?= WEBROOT ?>home/map">Bản đồ</a>
                                     </li>
                                     <li>
-                                        <a href="#">Liên hệ</a>
+                                        <a href="<?= WEBROOT ?>home/map">Liên hệ</a>
                                     </li>
                                 </ul>
                             </div>
@@ -410,7 +410,7 @@
                     e.preventDefault();
                     let pid = $(this).attr('data-product-id');
                     $.ajax({
-                        url: "<?= WEBROOT ?>/home/modal/pid/" + pid,
+                        url: "<?= WEBROOT ?>/products/modal/pid/" + pid,
                         context: document.body
                     }).done(function(result) {
 
@@ -616,7 +616,7 @@
                 $(this).text('Ẩn bớt');
 
                 $("html, body").animate({
-                    scrollTop: $(document).height() + 1000
+                    scrollTop: $(document).height() - 600
                 }, "slow");
 
             });

@@ -1,6 +1,10 @@
         <div class="productViewTop">
             <section class="productView-images" data-image-gallery="">
-                <?php if ($product->getHot()) : ?>
+                <?php
+
+                use SRC\helper\RATING;
+
+                if ($product->getHot()) : ?>
                     <div class="new-badge">HOT</div>
                 <?php endif; ?>
 
@@ -52,23 +56,11 @@
                         <meta itemprop="ratingValue" content="5">
                         <meta itemprop="ratingCount" content="5">
                         <meta itemprop="reviewCount" content="5">
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
+                        <?= RATING::toStar($avg_star) ?>
+                        (<?= number_format((float)$avg_star, 2, '.', ''); ?>) Sao
                         <!-- snippet location product_rating -->
-                        <span class="productView-reviewLink reviewLinkCount">
-                            <a href="#/sample-chanel-the-cheetah/#product-reviews">
-                                5 Customer Reviews
-                            </a>
-                        </span>
-                        <span class="productView-reviewLink">
-                            <a href="#/sample-chanel-the-cheetah/" data-reveal-id="modal-review-form">
-                                Write a Review
-                            </a>
-                        </span>
-                        <div id="modal-review-form" class="modal" data-reveal="">
+
+                        <div id="modal-review-form" class="modal">
 
 
                             <div class="modal-content">
@@ -166,20 +158,6 @@
                     </div>
                     <div data-content-region="product_below_price"></div>
 
-                    <dl class="productView-info">
-                        <dt class="productView-info-name">SKU:</dt>
-                        <dd class="productView-info-value" data-product-sku="">CTC</dd>
-                        <dt class="productView-info-name">Weight:</dt>
-                        <dd class="productView-info-value" data-product-weight="">2.20 LBS</dd>
-                        <dt class="productView-info-name">Gift wrapping:</dt>
-                        <dd class="productView-info-value">Options available</dd>
-                        <dt class="productView-info-name">Shipping:</dt>
-                        <dd class="productView-info-value">Free Shipping</dd>
-
-                    </dl>
-                    <div class="productView-summary">
-
-                    </div>
                 </div>
 
                 <div class="productView-options">

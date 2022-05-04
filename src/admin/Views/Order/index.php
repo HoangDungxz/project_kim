@@ -49,12 +49,13 @@
                                     <?php
 
                                     use SRC\helper\DATE;
+                                    use SRC\helper\NUMBER;
 
                                     foreach ($orders as $o) : ?>
                                         <tr>
                                             <td><?= $o->getId() ?></td>
                                             <td><?= $o->customers_name ?></td>
-                                            <td><?= $o->customers_phone ?></td>
+                                            <td><?= NUMBER::phone($o->customers_phone) ?></td>
                                             <td><?= $o->customers_address ?></td>
                                             <td><?= DATE::format($o->getDate()) ?></td>
                                             <td><?= $o->sum_quantity ?></td>

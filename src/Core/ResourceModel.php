@@ -117,6 +117,30 @@ class ResourceModel  implements ResourceModelInterface
         }
         return $this;
     }
+    public function between2($column, $value, $conditionType = "AND")
+    {
+        $column_parameter = str_replace(".", "_", $column);
+
+        $valueArr = explode("_", $value);
+        switch ($this->conditionSql) {
+            case ' ':
+                $this->conditionSql .= " WHERE $column BETWEEN :$column_parameter" . "_between_1 AND :$column_parameter" . "_between_2";;
+                $this->params =   array_merge($this->params, [
+                    $column_parameter . "_between_1" => $valueArr[0],
+                    $column_parameter . "_between_2" => $valueArr[1],
+
+                ]);
+                break;
+            default:
+                $this->conditionSql .= "  $conditionType $column BETWEEN :$column_parameter" . "_between_1 AND :$column_parameter" . "_between_2";;
+                $this->params =   array_merge($this->params, [
+                    $column_parameter . "_between_1" => $valueArr[0],
+                    $column_parameter . "_between_2" => $valueArr[1],
+                ]);
+                break;
+        }
+        return $this;
+    }
 
     public function join($tableJoin, $condition, $joinType = 'JOIN')
     {

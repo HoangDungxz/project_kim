@@ -21,7 +21,6 @@ use SRC\helper\SESSION;
                     </div>
                 </div>
 
-
             </div>
 
             <div class="center">
@@ -164,13 +163,13 @@ use SRC\helper\SESSION;
                     </li>
 
                     <li class="navPages-item">
-                        <a class="navPages-action" href="nail/index.html">tin tức</a>
+                        <a class="navPages-action" href="<?= WEBROOT ?>home/map">tin tức</a>
                     </li>
                     <li class="navPages-item">
-                        <a class="navPages-action" href="nail/index.html">Bản đồ</a>
+                        <a class="navPages-action" href="<?= WEBROOT ?>home/map">Bản đồ</a>
                     </li>
                     <li class="navPages-item">
-                        <a class="navPages-action" href="nail/index.html">Liên hệ</a>
+                        <a class="navPages-action" href="<?= WEBROOT ?>home/map">Liên hệ</a>
                     </li>
                 </ul>
             </nav>
