@@ -12,7 +12,7 @@ use SRC\Models\User\UserResourceModel;
  * UserController
  * 
  * @param ControllerName Quản lý tài khoản
- * @param SortOrder 3
+ * @param SortOrder 4
  * @param Icon fas fa-user
  */
 class UserController extends AdminControllers

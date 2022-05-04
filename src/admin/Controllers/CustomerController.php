@@ -10,7 +10,7 @@ use SRC\Models\Customer\CustomerResourceModel;
  * HomeController
  * 
  * @param ControllerName Quản lý khách hàng
- * @param SortOrder 6
+ * @param SortOrder 7
  * @param Icon fas fa-credit-card
  */
 class CustomerController  extends AdminControllers

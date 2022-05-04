@@ -5468,3 +5468,7 @@ div.dataTables_wrapper div.dataTables_filter input {
 div.dataTables_wrapper div.dataTables_length select {
 	margin: 0 15px;
 }
+
+.fa.fa-star.color {
+	color: #f16b6f;
+}

@@ -8,7 +8,7 @@ use SRC\Models\Customer\CustomerResourceModel;
  * HomeController
  * 
  * @param ControllerName Quản lý đại lý
- * @param SortOrder 7
+ * @param SortOrder 8
  * @param Icon fas fa-comments-dollar
  */
 class SaleAgentController  extends AdminControllers

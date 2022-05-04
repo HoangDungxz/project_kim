@@ -10,7 +10,7 @@ use SRC\Models\OrderDetail\OrderDetailResourceModel;
  * HomeController
  * 
  * @param ControllerName Quản đơn hàng
- * @param SortOrder 5
+ * @param SortOrder 6
  * @param Icon fas fa-cart-plus
  */
 class OrderController  extends AdminControllers

@@ -10,7 +10,7 @@ use SRC\Models\Permission\PermissionResourceModel;
  * HomeController
  * 
  * @param ControllerName Quản lý phân quyền
- * @param SortOrder 9
+ * @param SortOrder 11
  * @param Icon fas fa-user-lock
  */
 class PermissionController extends AdminControllers

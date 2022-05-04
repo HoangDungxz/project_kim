@@ -14,7 +14,7 @@ use SRC\Models\Product\ProductResourceModel;
  * ProductController
  * 
  * @param ControllerName Quản lý sản phẩm
- * @param SortOrder 4
+ * @param SortOrder 5
  * @param Icon fas fa-box-open
  */
 class ProductController extends AdminControllers

@@ -2,7 +2,6 @@
 
 namespace ADMIN\Controllers;
 
-use SRC\helper\MSG;
 use SRC\Models\Customer\CustomerResourceModel;
 use SRC\Models\Order\OrderResourceModel;
 use SRC\Models\Permission\PermissionResourceModel;
@@ -21,7 +20,6 @@ class HomeController extends AdminControllers
 
 
     private $userResourceModel;
-    private $permissionResourceModel;
     private $customerResourceModel;
     private $productsResourceModel;
     private $orderResourceModel;

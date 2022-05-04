@@ -7,10 +7,10 @@ use SRC\Models\News\NewsModel;
 use SRC\Models\News\NewsResourceModel;
 
 /**
- * HomeController
+ * NewsController
  * 
  * @param ControllerName Quản lý tin tức
- * @param SortOrder 8
+ * @param SortOrder 9
  * @param Icon fas fa-newspaper
  */
 class NewsController  extends AdminControllers
