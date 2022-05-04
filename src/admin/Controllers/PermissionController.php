@@ -113,8 +113,6 @@ class PermissionController extends AdminControllers
             // lấy bảng chính
             $permission = $this->permissionResourceModel->getById($params['pid']);
 
-
-
             if ($this->permissionResourceModel->delete($permission)) {
                 echo 'true';
                 MSG::send("Xóa quyền " . $permission->getName() . " thành công", 'success');

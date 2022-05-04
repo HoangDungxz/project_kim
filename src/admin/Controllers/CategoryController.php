@@ -27,8 +27,6 @@ class CategoryController extends AdminControllers
     private $categoryId;
     private $categoryParentId;
 
-    private $will_deletes = [];
-
     function __construct()
     {
         parent::__construct();
