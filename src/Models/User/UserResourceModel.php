@@ -46,7 +46,7 @@ class UserResourceModel extends ResourceModel
 
     public function getAll($params = [])
     {
-        $this->join('permissions', 'permissions.id=users.permission_id', 'LEFT OUTER JOIN')
+        $this->join('permissions', 'permissions.id=users.permission_id')
             ->select('users.*,permissions.name as permissions_name,permissions.paths as permissions_paths');
         return parent::getAll();
     }

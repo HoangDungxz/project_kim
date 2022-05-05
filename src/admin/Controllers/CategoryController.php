@@ -72,7 +72,7 @@ class CategoryController extends AdminControllers
         $this->with($products);
 
         $categories = $this->categoriesResourceModel
-            ->join('products', 'products.category_id=categories.id', "LEFT OUTER JOIN")
+            ->join('products', 'products.category_id=categories.id')
             ->select('categories.*,count(products.id) as product_count')
             ->groupBy('categories.id')
             ->getAll();
@@ -292,7 +292,7 @@ class CategoryController extends AdminControllers
 
             if ($category) {
                 $categoriesChilds  =   $this->categoriesResourceModel->categoriesAllChild($category->getId());
-
+                array_push($categoriesChilds, $category);
                 if ($categoriesChilds) {
 
                     foreach ($categoriesChilds as $c) {
@@ -308,13 +308,12 @@ class CategoryController extends AdminControllers
                                         array_push($will_deletes, $i);
                                     }
                                 }
+                                array_push($will_deletes, $p);
                             }
-                            array_push($will_deletes, $p);
                         }
                         array_push($will_deletes, $c);
                     }
                 }
-                array_push($will_deletes, $category);
             }
 
 

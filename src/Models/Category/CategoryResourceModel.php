@@ -31,7 +31,7 @@ class CategoryResourceModel extends ResourceModel
     }
     public function getChildCategories($params)
     {
-        $this->join('products', $this->table . '.id=products.category_id', 'LEFT OUTER JOIN')
+        $this->join('products', $this->table . '.id=products.category_id')
             ->where("$this->table.parent_id", $params['parent_id'])
             ->where('displayhomepage', 1)
             ->select("$this->table.*,count(products.id) as product_count")

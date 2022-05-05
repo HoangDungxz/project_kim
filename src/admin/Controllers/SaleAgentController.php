@@ -34,7 +34,7 @@ class SaleAgentController  extends AdminControllers
     {
         $sale_agents = $this->customerResourceModel
             ->select('customers.*,SUM(orderdetails.price * 20 / 100) as sum_price')
-            ->join('orderdetails', 'orderdetails.agent_id = customers.id', 'LEFT OUTER JOIN')
+            ->join('orderdetails', 'orderdetails.agent_id = customers.id')
             ->groupBy('customers.id')
             ->getAll();
 
@@ -133,7 +133,7 @@ class SaleAgentController  extends AdminControllers
 
         $sale_agent = $this->customerResourceModel
             ->select('customers.*,SUM(orderdetails.price * 20 / 100) as sum_price')
-            ->join('orderdetails', 'orderdetails.agent_id = customers.id', 'LEFT OUTER JOIN')
+            ->join('orderdetails', 'orderdetails.agent_id = customers.id')
             ->where('customers.id', $params['sid'])
             ->groupBy('customers.id')
             ->get();
@@ -179,7 +179,7 @@ class SaleAgentController  extends AdminControllers
 
                 $sale_agent = $this->customerResourceModel
                     ->select('customers.*,SUM(orderdetails.price * 20 / 100) / ' . $lv . ' as sum_price')
-                    ->join('orderdetails', 'orderdetails.agent_id = customers.id', 'LEFT OUTER JOIN')
+                    ->join('orderdetails', 'orderdetails.agent_id = customers.id')
                     ->where('customers.id', $s->getId())
                     ->groupBy('customers.id')
                     ->get();

@@ -51,7 +51,7 @@ class CustomersController extends FrontendControllers
 
             $orderDetail = $this->orderDetailResourceModel
                 ->join('products', 'products.id=orderdetails.product_id')
-                ->join('productimages', 'products.id=productimages.product_id', 'LEFT OUTER JOIN')
+                ->join('productimages', 'products.id=productimages.product_id')
                 ->groupBy('orderdetails.id')
                 ->select('orderdetails.*,
                 products.name as products_name,products.discount as products_discount,products.price as products_price,
@@ -68,7 +68,7 @@ class CustomersController extends FrontendControllers
 
             $sale_agent = $this->customerResourceModel
                 ->select('customers.*,SUM(orderdetails.price * 20 / 100) as sum_price')
-                ->join('orderdetails', 'orderdetails.agent_id = customers.id', 'LEFT OUTER JOIN')
+                ->join('orderdetails', 'orderdetails.agent_id = customers.id')
                 ->where('customers.id', $id)
                 ->groupBy('customers.id')
                 ->get();
@@ -328,20 +328,25 @@ class CustomersController extends FrontendControllers
 
                 $sale_agent = $this->customerResourceModel
                     ->select('customers.*,SUM(orderdetails.price * 20 / 100) / ' . $lv . ' as sum_price')
-                    ->join('orderdetails', 'orderdetails.agent_id = customers.id', 'LEFT OUTER JOIN')
+                    ->join('orderdetails', 'orderdetails.agent_id = customers.id')
                     ->where('customers.id', $s->getId())
                     ->groupBy('customers.id')
                     ->get();
 
-                $sale_agent->char = $char;
+                if ($sale_agent) {
+                    # code...
 
-                $this->commission_from_child += $sale_agent->sum_price;
 
-                array_push($this->child_agents,  $sale_agent);
+                    $sale_agent->char = $char;
 
-                unset($sale_agents[$key]);
+                    $this->commission_from_child += $sale_agent->sum_price;
 
-                $this->countCommissionFromChild($sale_agents, $s->getId(), $lv, $char . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+                    array_push($this->child_agents,  $sale_agent);
+
+                    unset($sale_agents[$key]);
+
+                    $this->countCommissionFromChild($sale_agents, $s->getId(), $lv, $char . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+                }
             }
         }
     }

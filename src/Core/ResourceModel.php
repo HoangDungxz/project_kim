@@ -69,7 +69,7 @@ class ResourceModel  implements ResourceModelInterface
 
                 break;
             default:
-                $this->conditionSql .= " $conditionType WHERE NOT ($column $type :$column_parameter) ";
+                $this->conditionSql .= " $conditionType NOT ($column $type :$column_parameter) ";
                 $this->params =   array_merge($this->params, [$column_parameter => $value]);
                 break;
         }
@@ -144,7 +144,7 @@ class ResourceModel  implements ResourceModelInterface
 
     public function join($tableJoin, $condition, $joinType = 'JOIN')
     {
-        $this->joinSql .= " $joinType $tableJoin ON $condition ";
+        $this->joinSql .= " $joinType $tableJoin ON ($tableJoin.deleted=0 AND $condition) ";
         return $this;
     }
     public function groupBy($groupBy)
@@ -180,6 +180,8 @@ class ResourceModel  implements ResourceModelInterface
 
     public function getAll($params = [])
     {
+        $this->where($this->table . '.deleted', 0);
+
         $table_name = $this->model->getTable_name();
         $sql = "SELECT $this->select FROM $table_name $this->joinSql $this->conditionSql $this->groupBySql $this->oderSql $this->paginateSql";
         $req = Database::getBdd()->prepare($sql);
@@ -192,10 +194,13 @@ class ResourceModel  implements ResourceModelInterface
 
     public function get($params = [])
     {
+        $this->where($this->table . '.deleted', 0);
+
         $table_name = $this->model->getTable_name();
         $sql = "SELECT $this->select FROM $table_name $this->joinSql $this->conditionSql $this->groupBySql $this->oderSql $this->paginateSql";
 
         $req = Database::getBdd()->prepare($sql);
+
         $req->execute($this->params);
         $this->clearSelectSql();
 
@@ -206,7 +211,7 @@ class ResourceModel  implements ResourceModelInterface
     {
         $table_name = $this->model->getTable_name();
 
-        $sql = "SELECT * FROM $table_name WHERE $this->id = $id";
+        $sql = "SELECT * FROM $table_name WHERE $this->id = $id AND $table_name.deleted = 0";
 
         $req = Database::getBdd()->prepare($sql);
         $req->execute($this->params);
@@ -298,10 +303,12 @@ class ResourceModel  implements ResourceModelInterface
                 $table_id = $model->getTable_id();
                 $id = $model->get($table_id);
 
-                $sql = "DELETE FROM $table_name WHERE $table_id = $id";
+                // $sql = "DELETE FROM $table_name WHERE $table_id = $id";
+                $sql = "UPDATE $table_name SET $table_name.deleted = 1 WHERE $table_name.$table_id = $id";
 
                 $req->prepare($sql)->execute();
             }
+
             $req->commit();
             return true;
         } catch (\PDOException $e) {
@@ -410,17 +417,17 @@ class ResourceModel  implements ResourceModelInterface
 
     public function deleteImage($images, $target_dir = false)
     {
-        if ($target_dir === false) {
-            $target_dir = $this->table;
-        }
-        $target_file = 'assets/upload/' . $target_dir . './' . $images;
+        // if ($target_dir === false) {
+        //     $target_dir = $this->table;
+        // }
+        // $target_file = 'assets/upload/' . $target_dir . './' . $images;
 
-        if (file_exists($target_file)) {
-            if (unlink($target_file)) {
-                return true;
-            }
-        }
-        return false;
+        // if (file_exists($target_file)) {
+        //     if (unlink($target_file)) {
+        //         return true;
+        //     }
+        // }
+        return true;
     }
 
 

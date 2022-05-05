@@ -11427,8 +11427,8 @@ cite {
 	overflow: hidden;
 	padding: 0;
 	right: 0;
-	top: 50% !important;
-	transform: translate(-50%, -50%);
+	top: 90px !important;
+	transform: translateX(-50%);
 }
 
 @media (min-width: 1200px) {

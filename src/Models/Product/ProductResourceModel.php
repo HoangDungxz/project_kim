@@ -71,8 +71,8 @@ class ProductResourceModel extends ResourceModel
             }
         }
 
-        $this->join('categories', "$this->table.category_id=categories.id", 'LEFT OUTER JOIN')
-            ->join('brands', "$this->table.brand_id=brands.id", 'LEFT OUTER JOIN')
+        $this->join('categories', "$this->table.category_id=categories.id")
+            ->join('brands', "$this->table.brand_id=brands.id")
             ->select("$this->table.*,categories.name as category_name,brands.name as brands_name");
 
 

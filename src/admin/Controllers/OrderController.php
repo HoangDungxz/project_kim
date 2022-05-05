@@ -79,8 +79,8 @@ class OrderController  extends AdminControllers
         }
 
         $order = $this->orderResourceModel
-            ->join('customers', 'orders.customer_id=customers.id')
-            ->join('orderdetails', 'orders.id=orderdetails.order_id')
+            ->join('customers', 'orders.customer_id=customers.id', 'LEFT OUTER JOIN')
+            ->join('orderdetails', 'orders.id=orderdetails.order_id', 'LEFT OUTER JOIN')
             ->select('orders.*,
             customers.email as customers_email, customers.name as customers_name,
             customers.address as customers_address, customers.phone as customers_phone,
@@ -91,7 +91,7 @@ class OrderController  extends AdminControllers
             ->get();
 
         $orderDetail = $this->orderDetailResourceModel
-            ->join('products', 'products.id=orderdetails.product_id')
+            ->join('products', 'products.id=orderdetails.product_id', 'LEFT OUTER JOIN')
             ->join('productimages', 'products.id=productimages.product_id', 'LEFT OUTER JOIN')
             ->groupBy('orderdetails.id')
             ->select('orderdetails.*,

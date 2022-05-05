@@ -1,5 +1,5 @@
 <div style="width:150px;">Lợi nhuận từ bán hàng</div>
-<div><?= number_format($sale_agent->sum_price); ?> ₫</div>
+<div><?= number_format($sale_agent ? $sale_agent->sum_price : 0); ?> ₫</div>
 <table class="table table-hover table-center mb-0 datatable">
     <thead>
         <tr>
