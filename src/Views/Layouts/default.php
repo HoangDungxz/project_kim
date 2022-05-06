@@ -248,7 +248,7 @@
                                         <a href="<?= WEBROOT ?>home/map">Giới thiệu</a>
                                     </li>
                                     <li>
-                                        <a href="<?= WEBROOT ?>home/map">Tin tức</a>
+                                        <a href="<?= WEBROOT ?>news">Tin tức</a>
                                     </li>
                                     <li>
                                         <a href="<?= WEBROOT ?>home/map">Khuyến mãi</a>

@@ -163,7 +163,7 @@ use SRC\helper\SESSION;
                     </li>
 
                     <li class="navPages-item">
-                        <a class="navPages-action" href="<?= WEBROOT ?>home/news">tin tức</a>
+                        <a class="navPages-action" href="<?= WEBROOT ?>news">tin tức</a>
                     </li>
                     <li class="navPages-item">
                         <a class="navPages-action" href="<?= WEBROOT ?>home/map">Bản đồ</a>
