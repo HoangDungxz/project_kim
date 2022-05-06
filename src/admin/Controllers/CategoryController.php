@@ -72,7 +72,7 @@ class CategoryController extends AdminControllers
         $this->with($products);
 
         $categories = $this->categoriesResourceModel
-            ->join('products', 'products.category_id=categories.id')
+            ->join('products', 'products.category_id=categories.id', 'LEFT OUTER JOIN')
             ->select('categories.*,count(products.id) as product_count')
             ->groupBy('categories.id')
             ->getAll();

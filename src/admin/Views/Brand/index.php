@@ -24,8 +24,8 @@
                             <div class="card-body left">
                                 <div class="nav flex-column">
                                     <div class="card-header left">
-                                        <h4 class="card-title">Danh Mục</h4>
-                                        <a href="<?= WEBROOT ?>admin/category/create" class="chat-compose">
+                                        <h4 class="card-title">Thương hiệu</h4>
+                                        <a href="<?= WEBROOT ?>admin/brand/create" class="chat-compose">
                                             <i class="material-icons">control_point</i>
                                         </a>
 
@@ -34,7 +34,7 @@
                                     <?php foreach ($brands as $key => $b) : ?>
 
                                         <div class="category-item">
-                                            <a class="nav-link mb-0 " href="<?= WEBROOT  . 'admin/brand/index/bid/' . $b->getId() ?> ">
+                                            <a class="nav-link mb-0 <?= $curent_bid == $b->getId() ? 'active' : '' ?>  " href="<?= WEBROOT  . 'admin/brand/index/bid/' . $b->getId() ?> ">
                                                 <div class="badge badge-success badge-pill"> <?= $b->product_count  ?></div>
                                                 <span> <?= $b->getName() ?>
                                                 </span>
@@ -42,6 +42,62 @@
                                             <i class="far fa-trash-alt delete-brand" bid="<?= $b->getId() ?>" bname="<?= $b->getName() ?>"></i>
                                         </div>
                                     <?php endforeach; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-6 col-md-6">
+                        <div class="card">
+                            <div class="card-body right">
+                                <div class="card-header">
+                                    <h4 class="card-title"><?= $brand->getName() ?></h4>
+                                </div>
+                                <form method="POST" action="<?= WEBROOT ?>admin/brand/update" id="brand_form">
+                                    <div class="form-group row">
+                                        <label for="brand_name" class="col-sm-3 col-form-label">Tên thương hiệu</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="brand_name" id="brand_name" value="<?= $brand->getName() ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4 ">
+                                        <input type="hidden" name="bid" value="<?= $brand->getId() ?>">
+                                        <button class="btn btn-primary" type="submit">
+                                            Sửa thương hiệu
+                                        </button>
+                                        <button class="btn" type="reset">Nhập lại</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body right">
+                                <div class="card-header">
+                                    <h4 class="card-title">Danh sách sản phẩm</h4>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-center mb-0 datatable dataTable no-footer">
+                                        <thead>
+                                            <tr>
+                                                <th>Ảnh</th>
+                                                <th>Tên</th>
+                                                <th>Hãng</th>
+                                                <th>Giá</th>
+                                                <th>Khuyến Mại</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($products  as $p) : ?>
+                                                <tr role="row" class="odd">
+                                                    <td><img src="<?= PUBLIC_URL ?>upload/products/<?= $p->images[0] ?>" class="rounded service-img" alt=""></td>
+                                                    <td><?= $p->getName() ?></td>
+                                                    <td><?= $p->brands_name ?></td>
+                                                    <td><?= number_format($p->getPrice()) ?> ₫</td>
+                                                    <td><?= $p->getDiscount() ?>%</td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

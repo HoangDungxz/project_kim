@@ -16,25 +16,23 @@ class FrontendControllers extends Controller
 
         $this->brandResourceModel = new BrandResourceModel();
 
-        $this->getCategories();
+        // $this->getCategories();
         $this->getOrder();
 
         $categoriesResourceModel = new CategoryResourceModel();
         $categories = $categoriesResourceModel
             ->where('displayhomepage', 1)
             ->getAll();
-
         $this->showCategories($categories);
+
+
         $categoriesShow = $this->categoriesShow;
         $this->with($categoriesShow);
 
 
         $brands = $this->brandResourceModel->getAll();
+
         $this->with($brands);
-
-
-
-        // die;
     }
 
     // BƯỚC 2: HÀM ĐỆ QUY HIỂN THỊ CATEGORIES
@@ -68,11 +66,11 @@ class FrontendControllers extends Controller
         }
     }
 
-    private function getCategories()
-    {
-        $categories = new CategoryResourceModel();
-        $this->with($categories);
-    }
+    // private function getCategories()
+    // {
+    //     $categories = new CategoryResourceModel();
+    //     // $this->with($categories);
+    // }
 
     private function getOrder()
     {

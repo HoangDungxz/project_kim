@@ -44,6 +44,11 @@ class HomeController extends FrontendControllers
         $this->render("map");
     }
 
+    function news()
+    {
+        $this->render("news");
+    }
+
 
     function notFound()
     {

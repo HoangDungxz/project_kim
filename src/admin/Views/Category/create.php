@@ -19,7 +19,7 @@
 
 
                    <div class="card">
-                       <?= isset($message) ? $message : '' ?>
+
                        <div class="card-body">
                            <!-- Form -->
                            <form method="POST" action="#" id="category_form">

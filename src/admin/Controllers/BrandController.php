@@ -3,6 +3,7 @@
 namespace ADMIN\Controllers;
 
 use SRC\helper\MSG;
+use SRC\Models\Brand\BrandModel;
 use SRC\Models\Brand\BrandResourceModel;
 use SRC\Models\Image\ImageResourceModel;
 use SRC\Models\Product\ProductResourceModel;
@@ -33,12 +34,32 @@ class BrandController  extends AdminControllers
     /**
      * Index
      * 
-     * @param AcctionName Danh sách hiệu
+     * @param AcctionName Danh sách thương hiệu
      */
-    function index()
+    function index($params)
     {
+
+        // lấy id brand hoặc id nhỏ nhất bảng brand
+
+        if (isset($params['bid'])) {
+            $bid = $params['bid'];
+        } else {
+            $bid = $this->brandResourceModel->select('MIN(brands.id) as brands_min_id')
+                ->get()->brands_min_id;
+        }
+
+        $brand = $this->brandResourceModel->getById($bid);
+        $this->with($brand);
+
+        $products = $this->productsResourceModel->where('brand_id', $bid)->getAll();
+        $this->with($products);
+
+        // để tạo active đỏ cho menu
+        $curent_bid = $bid;
+        $this->with($curent_bid);
+
         $brands = $this->brandResourceModel
-            ->join('products', 'products.brand_id=brands.id')
+            ->join('products', 'products.brand_id=brands.id', 'LEFT OUTER JOIN')
             ->select('brands.*,COUNT(products.id) as product_count')
             ->groupBy('brands.id')
             ->getAll();
@@ -47,6 +68,54 @@ class BrandController  extends AdminControllers
         $this->render("index");
     }
 
+    /**
+     * Index
+     * 
+     * @param AcctionName Thêm thương hiệu
+     */
+    function create()
+    {
+        extract($_POST);
+        if (isset($brand_name)) {
+            $brand = new BrandModel();
+            $brand->setName($brand_name);
+
+            if ($this->brandResourceModel->save($brand)) {
+                MSG::send('Thêm thương hiệu: ' . $brand_name . ' thành công', 'success');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                die;
+            } else {
+                MSG::send('Thêm thương hiệu: ' . $brand_name . ' thất bại');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                die;
+            }
+        }
+        $this->render('create');
+    }
+
+    /**
+     * Index
+     * 
+     * @param AcctionName Sửa thương hiệu
+     */
+    function update()
+    {
+        extract($_POST);
+        if (isset($brand_name, $bid)) {
+            $brand = $this->brandResourceModel->getById($bid);
+            $brand->setName($brand_name);
+
+            if ($this->brandResourceModel->save($brand)) {
+                MSG::send('Sửa thương hiệu: ' . $brand_name . ' thành công', 'success');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                die;
+            } else {
+                MSG::send('Sửa thương hiệu: ' . $brand_name . ' thất bại');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                die;
+            }
+        }
+    }
 
     /**
      * Index

@@ -5,15 +5,18 @@
     <title>Home page</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
+    <link rel="stylesheet" href="<?= PUBLIC_URL ?>frontend/css/fonts.css">
     <link data-stencil-stylesheet href="<?= PUBLIC_URL ?>frontend/css/theme-63ee4280-d571-0139-fd6f-1aa79d2b4bd7.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
+    <link href="<?= PUBLIC_URL ?>admin/css/toastr.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?= PUBLIC_URL ?>frontend/css/slick.min.css">
     <link rel="stylesheet" href="<?= PUBLIC_URL ?>frontend/css/style.css">
 
     <!-- <script src="<?= PUBLIC_URL ?>frontend/scripts/jquery.min221b.js"></script> -->
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="<?= PUBLIC_URL ?>admin/script/jquery-3.5.0.min.js"></script>
+    <script src="<?= PUBLIC_URL ?>frontend/scripts/jquery-migrate-1.2.1.min.js"></script>
+    <script src="<?= PUBLIC_URL ?>frontend/scripts/slick.min.js"></script>
+
     <script src="<?= PUBLIC_URL ?>frontend/scripts/jquery.sticky.js"></script>
 
     <script src="<?= PUBLIC_URL ?>admin/script/toastr.js"></script>
