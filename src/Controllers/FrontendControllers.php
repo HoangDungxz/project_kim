@@ -25,7 +25,6 @@ class FrontendControllers extends Controller
             ->getAll();
         $this->showCategories($categories);
 
-
         $categoriesShow = $this->categoriesShow;
         $this->with($categoriesShow);
 
@@ -36,7 +35,7 @@ class FrontendControllers extends Controller
     }
 
     // BƯỚC 2: HÀM ĐỆ QUY HIỂN THỊ CATEGORIES
-    function showCategories($categories, $parent_id = 0, $char = '')
+    function showCategories($categories, $parent_id = 0)
     {
         // BƯỚC 2.1: LẤY DANH SÁCH CATE CON
         $cate_child = array();
@@ -53,24 +52,31 @@ class FrontendControllers extends Controller
                                                 <ul class="navPage-subMenu-list">';
             foreach ($cate_child as $key => $item) {
                 // Hiển thị tiêu đề chuyên mục
-                $this->categoriesShow .= ' <li class="navPage-subMenu-item">
-                                    <a class="navPage-subMenu-action navPages-action has-subMenu" href="' . WEBROOT . 'products/index/cid/' . $item->getId() . '">
+                $this->categoriesShow .= '
+                                    <li class="navPage-subMenu-item">
+                                    <a class="navPage-subMenu-action navPages-action ' . ($this->checkHasChilds($categories, $item->getId()) ? "has-subMenu" : "") . '" href="' . WEBROOT . 'products/index/cid/' . $item->getId() . '">
                                         <span>' . $item->getName() . '</span>
                                     </a>';
 
                 // Tiếp tục đệ quy để tìm chuyên mục con của chuyên mục đang lặp
-                $this->showCategories($categories, $item->getId(), $char . '|---');
+                $this->showCategories($categories, $item->getId());
                 $this->categoriesShow .= '</li>';
             }
             $this->categoriesShow .= '</ul></div>';
         }
     }
 
-    // private function getCategories()
-    // {
-    //     $categories = new CategoryResourceModel();
-    //     // $this->with($categories);
-    // }
+    // kiểm tra category có con hay không - tạo mũi tên trên category
+    private function checkHasChilds($categories, $parent_id)
+    {
+        foreach ($categories as $key => $item) {
+            // Nếu là chuyên mục con thì trả về true
+            if ($item->getParent_id() == $parent_id) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     private function getOrder()
     {

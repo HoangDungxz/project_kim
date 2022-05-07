@@ -22,4 +22,19 @@ class NewsController extends FrontendControllers
         $this->with($news);
         $this->render("index");
     }
+
+    function detail($params)
+    {
+        extract($params);
+
+        if (!isset($nid)) {
+            header('Location: ' . WEBROOT . 'news');
+        }
+
+        $news = $this->newsResourceModel->getById($nid);
+
+        $this->with($news);
+
+        $this->render("detail");
+    }
 }
