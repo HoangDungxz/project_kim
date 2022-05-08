@@ -33,9 +33,9 @@ class SaleAgentsController extends FrontendControllers
                 ->where('email', URL::base64_decode_url($params['superior_agent']))
                 ->get();
 
-            $id = $superior_agent->getId();
+            $superior_agent_id = $superior_agent->getId();
 
-            if ($id == SESSION::get('customers', 'id')) {
+            if ($superior_agent_id == SESSION::get('customers', 'id')) {
                 MSG::send('Bạn không thể mời chính mình');
                 header("Location: " . WEBROOT);
                 die;
@@ -48,8 +48,9 @@ class SaleAgentsController extends FrontendControllers
         // lúc ấn có
         if (isset($_POST['ok'])) {
 
-            $customer = $this->customerResourceModel->getById($id);
-            $customer->setSuperior_agent_id($id ?? 0);
+            $customer = $this->customerResourceModel->getById(SESSION::get('customers', 'id'));
+
+            $customer->setSuperior_agent_id($superior_agent_id ?? 0);
 
             if ($this->customerResourceModel->save($customer)) {
                 MSG::send('Đăng ký làm đại lý thành công', 'success');

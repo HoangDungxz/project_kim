@@ -67,11 +67,11 @@
                                             </div>
                                             <div class="col-xl-12">
                                                 <div class="form-group row choise-img">
-                                                    <label class="col-lg-12 col-form-label">Chọn ảnh tin tức</label>
+                                                    <label class="col-lg-12 col-form-label">Chọn ảnh</label>
                                                     <div class="col-lg-12 images">
                                                         <div class="image-preview">
                                                             <div class="image-preview-content">
-                                                                <?php if ($news) : ?>
+                                                                <?php if (isset($news)) : ?>
                                                                     <img src="<?= PUBLIC_URL ?>upload/news/<?= $news->getPhoto() ?>" alt="">
                                                                 <?php else : ?>
                                                                     <img src="<?= PUBLIC_URL ?>upload/news/news_default_image.png" alt="">

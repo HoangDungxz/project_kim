@@ -2,6 +2,7 @@
 
 namespace ADMIN\Controllers;
 
+use SRC\helper\SESSION;
 use SRC\Models\Customer\CustomerResourceModel;
 
 /**
@@ -34,7 +35,7 @@ class SaleAgentController  extends AdminControllers
     {
         $sale_agents = $this->customerResourceModel
             ->select('customers.*,SUM(orderdetails.price * 20 / 100) as sum_price')
-            ->join('orderdetails', 'orderdetails.agent_id = customers.id')
+            ->join('orderdetails', 'orderdetails.agent_id = customers.id', "LEFT OUTER JOIN")
             ->groupBy('customers.id')
             ->getAll();
 
@@ -184,15 +185,17 @@ class SaleAgentController  extends AdminControllers
                     ->groupBy('customers.id')
                     ->get();
 
-                $sale_agent->char = $char;
+                if ($sale_agent) {
+                    $sale_agent->char = $char;
 
-                $this->commission_from_child += $sale_agent->sum_price;
+                    $this->commission_from_child += $sale_agent->sum_price;
 
-                array_push($this->child_agents,  $sale_agent);
+                    array_push($this->child_agents,  $sale_agent);
 
-                unset($sale_agents[$key]);
+                    unset($sale_agents[$key]);
 
-                $this->countCommissionFromChild($sale_agents, $s->getId(), $lv, $char . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+                    $this->countCommissionFromChild($sale_agents, $s->getId(), $lv, $char . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+                }
             }
         }
     }

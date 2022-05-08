@@ -80,8 +80,9 @@ class AdminControllers extends Controller
         // PHÂN QUYỀN
         // lấy danh sách các quyền của người dùng
         $permissions = $this->userResoureModel
-            ->select('users.id,permissions.paths')
+            ->select('users.id,permissions.paths,permissions.id as permissions_id')
             ->join('permissions', 'users.permission_id=permissions.id')
+            ->where('users.id', SESSION::get('users', 'id'))
             ->get();
 
         // chuyển đổi danh sách sang array
