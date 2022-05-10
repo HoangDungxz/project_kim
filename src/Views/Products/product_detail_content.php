@@ -237,21 +237,24 @@
                     slidesToScroll: 1,
                     autoplay: true,
                     autoplaySpeed: 7000,
+                    infinite: true,
                     nextArrow: `<div class="slick-next slick-arrow slick-arrow-custom" style="display: block;"></div>`,
-                    prevArrow: `   <div class="slick-prev slick-arrow slick-arrow-custom" style="display: block;"></div>`
+                    prevArrow: `<div class="slick-prev slick-arrow slick-arrow-custom" style="display: block;"></div>`
                 });
                 $('.productView-nav').slick({
                     slidesToShow: 1,
                     slidesToScroll: 1,
                     autoplay: true,
                     autoplaySpeed: 7000,
-                    arrows: false
+                    arrows: false,
+                    infinite: true
+
                 });
 
 
                 $('.productView-thumbnail').on('click', (e) => {
                     let index = $(e.target).closest('.productView-thumbnail').attr('data-slick-index');
-                    $('.productView-for').slick('slickGoTo', parseInt(index), false);
+                    $('.productView-for').slick('slickGoTo', parseInt(index - 1), false);
                     $('.productView-nav').slick('slickGoTo', parseInt(index), false);
                 })
 
